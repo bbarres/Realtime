@@ -47,27 +47,8 @@ write.table(kinMORG_renf,file="kinMORG_renf.txt",sep='\t')
 #of inbreeding coefficient of each individual. We then combine this two files, 
 #putting in the diagonal of the matrix 0.5*(1+inbreeding coefficient)
 
-kinLOISlim<-read.table("kin_snp_LOIS_nat.txt",header=T,sep="\t")
-
-#il faut aussi récupérer le coefficient d'inbreeding dans le même fichier 
-#de sortie SpaGeDi. D'abord faire le calcul 0.5*(1+inbreed) et intituler 
-#la nouvelle colonne 'intrakin'
-kinintra_nat<-read.table("kin_snp_intraLOIS_nat.txt",header=T,sep="\t")
-
-#voilà les transfo qu'il faut faire
-dim(kinLOISnat)[1]
-kinintra_nat$intrakin[kinintra_nat$Name.i==rownames(kinLOISnat)[2]]
-for (i in 1:dim(kinLOISnat)[1]) {
-  kinLOISnat[i,i]<-kinintra_nat$intrakin[kinintra_nat$Name.i==rownames(kinLOISnat)[i]]
-}
-ifelse(min(kinLOISnat)<0,kinLOISnat<-kinLOISnat+abs(min(kinLOISnat)),kinLOISnat)
-
-#maintenant voici la fonction qui va mettre la valeur intra individu dans 
-#la diagonale. En plus cette fonction va éliminer les valeurs nulles de la 
-#matrice en recherchant et en ajoutant la valeur absolue de la valeur min 
-#de la matrice à tous les cellules de la matrice. En entrée il faut les 
-#deux fichiers décrits ci-dessus qui sont arrangés à partir de la sortie 
-#SpaGeDi
+#here is the function to insert the inbreeding coefficient in the kinship 
+#matrix
 insertinbreed<-function(kin,inbreed)
 {
   for (i in 1:dim(kin)[1]) {
@@ -75,122 +56,36 @@ insertinbreed<-function(kin,inbreed)
   }
   ifelse(min(kin)<0,kin<-kin+abs(min(kin)),kin)
   return(kin)
-}  
-
-#démonstration de l'utilisation de cette fonction, d'abord SNP NAT
-kinLOISnat<-read.table("kin_snp_LOIS_nat.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_snp_intraLOIS_nat.txt",header=T,sep="\t")
-transLOISnat<-2*insertinbreed(kinLOISnat,kinintra_nat)
-write.table(transLOISnat,file="snp_NAT_kinLOIS.txt")
-
-kinRITLnat<-read.table("kin_snp_RITL_nat.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_snp_intraRITL_nat.txt",header=T,sep="\t")
-transRITLnat<-2*insertinbreed(kinRITLnat,kinintra_nat)
-write.table(transRITLnat,file="snp_NAT_kinRITL.txt")
+}
 
 
-#SNP LIM
-kinLOISlim<-read.table("kin_snp_LOIS_lim.txt",header=T,sep="\t")
-kinintra_lim<-read.table("kin_snp_intraLOIS_lim.txt",header=T,sep="\t")
+#We process the file for the 'lim' treatment, using a kinship computed with 
+#610 SNPs with a LD lower than 0.8 and a MAF>0.05
+#first we load the kinship matrix
+kinLOISlim<-read.table("lim_ldmaf_LOIS.txt",header=TRUE,row.names=1,sep="\t")
+#then we load the inbreeding coefficient and turn it into 0.5*(1+inbreed coeff)
+kinintra_lim<-read.table("lim_ldmaf_intraLOIS.txt",header=T,sep="\t")
+kinintra_lim<-cbind(kinintra_lim,"intrakin"=0.5*(1+kinintra_lim$ALL.LOCI))
+#finally we used the function to include the inbreeding coefficient value in 
+#the matrix and export the dataset to be used in TASSEL
 transLOISlim<-2*insertinbreed(kinLOISlim,kinintra_lim)
 write.table(transLOISlim,file="snp_LIM_kinLOIS.txt")
 
-kinRITLlim<-read.table("kin_snp_RITL_lim.txt",header=T,sep="\t")
-kinintra_lim<-read.table("kin_snp_intraRITL_lim.txt",header=T,sep="\t")
-transRITLlim<-2*insertinbreed(kinRITLlim,kinintra_lim)
-write.table(transRITLlim,file="snp_LIM_kinRITL.txt")
-
-#SNP RENF
-kinLOISrenf<-read.table("kin_snp_LOIS_renf.txt",header=T,sep="\t")
-kinintra_renf<-read.table("kin_snp_intraLOIS_renf.txt",header=T,sep="\t")
-transLOISrenf<-2*insertinbreed(kinLOISrenf,kinintra_renf)
-write.table(transLOISrenf,file="snp_RENF_kinLOIS.txt")
-
-kinRITLrenf<-read.table("kin_snp_RITL_renf.txt",header=T,sep="\t")
-kinintra_renf<-read.table("kin_snp_intraRITL_renf.txt",header=T,sep="\t")
-transRITLrenf<-2*insertinbreed(kinRITLrenf,kinintra_renf)
-write.table(transRITLrenf,file="snp_RENF_kinRITL.txt")
-
-#SAT NAT, vu les résultats sur les SNP on ne garde que LOISEL, même si le 
-#RITLAND est quasi aussi bon. Quand il y a un individu avec des données 
-#complétement manquantes, on complète par des 0 aussi bien dans la matrice 
-#que pour l'inbreed, donc 0.5 pour le kinship intra (0.5*(1+inb))
-
-kinLOISnat<-read.table("kin_sat_LOIS_nat.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_sat_intraLOIS_nat.txt",header=T,sep="\t")
-transLOISnat<-2*insertinbreed(kinLOISnat,kinintra_nat)
-write.table(transLOISnat,file="sat_NAT_kinLOIS.txt")
-
-#calcul pour voir si on prend un sous ensemble de SNP référence vs candidat, 
-#est-ce que ça a un impact sur la correction ? Pour simplifier on ne fait 
-#ça que sur les données nat pour l'instant et qu'avec l'apparentement de 
-#LOISEL
-
-#d'abord gènes 'références'
-kinLOISnat<-read.table("kin_snp_LOIS_natREF.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_snp_intraLOIS_natREF.txt",header=T,sep="\t")
-transLOISnatREF<-2*insertinbreed(kinLOISnat,kinintra_nat)
-write.table(transLOISnatREF,file="snp_NAT_REF_kinLOIS.txt")
-
-#puis les gènes 'candidats'
-kinLOISnat<-read.table("kin_snp_LOIS_natPATHO.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_snp_intraLOIS_natPATHO.txt",header=T,sep="\t")
-transLOISnatPATHO<-2*insertinbreed(kinLOISnat,kinintra_nat)
-write.table(transLOISnatPATHO,file="snp_NAT_PATHO_kinLOIS.txt")
+#We process the file for the 'lim' treatment, using a kinship computed with 
+#610 SNPs with a LD lower than 0.8 and a MAF>0.05
+#first we load the kinship matrix
+kinLOISnatrenf<-read.table("natrenf_ldmaf_LOIS.txt",header=TRUE,
+                           row.names=1,sep="\t")
+#then we load the inbreeding coefficient and turn it into 0.5*(1+inbreed coeff)
+kinintra_natrenf<-read.table("natrenf_ldmaf_intraLOIS.txt",header=T,sep="\t")
+kinintra_natrenf<-cbind(kinintra_natrenf,
+                        "intrakin"=0.5*(1+kinintra_natrenf$ALL.LOCI))
+#finally we used the function to include the inbreeding coefficient value in 
+#the matrix and export the dataset to be used in TASSEL
+transLOISnatrenf<-2*insertinbreed(kinLOISnatrenf,kinintra_natrenf)
+write.table(transLOISnatrenf,file="snp_NATRENF_kinLOIS.txt")
 
 
-#rebelotte pour les jeux de données criblés avec les MAF
-
-kinRITLnat<-read.table("kin_snp_RITL_nat.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_snp_intraRITL_nat.txt",header=T,sep="\t")
-transRITLnat<-2*insertinbreed(kinRITLnat,kinintra_nat)
-write.table(transRITLnat,file="snp_NAT_kinRITL.txt")
-
-kinLOISnat<-read.table("kin_snp_LOIS_nat.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_snp_intraLOIS_nat.txt",header=T,sep="\t")
-transLOISnat<-2*insertinbreed(kinLOISnat,kinintra_nat)
-write.table(transLOISnat,file="snp_NAT_kinLOIS.txt")
-
-kinRITLnat<-read.table("kin_sat_RITL_nat.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_sat_intraRITL_nat.txt",header=T,sep="\t")
-transRITLnat<-2*insertinbreed(kinRITLnat,kinintra_nat)
-write.table(transRITLnat,file="sat_NAT_kinRITL.txt")
-
-kinRITLnat<-read.table("kin_snp_PATHO_RITL_nat.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_snp_intraPATHO_RITL_nat.txt",header=T,sep="\t")
-transRITLnat<-2*insertinbreed(kinRITLnat,kinintra_nat)
-write.table(transRITLnat,file="snp_NAT_kinPATHO_RITL.txt")
-
-kinRITLnat<-read.table("kin_snp_REF_RITL_nat.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_snp_intraREF_RITL_nat.txt",header=T,sep="\t")
-transRITLnat<-2*insertinbreed(kinRITLnat,kinintra_nat)
-write.table(transRITLnat,file="snp_NAT_kinREF_RITL.txt")
-
-kinLOISnat<-read.table("kin_snp_PATHO_LOIS_nat.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_snp_intraPATHO_LOIS_nat.txt",header=T,sep="\t")
-transLOISnat<-2*insertinbreed(kinLOISnat,kinintra_nat)
-write.table(transLOISnat,file="snp_NAT_kinPATHO_LOIS.txt")
-
-kinLOISnat<-read.table("kin_snp_REF_LOIS_nat.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_snp_intraREF_LOIS_nat.txt",header=T,sep="\t")
-transLOISnat<-2*insertinbreed(kinLOISnat,kinintra_nat)
-write.table(transLOISnat,file="snp_NAT_kinREF_LOIS.txt")
-
-#rerebelotte pour les jeux de données criblés avec les MAF + LD, attention 
-#les noms de fichiers sont parfois identiques à ce que l'on trouve au-dessus, 
-#il faut donc faire attention de se trouver dans le bon dossier
-
-kinRITLnat<-read.table("kin_snp_RITL_nat.txt",header=T,sep="\t")
-kinintra_nat<-read.table("kin_snp_intraRITL_nat.txt",header=T,sep="\t")
-transRITLnat<-2*insertinbreed(kinRITLnat,kinintra_nat)
-write.table(transRITLnat,file="snp_NAT_kinRITL.txt")
-
-kinRITLlim<-read.table("kin_snp_RITL_lim.txt",header=T,sep="\t")
-kinintra_lim<-read.table("kin_snp_intraRITL_lim.txt",header=T,sep="\t")
-transRITLlim<-2*insertinbreed(kinRITLlim,kinintra_lim)
-write.table(transRITLlim,file="snp_LIM_kinRITL.txt")
-
-kinRITLrenf<-read.table("kin_snp_RITL_renf.txt",header=T,sep="\t")
-kinintra_renf<-read.table("kin_snp_intraRITL_renf.txt",header=T,sep="\t")
-transRITLrenf<-2*insertinbreed(kinRITLrenf,kinintra_renf)
-write.table(transRITLrenf,file="snp_RENF_kinRITL.txt")
+###############################################################################
+#END
+###############################################################################
