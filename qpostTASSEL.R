@@ -39,28 +39,60 @@ qpostassel<-function(stat,qalpha)
   return(statFin)
 }
 
-NATRENF_stat<-read.table("rez_NATRENF_stats.txt",sep="\t",header=T)
-q_NAT_stat<-qpostassel(NATRENF_stat,0.05)
+#False Discovery Rate computation for Natural and renforced treatment
+NATRENF_stat<-read.table("rez_NATRENF_stats.txt",sep="\t",header=TRUE)
+qNATRENF<-qpostassel(NATRENF_stat,0.05)
+write.table(qNATRENF,file="qNATRENF.txt",quote=FALSE,row.names=FALSE,sep="\t")
+
+#False Discovery Rate computation for Limited treatment
+LIM_stat<-read.table("rez_LIM_stats.txt",sep="\t",header=TRUE)
+qLIM<-qpostassel(LIM_stat,0.05)
+write.table(qLIM,file="qLIM.txt",quote=FALSE,row.names=FALSE,sep="\t")
 
 
 ###############################################################################
 #code for a qq-plot
 ###############################################################################
 
-unif<-runif(table(q_NAT_stat$Trait)[[1]],0,1)
+#here you put the output of the function 'qpostassel'
+toplot<-qNATRENF
 
-pdf(file="plot_NAT_Trait_QQ.pdf",width=40, height=10)
+unif<-runif(max(table(toplot$Trait)),0,1)
+
+pdf(file="NATRENF_QQ.pdf",width=40, height=10)
 op<-par(mfrow=c(2,8))
-for (i in 1:length(levels(q_NAT_stat$Trait))) {
-  range<-q_NAT_stat[q_NAT_stat$Trait==(levels(q_NAT_stat$Trait))[i],]
+for (i in 1:length(levels(toplot$Trait))) {
+  range<-toplot[toplot$Trait==(levels(toplot$Trait))[i],]
   plot(pty="s",type="o",
-       sort(-log(unif[1:dim(q_NAT_stat[q_NAT_stat$Trait
-                                    ==(levels(q_NAT_stat$Trait))[i],])[1]])),
+       sort(-log(unif[1:dim(toplot[toplot$Trait
+                                   ==(levels(toplot$Trait))[i],])[1]])),
        sort(-log(range$p)),
        col=as.factor(range$qsignif)[order(-log(range$p))],
        ylim=c(0,max(-log(range$p))),
        xaxt="s",yaxt="s", xlab="", ylab="",pch=21,cex=2,lwd=3,
-       main=levels(q_NAT_stat$Trait)[i],cex.main=2.5)
+       main=levels(toplot$Trait)[i],cex.main=2.5)
+  abline(0,1,lty=3,lwd=2)
+}
+par(op)
+dev.off()
+
+#and for the 'lim' dataset
+toplot<-qLIM
+
+unif<-runif(max(table(toplot$Trait)),0,1)
+
+pdf(file="LIM_QQ.pdf",width=40, height=10)
+op<-par(mfrow=c(2,8))
+for (i in 1:length(levels(toplot$Trait))) {
+  range<-toplot[toplot$Trait==(levels(toplot$Trait))[i],]
+  plot(pty="s",type="o",
+       sort(-log(unif[1:dim(toplot[toplot$Trait
+                                   ==(levels(toplot$Trait))[i],])[1]])),
+       sort(-log(range$p)),
+       col=as.factor(range$qsignif)[order(-log(range$p))],
+       ylim=c(0,max(-log(range$p))),
+       xaxt="s",yaxt="s", xlab="", ylab="",pch=21,cex=2,lwd=3,
+       main=levels(toplot$Trait)[i],cex.main=2.5)
   abline(0,1,lty=3,lwd=2)
 }
 par(op)
