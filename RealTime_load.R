@@ -6,7 +6,9 @@
 
 #loading the libraries
 library(adegenet)
+library(gdata)
 library(kinship2)
+library(RColorBrewer)
 
 #loading the different necessary data set
 
