@@ -34,6 +34,8 @@ plot(plan, pch=21, col="black")
 points(bord, pch=21, bg="green4", col="black")
 points(fam_3P, pch=20, bg="blue", col="orange")
 
+#export to .pdf 17 x 10 inches
+
 
 ##############################################################################/
 #END

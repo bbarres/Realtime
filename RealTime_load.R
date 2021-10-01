@@ -10,8 +10,9 @@ library(gdata)
 library(kinship2)
 library(RColorBrewer)
 
-#loading the different necessary data set
-
+#loading the different data sets
+mrkrInf<-read.table()
+RTdata<-read.table()
 
 
 ##############################################################################/
