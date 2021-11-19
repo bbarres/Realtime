@@ -12,7 +12,8 @@ library(RColorBrewer)
 
 #loading the different data sets
 mrkrInf<-read.table()
-RTdata<-read.table()
+RTdata<-read.table("data/datatot.txt",sep="\t",stringsAsFactors=TRUE,
+                   header=TRUE)
 
 
 ##############################################################################/

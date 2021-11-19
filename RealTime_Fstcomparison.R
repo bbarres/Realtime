@@ -40,6 +40,14 @@ experSNP@ind.names[experSNP@other$live_bin=="NA"]
 temp<-experSNP[experSNP@other$live_bin!="NA"]
 
 
+
+
+
+plot(dispo$coord_X,dispo$coord_Y,bg=dispo$family,pch=21)
+
+
+
+
 ##############################################################################/
 #END
 ##############################################################################/
