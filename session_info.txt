@@ -8,7 +8,7 @@
  collate  French_France.1252          
  ctype    French_France.1252          
  tz       Europe/Paris                
- date     2021-11-20                  
+ date     2021-11-21                  
 
 - Packages -----------------------------------------------------------------------
  package      * version date       lib source        
@@ -41,7 +41,6 @@
  gmodels        2.18.1  2018-06-25 [1] CRAN (R 4.1.0)
  gtable         0.3.0   2019-03-25 [1] CRAN (R 4.1.0)
  gtools         3.9.2   2021-06-06 [1] CRAN (R 4.1.0)
- hierfstat    * 0.5-7   2020-07-20 [1] CRAN (R 4.1.0)
  htmltools      0.5.2   2021-08-25 [1] CRAN (R 4.1.1)
  httpuv         1.6.3   2021-09-09 [1] CRAN (R 4.1.1)
  igraph         1.2.6   2020-10-06 [1] CRAN (R 4.1.0)
@@ -58,13 +57,10 @@
  mime           0.12    2021-09-28 [1] CRAN (R 4.1.1)
  munsell        0.5.0   2018-06-12 [1] CRAN (R 4.1.0)
  nlme           3.1-152 2021-02-04 [2] CRAN (R 4.1.1)
- pegas          1.0-1   2021-05-17 [1] CRAN (R 4.1.0)
  permute        0.9-5   2019-03-12 [1] CRAN (R 4.1.0)
  pillar         1.6.3   2021-09-26 [1] CRAN (R 4.1.1)
  pkgconfig      2.0.3   2019-09-22 [1] CRAN (R 4.1.0)
  plyr           1.8.6   2020-03-03 [1] CRAN (R 4.1.0)
- polysat        1.7-5   2021-05-28 [1] CRAN (R 4.1.0)
- poppr        * 2.9.3   2021-09-07 [1] CRAN (R 4.1.1)
  promises       1.2.0.1 2021-02-11 [1] CRAN (R 4.1.0)
  proxy          0.4-26  2021-06-07 [1] CRAN (R 4.1.0)
  purrr          0.3.4   2020-04-17 [1] CRAN (R 4.1.0)

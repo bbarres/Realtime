@@ -19,16 +19,22 @@ colovec<-c(colovec[1:3],"#ffffff",colovec[4:15],"#ffffff","#000000",
            "#ffffff","#ffffff")
 op<-par(mar=c(0,0,15,0))
 plot(dispo$coord_X,dispo$coord_Y,bty="n",ann=FALSE,axes=FALSE,
-     pch=c(rep(21,17),24,21,21)[as.numeric(dispo$family_simp)],
+     pch=c(rep(21,17),24,21,22)[as.numeric(dispo$family_simp)],
      bg=colovec[as.numeric(dispo$family_simp)])
-legend(x=300,y=950,horiz=TRUE,x.intersp=0.2,xpd=TRUE,pt.cex=2,
+text(x=c(20,620,1220,20,620,1220,20,620,1220),
+     y=c(760,760,760,455,455,455,145,145,145),
+     labels=c("A1 / nat","A2 / lim","A3 / renf",
+              "B1 / renf","B2 / nat","B3 / lim",
+              "C1 / lim", "C2 / renf","C3 / nat"),
+     xpd=TRUE,cex=2,font=2,adj=c(0,0))
+legend(x=300,y=900,horiz=TRUE,x.intersp=0.2,xpd=TRUE,pt.cex=2,
        text.width=seq(from=0,to=1,by=0.06),bty="n",
        legend=as.character(levels(dispo$family_simp))[c(1:3,5:16,18,20)],
-       pch=c(rep(21,15),24,21),
+       pch=c(rep(21,15),24,22),
        pt.bg=colovec[-c(4,17)])
 title(main="Map of the experimental setup",cex.main=4,line=10)
 par(op)
-#export to .pdf 20 x 10 inches
+#export to .pdf 20 x 12 inches
 
 
 
