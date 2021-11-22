@@ -9,6 +9,8 @@ library(adegenet)
 library(gdata)
 library(kinship2)
 library(RColorBrewer)
+library(viridis)
+
 
 #loading the different data sets
 

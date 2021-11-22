@@ -37,7 +37,68 @@ par(op)
 #export to .pdf 20 x 12 inches
 
 
+##############################################################################/
+#map of the dead tree####
+##############################################################################/
 
+colovec<-c(brewer.pal(12,"Paired")[c(rep(6,9),9,4)])
+op<-par(mar=c(0,0,15,0))
+plot(dispo$coord_X,dispo$coord_Y,bty="n",ann=FALSE,axes=FALSE,
+     pch=c(rep(21,17),24,21,22)[as.numeric(dispo$family_simp)],
+     bg=colovec[as.numeric(dispo$an_mort)])
+text(x=c(20,620,1220,20,620,1220,20,620,1220),
+     y=c(760,760,760,455,455,455,145,145,145),
+     labels=c("A1 / nat","A2 / lim","A3 / renf",
+              "B1 / renf","B2 / nat","B3 / lim",
+              "C1 / lim", "C2 / renf","C3 / nat"),
+     xpd=TRUE,cex=2,font=2,adj=c(0,0))
+legend(x=300,y=950,horiz=FALSE,x.intersp=1,y.intersp=0.5,
+       xpd=TRUE,pt.cex=3,bty="n",text.font=2,
+       legend=c("Dead","Acorn","Alive"),
+       pch=c(rep(15,3)),
+       col=colovec[c(1,10,11)])
+legend(x=60,y=950,horiz=FALSE,x.intersp=1,y.intersp=0.5,
+       xpd=TRUE,pt.cex=3,bty="n",text.font=2,
+       legend=c("Experiment","CC","hd"),
+       pch=c(21,24,22))
+title(main="Dead or alive map",cex.main=4,line=10)
+par(op)
+#export to .pdf 20 x 12 inches
+
+
+##############################################################################/
+#map of the tree height####
+##############################################################################/
+
+#defining a vector to chose the columns with tree height information
+temp<-c("Hfin09","Hfin10","Hfin11","Hfin12",
+        "Hdeb14","Hdeb15","Hdeb16","Hdeb17")
+min(dispo[,temp])
+
+
+colovec<-viridis(2)
+op<-par(mar=c(0,0,15,0))
+plot(dispo$coord_X,dispo$coord_Y,bty="n",ann=FALSE,axes=FALSE,
+     pch=c(rep(21,17),24,21,22)[as.numeric(dispo$family_simp)],
+     bg=colovec[as.numeric(dispo$an_mort)])
+text(x=c(20,620,1220,20,620,1220,20,620,1220),
+     y=c(760,760,760,455,455,455,145,145,145),
+     labels=c("A1 / nat","A2 / lim","A3 / renf",
+              "B1 / renf","B2 / nat","B3 / lim",
+              "C1 / lim", "C2 / renf","C3 / nat"),
+     xpd=TRUE,cex=2,font=2,adj=c(0,0))
+legend(x=300,y=950,horiz=FALSE,x.intersp=1,y.intersp=0.5,
+       xpd=TRUE,pt.cex=3,bty="n",text.font=2,
+       legend=c("Dead","Acorn","Alive"),
+       pch=c(rep(15,3)),
+       col=colovec[c(1,10,11)])
+legend(x=60,y=950,horiz=FALSE,x.intersp=1,y.intersp=0.5,
+       xpd=TRUE,pt.cex=3,bty="n",text.font=2,
+       legend=c("Experiment","CC","hd"),
+       pch=c(21,24,22))
+title(main="Dead or alive map",cex.main=4,line=10)
+par(op)
+#export to .pdf 20 x 12 inches
 
 
 ##############################################################################/
