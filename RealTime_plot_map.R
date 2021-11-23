@@ -66,6 +66,12 @@ par(op)
 #export to .pdf 20 x 12 inches
 
 
+#some individuals from the experimental setup are not included in the 
+#phenotypic data set
+dispo[dispo$family_simp!="CC" & dispo$family_simp!="hd" & 
+              is.na(dispo$an_mort),"Sample_ID"]
+
+
 ##############################################################################/
 #map of the tree height####
 ##############################################################################/
