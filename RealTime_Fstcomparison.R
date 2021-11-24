@@ -85,6 +85,9 @@ snpGen<-df2genind(snp.dat[,temp],ploidy=2,sep="/",
                   ind.names=snp.dat$Sample_ID,
                   pop=snp.dat$family_simp)
 
+str_replace_all(temp,"[.]","_")
+
+
 ##############################################################################/
 #END
 ##############################################################################/

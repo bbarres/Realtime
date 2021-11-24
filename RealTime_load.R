@@ -10,6 +10,7 @@ library(gdata)
 library(kinship2)
 library(RColorBrewer)
 library(viridis)
+library(stringr)
 
 
 #loading the different data sets
@@ -20,6 +21,7 @@ library(viridis)
 #data by individuals, including all individuals (hd, families, parents and CC
 RTdata<-read.table("data/datatot.txt",sep="\t",stringsAsFactors=FALSE,
                    header=TRUE)
+#because some functions do not like "." in the 
 #reordering the family levels
 RTdata$family_simp<-factor(RTdata$family_simp,
                            levels=c("1","9","11","26","27","45","48",
