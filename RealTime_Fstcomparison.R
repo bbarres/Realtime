@@ -74,6 +74,8 @@ microGen<-df2genind(temp2,ploidy=2,sep="/",
 #probably "contaminant"
 table(micro.dat$family_simp)
 
+
+
 ##############################################################################/
 #F statistics based on the snp data
 ##############################################################################/
@@ -84,8 +86,12 @@ temp<-colnames(snp.dat)[48:(48+818)]
 snpGen<-df2genind(snp.dat[,temp],ploidy=2,sep="/",
                   ind.names=snp.dat$Sample_ID,
                   pop=snp.dat$family_simp)
+#some markers are not polymorphic or display only a very limited polymorphism
+table(minorAllele(snpGen)>0.95)
+table(minorAllele(snpGen)<0.05)
 
-str_replace_all(temp,"[.]","_")
+#we limit the data to markers with a minor allele frequency > 0.05
+snpGen2<-snpGen[,loc=minorAllele(snpGen)<0.95 & minorAllele(snpGen)>0.05]
 
 
 ##############################################################################/

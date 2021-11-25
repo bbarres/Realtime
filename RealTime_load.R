@@ -21,7 +21,8 @@ library(stringr)
 #data by individuals, including all individuals (hd, families, parents and CC
 RTdata<-read.table("data/datatot.txt",sep="\t",stringsAsFactors=FALSE,
                    header=TRUE)
-#because some functions do not like "." in the 
+#because some functions do not like "." within colnames, we replace them
+colnames(RTdata)<-str_replace_all(colnames(RTdata),"[.]","_")
 #reordering the family levels
 RTdata$family_simp<-factor(RTdata$family_simp,
                            levels=c("1","9","11","26","27","45","48",
@@ -36,7 +37,7 @@ dispo<-drop.levels(dispo)
 #12 markers, but 3 were found to be of limited quality (too many missing
 #data). Therefore the quality criteria to remove individuals is a maximum 
 #of 2 microsatellite missing data for the 9 best microsatellite
-micro.dat<-RTdata[RTdata$na.9micro<3 & !is.na(RTdata$na.9micro),]
+micro.dat<-RTdata[RTdata$na_9micro<3 & !is.na(RTdata$na_9micro),]
 micro.dat<-drop.levels(micro.dat)
 
 #data subset of individuals with snp data. The quality of snp genotyping
