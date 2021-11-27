@@ -68,12 +68,19 @@ for (i in 1:(length(temp)/2)) {
 microGen<-df2genind(temp2,ploidy=2,sep="/",
                     ind.names=micro.dat$Sample_ID,
                     pop=micro.dat$family_simp)
+#adding information in the 'other' slot
+microGen@other$fam<-micro.dat$family_simp
+microGen@other$treat<-micro.dat$exp
+microGen@other$height<-micro.dat$Hdeb17
+microGen@other$DoA<-micro.dat$live_bin
 
 #this includes individual that are not directly related to the experiment, 
 #such as parents and the controlled crosses and 2 individuals that were 
 #probably "contaminant"
 table(micro.dat$family_simp)
-
+#we limit the data set to the individuals belonging to the experimental
+#set up
+microGen<-microGen[(microGen@other$fam!="CC" & microGen@other$fam!="PAR")]
 
 
 ##############################################################################/
