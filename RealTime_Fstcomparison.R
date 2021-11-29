@@ -4,9 +4,7 @@
 ##############################################################################/
 ##############################################################################/
 
-library(adegenet)
 library(hierfstat)
-library(poppr)
 
 source("RealTime_load.R")
 
@@ -84,8 +82,11 @@ microGen<-microGen[(microGen@other$fam!="CC" & microGen@other$fam!="PAR")]
 
 #compute genetic distance between individuals
 distMicro<-diss.dist(microGen,mat=FALSE)
-treeMicro<-bionj(distMicro)
+treeMicro<-nj(distMicro)
 plot(treeMicro,type="unr",show.tip=FALSE)
+colovec<-c(brewer.pal(12,"Paired"),brewer.pal(8,"Dark2")[c(1,4,8)])
+colovec<-c(colovec[1:3],"#ffffff",colovec[4:15],"#ffffff")
+tiplabels(pch=20,col=colovec[as.numeric(microGen@other$fam)], cex = 2)
 
 
 ##############################################################################/
@@ -118,6 +119,13 @@ table(minorAllele(snpGen)<0.05)
 
 #we limit the data to markers with a minor allele frequency > 0.05
 snpGen2<-snpGen[,loc=minorAllele(snpGen)<0.95 & minorAllele(snpGen)>0.05]
+
+#compute genetic distance between individuals
+distSnp2<-diss.dist(snpGen2,mat=FALSE)
+treeSnp2<-nj(distSnp2)
+plot(treeSnp2,type="unr",show.tip=FALSE)
+colovec<-c(brewer.pal(12,"Paired"),brewer.pal(8,"Dark2")[c(1,4,8)])
+tiplabels(pch=20,col=colovec[as.numeric(snpGen2@other$fam)], cex = 2)
 
 
 ##############################################################################/

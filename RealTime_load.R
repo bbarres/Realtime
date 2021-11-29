@@ -8,6 +8,9 @@
 library(adegenet)
 library(gdata)
 library(kinship2)
+library(poppr)
+library(ape)
+
 library(RColorBrewer)
 library(viridis)
 library(stringr)
