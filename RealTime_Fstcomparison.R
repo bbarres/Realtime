@@ -82,17 +82,36 @@ table(micro.dat$family_simp)
 #set up
 microGen<-microGen[(microGen@other$fam!="CC" & microGen@other$fam!="PAR")]
 
+#compute genetic distance between individuals
+distMicro<-diss.dist(microGen,mat=FALSE)
+treeMicro<-bionj(distMicro)
+plot(treeMicro,type="unr",show.tip=FALSE)
+
 
 ##############################################################################/
 #F statistics based on the snp data
 ##############################################################################/
 
-#list of the snp marker name
+#list of the snp marker names
 temp<-colnames(snp.dat)[48:(48+818)]
 
 snpGen<-df2genind(snp.dat[,temp],ploidy=2,sep="/",
                   ind.names=snp.dat$Sample_ID,
                   pop=snp.dat$family_simp)
+#adding information in the 'other' slot
+snpGen@other$fam<-snp.dat$family_simp
+snpGen@other$treat<-snp.dat$exp
+snpGen@other$height<-snp.dat$Hdeb17
+snpGen@other$DoA<-snp.dat$live_bin
+
+#this includes individual that are not directly related to the experiment, 
+#such as parents and the controlled crosses and 2 individuals that were 
+#probably "contaminant"
+table(snp.dat$family_simp)
+#we limit the data set to the individuals belonging to the experimental
+#set up
+snpGen<-snpGen[(snpGen@other$fam!="CC" & snpGen@other$fam!="PAR")]
+
 #some markers are not polymorphic or display only a very limited polymorphism
 table(minorAllele(snpGen)>0.95)
 table(minorAllele(snpGen)<0.05)
