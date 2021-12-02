@@ -80,6 +80,11 @@ table(micro.dat$family_simp)
 #set up
 microGen<-microGen[(microGen@other$fam!="CC" & microGen@other$fam!="PAR")]
 
+
+temp<-seppop(microGen)
+temp2<-repool(temp$`1`,temp$`1`,temp$`9`)
+
+
 #compute genetic distance between individuals
 distMicro<-diss.dist(microGen,mat=FALSE)
 treeMicro<-nj(distMicro)
