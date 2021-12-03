@@ -45,7 +45,7 @@ colovec<-c(brewer.pal(12,"Paired")[c(rep(6,9),9,4)])
 op<-par(mar=c(0,0,15,0))
 plot(dispo$coord_X,dispo$coord_Y,bty="n",ann=FALSE,axes=FALSE,
      pch=c(rep(21,17),24,21,22)[as.numeric(dispo$family_simp)],
-     bg=colovec[as.numeric(dispo$an_mort)])
+     bg=colovec[as.numeric(as.factor(dispo$an_mort))])
 text(x=c(20,620,1220,20,620,1220,20,620,1220),
      y=c(760,760,760,455,455,455,145,145,145),
      labels=c("A1 / nat","A2 / lim","A3 / renf",

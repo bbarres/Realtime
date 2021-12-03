@@ -4,7 +4,9 @@
 ##############################################################################/
 ##############################################################################/
 
-library(hierfstat)
+library(genepop)
+library(FinePop2)
+library(PopGenReport)
 
 source("RealTime_load.R")
 
@@ -71,6 +73,8 @@ microGen@other$fam<-micro.dat$family_simp
 microGen@other$treat<-micro.dat$exp
 microGen@other$height<-micro.dat$Hdeb17
 microGen@other$DoA<-micro.dat$live_bin
+#combine experimental and dead or alive information
+microGen@other$newPop<-paste(micro.dat$exp,micro.dat$live_bin,sep="")
 
 #this includes individual that are not directly related to the experiment, 
 #such as parents and the controlled crosses and 2 individuals that were 
@@ -79,11 +83,36 @@ table(micro.dat$family_simp)
 #we limit the data set to the individuals belonging to the experimental
 #set up
 microGen<-microGen[(microGen@other$fam!="CC" & microGen@other$fam!="PAR")]
+#we also remove individuals without dead or alive information
+microGen<-microGen[!is.na(microGen@other$DoA)]
+#checking the minor allele frequencies of the markers
+minorAllele(microGen)
 
+#set newPop as population
+pop(microGen)<-microGen@other$newPop
+table(pop(microGen))
+pairwise.WCfst(genind2hierfstat(microGen))
+n.temp<-seppop(microGen) 
+Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
+Hexp<-Hs(microGen)
+Arich<-colMeans(allelic.richness(microGen,min.n=100)$Ar)
+Ali.vs.Dea<-rbind(Hobs,Hexp,Arich)
 
-temp<-seppop(microGen)
-temp2<-repool(temp$`1`,temp$`1`,temp$`9`)
-
+#total vs surviving
+temp<-repool(n.temp$exp1,n.temp$exp0)
+pop(temp)<-rep("exp_init",times=nInd(temp))
+temp<-repool(temp,n.temp$exp1)
+temp2<-repool(n.temp$low1,n.temp$low0)
+pop(temp2)<-rep("low_init",times=nInd(temp2))
+temp<-repool(temp,temp2,n.temp$low1)
+#number of individuals by populations
+table(pop(temp))
+pairwise.WCfst(genind2hierfstat(temp))
+n.temp<-seppop(temp) 
+Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
+Hexp<-Hs(temp)
+Arich<-colMeans(allelic.richness(temp,min.n=100)$Ar)
+Deb.vs.Fin<-rbind(Hobs,Hexp,Arich)
 
 #compute genetic distance between individuals
 distMicro<-diss.dist(microGen,mat=FALSE)
@@ -91,7 +120,7 @@ treeMicro<-nj(distMicro)
 plot(treeMicro,type="unr",show.tip=FALSE)
 colovec<-c(brewer.pal(12,"Paired"),brewer.pal(8,"Dark2")[c(1,4,8)])
 colovec<-c(colovec[1:3],"#ffffff",colovec[4:15],"#ffffff")
-tiplabels(pch=20,col=colovec[as.numeric(microGen@other$fam)], cex = 2)
+tiplabels(pch=20,col=colovec[as.numeric(microGen@other$fam)],cex=2)
 
 
 ##############################################################################/
@@ -130,7 +159,7 @@ distSnp2<-diss.dist(snpGen2,mat=FALSE)
 treeSnp2<-nj(distSnp2)
 plot(treeSnp2,type="unr",show.tip=FALSE)
 colovec<-c(brewer.pal(12,"Paired"),brewer.pal(8,"Dark2")[c(1,4,8)])
-tiplabels(pch=20,col=colovec[as.numeric(snpGen2@other$fam)], cex = 2)
+tiplabels(pch=20,col=colovec[as.numeric(snpGen2@other$fam)],cex=2)
 
 
 ##############################################################################/

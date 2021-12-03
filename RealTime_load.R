@@ -7,6 +7,7 @@
 #loading the libraries
 library(adegenet)
 library(gdata)
+library(hierfstat)
 library(kinship2)
 library(poppr)
 library(ape)
