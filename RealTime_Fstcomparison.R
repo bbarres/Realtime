@@ -55,7 +55,7 @@ temp<-c("A11_all1","A11_all2","A15_all1","A15_all2","A3_all1","A3_all2",
         "C_all1","C_all2","D20_all1","D20_all2","D31_all1","D31_all2",
         "F_all1","F_all2","G_all1","G_all2","S19_all1","S19_all2")
 microName<-c("A11","A15","A3","AB","AK","AO","C","D20","D31","F","G","S19")
-temp2<-data.frame(matrix(vector(), dim(micro.dat)[1], 12,
+temp2<-data.frame(matrix(vector(),dim(micro.dat)[1],12,
                          dimnames=list(c(),microName)),
                   stringsAsFactors=F)
 for (i in 1:(length(temp)/2)) {
@@ -138,6 +138,8 @@ snpGen@other$fam<-snp.dat$family_simp
 snpGen@other$treat<-snp.dat$exp
 snpGen@other$height<-snp.dat$Hdeb17
 snpGen@other$DoA<-snp.dat$live_bin
+#combine experimental and dead or alive information
+snpGen@other$newPop<-paste(snp.dat$exp,snp.dat$live_bin,sep="")
 
 #this includes individual that are not directly related to the experiment, 
 #such as parents and the controlled crosses and 2 individuals that were 
@@ -146,6 +148,8 @@ table(snp.dat$family_simp)
 #we limit the data set to the individuals belonging to the experimental
 #set up
 snpGen<-snpGen[(snpGen@other$fam!="CC" & snpGen@other$fam!="PAR")]
+#we also remove individuals without dead or alive information
+snpGen<-snpGen[!is.na(snpGen@other$DoA)]
 
 #some markers are not polymorphic or display only a very limited polymorphism
 table(minorAllele(snpGen)>0.95)
@@ -153,6 +157,32 @@ table(minorAllele(snpGen)<0.05)
 
 #we limit the data to markers with a minor allele frequency > 0.05
 snpGen2<-snpGen[,loc=minorAllele(snpGen)<0.95 & minorAllele(snpGen)>0.05]
+
+#set newPop as population
+pop(snpGen2)<-snpGen2@other$newPop
+table(pop(snpGen2))
+pairwise.WCfst(genind2hierfstat(snpGen2))
+n.temp<-seppop(snpGen2) 
+Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
+Hexp<-Hs(snpGen2)
+Arich<-colMeans(allelic.richness(snpGen2,min.n=100)$Ar)
+Ali.vs.Dea<-rbind(Hobs,Hexp,Arich)
+
+#total vs surviving
+temp<-repool(n.temp$exp1,n.temp$exp0)
+pop(temp)<-rep("exp_init",times=nInd(temp))
+temp<-repool(temp,n.temp$exp1)
+temp2<-repool(n.temp$low1,n.temp$low0)
+pop(temp2)<-rep("low_init",times=nInd(temp2))
+temp<-repool(temp,temp2,n.temp$low1)
+#number of individuals by populations
+table(pop(temp))
+pairwise.WCfst(genind2hierfstat(temp))
+n.temp<-seppop(temp) 
+Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
+Hexp<-Hs(temp)
+Arich<-colMeans(allelic.richness(temp,min.n=100)$Ar)
+Deb.vs.Fin<-rbind(Hobs,Hexp,Arich)
 
 #compute genetic distance between individuals
 distSnp2<-diss.dist(snpGen2,mat=FALSE)
