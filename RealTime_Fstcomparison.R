@@ -7,6 +7,7 @@
 library(genepop)
 library(FinePop2)
 library(PopGenReport)
+library(graph4lg)
 
 source("RealTime_load.R")
 
@@ -92,7 +93,10 @@ minorAllele(microGen)
 pop(microGen)<-microGen@other$newPop
 table(pop(microGen))
 pairwise.WCfst(genind2hierfstat(microGen))
-n.temp<-seppop(microGen) 
+genind_to_genepop(microGen,output="data/microGenAD.txt")
+microGenAD<-"data/microGenAD.txt"
+genedivFis(microGenAD,sizes=FALSE,"output/microGenAD.txt.Fis")
+n.temp<-seppop(microGen)
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(microGen)
 Arich<-colMeans(allelic.richness(microGen,min.n=100)$Ar)
@@ -108,6 +112,9 @@ temp<-repool(temp,temp2,n.temp$low1)
 #number of individuals by populations
 table(pop(temp))
 pairwise.WCfst(genind2hierfstat(temp))
+genind_to_genepop(temp,output="data/microGenDF.txt")
+microGenAD<-"data/microGenDF.txt"
+genedivFis(microGenAD,sizes=FALSE,"output/microGenDF.txt.Fis")
 n.temp<-seppop(temp) 
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(temp)
