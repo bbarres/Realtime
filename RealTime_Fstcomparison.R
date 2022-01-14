@@ -169,11 +169,14 @@ snpGen2<-snpGen[,loc=minorAllele(snpGen)<0.95 & minorAllele(snpGen)>0.05]
 pop(snpGen2)<-snpGen2@other$newPop
 table(pop(snpGen2))
 pairwise.WCfst(genind2hierfstat(snpGen2))
+genind_to_genepop(snpGen2,output="data/snpGen2AD.txt")
+snpGen2AD<-"data/snpGen2AD.txt"
+genedivFis(microGenAD,sizes=FALSE,"output/snpGen2AD.txt.Fis")
 n.temp<-seppop(snpGen2) 
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(snpGen2)
 Arich<-colMeans(allelic.richness(snpGen2,min.n=100)$Ar)
-Ali.vs.Dea<-rbind(Hobs,Hexp,Arich)
+Ali.vs.Dea.snp<-rbind(Hobs,Hexp,Arich)
 
 #total vs surviving
 temp<-repool(n.temp$exp1,n.temp$exp0)
@@ -185,11 +188,14 @@ temp<-repool(temp,temp2,n.temp$low1)
 #number of individuals by populations
 table(pop(temp))
 pairwise.WCfst(genind2hierfstat(temp))
+genind_to_genepop(temp,output="data/snpGen2DF.txt")
+snpGen2AD<-"data/snpGen2DF.txt"
+genedivFis(microGenAD,sizes=FALSE,"output/snpGen2DF.txt.Fis")
 n.temp<-seppop(temp) 
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(temp)
 Arich<-colMeans(allelic.richness(temp,min.n=100)$Ar)
-Deb.vs.Fin<-rbind(Hobs,Hexp,Arich)
+Deb.vs.Fin.snp<-rbind(Hobs,Hexp,Arich)
 
 #compute genetic distance between individuals
 distSnp2<-diss.dist(snpGen2,mat=FALSE)
