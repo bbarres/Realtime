@@ -6,15 +6,18 @@
 
 #loading the libraries
 library(adegenet)
+library(ape)
+library(FinePop2)
 library(gdata)
+library(genepop)
+library(graph4lg)
 library(hierfstat)
 library(kinship2)
+library(PopGenReport)
 library(poppr)
-library(ape)
-
 library(RColorBrewer)
-library(viridis)
 library(stringr)
+library(viridis)
 
 
 #loading the different data sets

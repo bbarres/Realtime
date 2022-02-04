@@ -4,11 +4,6 @@
 ##############################################################################/
 ##############################################################################/
 
-library(genepop)
-library(FinePop2)
-library(PopGenReport)
-library(graph4lg)
-
 source("RealTime_load.R")
 
 
@@ -30,7 +25,6 @@ compSNP@other$father<-metaIND$father
 compSNP@other$traitement<-metaIND$traitement
 compSNP@other$traitsimp<-metaIND$trait_simp
 compSNP@other$live_bin<-metaIND$live_bin
-
 
 #limiting the data set to individuals of the experimental setting 
 experSNP<-compSNP[compSNP$pop!="PAR" & compSNP$pop!="CC" 
