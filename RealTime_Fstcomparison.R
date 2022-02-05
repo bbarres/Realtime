@@ -88,8 +88,10 @@ pop(microGen)<-microGen@other$newPop
 table(pop(microGen))
 pairwise.WCfst(genind2hierfstat(microGen))
 genind_to_genepop(microGen,output="data/microGenAD.txt")
-microGenAD<-"data/microGenAD.txt"
-genedivFis(microGenAD,sizes=FALSE,"output/microGenAD.txt.Fis")
+microGendat<-"data/microGenAD.txt"
+genedivFis(microGendat,sizes=FALSE,"output/microGenAD.txt.Fis")
+Fst(microGendat,sizes=FALSE,"output/microGenAD.txt.Fst",pairs=TRUE)
+clean_workdir()
 n.temp<-seppop(microGen)
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(microGen)
@@ -107,8 +109,10 @@ temp<-repool(temp,temp2,n.temp$low1)
 table(pop(temp))
 pairwise.WCfst(genind2hierfstat(temp))
 genind_to_genepop(temp,output="data/microGenDF.txt")
-microGenAD<-"data/microGenDF.txt"
-genedivFis(microGenAD,sizes=FALSE,"output/microGenDF.txt.Fis")
+microGendat<-"data/microGenDF.txt"
+genedivFis(microGendat,sizes=FALSE,"output/microGenDF.txt.Fis")
+Fst(microGendat,sizes=FALSE,"output/microGenAD.txt.Fst",pairs=TRUE)
+clean_workdir()
 n.temp<-seppop(temp) 
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(temp)
