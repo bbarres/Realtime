@@ -8,7 +8,7 @@
  collate  French_France.1252
  ctype    French_France.1252
  tz       Europe/Paris
- date     2022-02-04
+ date     2022-03-04
  rstudio  2021.09.2+382 Ghost Orchid (desktop)
  pandoc   NA
 
@@ -20,17 +20,17 @@
  assertthat     0.2.1     2019-03-21 [1] CRAN (R 4.1.0)
  boot           1.3-28    2021-05-03 [2] CRAN (R 4.1.2)
  calibrate      1.7.7     2020-06-19 [1] CRAN (R 4.1.0)
- cli            3.1.1     2022-01-20 [1] CRAN (R 4.1.2)
+ cli            3.2.0     2022-02-14 [1] CRAN (R 4.1.2)
  cluster        2.1.2     2021-04-17 [2] CRAN (R 4.1.2)
  codetools      0.2-18    2020-11-04 [2] CRAN (R 4.1.2)
- colorspace     2.0-2     2021-06-24 [1] CRAN (R 4.1.0)
+ colorspace     2.0-3     2022-02-21 [1] CRAN (R 4.1.2)
  combinat       0.0-8     2012-10-29 [1] CRAN (R 4.1.0)
- crayon         1.4.2     2021-10-29 [1] CRAN (R 4.1.2)
+ crayon         1.5.0     2022-02-14 [1] CRAN (R 4.1.2)
  data.table     1.14.2    2021-09-27 [1] CRAN (R 4.1.1)
  DBI            1.1.2     2021-12-20 [1] CRAN (R 4.1.2)
  digest         0.6.29    2021-12-01 [1] CRAN (R 4.1.2)
  dismo          1.3-5     2021-10-11 [1] CRAN (R 4.1.2)
- dplyr          1.0.7     2021-06-18 [1] CRAN (R 4.1.0)
+ dplyr          1.0.8     2022-02-08 [1] CRAN (R 4.1.2)
  ellipsis       0.3.2     2021-04-29 [1] CRAN (R 4.1.0)
  fansi          1.0.2     2022-01-14 [1] CRAN (R 4.1.2)
  fastmap        1.1.0     2021-01-25 [1] CRAN (R 4.1.0)
@@ -43,7 +43,7 @@
  genetics       1.3.8.1.3 2021-03-01 [1] CRAN (R 4.1.0)
  GGally         2.1.2     2021-06-21 [1] CRAN (R 4.1.0)
  ggplot2        3.3.5     2021-06-25 [1] CRAN (R 4.1.0)
- glue           1.6.1     2022-01-22 [1] CRAN (R 4.1.1)
+ glue           1.6.2     2022-02-24 [1] CRAN (R 4.1.2)
  graph4lg     * 1.2.0     2021-03-16 [1] CRAN (R 4.1.2)
  gridExtra      2.3       2017-09-09 [1] CRAN (R 4.1.1)
  gtable         0.3.0     2019-03-25 [1] CRAN (R 4.1.0)
@@ -97,9 +97,9 @@
  sp             1.4-6     2021-11-14 [1] CRAN (R 4.1.2)
  stringi        1.7.6     2021-11-29 [1] CRAN (R 4.1.2)
  stringr      * 1.4.0     2019-02-10 [1] CRAN (R 4.1.0)
- terra          1.5-17    2022-01-30 [1] CRAN (R 4.1.1)
+ terra          1.5-21    2022-02-17 [1] CRAN (R 4.1.2)
  tibble         3.1.6     2021-11-07 [1] CRAN (R 4.1.2)
- tidyselect     1.1.1     2021-04-30 [1] CRAN (R 4.1.0)
+ tidyselect     1.1.2     2022-02-21 [1] CRAN (R 4.1.2)
  utf8           1.2.2     2021-07-24 [1] CRAN (R 4.1.0)
  vctrs          0.3.8     2021-04-29 [1] CRAN (R 4.1.0)
  vegan          2.5-7     2020-11-28 [1] CRAN (R 4.1.0)
