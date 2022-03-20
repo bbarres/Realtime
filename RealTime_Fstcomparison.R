@@ -133,7 +133,9 @@ tiplabels(pch=20,col=colovec[as.numeric(microGen@other$fam)],cex=2)
 ##############################################################################/
 
 #list of the snp marker names
-temp<-colnames(snp.dat)[48:(48+818)]
+temp<-as.data.frame(colnames(snp.dat)[48:(48+818)])
+#adding another more simple snp marker name
+temp$newnames<-paste("snp",1:819,sep="")
 
 snpGen<-df2genind(snp.dat[,temp],ploidy=2,sep="/",
                   ind.names=snp.dat$Sample_ID,
