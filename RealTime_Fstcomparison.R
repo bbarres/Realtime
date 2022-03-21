@@ -90,7 +90,10 @@ pairwise.WCfst(genind2hierfstat(microGen))
 genind_to_genepop(microGen,output="data/microGenAD.txt")
 microGendat<-"data/microGenAD.txt"
 genedivFis(microGendat,sizes=FALSE,"output/microGenAD.txt.Fis")
+test_HW(microGendat,which="Proba",outputFile="output/microGenAD.txt.HW")
 Fst(microGendat,sizes=FALSE,pairs=TRUE,"output/microGenAD.txt.Fst")
+test_diff(microGendat,genic=FALSE,pairs=TRUE,
+          outputFile="output/microGenAD.txt.DD")
 clean_workdir()
 n.temp<-seppop(microGen)
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
@@ -111,7 +114,10 @@ pairwise.WCfst(genind2hierfstat(temp))
 genind_to_genepop(temp,output="data/microGenDF.txt")
 microGendat<-"data/microGenDF.txt"
 genedivFis(microGendat,sizes=FALSE,"output/microGenDF.txt.Fis")
+test_HW(microGendat,which="Proba",outputFile="output/microGenDF.txt.HW")
 Fst(microGendat,sizes=FALSE,pairs=TRUE,"output/microGenDF.txt.Fst")
+test_diff(microGendat,genic=FALSE,pairs=TRUE,
+          outputFile="output/microGenDF.txt.DD")
 clean_workdir()
 n.temp<-seppop(temp) 
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
@@ -178,7 +184,10 @@ genind_to_genepop(snpGen2,output="data/snpGen2AD.txt")
 #therefor you have to replace this string of 6 zeros by a string of 4 zeros
 snpGen2dat<-"data/snpGen2AD.txt"
 genedivFis(snpGen2dat,sizes=FALSE,"output/snpGen2AD.txt.Fis")
+test_HW(snpGen2dat,which="Proba",outputFile="output/snpGen2AD.txt.HW")
 Fst(snpGen2dat,sizes=FALSE,pairs=TRUE,"output/snpGen2AD.txt.Fst")
+test_diff(snpGen2dat,genic=FALSE,pairs=TRUE,
+          outputFile="output/snpGen2AD.txt.DD")
 clean_workdir()
 n.temp<-seppop(snpGen2) 
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
