@@ -133,9 +133,12 @@ tiplabels(pch=20,col=colovec[as.numeric(microGen@other$fam)],cex=2)
 ##############################################################################/
 
 #list of the snp marker names
-temp<-as.data.frame(colnames(snp.dat)[48:(48+818)])
-#adding another more simple snp marker name
-temp$newnames<-paste("snp",1:819,sep="")
+temp<-colnames(snp.dat)[48:(48+818)]
+#creating a dataframe for the correspondence between true 
+#names and simple names
+nomSNP<-as.data.frame(temp)
+colnames(nomSNP)<-"realNames"
+nomSNP$simpleNames<-paste("snp",1:819,sep="")
 
 snpGen<-df2genind(snp.dat[,temp],ploidy=2,sep="/",
                   ind.names=snp.dat$Sample_ID,
@@ -147,6 +150,7 @@ snpGen@other$height<-snp.dat$Hdeb17
 snpGen@other$DoA<-snp.dat$live_bin
 #combine experimental and dead or alive information
 snpGen@other$newPop<-paste(snp.dat$exp,snp.dat$live_bin,sep="")
+locNames(snpGen)<-paste("snp",1:819,sep="")
 
 #this includes individual that are not directly related to the experiment, 
 #such as parents and the controlled crosses and 2 individuals that were 
@@ -170,6 +174,8 @@ pop(snpGen2)<-snpGen2@other$newPop
 table(pop(snpGen2))
 pairwise.WCfst(genind2hierfstat(snpGen2))
 genind_to_genepop(snpGen2,output="data/snpGen2AD.txt")
+#small tips: the conversion is putting six digit for missing data "000000",
+#therefor you have to replace this string of 6 zeros by a string of 4 zeros
 snpGen2dat<-"data/snpGen2AD.txt"
 genedivFis(snpGen2dat,sizes=FALSE,"output/snpGen2AD.txt.Fis")
 Fst(snpGen2dat,sizes=FALSE,pairs=TRUE,"output/snpGen2AD.txt.Fst")
