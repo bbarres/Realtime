@@ -181,7 +181,7 @@ table(pop(snpGen2))
 pairwise.WCfst(genind2hierfstat(snpGen2))
 genind_to_genepop(snpGen2,output="data/snpGen2AD.txt")
 #small tips: the conversion is putting six digit for missing data "000000",
-#therefor you have to replace this string of 6 zeros by a string of 4 zeros
+#therefore you have to replace this string of 6 zeros by a string of 4 zeros
 snpGen2dat<-"data/snpGen2AD.txt"
 genedivFis(snpGen2dat,sizes=FALSE,"output/snpGen2AD.txt.Fis")
 test_HW(snpGen2dat,which="Proba",outputFile="output/snpGen2AD.txt.HW")
@@ -206,9 +206,14 @@ temp<-repool(temp,temp2,n.temp$low1)
 table(pop(temp))
 pairwise.WCfst(genind2hierfstat(temp))
 genind_to_genepop(temp,output="data/snpGen2DF.txt")
+#small tips: the conversion is putting six digit for missing data "000000",
+#therefore you have to replace this string of 6 zeros by a string of 4 zeros
 snpGen2dat<-"data/snpGen2DF.txt"
 genedivFis(snpGen2dat,sizes=FALSE,"output/snpGen2DF.txt.Fis")
+test_HW(snpGen2dat,which="Proba",outputFile="output/snpGen2DF.txt.HW")
 Fst(snpGen2dat,sizes=FALSE,pairs=TRUE,"output/snpGen2DF.txt.Fst")
+test_diff(snpGen2dat,genic=FALSE,pairs=TRUE,
+          outputFile="output/snpGen2DF.txt.DD")
 clean_workdir()
 n.temp<-seppop(temp) 
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
