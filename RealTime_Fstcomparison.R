@@ -66,6 +66,7 @@ microGen<-df2genind(temp2,ploidy=2,sep="/",
 #adding information in the 'other' slot
 microGen@other$fam<-micro.dat$family_simp
 microGen@other$treat<-micro.dat$exp
+microGen@other$PU<-paste(micro.dat$trait,micro.dat$bloc,sep="")
 microGen@other$height<-micro.dat$Hdeb17
 microGen@other$DoA<-micro.dat$live_bin
 #combine experimental and dead or alive information
@@ -101,6 +102,28 @@ Hexp<-Hs(microGen)
 Arich<-colMeans(allelic.richness(microGen,min.n=100)$Ar)
 Ali.vs.Dea<-rbind(Hobs,Hexp,Arich)
 
+#taking the 90% quantile as the future surviving individuals
+tempgen<-microGen[microGen@other$PU=="lim1"]
+tempgen@other$height>quantile(as.numeric(tempgen@other$height),0.9)
+microGen@other$newPop2<-
+pop(microGen)<-microGen@other$newPop
+table(pop(microGen))
+pairwise.WCfst(genind2hierfstat(microGen))
+genind_to_genepop(microGen,output="data/microGenAD.txt")
+microGendat<-"data/microGenAD.txt"
+genedivFis(microGendat,sizes=FALSE,"output/microGenAD.txt.Fis")
+test_HW(microGendat,which="Proba",outputFile="output/microGenAD.txt.HW")
+Fst(microGendat,sizes=FALSE,pairs=TRUE,"output/microGenAD.txt.Fst")
+test_diff(microGendat,genic=FALSE,pairs=TRUE,
+          outputFile="output/microGenAD.txt.DD")
+clean_workdir()
+n.temp<-seppop(microGen)
+Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
+Hexp<-Hs(microGen)
+Arich<-colMeans(allelic.richness(microGen,min.n=100)$Ar)
+Ali.vs.Dea<-rbind(Hobs,Hexp,Arich)
+
+
 #total vs surviving
 temp<-repool(n.temp$exp1,n.temp$exp0)
 pop(temp)<-rep("exp_init",times=nInd(temp))
@@ -124,6 +147,8 @@ Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(temp)
 Arich<-colMeans(allelic.richness(temp,min.n=100)$Ar)
 Deb.vs.Fin<-rbind(Hobs,Hexp,Arich)
+
+
 
 #compute genetic distance between individuals
 distMicro<-diss.dist(microGen,mat=FALSE)
