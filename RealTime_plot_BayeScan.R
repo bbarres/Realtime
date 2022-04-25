@@ -5,7 +5,7 @@
 ##############################################################################/
 
 #set the working directory
-setwd("~/work/Rfichiers/Githuber/Realtime_data")
+
 
 
 ##############################################################################/
@@ -68,7 +68,7 @@ plot_bayescan<-function(res,FDR=0.05,size=1,pos=0.35,highlight=NULL,
 #Computation and plotting####
 ##############################################################################/
 
-plot_bayescan("lim_vs_natrenf_fst.txt",pos=0.35,FDR=0.77,
+plot_bayescan("data/lim_vs_natrenf_fst.txt",pos=0.35,FDR=0.77,
               name_highlighted=FALSE,add_text=FALSE,
               highlight=97)
 # if you save the output in a variable, you can recall the different results:
