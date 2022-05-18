@@ -10,9 +10,9 @@ library(tidyr)
 
 #loading the kinship data produced by spagedi 1.5
 nat_kin_lois<-read.table("data/nat_kin_lois.txt",header=TRUE,sep="\t")
-kinSelf<-nat_kin_lois[nat_kin_lois$Spatial_dist=="inbreeding coef",]$loisel1995
-kinSelf<-0.5*(1+kinSelf)
-nat_kin_lois[nat_kin_lois$Spatial_dist=="inbreeding coef",]$loisel1995<-kinSelf
+# kinSelf<-nat_kin_lois[nat_kin_lois$Spatial_dist=="inbreeding coef",]$loisel1995
+# kinSelf<-0.5*(1+kinSelf)
+# nat_kin_lois[nat_kin_lois$Spatial_dist=="inbreeding coef",]$loisel1995<-kinSelf
 nat_kin_lois<-nat_kin_lois[,c(1,2,6)]
 nat_kin_lois<-nat_kin_lois[order(nat_kin_lois$Name_i,nat_kin_lois$Name_j),]
 temp<-spread(nat_kin_lois,2,3)
