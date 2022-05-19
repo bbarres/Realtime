@@ -8,7 +8,12 @@
 library(kinship2)
 library(tidyr)
 
-#loading the kinship data produced by spagedi 1.5
+
+##############################################################################/
+#Kinship matrix for the last round of analyses####
+##############################################################################/
+
+#"exp" modality: loading the kinship data produced by spagedi 1.5
 nat_kin_lois<-read.table("data/nat_kin_lois.txt",header=TRUE,sep="\t")
 # kinSelf<-nat_kin_lois[nat_kin_lois$Spatial_dist=="inbreeding coef",]$loisel1995
 # kinSelf<-0.5*(1+kinSelf)
@@ -20,6 +25,21 @@ temp2<-spread(nat_kin_lois,1,3)
 temp3<-which(is.na(temp),arr.ind=TRUE)
 temp[temp3]<-temp2[temp3]
 write.table(temp,file="output/nat_lois_mat.txt",sep="\t",
+            quote=FALSE,col.names=FALSE,row.names=FALSE)
+
+
+#"lim" modality: loading the kinship data produced by spagedi 1.5
+lim_kin_lois<-read.table("data/lim_kin_lois.txt",header=TRUE,sep="\t")
+# kinSelf<-lim_kin_lois[lim_kin_lois$Spatial_dist=="inbreeding coef",]$loisel1995
+# kinSelf<-0.5*(1+kinSelf)
+# lim_kin_lois[lim_kin_lois$Spatial_dist=="inbreeding coef",]$loisel1995<-kinSelf
+lim_kin_lois<-lim_kin_lois[,c(1,2,6)]
+lim_kin_lois<-lim_kin_lois[order(lim_kin_lois$Name_i,lim_kin_lois$Name_j),]
+temp<-spread(lim_kin_lois,2,3)
+temp2<-spread(lim_kin_lois,1,3)
+temp3<-which(is.na(temp),arr.ind=TRUE)
+temp[temp3]<-temp2[temp3]
+write.table(temp,file="output/lim_lois_mat.txt",sep="\t",
             quote=FALSE,col.names=FALSE,row.names=FALSE)
 
 
