@@ -25,8 +25,9 @@ NatLois<-read.table("nat_lois_mat.txt", head = FALSE)
 natGAPIT<-GAPIT(
   Y=ToutTrait,
   G=NatG,
+  kinship.algorithm="Loiselle",
   #KI=NatLois,
-  PCA.total=2,
+  PCA.total=0,
   model="Blink"
 )
 
@@ -44,7 +45,6 @@ limGAPIT<-GAPIT(
   Y=ToutTrait,
   G=LimG,
   kinship.algorithm="Loiselle",
-  Inter.Plot=TRUE,
   #KI=LimLois,
   PCA.total=0,
   model="Blink"
