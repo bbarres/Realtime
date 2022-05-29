@@ -8,6 +8,7 @@
 library(adegenet)
 library(ape)
 library(FinePop2)
+library(GAPIT3)
 library(gdata)
 library(genepop)
 library(graph4lg)
