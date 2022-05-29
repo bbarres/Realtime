@@ -14,7 +14,7 @@ setwd("/myGAPIT")
 
 
 ##############################################################################/
-#first attempt without Q and kinship specific matrices###
+#first attempt without Q and kinship specific matrices fot natural condition###
 ##############################################################################/
 
 ToutTrait<-read.table("pheno_final.txt",header=TRUE)
@@ -27,6 +27,26 @@ natGAPIT<-GAPIT(
   G=NatG,
   #KI=NatLois,
   PCA.total=2,
+  model="Blink"
+)
+
+
+##############################################################################/
+#first attempt without Q and kinship specific matrices fot natural condition###
+##############################################################################/
+
+ToutTrait<-read.table("pheno_final.txt",header=TRUE)
+LimG<-read.delim("lim.hmp.txt",header=FALSE)
+LimLois<-read.table("lim_lois_mat.txt", head = FALSE)
+
+#Step 2: Run GAPIT
+limGAPIT<-GAPIT(
+  Y=ToutTrait,
+  G=LimG,
+  kinship.algorithm="Loiselle",
+  Inter.Plot=TRUE,
+  #KI=LimLois,
+  PCA.total=0,
   model="Blink"
 )
 
@@ -151,7 +171,7 @@ myGAPIT <- GAPIT(
   SNP.fraction=0.6
 )
 
-#Tutorial 9: Reduce memory usage by loading fragment of file, one at a time, by defining fragment size (number of SNPs)
+#Tutorial 9: Reduce memory usage by loading fragment of file, one at a time, by defini
 #----------------------------------------------------------------------------------------
 #Step 1: Set data directory and import files
 myY  <- read.table("mdp_traits.txt", head = TRUE)
