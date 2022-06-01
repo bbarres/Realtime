@@ -15,14 +15,14 @@ setwd("/myGAPIT")
 
 
 ##############################################################################/
-#first attempt without Q and kinship specific matrices fot natural condition###
+#Model Blink/kinship for natural inoculum condition####
 ##############################################################################/
 
 ToutTrait<-read.table("pheno_final.txt",header=TRUE)
 NatG<-read.delim("nat.hmp.txt",header=FALSE)
-NatLois<-read.table("nat_lois_mat.txt", head = FALSE)
+NatLois<-read.table("nat_lois_mat.txt",header=FALSE)
 
-#Blink method on oidium phenotype
+#Blink method on powdery mildew phenotype
 natGAPIT<-GAPIT(
   Y=ToutTrait[,1:7],
   G=NatG,
@@ -44,7 +44,7 @@ natGAPIT<-GAPIT(
   #,Random.model=TRUE
 )
 
-#MLM method on oidium trait
+#MLM method on powdery mildew trait
 natGAPIT<-GAPIT(
   Y=ToutTrait[,1:7],
   G=NatG,
@@ -54,15 +54,16 @@ natGAPIT<-GAPIT(
   model="MLM"
 )
 
+
 ##############################################################################/
-#first attempt without Q and kinship specific matrices fot natural condition###
+#Model Blink/kinship for limited inoculum condition####
 ##############################################################################/
 
 ToutTrait<-read.table("pheno_final.txt",header=TRUE)
 LimG<-read.delim("lim.hmp.txt",header=FALSE)
-LimLois<-read.table("lim_lois_mat.txt", head = FALSE)
+LimLois<-read.table("lim_lois_mat.txt",header=FALSE)
 
-#Blink method on oidium phenotype
+#Blink method on powdery mildew phenotype
 limGAPIT<-GAPIT(
   Y=ToutTrait[,1:7],
   G=LimG,
