@@ -18,13 +18,21 @@ setwd("/myGAPIT")
 #Model Blink/kinship for natural inoculum condition####
 ##############################################################################/
 
-ToutTrait<-read.table("pheno_final.txt",header=TRUE)
+AllTrait<-read.table("pheno_final.txt",header=TRUE)
+#we remove the individuals without SNP data
+AllTrait<-AllTrait[AllTrait$SNPage==1 & is.na(AllTrait$SNPage)!=TRUE &
+                     AllTrait$Quality_SNPage==1,]
+NatTrait<-AllTrait[AllTrait$treat=="exp",5:14]
+LimTrait<-AllTrait[AllTrait$treat=="low",5:14]
+
+#loading genotype data
 NatG<-read.delim("nat.hmp.txt",header=FALSE)
+#alternative kinship matrix
 NatLois<-read.table("nat_lois_mat.txt",header=FALSE)
 
 #Blink method on powdery mildew phenotype
 natGAPIT<-GAPIT(
-  Y=ToutTrait[,1:7],
+  Y=NatTrait[,1:7],
   G=NatG,
   kinship.algorithm="Loiselle",
   #KI=NatLois,
@@ -35,7 +43,7 @@ natGAPIT<-GAPIT(
 
 #Blink method on general phenotype
 natGAPIT<-GAPIT(
-  Y=ToutTrait[,c(1,7:10)],
+  Y=NatTrait[,c(1,7:10)],
   G=NatG,
   kinship.algorithm="Loiselle",
   #KI=NatLois,
@@ -46,7 +54,7 @@ natGAPIT<-GAPIT(
 
 #MLM method on powdery mildew trait
 natGAPIT<-GAPIT(
-  Y=ToutTrait[,1:7],
+  Y=NatTrait[,1:7],
   G=NatG,
   kinship.algorithm="Loiselle",
   #KI=NatLois,
@@ -59,13 +67,14 @@ natGAPIT<-GAPIT(
 #Model Blink/kinship for limited inoculum condition####
 ##############################################################################/
 
-ToutTrait<-read.table("pheno_final.txt",header=TRUE)
+#loading genotype data
 LimG<-read.delim("lim.hmp.txt",header=FALSE)
+#alternative kinship matrix
 LimLois<-read.table("lim_lois_mat.txt",header=FALSE)
 
 #Blink method on powdery mildew phenotype
 limGAPIT<-GAPIT(
-  Y=ToutTrait[,1:7],
+  Y=LimTrait[,1:7],
   G=LimG,
   kinship.algorithm="Loiselle",
   #KI=LimLois,
@@ -76,7 +85,7 @@ limGAPIT<-GAPIT(
 
 #Blink method on general phenotype
 limGAPIT<-GAPIT(
-  Y=ToutTrait[,c(1,7:10)],
+  Y=LimTrait[,c(1,7:10)],
   G=LimG,
   kinship.algorithm="Loiselle",
   #KI=LimLois,
