@@ -9,6 +9,7 @@
 # devtools::install_github("jiabowang/GAPIT3",force=TRUE)
 
 source("RealTime_load.R")
+library(vioplot)
 
 #to be removed when the code will be working properly
 setwd("/myGAPIT")
@@ -62,6 +63,15 @@ natGAPIT<-GAPIT(
   model="MLM"
 )
 
+colovec<-brewer.pal(12,"Paired")
+plot(density(NatTrait$oid_moy,na.rm=TRUE))
+plot(NatTrait$oid_moy[order(NatTrait$oid_moy)])
+vioplot(NatTrait$oid_moy,plotCentre="points",col=colovec[5],border=colovec[5],
+        lineCol="white",rectCol=colovec[3],names="oid_moy",las=1)
+stripchart(NatTrait$oid_moy,method="jitter",col="red",
+           vertical=TRUE,pch=19,cex=0.7,add=TRUE)
+#export to .pdf 4 x 6 inches
+
 
 ##############################################################################/
 #Model Blink/kinship for limited inoculum condition####
@@ -93,6 +103,12 @@ limGAPIT<-GAPIT(
   model="Blink"
   #,Random.model=TRUE
 )
+
+
+##############################################################################/
+#Model Blink/kinship for limited inoculum condition####
+##############################################################################/
+
 
 
 ##############################################################################/
