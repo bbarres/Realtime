@@ -178,11 +178,12 @@ snpGen<-snpGen[(snpGen@other$fam!="CC" & snpGen@other$fam!="PAR")]
 #we also remove individuals without dead or alive information
 snpGen<-snpGen[!is.na(snpGen@other$DoA)]
 
-snpGenfam<-seppop(snpGen)
-nomFam<-popNames(snpGen)
-
-pop(snpGenfam[[1]])<-snpGenfam[[1]]@other$newPop
-temp<-genind2df(snpGenfam[[1]],oneColPerAll=TRUE)
+#dead vs alive analyses
+#set newPop as population
+snpGen2<-snpGen
+pop(snpGen2)<-snpGen2@other$newPop
+nomFam<-popNames(snpGen2)
+temp<-genind2df(snpGen2,oneColPerAll=TRUE)
 temp[temp=="A"]<-10
 temp[temp=="T"]<-20
 temp[temp=="C"]<-30
@@ -198,12 +199,184 @@ temp2<-as.data.frame(temp2)
 temp2$pop<-tempop
 temp2$moda<-stringr::str_match(tempop, "(...)(.*)")[,2]
 temp2$vivmor<-stringr::str_match(tempop, "(...)(.*)")[,3]
-vioplot(as.numeric(temp2[temp2$moda=="exp",]$PHt)~temp2[temp2$moda=="exp",]$vivmor)
+temp2$fam<-"Global"
+HetVivMort<-temp2
 
-#set newPop as population
-pop(snpGen2)<-snpGen2@other$newPop
+#same thing by family
+snpGenfam<-seppop(snpGen)
+nomFam<-popNames(snpGen)
+for (i in 1:length(nomFam)) {
+  pop(snpGenfam[[i]])<-snpGenfam[[i]]@other$newPop
+  temp<-genind2df(snpGenfam[[i]],oneColPerAll=TRUE)
+  temp[temp=="A"]<-10
+  temp[temp=="T"]<-20
+  temp[temp=="C"]<-30
+  temp[temp=="G"]<-40
+  tempop<-temp[,1]
+  sampleid<-row.names(temp)
+  temp<-temp[,-1]
+  temp<-data.frame(lapply(temp,as.numeric))
+  temp$sampleid<-sampleid
+  temp<-temp[,c(1639,1:1638)]
+  temp2<-GENHET(dat=temp,estimfreq="T",locname=nomSNP$simpleNames)
+  temp2<-as.data.frame(temp2)
+  temp2$pop<-tempop
+  temp2$moda<-stringr::str_match(tempop, "(...)(.*)")[,2]
+  temp2$vivmor<-stringr::str_match(tempop, "(...)(.*)")[,3]
+  temp2$fam<-nomFam[i]
+  HetVivMort<-rbind(HetVivMort,temp2)
+}
 
 
+HetVivMortExp<-HetVivMort[HetVivMort$moda=="exp",]
+HetVivMortLim<-HetVivMort[HetVivMort$moda=="low",]
+
+op<-par(mfrow=c(5,1))
+vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Exposed / PHt")
+vioplot(as.numeric(HetVivMortExp$Hs_obs)~HetVivMortExp$vivmor:HetVivMortExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Exposed / Hs_obs")
+vioplot(as.numeric(HetVivMortExp$Hs_exp)~HetVivMortExp$vivmor:HetVivMortExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Exposed / Hs_exp")
+vioplot(as.numeric(HetVivMortExp$IR)~HetVivMortExp$vivmor:HetVivMortExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Exposed / IR")
+vioplot(as.numeric(HetVivMortExp$HL)~HetVivMortExp$vivmor:HetVivMortExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Exposed / HL")
+par(op)
+#export to .pdf 20 x 20 inches
+
+op<-par(mfrow=c(5,1))
+vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$vivmor:HetVivMortLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Limited / PHt")
+vioplot(as.numeric(HetVivMortLim$Hs_obs)~HetVivMortLim$vivmor:HetVivMortLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Limited / Hs_obs")
+vioplot(as.numeric(HetVivMortLim$Hs_exp)~HetVivMortLim$vivmor:HetVivMortLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Limited / Hs_exp")
+vioplot(as.numeric(HetVivMortLim$IR)~HetVivMortLim$vivmor:HetVivMortLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Limited / IR")
+vioplot(as.numeric(HetVivMortLim$HL)~HetVivMortLim$vivmor:HetVivMortLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Limited / HL")
+par(op)
+#export to .pdf 20 x 20 inches
+
+
+#total vs surviving
+n.temp<-seppop(snpGen2,treatOther=TRUE)
+n.temp.other<-lapply(n.temp,as.data.frame(other))
+temp<-repool(n.temp$exp1,n.temp$exp0)
+pop(temp)<-rep("expinit",times=nInd(temp))
+temp<-repool(temp,n.temp$exp1)
+temp2<-repool(n.temp$low1,n.temp$low0)
+pop(temp2)<-rep("lowinit",times=nInd(temp2))
+snpGen3<-repool(temp,temp2,n.temp$low1)
+snpGen3@other<-rbind(n.temp.other$exp1,n.temp.other$exp0,
+                  n.temp.other$exp1,n.temp.other$low1,
+                  n.temp.other$low0,n.temp.other$low1)
+colnames(snpGen3@other)<-c("fam","treat","height","DoA","newPop")
+snpGen3@other$newPop<-pop(snpGen3)
+
+nomFam<-popNames(snpGen3)
+temp<-genind2df(snpGen3,oneColPerAll=TRUE)
+temp[temp=="A"]<-10
+temp[temp=="T"]<-20
+temp[temp=="C"]<-30
+temp[temp=="G"]<-40
+tempop<-temp[,1]
+sampleid<-row.names(temp)
+temp<-temp[,-1]
+temp<-data.frame(lapply(temp,as.numeric))
+temp$sampleid<-sampleid
+temp<-temp[,c(1639,1:1638)]
+temp2<-GENHET(dat=temp,estimfreq="T",locname=nomSNP$simpleNames)
+temp2<-as.data.frame(temp2)
+temp2$pop<-tempop
+temp2$moda<-stringr::str_match(tempop, "(...)(.*)")[,2]
+temp2$vivmor<-stringr::str_match(tempop, "(...)(.*)")[,3]
+temp2$fam<-"Global"
+HetStarSto<-temp2
+
+#same thing by family
+pop(snpGen3)<-snpGen3@other$fam
+snpGen3fam<-seppop(snpGen3)
+nomFam<-popNames(snpGen3)
+for (i in 1:length(nomFam)) {
+  pop(snpGen3fam[[i]])<-snpGen3fam[[i]]@other$newPop
+  temp<-genind2df(snpGen3fam[[i]],oneColPerAll=TRUE)
+  temp[temp=="A"]<-10
+  temp[temp=="T"]<-20
+  temp[temp=="C"]<-30
+  temp[temp=="G"]<-40
+  tempop<-temp[,1]
+  sampleid<-row.names(temp)
+  temp<-temp[,-1]
+  temp<-data.frame(lapply(temp,as.numeric))
+  temp$sampleid<-sampleid
+  temp<-temp[,c(1639,1:1638)]
+  temp2<-GENHET(dat=temp,estimfreq="T",locname=nomSNP$simpleNames)
+  temp2<-as.data.frame(temp2)
+  temp2$pop<-tempop
+  temp2$moda<-stringr::str_match(tempop, "(...)(.*)")[,2]
+  temp2$vivmor<-stringr::str_match(tempop, "(...)(.*)")[,3]
+  temp2$fam<-nomFam[i]
+  HetStarSto<-rbind(HetStarSto,temp2)
+}
+
+#in order to have the good order of the categories, we change 
+#the vivmor catefories
+HetStarSto[HetStarSto$vivmor=="init","vivmor"]<-"beg"
+HetStarSto[HetStarSto$vivmor=="1","vivmor"]<-"end"
+
+HetStarStoExp<-HetStarSto[HetStarSto$moda=="exp",]
+HetStarStoLim<-HetStarSto[HetStarSto$moda=="low",]
+
+
+op<-par(mfrow=c(5,1))
+vioplot(as.numeric(HetStarStoExp$PHt)~HetStarStoExp$vivmor:HetStarStoExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Exposed / PHt")
+vioplot(as.numeric(HetStarStoExp$Hs_obs)~HetStarStoExp$vivmor:HetStarStoExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Exposed / Hs_obs")
+vioplot(as.numeric(HetStarStoExp$Hs_exp)~HetStarStoExp$vivmor:HetStarStoExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Exposed / Hs_exp")
+vioplot(as.numeric(HetStarStoExp$IR)~HetStarStoExp$vivmor:HetStarStoExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Exposed / IR")
+vioplot(as.numeric(HetStarStoExp$HL)~HetStarStoExp$vivmor:HetStarStoExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Exposed / HL")
+par(op)
+#export to .pdf 20 x 20 inches
+
+op<-par(mfrow=c(5,1))
+vioplot(as.numeric(HetStarStoLim$PHt)~HetStarStoLim$vivmor:HetStarStoLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Limited / PHt")
+vioplot(as.numeric(HetStarStoLim$Hs_obs)~HetStarStoLim$vivmor:HetStarStoLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Limited / Hs_obs")
+vioplot(as.numeric(HetStarStoLim$Hs_exp)~HetStarStoLim$vivmor:HetStarStoLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Limited / Hs_exp")
+vioplot(as.numeric(HetStarStoLim$IR)~HetStarStoLim$vivmor:HetStarStoLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Limited / IR")
+vioplot(as.numeric(HetStarStoLim$HL)~HetStarStoLim$vivmor:HetStarStoLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Limited / HL")
+par(op)
+#export to .pdf 20 x 20 inches
 
 ##############################################################################/
 #END
