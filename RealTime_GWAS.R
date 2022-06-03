@@ -115,8 +115,8 @@ temp2<-temp[,colnames(temp)=="Sample_ID" |
               colnames(temp)=="Entomo_CL7647CT8535_01_89"]
 temp3<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
 boxplot(temp3$oid_moy~temp3$Entomo_CL7647CT8535_01_89,boxwex=0.3,las=1)
-stripchart(temp3$oid_moy~temp3$Entomo_CL7647CT8535_01_89,method="jitter",col="red",
-           vertical=TRUE,pch=19,cex=0.7,add=TRUE)
+stripchart(temp3$oid_moy~temp3$Entomo_CL7647CT8535_01_89,
+           method="jitter",col="red",vertical=TRUE,pch=19,cex=0.7,add=TRUE)
 vioplot(temp3$oid_moy~temp3$Entomo_CL7647CT8535_01_89,boxwex=0.3,las=1)
 
 table(temp3$Entomo_CL7647CT8535_01_89)

@@ -214,7 +214,7 @@ Fst(snpGen2dat,sizes=FALSE,pairs=TRUE,"output/snpGen2AD.txt.Fst")
 test_diff(snpGen2dat,genic=FALSE,pairs=TRUE,
           outputFile="output/snpGen2AD.txt.DD")
 clean_workdir()
-n.temp<-seppop(snpGen2) 
+n.temp<-seppop(snpGen2)
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(snpGen2)
 Arich<-colMeans(allelic.richness(snpGen2,min.n=100)$Ar)
