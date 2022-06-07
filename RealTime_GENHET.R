@@ -32,7 +32,9 @@ source("RealTime_load.R")
       
       #creation of the list of alleles
       datv=vector(length=nbind*nbloc*2)
-      for (i in 2:ncol(dat)) datv[(nrow(dat)*(i-2)+1):(nrow(dat)*(i-1))]=dat[,i]
+      for (i in 2:ncol(dat)) {
+        datv[(nrow(dat)*(i-2)+1):(nrow(dat)*(i-1))]=dat[,i]
+      }
       al=sort(na.omit(unique(datv)))
       
       #count of the number of times each allele appears + nb of missing data
@@ -50,8 +52,9 @@ source("RealTime_load.R")
       colnames(alfreq)=c("Allele",locname)
       alfreq[,1]=al
       for(m in (1:nrow(alfreq)))
-        for (n in 2:ncol(alfreq)) alfreq[m,n]=alcount[m,n]/(nbind*2-alcount[nrow(alcount),n])
-      
+        for (n in 2:ncol(alfreq)){
+          alfreq[m,n]=alcount[m,n]/(nbind*2-alcount[nrow(alcount),n])
+        }
     }
     
     else alfreq=alfuser
@@ -120,7 +123,9 @@ source("RealTime_load.R")
         else sEh=sEh+E[j/2]
         smHtl=smHtl+mHtl[j/2]
         sE=sE+E[j/2]
-        sfl=sfl+alfreq[alfreq[,1]==as.numeric(dat[i,j]),(j/2+1)]+alfreq[alfreq[,1]==as.numeric(dat[i,j+1]),(j/2+1)]
+        sfl=sfl+alfreq[alfreq[,1]==as.numeric(dat[i,j]),
+                       (j/2+1)]+alfreq[alfreq[,1]==as.numeric(dat[i,j+1]),
+                                       (j/2+1)]
       }
     }
     }
@@ -234,38 +239,54 @@ HetVivMortLim<-HetVivMort[HetVivMort$moda=="low",]
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Exposed / PHt")
-vioplot(as.numeric(HetVivMortExp$Hs_obs)~HetVivMortExp$vivmor:HetVivMortExp$fam,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Exposed / PHt")
+vioplot(as.numeric(HetVivMortExp$Hs_obs)~
+          HetVivMortExp$vivmor:HetVivMortExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Exposed / Hs_obs")
-vioplot(as.numeric(HetVivMortExp$Hs_exp)~HetVivMortExp$vivmor:HetVivMortExp$fam,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Exposed / Hs_obs")
+vioplot(as.numeric(HetVivMortExp$Hs_exp)~
+          HetVivMortExp$vivmor:HetVivMortExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Exposed / Hs_exp")
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Exposed / Hs_exp")
 vioplot(as.numeric(HetVivMortExp$IR)~HetVivMortExp$vivmor:HetVivMortExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Exposed / IR")
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Exposed / IR")
 vioplot(as.numeric(HetVivMortExp$HL)~HetVivMortExp$vivmor:HetVivMortExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Exposed / HL")
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Exposed / HL")
 par(op)
 #export to .pdf 20 x 20 inches
+
+var.test(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam)
 
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$vivmor:HetVivMortLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Limited / PHt")
-vioplot(as.numeric(HetVivMortLim$Hs_obs)~HetVivMortLim$vivmor:HetVivMortLim$fam,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Limited / PHt")
+vioplot(as.numeric(HetVivMortLim$Hs_obs)~
+          HetVivMortLim$vivmor:HetVivMortLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Limited / Hs_obs")
-vioplot(as.numeric(HetVivMortLim$Hs_exp)~HetVivMortLim$vivmor:HetVivMortLim$fam,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Limited / Hs_obs")
+vioplot(as.numeric(HetVivMortLim$Hs_exp)~
+          HetVivMortLim$vivmor:HetVivMortLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Limited / Hs_exp")
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Limited / Hs_exp")
 vioplot(as.numeric(HetVivMortLim$IR)~HetVivMortLim$vivmor:HetVivMortLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Limited / IR")
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Limited / IR")
 vioplot(as.numeric(HetVivMortLim$HL)~HetVivMortLim$vivmor:HetVivMortLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Dead or Alive: Limited / HL")
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Limited / HL")
 par(op)
 #export to .pdf 20 x 20 inches
 
@@ -343,38 +364,52 @@ HetStarStoLim<-HetStarSto[HetStarSto$moda=="low",]
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetStarStoExp$PHt)~HetStarStoExp$vivmor:HetStarStoExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Exposed / PHt")
-vioplot(as.numeric(HetStarStoExp$Hs_obs)~HetStarStoExp$vivmor:HetStarStoExp$fam,
+        ylab="Value",xlab="Pheno:Family",
+        main="Begin vs end: Exposed / PHt")
+vioplot(as.numeric(HetStarStoExp$Hs_obs)~
+          HetStarStoExp$vivmor:HetStarStoExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Exposed / Hs_obs")
-vioplot(as.numeric(HetStarStoExp$Hs_exp)~HetStarStoExp$vivmor:HetStarStoExp$fam,
+        ylab="Value",xlab="Pheno:Family",
+        main="Begin vs end: Exposed / Hs_obs")
+vioplot(as.numeric(HetStarStoExp$Hs_exp)~
+          HetStarStoExp$vivmor:HetStarStoExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Exposed / Hs_exp")
+        ylab="Value",xlab="Pheno:Family",
+        main="Begin vs end: Exposed / Hs_exp")
 vioplot(as.numeric(HetStarStoExp$IR)~HetStarStoExp$vivmor:HetStarStoExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Exposed / IR")
+        ylab="Value",xlab="Pheno:Family",
+        main="Begin vs end: Exposed / IR")
 vioplot(as.numeric(HetStarStoExp$HL)~HetStarStoExp$vivmor:HetStarStoExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Exposed / HL")
+        ylab="Value",xlab="Pheno:Family",
+        main="Begin vs end: Exposed / HL")
 par(op)
 #export to .pdf 20 x 20 inches
 
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetStarStoLim$PHt)~HetStarStoLim$vivmor:HetStarStoLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Limited / PHt")
-vioplot(as.numeric(HetStarStoLim$Hs_obs)~HetStarStoLim$vivmor:HetStarStoLim$fam,
+        ylab="Value",xlab="Pheno:Family",
+        main="Begin vs end: Limited / PHt")
+vioplot(as.numeric(HetStarStoLim$Hs_obs)~
+          HetStarStoLim$vivmor:HetStarStoLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Limited / Hs_obs")
-vioplot(as.numeric(HetStarStoLim$Hs_exp)~HetStarStoLim$vivmor:HetStarStoLim$fam,
+        ylab="Value",xlab="Pheno:Family",
+        main="Begin vs end: Limited / Hs_obs")
+vioplot(as.numeric(HetStarStoLim$Hs_exp)~
+          HetStarStoLim$vivmor:HetStarStoLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Limited / Hs_exp")
+        ylab="Value",xlab="Pheno:Family",
+        main="Begin vs end: Limited / Hs_exp")
 vioplot(as.numeric(HetStarStoLim$IR)~HetStarStoLim$vivmor:HetStarStoLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Limited / IR")
+        ylab="Value",xlab="Pheno:Family",
+        main="Begin vs end: Limited / IR")
 vioplot(as.numeric(HetStarStoLim$HL)~HetStarStoLim$vivmor:HetStarStoLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",main="Begin vs end: Limited / HL")
+        ylab="Value",xlab="Pheno:Family",
+        main="Begin vs end: Limited / HL")
 par(op)
 #export to .pdf 20 x 20 inches
 
