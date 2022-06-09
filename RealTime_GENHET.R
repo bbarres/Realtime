@@ -264,18 +264,34 @@ par(op)
 
 HetAli<-HetVivMortExp[HetVivMortExp$vivmor==1,]
 HetDea<-HetVivMortExp[HetVivMortExp$vivmor==0,]
-vioplot(as.numeric(HetAli$PHt)~HetAli$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",side="left",
+
+colovec<-c(brewer.pal(12,"Set3")[6:7],
+           brewer.pal(9,"Set1")[1:2])
+vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$fam,
+        col = c("transparent"),sep=":",las=1,border="transparent",
+        ylab="Value",xlab="Pheno:Family",
         main="Dead or Alive: Exposed / PHt")
-vioplot(as.numeric(HetDea$PHt)~HetDea$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",side="right",
+vioplot(as.numeric(HetDea$PHt)~HetDea$fam,plotCentre="line",
+        col=colovec[1],sep=":",las=1,side="left",
         add=TRUE)
-
-
+stripchart(as.numeric(HetDea$PHt)~HetDea$fam,vertical=TRUE,
+           method="jitter",pch=21,add=TRUE,col=colovec[3],
+           at=c(1:16)-0.2)
+vioplot(as.numeric(HetAli$PHt)~HetAli$fam,plotCentre="line",
+        col=colovec[2],sep=":",las=1,side="right",
+        add=TRUE)
+stripchart(as.numeric(HetAli$PHt)~HetAli$fam,vertical=TRUE,
+           method="jitter",pch=21,add=TRUE,col=colovec[4],
+           at=c(1:16)+0.2)
+points(x=c(1:16)-0.02,y=aggregate(as.numeric(HetDea$PHt),
+                                  list(HetDea$fam),FUN=mean)[,2],
+       pch=19,col=colovec[3])
+points(x=c(1:16)+0.02,y=aggregate(as.numeric(HetAli$PHt),
+                                  list(HetAli$fam),FUN=mean)[,2],
+       pch=19,col=colovec[4])
 
 var.test(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam)
+
 
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$vivmor:HetVivMortLim$fam,
