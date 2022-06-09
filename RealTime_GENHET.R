@@ -262,6 +262,19 @@ vioplot(as.numeric(HetVivMortExp$HL)~HetVivMortExp$vivmor:HetVivMortExp$fam,
 par(op)
 #export to .pdf 20 x 20 inches
 
+HetAli<-HetVivMortExp[HetVivMortExp$vivmor==1,]
+HetDea<-HetVivMortExp[HetVivMortExp$vivmor==0,]
+vioplot(as.numeric(HetAli$PHt)~HetAli$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",side="left",
+        main="Dead or Alive: Exposed / PHt")
+vioplot(as.numeric(HetDea$PHt)~HetDea$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",side="right",
+        add=TRUE)
+
+
+
 var.test(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam)
 
 op<-par(mfrow=c(5,1))
