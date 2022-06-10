@@ -153,10 +153,10 @@ source("RealTime_load.R")
 
 
 ##############################################################################/
-#Running the function####
+#preparing the data set####
 ##############################################################################/
 
-#preparing the dataset
+#preparing the data set
 #list of the snp marker names
 temp<-colnames(snp.dat)[48:(48+818)]
 #creating a dataframe for the correspondence between true 
@@ -183,7 +183,11 @@ snpGen<-snpGen[(snpGen@other$fam!="CC" & snpGen@other$fam!="PAR")]
 #we also remove individuals without dead or alive information
 snpGen<-snpGen[!is.na(snpGen@other$DoA)]
 
-#dead vs alive analyses
+
+##############################################################################/
+#Heterozygosity dead vs alive####
+##############################################################################/
+
 #set newPop as population
 snpGen2<-snpGen
 pop(snpGen2)<-snpGen2@other$newPop
@@ -262,37 +266,6 @@ vioplot(as.numeric(HetVivMortExp$HL)~HetVivMortExp$vivmor:HetVivMortExp$fam,
 par(op)
 #export to .pdf 20 x 20 inches
 
-HetAli<-HetVivMortExp[HetVivMortExp$vivmor==1,]
-HetDea<-HetVivMortExp[HetVivMortExp$vivmor==0,]
-
-colovec<-c(brewer.pal(12,"Set3")[6:7],
-           brewer.pal(9,"Set1")[1:2])
-vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$fam,
-        col = c("transparent"),sep=":",las=1,border="transparent",
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Exposed / PHt")
-vioplot(as.numeric(HetDea$PHt)~HetDea$fam,plotCentre="line",
-        col=colovec[1],sep=":",las=1,side="left",
-        add=TRUE)
-stripchart(as.numeric(HetDea$PHt)~HetDea$fam,vertical=TRUE,
-           method="jitter",pch=21,add=TRUE,col=colovec[3],
-           at=c(1:16)-0.2)
-vioplot(as.numeric(HetAli$PHt)~HetAli$fam,plotCentre="line",
-        col=colovec[2],sep=":",las=1,side="right",
-        add=TRUE)
-stripchart(as.numeric(HetAli$PHt)~HetAli$fam,vertical=TRUE,
-           method="jitter",pch=21,add=TRUE,col=colovec[4],
-           at=c(1:16)+0.2)
-points(x=c(1:16)-0.02,y=aggregate(as.numeric(HetDea$PHt),
-                                  list(HetDea$fam),FUN=mean)[,2],
-       pch=19,col=colovec[3])
-points(x=c(1:16)+0.02,y=aggregate(as.numeric(HetAli$PHt),
-                                  list(HetAli$fam),FUN=mean)[,2],
-       pch=19,col=colovec[4])
-
-var.test(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam)
-
-
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$vivmor:HetVivMortLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
@@ -319,8 +292,87 @@ vioplot(as.numeric(HetVivMortLim$HL)~HetVivMortLim$vivmor:HetVivMortLim$fam,
 par(op)
 #export to .pdf 20 x 20 inches
 
+op<-par(mfrow=c(2,1))
+#semi violin plot for the exposed treatment
+HetAli<-HetVivMortExp[HetVivMortExp$vivmor==1,]
+HetDea<-HetVivMortExp[HetVivMortExp$vivmor==0,]
+colovec<-c(brewer.pal(12,"Set3")[6:7],
+           brewer.pal(9,"Set1")[1:2])
+vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$fam,
+        col = c("transparent"),sep=":",las=1,border="transparent",
+        ylab="PHt",xlab="",ylim=c(0.07,0.35),frame.plot=FALSE,
+        lineCol="transparent",rectCol="transparent",main="Exposed treatment")
+vioplot(as.numeric(HetDea$PHt)~HetDea$fam,plotCentre="line",
+        col=colovec[1],sep=":",las=1,side="left",frame.plot=FALSE,
+        add=TRUE)
+stripchart(as.numeric(HetDea$PHt)~HetDea$fam,vertical=TRUE,
+           method="jitter",pch=21,add=TRUE,col=colovec[3],
+           at=c(1:16)-0.2)
+vioplot(as.numeric(HetAli$PHt)~HetAli$fam,plotCentre="line",
+        col=colovec[2],sep=":",las=1,side="right",frame.plot=FALSE,
+        add=TRUE)
+stripchart(as.numeric(HetAli$PHt)~HetAli$fam,vertical=TRUE,
+           method="jitter",pch=21,add=TRUE,col=colovec[4],
+           at=c(1:16)+0.2)
+segments(c(1:16)-0.2,aggregate(as.numeric(HetDea$PHt),
+                               list(HetDea$fam),FUN=mean)[,2],
+         c(1:16)+0.2,aggregate(as.numeric(HetAli$PHt),
+                               list(HetAli$fam),FUN=mean)[,2],
+         col=grey(0.95,0.9),lwd=6)
+points(x=c(1:16)-0.2,y=aggregate(as.numeric(HetDea$PHt),
+                                  list(HetDea$fam),FUN=mean)[,2],
+       pch=19,col=colovec[3])
+points(x=c(1:16)+0.2,y=aggregate(as.numeric(HetAli$PHt),
+                                  list(HetAli$fam),FUN=mean)[,2],
+       pch=19,col=colovec[4])
+box(bty="l")
 
-#total vs surviving
+#semi violin plot for the exposed treatment
+HetAli<-HetVivMortLim[HetVivMortLim$vivmor==1,]
+HetDea<-HetVivMortLim[HetVivMortLim$vivmor==0,]
+colovec<-c(brewer.pal(12,"Set3")[6:7],
+           brewer.pal(9,"Set1")[1:2])
+vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$fam,
+        col = c("transparent"),sep=":",las=1,border="transparent",
+        ylab="PHt",xlab="",ylim=c(0.07,0.35),frame.plot=FALSE,
+        lineCol="transparent",rectCol="transparent",main="Limited treatment")
+vioplot(as.numeric(HetDea$PHt)~HetDea$fam,plotCentre="line",
+        col=colovec[1],sep=":",las=1,side="left",frame.plot=FALSE,
+        add=TRUE)
+stripchart(as.numeric(HetDea$PHt)~HetDea$fam,vertical=TRUE,
+           method="jitter",pch=21,add=TRUE,col=colovec[3],
+           at=c(1:16)-0.2)
+vioplot(as.numeric(HetAli$PHt)~HetAli$fam,plotCentre="line",
+        col=colovec[2],sep=":",las=1,side="right",frame.plot=FALSE,
+        add=TRUE)
+stripchart(as.numeric(HetAli$PHt)~HetAli$fam,vertical=TRUE,
+           method="jitter",pch=21,add=TRUE,col=colovec[4],
+           at=c(1:16)+0.2)
+segments(c(1:16)-0.2,aggregate(as.numeric(HetDea$PHt),
+                               list(HetDea$fam),FUN=mean)[,2],
+         c(1:16)+0.2,aggregate(as.numeric(HetAli$PHt),
+                               list(HetAli$fam),FUN=mean)[,2],
+         col=grey(0.95,0.9),lwd=6)
+points(x=c(1:16)-0.2,y=aggregate(as.numeric(HetDea$PHt),
+                                 list(HetDea$fam),FUN=mean)[,2],
+       pch=19,col=colovec[3])
+points(x=c(1:16)+0.2,y=aggregate(as.numeric(HetAli$PHt),
+                                 list(HetAli$fam),FUN=mean)[,2],
+       pch=19,col=colovec[4])
+box(bty="l")
+par(op)
+
+#export to .pdf 13 x 15 inches
+
+var.test(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam)
+
+
+
+##############################################################################/
+#Heterozygosity total vs surviving####
+##############################################################################/
+
+#reshaping the data set for computation
 n.temp<-seppop(snpGen2,treatOther=TRUE)
 n.temp.other<-lapply(n.temp,as.data.frame(other))
 temp<-repool(n.temp$exp1,n.temp$exp0)
