@@ -236,9 +236,17 @@ for (i in 1:length(nomFam)) {
   HetVivMort<-rbind(HetVivMort,temp2)
 }
 
-
 HetVivMortExp<-HetVivMort[HetVivMort$moda=="exp",]
+#removing global
+HetVivMortExp<-HetVivMortExp[HetVivMortExp$fam!="Global",]
+HetVivMortExp$fam[HetVivMortExp$fam=="1"]<-"01"
+HetVivMortExp$fam[HetVivMortExp$fam=="9"]<-"09"
+
 HetVivMortLim<-HetVivMort[HetVivMort$moda=="low",]
+#removing global
+HetVivMortLim<-HetVivMortLim[HetVivMortLim$fam!="Global",]
+HetVivMortLim$fam[HetVivMortLim$fam=="1"]<-"01"
+HetVivMortLim$fam[HetVivMortLim$fam=="9"]<-"09"
 
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam,
@@ -307,25 +315,27 @@ vioplot(as.numeric(HetDea$PHt)~HetDea$fam,plotCentre="line",
         add=TRUE)
 stripchart(as.numeric(HetDea$PHt)~HetDea$fam,vertical=TRUE,
            method="jitter",pch=21,add=TRUE,col=colovec[3],
-           at=c(1:16)-0.2)
+           at=c(1:15)-0.2)
 vioplot(as.numeric(HetAli$PHt)~HetAli$fam,plotCentre="line",
         col=colovec[2],sep=":",las=1,side="right",frame.plot=FALSE,
         add=TRUE)
 stripchart(as.numeric(HetAli$PHt)~HetAli$fam,vertical=TRUE,
            method="jitter",pch=21,add=TRUE,col=colovec[4],
-           at=c(1:16)+0.2)
-segments(c(1:16)-0.2,aggregate(as.numeric(HetDea$PHt),
+           at=c(1:15)+0.2)
+segments(c(1:15)-0.2,aggregate(as.numeric(HetDea$PHt),
                                list(HetDea$fam),FUN=mean)[,2],
-         c(1:16)+0.2,aggregate(as.numeric(HetAli$PHt),
+         c(1:15)+0.2,aggregate(as.numeric(HetAli$PHt),
                                list(HetAli$fam),FUN=mean)[,2],
          col=grey(0.95,0.9),lwd=6)
-points(x=c(1:16)-0.2,y=aggregate(as.numeric(HetDea$PHt),
+points(x=c(1:15)-0.2,y=aggregate(as.numeric(HetDea$PHt),
                                   list(HetDea$fam),FUN=mean)[,2],
        pch=19,col=colovec[3])
-points(x=c(1:16)+0.2,y=aggregate(as.numeric(HetAli$PHt),
+points(x=c(1:15)+0.2,y=aggregate(as.numeric(HetAli$PHt),
                                   list(HetAli$fam),FUN=mean)[,2],
        pch=19,col=colovec[4])
 box(bty="l")
+legend(-0.5,0.43,c("dead","alive"),fill=colovec[1:2],cex=1.3,
+       bty="n",x.intersp=0.2,y.intersp=0.7,xpd=TRUE)
 
 #semi violin plot for the exposed treatment
 HetAli<-HetVivMortLim[HetVivMortLim$vivmor==1,]
@@ -341,28 +351,28 @@ vioplot(as.numeric(HetDea$PHt)~HetDea$fam,plotCentre="line",
         add=TRUE)
 stripchart(as.numeric(HetDea$PHt)~HetDea$fam,vertical=TRUE,
            method="jitter",pch=21,add=TRUE,col=colovec[3],
-           at=c(1:16)-0.2)
+           at=c(1:15)-0.2)
 vioplot(as.numeric(HetAli$PHt)~HetAli$fam,plotCentre="line",
         col=colovec[2],sep=":",las=1,side="right",frame.plot=FALSE,
         add=TRUE)
 stripchart(as.numeric(HetAli$PHt)~HetAli$fam,vertical=TRUE,
            method="jitter",pch=21,add=TRUE,col=colovec[4],
-           at=c(1:16)+0.2)
-segments(c(1:16)-0.2,aggregate(as.numeric(HetDea$PHt),
+           at=c(1:15)+0.2)
+segments(c(1:15)-0.2,aggregate(as.numeric(HetDea$PHt),
                                list(HetDea$fam),FUN=mean)[,2],
-         c(1:16)+0.2,aggregate(as.numeric(HetAli$PHt),
+         c(1:15)+0.2,aggregate(as.numeric(HetAli$PHt),
                                list(HetAli$fam),FUN=mean)[,2],
          col=grey(0.95,0.9),lwd=6)
-points(x=c(1:16)-0.2,y=aggregate(as.numeric(HetDea$PHt),
+points(x=c(1:15)-0.2,y=aggregate(as.numeric(HetDea$PHt),
                                  list(HetDea$fam),FUN=mean)[,2],
        pch=19,col=colovec[3])
-points(x=c(1:16)+0.2,y=aggregate(as.numeric(HetAli$PHt),
+points(x=c(1:15)+0.2,y=aggregate(as.numeric(HetAli$PHt),
                                  list(HetAli$fam),FUN=mean)[,2],
        pch=19,col=colovec[4])
 box(bty="l")
 par(op)
 
-#export to .pdf 13 x 15 inches
+#export to .pdf 10 x 12 inches
 
 var.test(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam)
 
