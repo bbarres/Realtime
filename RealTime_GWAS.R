@@ -9,7 +9,6 @@
 # devtools::install_github("jiabowang/GAPIT3",force=TRUE)
 
 source("RealTime_load.R")
-library(vioplot)
 
 #to be removed when the code will be working properly
 setwd("/myGAPIT")
@@ -53,15 +52,15 @@ natGAPIT<-GAPIT(
   #,Random.model=TRUE
 )
 
-#MLM method on powdery mildew trait
-natGAPIT<-GAPIT(
-  Y=NatTrait[,1:7],
-  G=NatG,
-  kinship.algorithm="Loiselle",
-  #KI=NatLois,
-  PCA.total=0,
-  model="MLM"
-)
+# #MLM method on powdery mildew trait
+# natGAPIT<-GAPIT(
+#   Y=NatTrait[,1:7],
+#   G=NatG,
+#   kinship.algorithm="Loiselle",
+#   #KI=NatLois,
+#   PCA.total=0,
+#   model="MLM"
+# )
 
 colovec<-brewer.pal(12,"Paired")
 plot(density(NatTrait$oid_moy,na.rm=TRUE))
