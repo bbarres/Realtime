@@ -11,7 +11,7 @@ source("RealTime_load.R")
 
 
 ##############################################################################/
-#Model Blink/kinship for natural inoculum condition####
+#Loading the necessary data sets####
 ##############################################################################/
 
 AllTrait<-read.table("data/pheno_final.txt",header=TRUE)
@@ -21,8 +21,16 @@ AllTrait<-AllTrait[AllTrait$SNPage==1 & is.na(AllTrait$SNPage)!=TRUE &
 NatTrait<-AllTrait[AllTrait$treat=="exp",5:14]
 LimTrait<-AllTrait[AllTrait$treat=="low",5:14]
 
-#loading genotype data
+#loading the natural treatment genotype data
 NatG<-read.delim("data/nat.hmp.txt",header=FALSE)
+
+#loading the limited treatment genotype data
+LimG<-read.delim("data/lim.hmp.txt",header=FALSE)
+
+
+##############################################################################/
+#Model Blink/kinship for natural inoculum condition####
+##############################################################################/
 
 # #Blink method on powdery mildew phenotype
 # natGAPIT<-GAPIT(
@@ -48,6 +56,8 @@ natGAPIT<-GAPIT(
   model="Blink"
   #,Random.model=TRUE
 )
+RezNatGAPIT<-read.table("GAPIT.Filter_GWAS_results.txt",header=TRUE,
+                        sep=" ")
 setwd(nomTemp)
 
 # #MLM method on powdery mildew trait
@@ -74,9 +84,6 @@ stripchart(NatTrait$oid_moy,method="jitter",col="red",
 #Model Blink/kinship for limited inoculum condition####
 ##############################################################################/
 
-#loading genotype data
-LimG<-read.delim("data/lim.hmp.txt",header=FALSE)
-
 # #Blink method on powdery mildew phenotype
 # limGAPIT<-GAPIT(
 #   Y=LimTrait[,1:7],
@@ -101,6 +108,8 @@ limGAPIT<-GAPIT(
   model="Blink"
   #,Random.model=TRUE
 )
+RezLimGAPIT<-read.table("GAPIT.Filter_GWAS_results.txt",header=TRUE,
+                        sep=" ")
 setwd(nomTemp)
 
 
