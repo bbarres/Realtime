@@ -58,6 +58,8 @@ natGAPIT<-GAPIT(
 )
 RezNatGAPIT<-read.table("GAPIT.Filter_GWAS_results.txt",header=TRUE,
                         sep=" ")
+RezNatGAPIT$SNP<-str_replace_all(RezNatGAPIT$SNP,"~","_")
+RezNatGAPIT$SNP<-str_replace_all(RezNatGAPIT$SNP,"-","_")
 setwd(nomTemp)
 
 # #MLM method on powdery mildew trait
@@ -70,14 +72,42 @@ setwd(nomTemp)
 #   model="MLM"
 # )
 
-colovec<-brewer.pal(12,"Paired")
-plot(density(NatTrait$oid_moy,na.rm=TRUE))
-plot(NatTrait$oid_moy[order(NatTrait$oid_moy)])
-vioplot(NatTrait$oid_moy,plotCentre="points",col=colovec[5],border=colovec[5],
-        lineCol="white",rectCol=colovec[3],names="oid_moy",las=1)
-stripchart(NatTrait$oid_moy,method="jitter",col="red",
-           vertical=TRUE,pch=19,cex=0.7,add=TRUE)
-#export to .pdf 4 x 6 inches
+
+
+
+op<-par(mar=c(6, 5, 1, 1) + 0.1)
+graf<-barplot(kdrDistr$n,ylim=c(0,1000),
+              ylab="Number of individuals",cex.axis =1.3,cex.lab=2,
+              las=1,xaxt="n",yaxt="n",bty="n",
+              col=rep(thecol,4),
+              border=NA,
+              space=c(rep(0.1,3),1.4,rep(0.1,2),1.4,
+                      rep(0.1,2),1.4,rep(0.1,2)),
+              font.lab=2)
+abline(h=c(50,100,200,400,600,800,1000),col=grey(0.8,0.8),lwd=2,lty=1)
+barplot(kdrDistr$n,ylim=c(0,1100),
+        ylab="Number of individuals",cex.axis =1.3,cex.lab=2,
+        las=1,xaxt="n",yaxt="n",bty="n",
+        col=rep(thecol,4),
+        border=NA,
+        space=c(rep(0.1,3),1.4,rep(0.1,2),1.4,
+                rep(0.1,2),1.4,rep(0.1,2)),
+        font.lab=2,add=TRUE)
+axis(1,at=graf[c(2,5,8,11)],labels=FALSE, lwd=4)
+axis(2,at=c(50,100,200,400,600,800,1000),
+     labels=c(50,100,200,400,600,800,1000),lwd=4,las=1,font=2,cex.axis=1.1)
+box(bty="l",lwd=4)
+text(graf,kdrDistr$n+15,
+     labels=as.character(kdrDistr$n),font=2)
+mtext(levels(kdrDistr$species)[c(3,2,4,1)],at=graf[c(2,5,8,11)],
+      line=1.5,cex=1.4,side=1,font=2)
+mtext("Species", at=9.4,line=3,cex=2,side=1,
+      font=2,padj=1)
+legend(12,800,
+       legend=c("R/R","R/S","S/S"),
+       pch=15,col=thecol,bg=thecol,bty="n",cex=1.3,pt.cex=1.6,xpd=TRUE,
+       ncol=1,x.intersp=1,y.intersp=0.8)
+par(op)
 
 
 ##############################################################################/
@@ -113,6 +143,7 @@ RezLimGAPIT<-read.table("GAPIT.Filter_GWAS_results.txt",header=TRUE,
 setwd(nomTemp)
 
 
+
 ##############################################################################/
 #SNP genotype effect on the traits####
 ##############################################################################/
@@ -120,8 +151,11 @@ setwd(nomTemp)
 temp<-snp.dat[snp.dat$Sample_ID %in% NatTrait$Taxa,]
 temp<-temp[,c(1,48:866)]
 temp2<-temp[,colnames(temp)=="Sample_ID" | 
-              colnames(temp)=="Entomo_CL7647CT8535_01_89"]
+              colnames(temp)==RezNatGAPIT$SNP[1]]
 temp3<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
+barplot(as.data.frame(table(temp3$statut,temp3$Entomo_CL7647CT8535_01_89))$Freq)
+
+
 boxplot(temp3$oid_moy~temp3$Entomo_CL7647CT8535_01_89,boxwex=0.3,las=1)
 stripchart(temp3$oid_moy~temp3$Entomo_CL7647CT8535_01_89,
            method="jitter",col="red",vertical=TRUE,pch=19,cex=0.7,add=TRUE)
