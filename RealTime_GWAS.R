@@ -15,6 +15,8 @@ source("RealTime_load.R")
 ##############################################################################/
 
 AllTrait<-read.table("data/pheno_final.txt",header=TRUE)
+colnames(AllTrait)[11:14]<-c("Powdery mildew","Height",
+                             "Acorn weight","Dead or Alive")
 #we remove the individuals without SNP data
 AllTrait<-AllTrait[AllTrait$SNPage==1 & is.na(AllTrait$SNPage)!=TRUE &
                      AllTrait$Quality_SNPage==1,]
@@ -50,7 +52,7 @@ setwd(paste(nomTemp,"/output/natGWAS",sep=""))
 natGAPIT<-GAPIT(
   Y=NatTrait[,c(1,7:10)],
   G=NatG,
-  kinship.algorithm="Loiselle",
+  #kinship.algorithm="Loiselle",
   #KI=NatLois,
   PCA.total=0,
   model="Blink"
@@ -64,7 +66,7 @@ setwd(nomTemp)
 
 # #MLM method on powdery mildew trait
 # natGAPIT<-GAPIT(
-#   Y=NatTrait[,1:7],
+#   Y=NatTrait[,c(1,7:10],
 #   G=NatG,
 #   kinship.algorithm="Loiselle",
 #   #KI=NatLois,
@@ -132,7 +134,7 @@ setwd(paste(nomTemp,"/output/limGWAS",sep=""))
 limGAPIT<-GAPIT(
   Y=LimTrait[,c(1,7:10)],
   G=LimG,
-  kinship.algorithm="Loiselle",
+  #kinship.algorithm="Loiselle",
   #KI=LimLois,
   PCA.total=0,
   model="Blink"
@@ -141,7 +143,6 @@ limGAPIT<-GAPIT(
 RezLimGAPIT<-read.table("GAPIT.Filter_GWAS_results.txt",header=TRUE,
                         sep=" ")
 setwd(nomTemp)
-
 
 
 ##############################################################################/
