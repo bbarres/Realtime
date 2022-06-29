@@ -52,11 +52,9 @@ setwd(paste(nomTemp,"/output/natGWAS",sep=""))
 natGAPIT<-GAPIT(
   Y=NatTrait[,c(1,7:10)],
   G=NatG,
-  #kinship.algorithm="Loiselle",
-  #KI=NatLois,
+  SNP.effect="Add",
   PCA.total=0,
   model="Blink"
-  #,Random.model=TRUE
 )
 RezNatGAPIT<-read.table("GAPIT.Filter_GWAS_results.txt",header=TRUE,
                         sep=" ")
@@ -134,11 +132,9 @@ setwd(paste(nomTemp,"/output/limGWAS",sep=""))
 limGAPIT<-GAPIT(
   Y=LimTrait[,c(1,7:10)],
   G=LimG,
-  #kinship.algorithm="Loiselle",
-  #KI=LimLois,
+  SNP.effect="Add",
   PCA.total=0,
   model="Blink"
-  #,Random.model=TRUE
 )
 RezLimGAPIT<-read.table("GAPIT.Filter_GWAS_results.txt",header=TRUE,
                         sep=" ")
@@ -154,7 +150,8 @@ temp<-temp[,c(1,48:866)]
 temp2<-temp[,colnames(temp)=="Sample_ID" | 
               colnames(temp)==RezNatGAPIT$SNP[1]]
 temp3<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
-barplot(as.data.frame(table(temp3$statut,temp3$Entomo_CL7647CT8535_01_89))$Freq)
+barplot(as.data.frame(table(temp3$statut,
+                            temp3$Entomo_CL7647CT8535_01_89))$Freq)
 
 
 boxplot(temp3$oid_moy~temp3$Entomo_CL7647CT8535_01_89,boxwex=0.3,las=1)
