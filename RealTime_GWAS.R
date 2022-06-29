@@ -150,8 +150,9 @@ temp<-temp[,c(1,48:866)]
 temp2<-temp[,colnames(temp)=="Sample_ID" | 
               colnames(temp)==RezNatGAPIT$SNP[1]]
 temp3<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
-barplot(as.data.frame(table(temp3$statut,
-                            temp3$Entomo_CL7647CT8535_01_89))$Freq)
+barplot(as.data.frame(table(temp3$`Dead or Alive`,
+                            temp3$Entomo_CL7647CT8535_01_89))$Freq,
+        col=c("red","green"))
 
 
 boxplot(temp3$oid_moy~temp3$Entomo_CL7647CT8535_01_89,boxwex=0.3,las=1)

@@ -185,7 +185,7 @@ snpGen<-snpGen[!is.na(snpGen@other$DoA)]
 
 
 ##############################################################################/
-#Heterozygosity dead vs alive####
+#Heterozygosity dead vs alive computation####
 ##############################################################################/
 
 #set newPop as population
@@ -236,6 +236,12 @@ for (i in 1:length(nomFam)) {
   HetVivMort<-rbind(HetVivMort,temp2)
 }
 
+
+##############################################################################/
+#Plot for comparing Dead or Alive heterozygosities indices by family####
+##############################################################################/
+
+
 HetVivMortExp<-HetVivMort[HetVivMort$moda=="exp",]
 #removing global
 HetVivMortExp<-HetVivMortExp[HetVivMortExp$fam!="Global",]
@@ -248,6 +254,8 @@ HetVivMortLim<-HetVivMortLim[HetVivMortLim$fam!="Global",]
 HetVivMortLim$fam[HetVivMortLim$fam=="1"]<-"01"
 HetVivMortLim$fam[HetVivMortLim$fam=="9"]<-"09"
 
+
+#plot of the different indices for Exposed treatment by family
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
@@ -274,6 +282,8 @@ vioplot(as.numeric(HetVivMortExp$HL)~HetVivMortExp$vivmor:HetVivMortExp$fam,
 par(op)
 #export to .pdf 20 x 20 inches
 
+
+#plot of the different indices for Limited treatment by family
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$vivmor:HetVivMortLim$fam,
         col = c("orange","yellow"),sep=":",las=1,
@@ -300,6 +310,8 @@ vioplot(as.numeric(HetVivMortLim$HL)~HetVivMortLim$vivmor:HetVivMortLim$fam,
 par(op)
 #export to .pdf 20 x 20 inches
 
+
+#plot of the PHt index for both Exposed and limited treatment by family
 op<-par(mfrow=c(2,1))
 #semi violin plot for the exposed treatment
 HetAli<-HetVivMortExp[HetVivMortExp$vivmor==1,]
@@ -371,8 +383,48 @@ points(x=c(1:15)+0.2,y=aggregate(as.numeric(HetAli$PHt),
        pch=19,col=colovec[4])
 box(bty="l")
 par(op)
-
 #export to .pdf 10 x 12 inches
+
+
+#Plot for global data comparing Exposed and Limited treatments
+HetVivMortGlob<-HetVivMort[HetVivMort$fam=="Global",]
+#semi violin plot for the exposed treatment
+HetAli<-HetVivMortGlob[HetVivMortGlob$vivmor==1,]
+HetDea<-HetVivMortGlob[HetVivMortGlob$vivmor==0,]
+colovec<-c(brewer.pal(12,"Set3")[6:7],
+           brewer.pal(9,"Set1")[1:2])
+vioplot(as.numeric(HetVivMortGlob$PHt)~HetVivMortGlob$moda,
+        col = c("transparent"),sep=":",las=1,border="transparent",
+        ylab="PHt",xlab="",ylim=c(0.07,0.35),frame.plot=FALSE,
+        lineCol="transparent",rectCol="transparent",
+        main="Comparison between treatments")
+vioplot(as.numeric(HetDea$PHt)~HetDea$moda,plotCentre="line",
+        col=colovec[1],sep=":",las=1,side="left",frame.plot=FALSE,
+        add=TRUE)
+stripchart(as.numeric(HetDea$PHt)~HetDea$moda,vertical=TRUE,
+           method="jitter",pch=21,add=TRUE,col=colovec[3],
+           at=c(1:2)-0.2)
+vioplot(as.numeric(HetAli$PHt)~HetAli$moda,plotCentre="line",
+        col=colovec[2],sep=":",las=1,side="right",frame.plot=FALSE,
+        add=TRUE)
+stripchart(as.numeric(HetAli$PHt)~HetAli$moda,vertical=TRUE,
+           method="jitter",pch=21,add=TRUE,col=colovec[4],
+           at=c(1:2)+0.2)
+segments(c(1:2)-0.2,aggregate(as.numeric(HetDea$PHt),
+                               list(HetDea$moda),FUN=mean)[,2],
+         c(1:2)+0.2,aggregate(as.numeric(HetAli$PHt),
+                               list(HetAli$moda),FUN=mean)[,2],
+         col=grey(0.95,0.9),lwd=6)
+points(x=c(1:2)-0.2,y=aggregate(as.numeric(HetDea$PHt),
+                                 list(HetDea$moda),FUN=mean)[,2],
+       pch=21,bg=colovec[3],col="black")
+points(x=c(1:2)+0.2,y=aggregate(as.numeric(HetAli$PHt),
+                                 list(HetAli$moda),FUN=mean)[,2],
+       pch=21,bg=colovec[4],col="black")
+box(bty="l")
+legend(0.2,0.4,c("dead","alive"),fill=colovec[1:2],cex=1.3,
+       bty="n",x.intersp=0.5,y.intersp=0.7,xpd=TRUE)
+#export to .pdf 6 x 8 inches
 
 var.test(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam)
 
