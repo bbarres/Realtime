@@ -152,7 +152,8 @@ temp2<-temp[,colnames(temp)=="Sample_ID" |
 temp3<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
 barplot(as.data.frame(table(temp3$`Dead or Alive`,
                             temp3$Entomo_CL7647CT8535_01_89))$Freq,
-        col=c("red","green"))
+        col=brewer.pal(8,"Dark2")[2:1],las=1,
+        space=c(0.1,rep(c(0.1,1.4),2),0.1))
 
 
 boxplot(temp3$oid_moy~temp3$Entomo_CL7647CT8535_01_89,boxwex=0.3,las=1)
