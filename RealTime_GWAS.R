@@ -156,7 +156,7 @@ temp3<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
 colnames(temp3)
 
 graf<-barplot(as.data.frame(table(temp3$`Dead or Alive`,
-                                  temp3$Entomo_CL7647CT8535_01_89))$Freq,
+                                  temp3[,2]))$Freq,
               col=brewer.pal(8,"Dark2")[2:1],las=1,
               space=c(0.1,rep(c(0.1,0.9),2),0.1),xaxt="n",yaxt="n")
 abline(h=c(50,100,200,300),col=grey(0.8,0.8),lwd=2,lty=1)
@@ -164,20 +164,20 @@ axis(1,at=(graf[c(1,3,5)]+graf[c(2,4,6)])/2,labels=FALSE,lwd=4)
 axis(2,lwd=4,las=1,font=2,cex.axis=1.1)
 box(bty="l",lwd=4)
 mtext(colnames(table(temp3$`Dead or Alive`,
-                     temp3$Entomo_CL7647CT8535_01_89)),
+                     temp3[,2])),
       at=(graf[c(1,3,5)]+graf[c(2,4,6)])/2,
       line=1.5,cex=1.4,side=1,font=2)
 
-boxplot(temp3$`Powdery mildew`~temp3$Entomo_CL7647CT8535_01_89,boxwex=0.3,las=1)
-stripchart(temp3$`Powdery mildew`~temp3$Entomo_CL7647CT8535_01_89,
+boxplot(temp3$`Powdery mildew`~temp3[,2],boxwex=0.3,las=1)
+stripchart(temp3$`Powdery mildew`~temp3[,2],
            method="jitter",col="red",vertical=TRUE,pch=19,cex=0.7,add=TRUE)
-vioplot(temp3$`Powdery mildew`~temp3$Entomo_CL7647CT8535_01_89,boxwex=0.3,las=1)
+vioplot(temp3$`Powdery mildew`~temp3[,2],boxwex=0.3,las=1)
 
-table(temp3$Entomo_CL7647CT8535_01_89)
+table(temp3[,2])
 
 
-boxplot(temp3$statut~temp3$Entomo_CL7647CT8535_01_89,boxwex=0.3,las=1)
-stripchart(temp3$statut~temp3$Entomo_CL7647CT8535_01_89,
+boxplot(temp3$`Dead or Alive`~temp3[,2],boxwex=0.3,las=1)
+stripchart(temp3$`Dead or Alive`~temp3[,2],
            method="jitter",col="red",vertical=TRUE,pch=19,cex=0.7,add=TRUE)
 
 
