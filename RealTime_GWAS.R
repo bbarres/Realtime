@@ -138,6 +138,8 @@ limGAPIT<-GAPIT(
 )
 RezLimGAPIT<-read.table("GAPIT.Filter_GWAS_results.txt",header=TRUE,
                         sep=" ")
+RezLimGAPIT$SNP<-str_replace_all(RezLimGAPIT$SNP,"~","_")
+RezLimGAPIT$SNP<-str_replace_all(RezLimGAPIT$SNP,"-","_")
 setwd(nomTemp)
 
 
