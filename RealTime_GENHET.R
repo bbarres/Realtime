@@ -236,11 +236,19 @@ for (i in 1:length(nomFam)) {
   HetVivMort<-rbind(HetVivMort,temp2)
 }
 
+#export of the final result file
+write.table(HetVivMort,file="data/HetVivMort.txt",sep="\t",
+            quote=FALSE,row.names=FALSE)
+
 
 ##############################################################################/
 #Plot for comparing Dead or Alive heterozygosities indices by family####
 ##############################################################################/
 
+#if you don't want to run the above code, you can directly import the 
+#result file
+HetVivMort<-read.table(file="data/HetVivMort.txt",sep="\t",
+                       header=TRUE,colClasses="character")
 
 HetVivMortExp<-HetVivMort[HetVivMort$moda=="exp",]
 #removing global
@@ -327,13 +335,13 @@ vioplot(as.numeric(HetDea$PHt)~HetDea$fam,plotCentre="line",
         add=TRUE)
 stripchart(as.numeric(HetDea$PHt)~HetDea$fam,vertical=TRUE,
            method="jitter",pch=21,add=TRUE,col=colovec[3],
-           at=c(1:15)-0.2)
+           at=c(1:15)-0.2,cex=0.8)
 vioplot(as.numeric(HetAli$PHt)~HetAli$fam,plotCentre="line",
         col=colovec[2],sep=":",las=1,side="right",frame.plot=FALSE,
         add=TRUE)
 stripchart(as.numeric(HetAli$PHt)~HetAli$fam,vertical=TRUE,
            method="jitter",pch=21,add=TRUE,col=colovec[4],
-           at=c(1:15)+0.2)
+           at=c(1:15)+0.2,cex=0.8)
 segments(c(1:15)-0.2,aggregate(as.numeric(HetDea$PHt),
                                list(HetDea$fam),FUN=mean)[,2],
          c(1:15)+0.2,aggregate(as.numeric(HetAli$PHt),
@@ -341,15 +349,15 @@ segments(c(1:15)-0.2,aggregate(as.numeric(HetDea$PHt),
          col=grey(0.95,0.9),lwd=6)
 points(x=c(1:15)-0.2,y=aggregate(as.numeric(HetDea$PHt),
                                   list(HetDea$fam),FUN=mean)[,2],
-       pch=19,col=colovec[3])
+       pch=21,bg=colovec[3],cex=1.2)
 points(x=c(1:15)+0.2,y=aggregate(as.numeric(HetAli$PHt),
                                   list(HetAli$fam),FUN=mean)[,2],
-       pch=19,col=colovec[4])
+       pch=21,bg=colovec[4],cex=1.2)
 box(bty="l")
 legend(-0.5,0.43,c("dead","alive"),fill=colovec[1:2],cex=1.3,
        bty="n",x.intersp=0.2,y.intersp=0.7,xpd=TRUE)
 
-#semi violin plot for the exposed treatment
+#semi violin plot for the protected treatment
 HetAli<-HetVivMortLim[HetVivMortLim$vivmor==1,]
 HetDea<-HetVivMortLim[HetVivMortLim$vivmor==0,]
 colovec<-c(brewer.pal(12,"Set3")[6:7],
@@ -357,19 +365,20 @@ colovec<-c(brewer.pal(12,"Set3")[6:7],
 vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$fam,
         col = c("transparent"),sep=":",las=1,border="transparent",
         ylab="PHt",xlab="",ylim=c(0.07,0.35),frame.plot=FALSE,
-        lineCol="transparent",rectCol="transparent",main="Limited treatment")
+        lineCol="transparent",rectCol="transparent",
+        main="Protected treatment")
 vioplot(as.numeric(HetDea$PHt)~HetDea$fam,plotCentre="line",
         col=colovec[1],sep=":",las=1,side="left",frame.plot=FALSE,
         add=TRUE)
 stripchart(as.numeric(HetDea$PHt)~HetDea$fam,vertical=TRUE,
            method="jitter",pch=21,add=TRUE,col=colovec[3],
-           at=c(1:15)-0.2)
+           at=c(1:15)-0.2,cex=0.8)
 vioplot(as.numeric(HetAli$PHt)~HetAli$fam,plotCentre="line",
         col=colovec[2],sep=":",las=1,side="right",frame.plot=FALSE,
         add=TRUE)
 stripchart(as.numeric(HetAli$PHt)~HetAli$fam,vertical=TRUE,
            method="jitter",pch=21,add=TRUE,col=colovec[4],
-           at=c(1:15)+0.2)
+           at=c(1:15)+0.2,cex=0.8)
 segments(c(1:15)-0.2,aggregate(as.numeric(HetDea$PHt),
                                list(HetDea$fam),FUN=mean)[,2],
          c(1:15)+0.2,aggregate(as.numeric(HetAli$PHt),
@@ -377,13 +386,13 @@ segments(c(1:15)-0.2,aggregate(as.numeric(HetDea$PHt),
          col=grey(0.95,0.9),lwd=6)
 points(x=c(1:15)-0.2,y=aggregate(as.numeric(HetDea$PHt),
                                  list(HetDea$fam),FUN=mean)[,2],
-       pch=19,col=colovec[3])
+       pch=21,bg=colovec[3],cex=1.2)
 points(x=c(1:15)+0.2,y=aggregate(as.numeric(HetAli$PHt),
                                  list(HetAli$fam),FUN=mean)[,2],
-       pch=19,col=colovec[4])
+       pch=21,bg=colovec[4],cex=1.2)
 box(bty="l")
 par(op)
-#export to .pdf 10 x 12 inches
+#export to .pdf 8 x 10 inches
 
 
 #Plot for global data comparing Exposed and Limited treatments
