@@ -146,10 +146,10 @@ setwd(nomTemp)
 
 
 ##############################################################################/
-#SNP genotype effect on the traits####
+#plotting significant SNP genotype effect on the traits####
 ##############################################################################/
 
-
+#code for plotting all the significant SNP
 temp<-snp.dat[snp.dat$Sample_ID %in% NatTrait$Taxa,]
 temp<-temp[,c(1,48:866)]
 tempb<-snp.dat[snp.dat$Sample_ID %in% LimTrait$Taxa,]
