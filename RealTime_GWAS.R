@@ -74,8 +74,6 @@ setwd(nomTemp)
 # )
 
 
-
-
 op<-par(mar=c(6, 5, 1, 1) + 0.1)
 graf<-barplot(kdrDistr$n,ylim=c(0,1000),
               ylab="Number of individuals",cex.axis =1.3,cex.lab=2,

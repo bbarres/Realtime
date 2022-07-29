@@ -262,7 +262,6 @@ HetVivMortLim<-HetVivMortLim[HetVivMortLim$fam!="Global",]
 HetVivMortLim$fam[HetVivMortLim$fam=="1"]<-"01"
 HetVivMortLim$fam[HetVivMortLim$fam=="9"]<-"09"
 
-
 #plot of the different indices for Exposed treatment by family
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam,
@@ -290,7 +289,6 @@ vioplot(as.numeric(HetVivMortExp$HL)~HetVivMortExp$vivmor:HetVivMortExp$fam,
 par(op)
 #export to .pdf 20 x 20 inches
 
-
 #plot of the different indices for Limited treatment by family
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$vivmor:HetVivMortLim$fam,
@@ -317,7 +315,6 @@ vioplot(as.numeric(HetVivMortLim$HL)~HetVivMortLim$vivmor:HetVivMortLim$fam,
         main="Dead or Alive: Limited / HL")
 par(op)
 #export to .pdf 20 x 20 inches
-
 
 #plot of the PHt index for both Exposed and limited treatment by family
 op<-par(mfrow=c(2,1))
@@ -393,7 +390,6 @@ points(x=c(1:15)+0.2,y=aggregate(as.numeric(HetAli$PHt),
 box(bty="l")
 par(op)
 #export to .pdf 8 x 10 inches
-
 
 #Plot for global data comparing Exposed and Limited treatments
 HetVivMortGlob<-HetVivMort[HetVivMort$fam=="Global",]
@@ -534,7 +530,7 @@ HetStarSto[HetStarSto$vivmor=="1","vivmor"]<-"end"
 HetStarStoExp<-HetStarSto[HetStarSto$moda=="exp",]
 HetStarStoLim<-HetStarSto[HetStarSto$moda=="low",]
 
-
+#the plot
 op<-par(mfrow=c(5,1))
 vioplot(as.numeric(HetStarStoExp$PHt)~HetStarStoExp$vivmor:HetStarStoExp$fam,
         col = c("orange","yellow"),sep=":",las=1,
