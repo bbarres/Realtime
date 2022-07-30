@@ -31,7 +31,7 @@ LimG<-read.delim("data/lim.hmp.txt",header=FALSE)
 
 
 ##############################################################################/
-#Model Blink/kinship for natural inoculum condition####
+#Model Blink/kinship for exposed condition####
 ##############################################################################/
 
 # #Blink method on powdery mildew phenotype
@@ -72,41 +72,6 @@ setwd(nomTemp)
 #   PCA.total=0,
 #   model="MLM"
 # )
-
-
-op<-par(mar=c(6, 5, 1, 1) + 0.1)
-graf<-barplot(kdrDistr$n,ylim=c(0,1000),
-              ylab="Number of individuals",cex.axis =1.3,cex.lab=2,
-              las=1,xaxt="n",yaxt="n",bty="n",
-              col=rep(thecol,4),
-              border=NA,
-              space=c(rep(0.1,3),1.4,rep(0.1,2),1.4,
-                      rep(0.1,2),1.4,rep(0.1,2)),
-              font.lab=2)
-abline(h=c(50,100,200,400,600,800,1000),col=grey(0.8,0.8),lwd=2,lty=1)
-barplot(kdrDistr$n,ylim=c(0,1100),
-        ylab="Number of individuals",cex.axis =1.3,cex.lab=2,
-        las=1,xaxt="n",yaxt="n",bty="n",
-        col=rep(thecol,4),
-        border=NA,
-        space=c(rep(0.1,3),1.4,rep(0.1,2),1.4,
-                rep(0.1,2),1.4,rep(0.1,2)),
-        font.lab=2,add=TRUE)
-axis(1,at=graf[c(2,5,8,11)],labels=FALSE,lwd=4)
-axis(2,at=c(50,100,200,400,600,800,1000),
-     labels=c(50,100,200,400,600,800,1000),lwd=4,las=1,font=2,cex.axis=1.1)
-box(bty="l",lwd=4)
-text(graf,kdrDistr$n+15,
-     labels=as.character(kdrDistr$n),font=2)
-mtext(levels(kdrDistr$species)[c(3,2,4,1)],at=graf[c(2,5,8,11)],
-      line=1.5,cex=1.4,side=1,font=2)
-mtext("Species", at=9.4,line=3,cex=2,side=1,
-      font=2,padj=1)
-legend(12,800,
-       legend=c("R/R","R/S","S/S"),
-       pch=15,col=thecol,bg=thecol,bty="n",cex=1.3,pt.cex=1.6,xpd=TRUE,
-       ncol=1,x.intersp=1,y.intersp=0.8)
-par(op)
 
 
 ##############################################################################/
@@ -432,102 +397,102 @@ dev.off()
 
   
   
-  
+
 
 #for the protected treatment
-  #data of the exposed treatment
-  temp2<-temp[,colnames(temp)=="Sample_ID" | 
-                colnames(temp)==RezLimGAPIT$SNP[6]]
-  temp2<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
-  #temp2[,2]<-as.factor(temp2[,2])
-  traiinterest<-substring(RezLimGAPIT[6,6],7)
-  #data of the protected treatment
-  temp3<-tempb[,colnames(tempb)=="Sample_ID" | 
-                 colnames(tempb)==RezLimGAPIT$SNP[6]]
-  temp3<-merge(temp3,LimTrait,by.x="Sample_ID",by.y="Taxa")
-  #temp3[,2]<-as.factor(temp3[,2])
-  
-  pdf(file=paste("output/SNP_PRO_",traiinterest,"_",
-                 RezLimGAPIT$SNP[6],".pdf",sep=""),
-      width=12,height=4)
-  op<-par(mfrow=c(1,4))
-  vioplot(temp3$`Acorn weight`~temp3[,2],boxwex=0.3,las=1,
-          col=brewer.pal(9,"Set1")[c(6,3,2)],
-          xlab=RezLimGAPIT$SNP[6],
-          ylab="Acorn weight (g)",main="Acorn weight")
-  vioplot(temp3$`Height`~temp3[,2],boxwex=0.3,las=1,
-          col=brewer.pal(9,"Set1")[c(6,3,2)],
-          xlab=RezLimGAPIT$SNP[6],
-          ylab="Height (cm)",main="Height")
-  vioplot(temp3$`Powdery mildew`~temp3[,2],boxwex=0.3,las=1,
-          col=brewer.pal(9,"Set1")[c(6,3,2)],
-          xlab=RezLimGAPIT$SNP[6],
-          ylab="Powdery mildew note",main="Powdery mildew")
-  graf<-barplot(as.data.frame(table(temp3$`Dead or Alive`,
-                                    temp3[,2]))$Freq,
-                col=brewer.pal(12,"Set3")[6:7],las=1,
-                space=c(0.1,rep(c(0.1,0.9),2),0.1),
-                main="Dead or Alive",xlab=RezLimGAPIT$SNP[6])
-  #abline(h=c(50,100,200,300),col=grey(0.8,0.8),lwd=2,lty=1)
-  axis(1,at=(graf[c(1,3,5)]+graf[c(2,4,6)])/2,
-       labels=colnames(table(temp3$`Dead or Alive`,
-                             temp3[,2])))
-  box(bty="o",lwd=1)
-  par(op)
-  dev.off()
-  
-  #second plot for the two treatment
-  op<-par(mfcol=c(2,2))
-  vioplot(temp2[,traiinterest]~temp2[,2],
-          col=c("transparent"),sep=":",las=1,border="transparent",
-          ylab=traiinterest,xlab="",frame.plot=FALSE,
-          lineCol="transparent",rectCol="transparent",
-          main=paste(RezLimGAPIT$SNP[6],"exposed"))
-  vioplot(temp2[temp2[,11]==0,traiinterest]~temp2[temp2[,11]==0,2],
-          plotCentre="line",
-          col=brewer.pal(12,"Set3")[6],sep=":",las=1,side="left",
-          frame.plot=FALSE,add=TRUE)
-  vioplot(temp2[temp2[,11]==1,traiinterest]~temp2[temp2[,11]==1,2],
-          plotCentre="line",
-          col=brewer.pal(12,"Set3")[7],sep=":",las=1,side="right",
-          frame.plot=FALSE,add=TRUE)
-  box(bty="o",lwd=1)
-  graf<-barplot(proportions(table(temp2$`Dead or Alive`,
-                                  temp2[,2]),margin=2)[1,]*100,
-                col=brewer.pal(12,"Set3")[6],las=1,space=1,
-                ylim=c(0,100),names.arg="",
-                main="Exposed death rate")
-  axis(1,at=graf,
-       labels=paste(colnames(table(temp2$`Dead or Alive`,temp2[,2])),
-                    " (n=",table(temp2[,2]),")",
-                    sep=""))
-  box(bty="o",lwd=1)
-  vioplot(temp3[,traiinterest]~temp3[,2],
-          col=c("transparent"),sep=":",las=1,border="transparent",
-          ylab=traiinterest,xlab="",frame.plot=FALSE,
-          lineCol="transparent",rectCol="transparent",
-          main=paste(RezNatGAPIT$SNP[6],"protected"))
-  vioplot(temp3[temp3[,11]==0,traiinterest]~temp3[temp3[,11]==0,2],
-          plotCentre="line",
-          col=brewer.pal(12,"Set3")[6],sep=":",las=1,side="left",
-          frame.plot=FALSE,add=TRUE)
-  vioplot(temp3[temp3[,11]==1,traiinterest]~temp3[temp3[,11]==1,2],
-          plotCentre="line",
-          col=brewer.pal(12,"Set3")[7],sep=":",las=1,side="right",
-          frame.plot=FALSE,add=TRUE)
-  box(bty="o",lwd=1)
-  grafb<-barplot(proportions(table(temp3$`Dead or Alive`,
-                                   temp3[,2]),margin=2)[1,]*100,
-                 col=brewer.pal(12,"Set3")[6],las=1,space=1,
-                 ylim=c(0,100),names.arg="",
-                 main="Protected death rate")
-  axis(1,at=grafb,
-       labels=paste(colnames(table(temp3$`Dead or Alive`,temp3[,2])),
-                    " (n=",table(temp3[,2]),")",
-                    sep=""))
-  box(bty="o",lwd=1)
-  par(op)
-  dev.off()
+#data of the exposed treatment
+temp2<-temp[,colnames(temp)=="Sample_ID" | 
+              colnames(temp)==RezLimGAPIT$SNP[6]]
+temp2<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
+#temp2[,2]<-as.factor(temp2[,2])
+traiinterest<-substring(RezLimGAPIT[6,6],7)
+#data of the protected treatment
+temp3<-tempb[,colnames(tempb)=="Sample_ID" | 
+               colnames(tempb)==RezLimGAPIT$SNP[6]]
+temp3<-merge(temp3,LimTrait,by.x="Sample_ID",by.y="Taxa")
+#temp3[,2]<-as.factor(temp3[,2])
+
+pdf(file=paste("output/SNP_PRO_",traiinterest,"_",
+               RezLimGAPIT$SNP[6],".pdf",sep=""),
+    width=12,height=4)
+op<-par(mfrow=c(1,4))
+vioplot(temp3$`Acorn weight`~temp3[,2],boxwex=0.3,las=1,
+        col=brewer.pal(9,"Set1")[c(6,3,2)],
+        xlab=RezLimGAPIT$SNP[6],
+        ylab="Acorn weight (g)",main="Acorn weight")
+vioplot(temp3$`Height`~temp3[,2],boxwex=0.3,las=1,
+        col=brewer.pal(9,"Set1")[c(6,3,2)],
+        xlab=RezLimGAPIT$SNP[6],
+        ylab="Height (cm)",main="Height")
+vioplot(temp3$`Powdery mildew`~temp3[,2],boxwex=0.3,las=1,
+        col=brewer.pal(9,"Set1")[c(6,3,2)],
+        xlab=RezLimGAPIT$SNP[6],
+        ylab="Powdery mildew note",main="Powdery mildew")
+graf<-barplot(as.data.frame(table(temp3$`Dead or Alive`,
+                                  temp3[,2]))$Freq,
+              col=brewer.pal(12,"Set3")[6:7],las=1,
+              space=c(0.1,rep(c(0.1,0.9),2),0.1),
+              main="Dead or Alive",xlab=RezLimGAPIT$SNP[6])
+#abline(h=c(50,100,200,300),col=grey(0.8,0.8),lwd=2,lty=1)
+axis(1,at=(graf[c(1,3,5)]+graf[c(2,4,6)])/2,
+     labels=colnames(table(temp3$`Dead or Alive`,
+                           temp3[,2])))
+box(bty="o",lwd=1)
+par(op)
+dev.off()
+
+#second plot for the two treatment
+op<-par(mfcol=c(2,2))
+vioplot(temp2[,traiinterest]~temp2[,2],
+        col=c("transparent"),sep=":",las=1,border="transparent",
+        ylab=traiinterest,xlab="",frame.plot=FALSE,
+        lineCol="transparent",rectCol="transparent",
+        main=paste(RezLimGAPIT$SNP[6],"exposed"))
+vioplot(temp2[temp2[,11]==0,traiinterest]~temp2[temp2[,11]==0,2],
+        plotCentre="line",
+        col=brewer.pal(12,"Set3")[6],sep=":",las=1,side="left",
+        frame.plot=FALSE,add=TRUE)
+vioplot(temp2[temp2[,11]==1,traiinterest]~temp2[temp2[,11]==1,2],
+        plotCentre="line",
+        col=brewer.pal(12,"Set3")[7],sep=":",las=1,side="right",
+        frame.plot=FALSE,add=TRUE)
+box(bty="o",lwd=1)
+graf<-barplot(proportions(table(temp2$`Dead or Alive`,
+                                temp2[,2]),margin=2)[1,]*100,
+              col=brewer.pal(12,"Set3")[6],las=1,space=1,
+              ylim=c(0,100),names.arg="",
+              main="Exposed death rate")
+axis(1,at=graf,
+     labels=paste(colnames(table(temp2$`Dead or Alive`,temp2[,2])),
+                  " (n=",table(temp2[,2]),")",
+                  sep=""))
+box(bty="o",lwd=1)
+vioplot(temp3[,traiinterest]~temp3[,2],
+        col=c("transparent"),sep=":",las=1,border="transparent",
+        ylab=traiinterest,xlab="",frame.plot=FALSE,
+        lineCol="transparent",rectCol="transparent",
+        main=paste(RezNatGAPIT$SNP[6],"protected"))
+vioplot(temp3[temp3[,11]==0,traiinterest]~temp3[temp3[,11]==0,2],
+        plotCentre="line",
+        col=brewer.pal(12,"Set3")[6],sep=":",las=1,side="left",
+        frame.plot=FALSE,add=TRUE)
+vioplot(temp3[temp3[,11]==1,traiinterest]~temp3[temp3[,11]==1,2],
+        plotCentre="line",
+        col=brewer.pal(12,"Set3")[7],sep=":",las=1,side="right",
+        frame.plot=FALSE,add=TRUE)
+box(bty="o",lwd=1)
+grafb<-barplot(proportions(table(temp3$`Dead or Alive`,
+                                 temp3[,2]),margin=2)[1,]*100,
+               col=brewer.pal(12,"Set3")[6],las=1,space=1,
+               ylim=c(0,100),names.arg="",
+               main="Protected death rate")
+axis(1,at=grafb,
+     labels=paste(colnames(table(temp3$`Dead or Alive`,temp3[,2])),
+                  " (n=",table(temp3[,2]),")",
+                  sep=""))
+box(bty="o",lwd=1)
+par(op)
+dev.off()
 
 
 ##############################################################################/
