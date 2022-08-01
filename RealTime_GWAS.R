@@ -62,6 +62,8 @@ RezNatGAPIT$SNP<-str_replace_all(RezNatGAPIT$SNP,"~","_")
 RezNatGAPIT$SNP<-str_replace_all(RezNatGAPIT$SNP,"-","_")
 RezNatGAPIT$SNP<-str_replace_all(RezNatGAPIT$SNP,fixed("+"),"_")
 setwd(nomTemp)
+write.table(RezNatGAPIT,file="data/RezNatGAPIT.txt",sep="\t",
+            quote=FALSE,row.names=FALSE)
 
 # #MLM method on powdery mildew trait
 # natGAPIT<-GAPIT(
@@ -106,7 +108,8 @@ RezLimGAPIT$SNP<-str_replace_all(RezLimGAPIT$SNP,"~","_")
 RezLimGAPIT$SNP<-str_replace_all(RezLimGAPIT$SNP,"-","_")
 RezLimGAPIT$SNP<-str_replace_all(RezLimGAPIT$SNP,fixed("+"),"_")
 setwd(nomTemp)
-
+write.table(RezLimGAPIT,file="data/RezLimGAPIT.txt",sep="\t",
+            quote=FALSE,row.names=FALSE)
 
 ##############################################################################/
 #plotting significant SNP genotype effect on the traits####
