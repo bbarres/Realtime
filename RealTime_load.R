@@ -58,6 +58,26 @@ snp.dat<-drop.levels(snp.dat)
 
 
 ##############################################################################/
+#Loading the necessary data sets for GWAS analyses####
+##############################################################################/
+
+AllTrait<-read.table("data/pheno_final.txt",header=TRUE)
+colnames(AllTrait)[11:14]<-c("Powdery mildew","Height",
+                             "Acorn weight","Dead or Alive")
+#we remove the individuals without SNP data
+AllTrait<-AllTrait[AllTrait$SNPage==1 & is.na(AllTrait$SNPage)!=TRUE &
+                     AllTrait$Quality_SNPage==1,]
+NatTrait<-AllTrait[AllTrait$treat=="exp",5:14]
+LimTrait<-AllTrait[AllTrait$treat=="low",5:14]
+
+#loading the natural treatment genotype data
+NatG<-read.delim("data/nat.hmp.txt",header=FALSE)
+
+#loading the limited treatment genotype data
+LimG<-read.delim("data/lim.hmp.txt",header=FALSE)
+
+
+##############################################################################/
 #Writing info session for reproducibility####
 ##############################################################################/
 
