@@ -18,7 +18,7 @@ RezLimGAPIT<-read.table("data/RezLimGAPIT.txt",sep="\t",header=TRUE)
 
 
 ##############################################################################/
-#plotting significant SNP genotype effect on the traits####
+#plotting significant SNP genotype effect on ALL the traits####
 ##############################################################################/
 
 #code for plotting all the significant SNP
@@ -27,7 +27,7 @@ temp<-temp[,c(1,48:866)]
 tempb<-snp.dat[snp.dat$Sample_ID %in% LimTrait$Taxa,]
 tempb<-tempb[,c(1,48:866)]
 
-#for the Exposed treatment
+#for the SNP significant in the Exposed treatment
 for (i in 1:dim(RezNatGAPIT)[1]) {
   #data of the exposed treatment
   temp2<-temp[,colnames(temp)=="Sample_ID" | 
@@ -70,7 +70,7 @@ for (i in 1:dim(RezNatGAPIT)[1]) {
   par(op)
   dev.off()
   
-  #second plot for the two treatment
+  #second plot for the distribution in the two treatments
   pdf(file=paste("output/SNP_EXP_DoA_",traiinterest,"_",
                  RezNatGAPIT$SNP[i],".pdf",sep=""),
       width=7,height=8)
@@ -128,7 +128,8 @@ for (i in 1:dim(RezNatGAPIT)[1]) {
   
 }
 
-#for the protected treatment
+
+#for the SNP significant for the protected treatment
 for (i in 1:dim(RezLimGAPIT)[1]) {
   #data of the exposed treatment
   temp2<-temp[,colnames(temp)=="Sample_ID" | 
@@ -171,7 +172,7 @@ for (i in 1:dim(RezLimGAPIT)[1]) {
   par(op)
   dev.off()
   
-  #second plot for the two treatment
+  #second plot for the distribution in the two treatments
   pdf(file=paste("output/SNP_PRO_DoA_",traiinterest,"_",
                  RezLimGAPIT$SNP[i],".pdf",sep=""),
       width=7,height=8)
