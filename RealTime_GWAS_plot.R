@@ -280,7 +280,6 @@ axis(1,at=(graf[c(1,3,5)]+graf[c(2,4,6)])/2,
                            temp2[,2])))
 box(bty="o",lwd=1)
 
-
 graf<-barplot(proportions(table(temp2$`Dead or Alive`,
                                 temp2[,2]),margin=2)[1,]*100,
               col=brewer.pal(12,"Set3")[6],las=1,space=1,
@@ -351,7 +350,7 @@ box(bty="o",lwd=1)
 par(op)
 dev.off()
 
-#second plot for the two treatment
+#second plot for the distribution for the two treatments
 op<-par(mfcol=c(2,2))
 vioplot(temp2[,traiinterest]~temp2[,2],
         col=c("transparent"),sep=":",las=1,border="transparent",
