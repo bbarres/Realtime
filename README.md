@@ -30,9 +30,9 @@ In this section, you will find the list of the different scripts used in the art
 For reproducibility purpose, you will find all the information about the versions of R, Rstudio, OS etc., as well as the list and version number of the packages used at the time of publishing this script in the **session_info.txt** file.
 
 ## Citation
-You will be soon (hopefullt) able to cite the related study as follow: 
-+ Barrès B.\*, Capderrey C., Mahéo F., Micoud A., Hullé M. and Simon J.-C.
+You will be soon (hopefully) able to cite the related study as follow: 
++ Barrès B., Saint-Jean G.,Garnier-Géré P., Dutech C. and Desprez-Loustau M.-L.
 [Significant demographic and genetic impacts of powdery mildew in a young oak cohort. *journal name*.](https://)
 
 If you want to use (some of) the code found on this page or if you want to cite this repository:
-+ Benoit Barrès and Marie-Laure Despré-Loustau. [Supporting data and code for: Significant demographic and genetic impacts of powdery mildew in a young oak cohort. Zenodo.](https://zenodo.org/badge/latestdoi/sss)
++ Benoit Barrès and Marie-Laure Desprez-Loustau. [Supporting data and code for: Significant demographic and genetic impacts of powdery mildew in a young oak cohort. Zenodo.](https://zenodo.org/badge/latestdoi/sss)
