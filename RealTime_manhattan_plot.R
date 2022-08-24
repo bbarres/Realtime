@@ -52,8 +52,8 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
     datMan$Position+
     (datMan$grpNum-1)*decalCHR
   plot(datMan$posabsol,datMan$logp,pch=19,las=1,font.axis=2,
-       ylab=expression(-log[10](pval)),
-       xaxt="n",bty="n",xlab="",ylim=ylimi,
+       ylab=expression(-log[10](pval)),cex.lab=1.5,
+       xaxt="n",yaxt="n",bty="n",xlab="",ylim=ylimi,
        col=colovec[as.numeric(even(as.numeric(datMan$Chromosome)))+1])
   points(datMan[datMan$signiCat=="<0.01",]$posabsol,
          datMan[datMan$signiCat=="<0.01",]$logp,
@@ -64,14 +64,15 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
   points(datMan[datMan$signiCat=="<0.0001",]$posabsol,
          datMan[datMan$signiCat=="<0.0001",]$logp,
          pch=19,col=colosign[3])
+  axis(2,lwd=2,las=1)
   if(desiXax==1){
-    axis(1,pos=-0.1,lwd=2,
+    axis(1,pos=-0.2,lwd=2,
          at=c(c(0,cumsum(tapply(datMan$Position,datMan$Chromosome,max))[1:14])+
                 tapply(datMan$Position,datMan$Chromosome,max)/2+
                 (0:14)*decalCHR),
-         lab=levels(datMan$Chromosome),las=1,hadj=0.5,font=2)
+         lab=levels(datMan$Chromosome),las=1,hadj=0.5,padj=-0.5,font=2)
   } else {
-    axis(1,pos=-0.1,tcl=0.5,lwd=2,
+    axis(1,pos=-0.2,tcl=0.5,lwd=2,
          at=c(c(0,cumsum(tapply(datMan$Position,datMan$Chromosome,max))[1:14])+
                 tapply(datMan$Position,datMan$Chromosome,max)/2+
                 (0:14)*decalCHR),
