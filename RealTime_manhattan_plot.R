@@ -67,11 +67,11 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
          datMan[datMan$signiCat=="<0.0001",]$logp,
          pch=19,col=colosign[3])
   if(desiXax==1){
-    axis(1,pos=-0.05,
+    axis(1,pos=-0.1,
          at=c(c(0,cumsum(tapply(datMan$Position,datMan$Chromosome,max))[1:14])+
                 tapply(datMan$Position,datMan$Chromosome,max)/2+
                 (0:14)*decalCHR),
-         lab=levels(datMan$Chromosome))
+         lab=levels(datMan$Chromosome),las=2,hadj=1)
   }
 
 }
@@ -87,16 +87,16 @@ AcLim<-readManDa("output/limGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
 
 
 colosign<-brewer.pal(11,"RdYlGn")[c(3,2,1)]
-op<-par(mfrow=c(2,1),mar=c(0,5,3,3))
+op<-par(mfrow=c(2,1),mar=c(1,5,3,3))
 colovec<-brewer.pal(12,"Paired")[1:2]
 ManhaPlot(AcNat,colovec,colosign,decalCHR=10000000,desiXax=1,ylimi=c(0,8))
-title(main="Acorn weight",font=2,cex=2)
-par(mar=c(5,5,2,3))
+title(main="Acorn weight",font=2,cex.main=3)
+par(mar=c(3,5,1,3))
 colovec<-brewer.pal(12,"Paired")[3:4]
 ManhaPlot(AcLim,colovec,colosign,decalCHR=10000000,desiXax=0,ylimi=c(8,0))
 par(op)
 
-
+#export 15 x 7 inches in .pdf
 
 
 
@@ -106,7 +106,7 @@ op<-par(mfrow=c(2,1))
 par(mar=c(0,5,3,3))
 manhattan(gwasResults,ylim=c(0,10),cex=2.2,cex.lab=2.5,
           font.lab=2,font.axis=2,cex.axis=1.6,las=2,font=4)
-par(mar=c(5,5,3,3))
+par(mar=c(0,5,3,3))
 manhattan(gwasResults,ylim=c(10,0),cex=2.2,cex.lab=2.5,
           font.lab=2,font.axis=2,cex.axis=1.6,las=2,font=4,xlab="",xaxt="n")
 par(op)
