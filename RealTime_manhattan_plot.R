@@ -25,8 +25,10 @@ readManDa<-function(pathtoGWASrez) {
                                         "MT","Pltd"))
   #there is only 12 chromosome in Q. robur, the 13 stand for an 
   #unlocated SNP on the genome at the time of the analysis. The level
-  #"13" is therefore turn into "Unk"
-  levels(datMan$Chromosome)[13]<-"Unk"
+  #"13" is therefore turn into "NA"
+  levels(datMan$Chromosome)[13]<-"Na"
+  levels(datMan$Chromosome)[14]<-"Mt"
+  levels(datMan$Chromosome)[15]<-"Cp"
   #we turn Position from integer to numeric
   datMan$Position<-as.numeric(datMan$Position)
   datMan<-datMan[order(datMan$Chromosome,datMan$Position),]
@@ -52,21 +54,21 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
     datMan$Position+
     (datMan$grpNum-1)*decalCHR
   plot(datMan$posabsol,datMan$logp,pch=19,las=1,font.axis=2,
-       ylab=expression(-log[10](pval)),cex.lab=1.5,
+       ylab=expression(-log[10](pval)),cex.lab=1.5,cex=1.0,
        xaxt="n",yaxt="n",bty="n",xlab="",ylim=ylimi,
        col=colovec[as.numeric(even(as.numeric(datMan$Chromosome)))+1])
   points(datMan[datMan$signiCat=="<0.01",]$posabsol,
          datMan[datMan$signiCat=="<0.01",]$logp,
-         pch=19,col=colosign[1])
+         pch=21,bg=colosign[1],cex=1.5)
   points(datMan[datMan$signiCat=="<0.001",]$posabsol,
          datMan[datMan$signiCat=="<0.001",]$logp,
-         pch=19,col=colosign[2])
+         pch=21,bg=colosign[2],cex=1.5)
   points(datMan[datMan$signiCat=="<0.0001",]$posabsol,
          datMan[datMan$signiCat=="<0.0001",]$logp,
-         pch=19,col=colosign[3])
+         pch=21,bg=colosign[3],cex=1.5)
   axis(2,lwd=2,las=1)
   if(desiXax==1){
-    axis(1,pos=-0.2,lwd=2,
+    axis(1,pos=-0.2,lwd=2,cex.axis=1,
          at=c(c(0,cumsum(tapply(datMan$Position,datMan$Chromosome,max))[1:14])+
                 tapply(datMan$Position,datMan$Chromosome,max)/2+
                 (0:14)*decalCHR),
@@ -83,23 +85,62 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
 
 
 ##############################################################################/
-#running the function to obtain a beautifull manhattan plot####
+#running the functions to obtain a beautiful Manhattan plot####
 ##############################################################################/
 
 AcNat<-readManDa("output/natGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
 AcLim<-readManDa("output/limGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
+HeNat<-readManDa("output/natGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
+HeLim<-readManDa("output/limGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
+PMNat<-readManDa("output/natGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
+PMLim<-readManDa("output/limGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
+SuNat<-readManDa("output/natGWAS/GAPIT.Blink.survival.GWAS.Results.csv")
+SuLim<-readManDa("output/limGWAS/GAPIT.Blink.survival.GWAS.Results.csv")
 
-colosign<-brewer.pal(11,"RdYlGn")[c(3,2,1)]
-op<-par(mfrow=c(2,1),mar=c(1,5,3,3))
-colovec<-brewer.pal(12,"Paired")[1:2]
-ManhaPlot(AcNat,colovec,colosign,decalCHR=30000000,desiXax=1,ylimi=c(0,8))
+colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4])
+colosign<-brewer.pal(9,"YlOrRd")[c(4,6,8)]
+op<-par(mfrow=c(8,1),mar=c(1,5,3,0))
+#Acorn weight
+ManhaPlot(AcNat,colovec[1:2],colosign,
+          decalCHR=40000000,desiXax=1,ylimi=c(0,8))
 title(main="Acorn weight",font=2,cex.main=3)
-par(mar=c(3,5,1,3))
-colovec<-brewer.pal(12,"Paired")[3:4]
-ManhaPlot(AcLim,colovec,colosign,decalCHR=30000000,desiXax=0,ylimi=c(8,0))
+legend(-50000000,9,legend=c("Exposed","Protected"),xpd=TRUE,
+       pch=22,pt.cex=3,pt.lwd=4,cex=1.2,
+       pt.bg=colovec[c(1,3)],col=colovec[c(2,4)],bty="n",
+       x.intersp=0.4,y.intersp=1.6)
+legend(150000000,9,legend=c("P<0.01","P<0.001","P<0.0001"),xpd=TRUE,
+       pch=21,pt.cex=2,pt.lwd=1,cex=1.2,
+       pt.bg=colosign,col="black",bty="n",
+       x.intersp=0.4,y.intersp=1.2)
+par(mar=c(3,5,1,0))
+ManhaPlot(AcLim,colovec[3:4],colosign,
+          decalCHR=40000000,desiXax=0,ylimi=c(8,0))
+#Height
+par(mar=c(1,5,3,0))
+ManhaPlot(HeNat,colovec[1:2],colosign,
+          decalCHR=40000000,desiXax=1,ylimi=c(0,8))
+title(main="Height",font=2,cex.main=3)
+par(mar=c(3,5,1,0))
+ManhaPlot(HeLim,colovec[3:4],colosign,
+          decalCHR=40000000,desiXax=0,ylimi=c(8,0))
+#Powdery mildew
+par(mar=c(1,5,3,0))
+ManhaPlot(PMNat,colovec[1:2],colosign,
+          decalCHR=40000000,desiXax=1,ylimi=c(0,8))
+title(main="Powdery mildew",font=2,cex.main=3)
+par(mar=c(3,5,1,0))
+ManhaPlot(PMLim,colovec[3:4],colosign,
+          decalCHR=40000000,desiXax=0,ylimi=c(8,0))
+par(mar=c(1,5,3,0))
+ManhaPlot(SuNat,colovec[1:2],colosign,
+          decalCHR=40000000,desiXax=1,ylimi=c(0,8))
+title(main="Survival",font=2,cex.main=3)
+par(mar=c(3,5,1,0))
+ManhaPlot(SuLim,colovec[3:4],colosign,
+          decalCHR=40000000,desiXax=0,ylimi=c(8,0))
 par(op)
 
-#export 15 x 7 inches in .pdf
+#export 13.5 x 7 inches in .pdf
 
 
 
