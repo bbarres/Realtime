@@ -8,7 +8,7 @@
  collate  French_France.utf8
  ctype    French_France.utf8
  tz       Europe/Paris
- date     2022-08-23
+ date     2022-08-24
  rstudio  2022.07.1+554 Spotted Wakerobin (desktop)
  pandoc   NA
 
@@ -49,7 +49,7 @@
  graph4lg      * 1.6.0     2022-05-18 [1] CRAN (R 4.2.0)
  gridExtra       2.3       2017-09-09 [1] CRAN (R 4.2.0)
  gtable          0.3.0     2019-03-25 [1] CRAN (R 4.2.0)
- gtools          3.9.3     2022-07-11 [1] CRAN (R 4.2.1)
+ gtools        * 3.9.3     2022-07-11 [1] CRAN (R 4.2.1)
  hierfstat     * 0.5-11    2022-05-05 [1] CRAN (R 4.2.0)
  htmltools       0.5.3     2022-07-18 [1] CRAN (R 4.2.1)
  httpuv          1.6.5     2022-01-05 [1] CRAN (R 4.2.0)
@@ -80,6 +80,7 @@
  poppr         * 2.9.3     2021-09-07 [1] CRAN (R 4.2.0)
  promises        1.2.0.1   2021-02-11 [1] CRAN (R 4.2.0)
  purrr           0.3.4     2020-04-17 [1] CRAN (R 4.2.0)
+ qqman         * 0.1.8     2021-04-19 [1] CRAN (R 4.2.1)
  quadprog      * 1.5-8     2019-11-20 [1] CRAN (R 4.2.0)
  R.methodsS3     1.8.2     2022-06-13 [1] CRAN (R 4.2.0)
  R.oo            1.25.0    2022-06-12 [1] CRAN (R 4.2.0)
