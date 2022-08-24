@@ -7,7 +7,6 @@
 source("RealTime_load.R")
 #in order to load the results of the GWAS analyses, you need to run the 
 #RealTime_GWAS.R script before this script
-datMan<-read.csv("output/natGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
 
 
 ##############################################################################/
@@ -42,7 +41,6 @@ readManDa<-function(pathtoGWASrez) {
   return(datMan)
 }
 
-temp<-datMan[order(datMan$Chromosome,datMan$Position),]
 
 ##############################################################################/
 #function to plot a Manhattan plot####
@@ -53,7 +51,7 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
   datMan$posabsol<-datMan$decal+
     datMan$Position+
     (datMan$grpNum-1)*decalCHR
-  plot(datMan$posabsol,datMan$logp,pch=19,las=1,
+  plot(datMan$posabsol,datMan$logp,pch=19,las=1,font.axis=2,
        ylab=expression(-log[10](pval)),
        xaxt="n",bty="n",xlab="",ylim=ylimi,
        col=colovec[as.numeric(even(as.numeric(datMan$Chromosome)))+1])
@@ -67,11 +65,17 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
          datMan[datMan$signiCat=="<0.0001",]$logp,
          pch=19,col=colosign[3])
   if(desiXax==1){
-    axis(1,pos=-0.1,
+    axis(1,pos=-0.1,lwd=2,
          at=c(c(0,cumsum(tapply(datMan$Position,datMan$Chromosome,max))[1:14])+
                 tapply(datMan$Position,datMan$Chromosome,max)/2+
                 (0:14)*decalCHR),
-         lab=levels(datMan$Chromosome),las=2,hadj=1)
+         lab=levels(datMan$Chromosome),las=1,hadj=0.5,font=2)
+  } else {
+    axis(1,pos=-0.1,tcl=0.5,lwd=2,
+         at=c(c(0,cumsum(tapply(datMan$Position,datMan$Chromosome,max))[1:14])+
+                tapply(datMan$Position,datMan$Chromosome,max)/2+
+                (0:14)*decalCHR),
+         lab=NA)
   }
 
 }
@@ -81,19 +85,17 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
 #running the function to obtain a beautifull manhattan plot####
 ##############################################################################/
 
-
 AcNat<-readManDa("output/natGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
 AcLim<-readManDa("output/limGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
-
 
 colosign<-brewer.pal(11,"RdYlGn")[c(3,2,1)]
 op<-par(mfrow=c(2,1),mar=c(1,5,3,3))
 colovec<-brewer.pal(12,"Paired")[1:2]
-ManhaPlot(AcNat,colovec,colosign,decalCHR=10000000,desiXax=1,ylimi=c(0,8))
+ManhaPlot(AcNat,colovec,colosign,decalCHR=30000000,desiXax=1,ylimi=c(0,8))
 title(main="Acorn weight",font=2,cex.main=3)
 par(mar=c(3,5,1,3))
 colovec<-brewer.pal(12,"Paired")[3:4]
-ManhaPlot(AcLim,colovec,colosign,decalCHR=10000000,desiXax=0,ylimi=c(8,0))
+ManhaPlot(AcLim,colovec,colosign,decalCHR=30000000,desiXax=0,ylimi=c(8,0))
 par(op)
 
 #export 15 x 7 inches in .pdf
