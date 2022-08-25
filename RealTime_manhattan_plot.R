@@ -68,13 +68,13 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
          pch=21,bg=colosign[3],cex=1.5)
   axis(2,lwd=2,las=1)
   if(desiXax==1){
-    axis(1,pos=-0.2,lwd=2,cex.axis=1,
+    axis(1,lwd=2,cex.axis=1,
          at=c(c(0,cumsum(tapply(datMan$Position,datMan$Chromosome,max))[1:14])+
                 tapply(datMan$Position,datMan$Chromosome,max)/2+
                 (0:14)*decalCHR),
          lab=levels(datMan$Chromosome),las=1,hadj=0.5,padj=-0.5,font=2)
   } else {
-    axis(1,pos=-0.2,tcl=0.5,lwd=2,
+    axis(1,tcl=0.5,lwd=2,
          at=c(c(0,cumsum(tapply(datMan$Position,datMan$Chromosome,max))[1:14])+
                 tapply(datMan$Position,datMan$Chromosome,max)/2+
                 (0:14)*decalCHR),
@@ -94,8 +94,8 @@ HeNat<-readManDa("output/natGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
 HeLim<-readManDa("output/limGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
 PMNat<-readManDa("output/natGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
 PMLim<-readManDa("output/limGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
-SuNat<-readManDa("output/natGWAS/GAPIT.Blink.survival.GWAS.Results.csv")
-SuLim<-readManDa("output/limGWAS/GAPIT.Blink.survival.GWAS.Results.csv")
+SuNat<-readManDa("output/natGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
+SuLim<-readManDa("output/limGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
 
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4])
 colosign<-brewer.pal(9,"YlOrRd")[c(4,6,8)]
