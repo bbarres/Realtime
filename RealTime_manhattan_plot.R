@@ -74,12 +74,13 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
                 (0:14)*decalCHR),
          lab=levels(datMan$Chromosome),las=1,hadj=0.5,padj=-0.5,font=2)
   } else {
-    axis(1,tcl=0.5,lwd=2,
+    axis(3,lwd=2,
          at=c(c(0,cumsum(tapply(datMan$Position,datMan$Chromosome,max))[1:14])+
                 tapply(datMan$Position,datMan$Chromosome,max)/2+
                 (0:14)*decalCHR),
          lab=NA)
   }
+  box(lwd=2)
 
 }
 
@@ -97,50 +98,80 @@ PMLim<-readManDa("output/limGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
 SuNat<-readManDa("output/natGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
 SuLim<-readManDa("output/limGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
 
+#Figure for one trait
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4])
 colosign<-brewer.pal(9,"YlOrRd")[c(4,6,8)]
-op<-par(mfrow=c(8,1),mar=c(1,5,3,0))
+op<-par(mfrow=c(2,1),mar=c(1,5,3,0.5))
 #Acorn weight
 ManhaPlot(AcNat,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,8))
 title(main="Acorn weight",font=2,cex.main=3)
-legend(-50000000,9,legend=c("Exposed","Protected"),xpd=TRUE,
-       pch=22,pt.cex=3,pt.lwd=4,cex=1.2,
+legend(-50000000,8.7,legend=c("Exposed","Protected"),xpd=TRUE,
+       pch=22,pt.cex=4,pt.lwd=4,cex=1.3,
        pt.bg=colovec[c(1,3)],col=colovec[c(2,4)],bty="n",
-       x.intersp=0.4,y.intersp=1.6)
-legend(150000000,9,legend=c("P<0.01","P<0.001","P<0.0001"),xpd=TRUE,
+       x.intersp=0.5,y.intersp=1.6)
+legend(150000000,8.5,legend=c("P<0.01","P<0.001","P<0.0001"),xpd=TRUE,
        pch=21,pt.cex=2,pt.lwd=1,cex=1.2,
        pt.bg=colosign,col="black",bty="n",
-       x.intersp=0.4,y.intersp=1.2)
-par(mar=c(3,5,1,0))
+       x.intersp=0.4,y.intersp=1.1)
+par(mar=c(2.5,5,1.5,0.5))
 ManhaPlot(AcLim,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(8,0))
-#Height
-par(mar=c(1,5,3,0))
-ManhaPlot(HeNat,colovec[1:2],colosign,
-          decalCHR=40000000,desiXax=1,ylimi=c(0,8))
-title(main="Height",font=2,cex.main=3)
-par(mar=c(3,5,1,0))
-ManhaPlot(HeLim,colovec[3:4],colosign,
-          decalCHR=40000000,desiXax=0,ylimi=c(8,0))
+par(op)
+#export to .pdf 15 x 7 inches
+
+
+
+#Figure combined for the 4 traits
+colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4])
+colosign<-brewer.pal(9,"YlOrRd")[c(4,6,8)]
+op<-par(mfrow=c(8,1),mar=c(1,5,2.5,0.5))
+
+#survival
+ManhaPlot(SuNat,colovec[1:2],colosign,
+          decalCHR=40000000,desiXax=1,ylimi=c(0,11))
+title(main="Survival",font=2,cex.main=3)
+legend(-50000000,14.5,legend=c("Exposed","Protected"),xpd=TRUE,
+       pch=22,pt.cex=4,pt.lwd=4,cex=1.4,
+       pt.bg=colovec[c(1,3)],col=colovec[c(2,4)],bty="n",
+       x.intersp=0.9,y.intersp=0.5)
+legend(150000000,14.5,legend=c("Pcor<0.01","Pcor<0.001","Pcor<0.0001"),
+       xpd=TRUE,pch=21,pt.cex=2,pt.lwd=1,cex=1.4,
+       pt.bg=colosign,col="black",bty="n",
+       x.intersp=0.6,y.intersp=0.3)
+par(mar=c(2,5,1.5,0.5))
+ManhaPlot(SuLim,colovec[3:4],colosign,
+          decalCHR=40000000,desiXax=0,ylimi=c(11,0))
+
 #Powdery mildew
-par(mar=c(1,5,3,0))
+par(mar=c(1,5,2.5,0.5))
 ManhaPlot(PMNat,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,8))
 title(main="Powdery mildew",font=2,cex.main=3)
-par(mar=c(3,5,1,0))
+par(mar=c(2,5,1.5,0.5))
 ManhaPlot(PMLim,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(8,0))
-par(mar=c(1,5,3,0))
-ManhaPlot(SuNat,colovec[1:2],colosign,
-          decalCHR=40000000,desiXax=1,ylimi=c(0,8))
-title(main="Survival",font=2,cex.main=3)
-par(mar=c(3,5,1,0))
-ManhaPlot(SuLim,colovec[3:4],colosign,
-          decalCHR=40000000,desiXax=0,ylimi=c(8,0))
-par(op)
 
-#export 13.5 x 7 inches in .pdf
+#Height
+par(mar=c(1,5,2.5,0.5))
+ManhaPlot(HeNat,colovec[1:2],colosign,
+          decalCHR=40000000,desiXax=1,ylimi=c(0,8))
+title(main="Height",font=2,cex.main=3)
+par(mar=c(2,5,1.5,0.5))
+ManhaPlot(HeLim,colovec[3:4],colosign,
+          decalCHR=40000000,desiXax=0,ylimi=c(8,0))
+
+#Acorn weight
+par(mar=c(1,5,2.5,0.5))
+ManhaPlot(AcNat,colovec[1:2],colosign,
+          decalCHR=40000000,desiXax=1,ylimi=c(0,9))
+title(main="Acorn weight",font=2,cex.main=3)
+par(mar=c(2,5,1.5,0.5))
+ManhaPlot(AcLim,colovec[3:4],colosign,
+          decalCHR=40000000,desiXax=0,ylimi=c(9,0))
+
+par(op)
+#export 10 x 13 inches in .pdf
 
 
 
