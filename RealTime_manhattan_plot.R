@@ -128,46 +128,46 @@ colosign<-brewer.pal(9,"YlOrRd")[c(4,6,8)]
 op<-par(mfrow=c(8,1),mar=c(1,5,2.5,0.5))
 
 #survival
-ManhaPlot(SuNat,colovec[1:2],colosign,
+ManhaPlot(SuNat,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,11))
 title(main="Survival",font=2,cex.main=3)
-legend(-50000000,14.5,legend=c("Exposed","Protected"),xpd=TRUE,
+legend(-50000000,14.5,legend=c("Natural","Protected"),xpd=TRUE,
        pch=22,pt.cex=4,pt.lwd=4,cex=1.4,
-       pt.bg=colovec[c(1,3)],col=colovec[c(2,4)],bty="n",
+       pt.bg=colovec[c(3,1)],col=colovec[c(4,2)],bty="n",
        x.intersp=0.9,y.intersp=0.5)
 legend(150000000,14.5,legend=c("Pcor<0.01","Pcor<0.001","Pcor<0.0001"),
        xpd=TRUE,pch=21,pt.cex=2,pt.lwd=1,cex=1.4,
        pt.bg=colosign,col="black",bty="n",
        x.intersp=0.6,y.intersp=0.3)
 par(mar=c(2,5,1.5,0.5))
-ManhaPlot(SuLim,colovec[3:4],colosign,
+ManhaPlot(SuLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(11,0))
 
 #Powdery mildew
 par(mar=c(1,5,2.5,0.5))
-ManhaPlot(PMNat,colovec[1:2],colosign,
+ManhaPlot(PMNat,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,8))
 title(main="Powdery mildew",font=2,cex.main=3)
 par(mar=c(2,5,1.5,0.5))
-ManhaPlot(PMLim,colovec[3:4],colosign,
+ManhaPlot(PMLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(8,0))
 
 #Height
 par(mar=c(1,5,2.5,0.5))
-ManhaPlot(HeNat,colovec[1:2],colosign,
+ManhaPlot(HeNat,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,8))
 title(main="Height",font=2,cex.main=3)
 par(mar=c(2,5,1.5,0.5))
-ManhaPlot(HeLim,colovec[3:4],colosign,
+ManhaPlot(HeLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(8,0))
 
 #Acorn weight
 par(mar=c(1,5,2.5,0.5))
-ManhaPlot(AcNat,colovec[1:2],colosign,
+ManhaPlot(AcNat,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,9))
 title(main="Acorn weight",font=2,cex.main=3)
 par(mar=c(2,5,1.5,0.5))
-ManhaPlot(AcLim,colovec[3:4],colosign,
+ManhaPlot(AcLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(9,0))
 
 par(op)
