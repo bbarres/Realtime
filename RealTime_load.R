@@ -62,28 +62,28 @@ snp.dat<-drop.levels(snp.dat)
 #Loading the necessary data sets for GWAS analyses####
 ##############################################################################/
 
-AllTrait2<-snp.dat[snp.dat$family_simp!="PAR" & snp.dat$family_simp!="CC",]
-AllTrait2<-AllTrait2[,c("treat","Sample_ID","oid4_09","oid5_10",
+AllTrait<-snp.dat[snp.dat$family_simp!="PAR" & snp.dat$family_simp!="CC",]
+AllTrait<-AllTrait[,c("treat","Sample_ID","oid4_09","oid5_10",
                         "oid5_11","oid4_12","oid2_13","oid_moy",
                         "H12v","pgland","statut10")]
-colnames(AllTrait2)<-c("treat","Taxa","oid4_09","oid5_10","oid5_11",
+#rename the columns with more accurate names
+colnames(AllTrait)<-c("treat","Taxa","oid4_09","oid5_10","oid5_11",
                        "oid4_12","oid2_13","Powdery mildew","Height",
                        "Acorn weight","Survival")
-NatTrait<-AllTrait2[AllTrait2$treat=="exp",2:11]
-LimTrait<-AllTrait2[AllTrait2$treat=="low",2:11]
+NatTrait<-AllTrait[AllTrait$treat=="exp",2:11]
+LimTrait<-AllTrait[AllTrait$treat=="low",2:11]
 
 
-
-#to remove
-AllTrait<-read.table("data/pheno_final.txt",header=TRUE)
-colnames(AllTrait)[11:14]<-c("Powdery mildew","Height",
-                             "Acorn weight","Dead or Alive")
-#we remove the individuals without SNP data
-AllTrait<-AllTrait[AllTrait$SNPage==1 & !is.na(AllTrait$SNPage) &
-                     AllTrait$Quality_SNPage==1,]
-NatTrait<-AllTrait[AllTrait$treat=="exp",5:14]
-LimTrait<-AllTrait[AllTrait$treat=="low",5:14]
-#end remove
+# #to remove
+# AllTrait<-read.table("data/pheno_final.txt",header=TRUE)
+# colnames(AllTrait)[11:14]<-c("Powdery mildew","Height",
+#                              "Acorn weight","Dead or Alive")
+# #we remove the individuals without SNP data
+# AllTrait<-AllTrait[AllTrait$SNPage==1 & !is.na(AllTrait$SNPage) &
+#                      AllTrait$Quality_SNPage==1,]
+# NatTrait<-AllTrait[AllTrait$treat=="exp",5:14]
+# LimTrait<-AllTrait[AllTrait$treat=="low",5:14]
+# #end remove
 
 
 #loading the natural treatment genotype data

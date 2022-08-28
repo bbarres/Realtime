@@ -23,9 +23,9 @@ plot(dispo$coord_X,dispo$coord_Y,bty="n",ann=FALSE,axes=FALSE,
      bg=colovec[as.numeric(dispo$family_simp)])
 text(x=c(20,620,1220,20,620,1220,20,620,1220),
      y=c(760,760,760,455,455,455,145,145,145),
-     labels=c("A1 / nat","A2 / lim","A3 / renf",
-              "B1 / renf","B2 / nat","B3 / lim",
-              "C1 / lim", "C2 / renf","C3 / nat"),
+     labels=c("A1 / natural","A2 / protected","A3 / natural",
+              "B1 / natural","B2 / natural","B3 / protected",
+              "C1 / protected", "C2 / natural","C3 / natural"),
      xpd=TRUE,cex=2,font=2,adj=c(0,0))
 legend(x=1300,y=1050,horiz=FALSE,x.intersp=0.2,xpd=TRUE,pt.cex=2,
        text.width=seq(from=0,to=1,by=0.06),bty="n",ncol=4,
