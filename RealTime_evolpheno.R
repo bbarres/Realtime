@@ -166,8 +166,8 @@ op<-par(mfrow=c(3,1),mar=c(4.1,5.1,2.1,1.1))
 #Figure A
 matplot(t(survEv),type="b",ylim=c(0,100),las=1,
         col=colovec[as.numeric(survEv.treat)],lwd=2,
-        lty=as.numeric(survEv.treat),
-        pch=c(0,15,1,2,3,16,17,5,6),
+        lty=as.numeric(survEv.treat),bg="white",
+        pch=c(22,19,22,22,22,19,19,22,22),
         xaxt="n",yaxt="n",bty="n",
         ylab="Percentage of survival",xlab="Year",
         font.lab=2,cex.lab=2,cex=1.8)
@@ -175,12 +175,10 @@ axis(1,lwd=2,cex.axis=1.5,at=c(1:dim(survEv)[2]),
      lab=colnames(survEv),las=1,font=2)
 axis(2,lwd=2,las=1,font=2,cex.axis=1.5)
 box(lwd=2)
-legend(1,70,legend=rep(NA,6),title="Natural\ntreatment",title.adj=0,
-       col=colovec[1],lty=1,pch=c(22,21,24,3,23,25),pt.bg="white",
-       bty="n",cex=1.5,title.cex=1.5,y.intersp=0.65,x.intersp=0.5,lwd=2)
-legend(3,70,legend=rep(NA,3),title="Protected\ntreatment",title.adj=0,
-       col=colovec[2],lty=2,pch=c(15,16,17),pt.bg="white",
-       bty="n",cex=1.5,title.cex=1.5,y.intersp=0.65,x.intersp=0.5,lwd=2)
+legend(1.5,45,legend=c("Natural treatment","Protected treatment"),
+       col=colovec,lty=c(1,2),pch=c(22,19),pt.bg="white",
+       bty="n",cex=1.8,y.intersp=0.65,x.intersp=0.5,lwd=2)
+
 
 #Figure B
 graf<-barplot(temp1$mean,density=c(-1,20),angle=c(0,60),border=NA,
@@ -230,10 +228,9 @@ axis(1,lwd=2,cex.axis=1.5,at=c(2009:2017),
      lab=colnames(survEv),las=1,font=2)
 axis(2,lwd=2,las=1,font=2,cex.axis=1.5)
 box(lwd=2)
-legend(2009.5,15,legend=c("Natural treatment","Protected treatment"),
+legend(2009.8,18,legend=c("Natural treatment","Protected treatment"),
        col=colovec,lty=c(1,2),pch=c(22,19),pt.bg="white",
-       bty="n",cex=1.5,title.cex=1.5,y.intersp=0.65,x.intersp=0.5,lwd=2)
-
+       bty="n",cex=1.8,y.intersp=0.65,x.intersp=0.5,lwd=2)
 par(op)
 #export to .pdf 6 x 14 portrait
 
