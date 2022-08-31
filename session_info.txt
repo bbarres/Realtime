@@ -8,7 +8,7 @@
  collate  French_France.utf8
  ctype    French_France.utf8
  tz       Europe/Paris
- date     2022-08-30
+ date     2022-08-31
  rstudio  2022.07.1+554 Spotted Wakerobin (desktop)
  pandoc   NA
 
@@ -68,6 +68,7 @@
  permute        0.9-7     2022-01-27 [1] CRAN (R 4.2.0)
  pillar         1.8.0     2022-07-18 [1] CRAN (R 4.2.1)
  pkgconfig      2.0.3     2019-09-22 [1] CRAN (R 4.2.0)
+ plotrix      * 3.8-2     2021-09-08 [1] CRAN (R 4.2.0)
  plyr           1.8.7     2022-03-24 [1] CRAN (R 4.2.0)
  png            0.1-7     2013-12-03 [1] CRAN (R 4.2.0)
  polysat        1.7-6     2021-12-08 [1] CRAN (R 4.2.0)
@@ -99,6 +100,7 @@
  stringr      * 1.4.0     2019-02-10 [1] CRAN (R 4.2.0)
  terra          1.6-3     2022-07-25 [1] CRAN (R 4.2.1)
  tibble         3.1.8     2022-07-22 [1] CRAN (R 4.2.1)
+ tidyr        * 1.2.0     2022-02-01 [1] CRAN (R 4.2.0)
  tidyselect     1.1.2     2022-02-21 [1] CRAN (R 4.2.0)
  utf8           1.2.2     2021-07-24 [1] CRAN (R 4.2.0)
  vctrs          0.4.1     2022-04-13 [1] CRAN (R 4.2.0)

@@ -86,12 +86,16 @@ plotCI(x=graf,y=temp1$mean,
        ui=temp1$mean+temp2$sd,
        li=temp1$mean,
        pch=NA,lwd=2,add=TRUE)
+#for cosmetic reason, we superimpose again the barplot
+barplot(temp1$mean,
+        col=colovec,ylim=c(-1,105),ylab="Percentage of infection",
+        cex.axis=1,cex.lab=1.5,las=1,yaxt="n",bty="n",border=NA,
+        space=c(0.1,0.1,rep(c(1,0.1),times=8)),font.lab=2,add=TRUE)
 
-legend(4,75,legend=c("Based on loss of efficacy",
-                     "Based on PPP use",
-                     "Randomly"),
-       pch=15,col=thecol,bg=thecol,bty="n",cex=1.3,pt.cex=1.4,xpd=TRUE,
-       y.intersp=1.8)
+legend(-1,103,legend=c("Natural treatment",
+                     "Protected treatment"),
+       pch=15,col=colovec,bg=colovec,bty="n",cex=1.3,
+       pt.cex=1.4,xpd=TRUE,y.intersp=1.5,x.intersp=0.5)
 
 
 ##############################################################################/
