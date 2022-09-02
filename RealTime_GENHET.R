@@ -401,6 +401,42 @@ par(op)
 #export to .pdf 10 x 10 inches
 
 
+##############################################################################/
+#Comparison of mean and variance of PHt####
+##############################################################################/
+
+HetVivMort<-read.table(file="data/HetVivMort.txt",sep="\t",
+                       header=TRUE)
+HetVivMort$vivmor<-as.factor(HetVivMort$vivmor)
+
+VivMortGlob<-HetVivMort[HetVivMort$fam=="Global",]
+DoANat<-VivMortGlob[VivMortGlob$moda=="exp",]
+DoAPrt<-VivMortGlob[VivMortGlob$moda=="low",]
+#looking at the distribution
+plot(density(DoANat$PHt))
+qqnorm(DoANat$PHt)
+qqline(DoANat$PHt)
+#tests for normality
+shapiro.test(DoANat$PHt)
+ks.test(DoANat$PHt,'pnorm')
+#comparison of mean PHt between Dead and Alive
+wilcox.test(PHt~vivmor,data=DoANat,exact=FALSE)
+#comparison of the variance between Dead and Alive
+fligner.test(PHt~vivmor,data=DoANat)
+
+#looking at the distribution
+plot(density(DoAPrt$PHt))
+qqnorm(DoAPrt$PHt)
+qqline(DoAPrt$PHt)
+shapiro.test(DoAPrt$PHt)
+ks.test(DoAPrt$PHt,'pnorm')
+#comparison of mean PHt between Dead and Alive
+wilcox.test(PHt~vivmor,data=DoAPrt,exact=FALSE)
+#comparison of the variance between Dead and Alive
+fligner.test(PHt~vivmor,data=DoAPrt)
+
+
+
 
 
 
