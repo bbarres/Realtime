@@ -414,7 +414,9 @@ DoANat<-VivMortGlob[VivMortGlob$moda=="exp",]
 DoAPrt<-VivMortGlob[VivMortGlob$moda=="low",]
 
 #looking at the distribution
-plot(density(DoANat$PHt))
+plot(density(DoANat$PHt),main="Natural treatment")
+lines(density(DoANat[DoANat$vivmor=="0",]$PHt),col="red")
+lines(density(DoANat[DoANat$vivmor=="1",]$PHt),col="blue")
 qqnorm(DoANat$PHt)
 qqline(DoANat$PHt)
 #tests for normality
@@ -424,11 +426,17 @@ ks.test(DoANat$PHt,'pnorm')
 wilcox.test(PHt~vivmor,data=DoANat,exact=FALSE)
 #comparison of the variance between Dead and Alive
 fligner.test(PHt~vivmor,data=DoANat)
+mean(DoANat[DoANat$vivmor=="0",]$PHt)
+sqrt(var(DoANat[DoANat$vivmor=="0",]$PHt))
 var(DoANat[DoANat$vivmor=="0",]$PHt)
+mean(DoANat[DoANat$vivmor=="1",]$PHt)
+sqrt(var(DoANat[DoANat$vivmor=="1",]$PHt))
 var(DoANat[DoANat$vivmor=="1",]$PHt)
 
 #looking at the distribution
-plot(density(DoAPrt$PHt))
+plot(density(DoAPrt$PHt),main="Protected treatment")
+lines(density(DoAPrt[DoAPrt$vivmor=="0",]$PHt),col="red")
+lines(density(DoAPrt[DoAPrt$vivmor=="1",]$PHt),col="blue")
 qqnorm(DoAPrt$PHt)
 qqline(DoAPrt$PHt)
 shapiro.test(DoAPrt$PHt)
@@ -437,7 +445,11 @@ ks.test(DoAPrt$PHt,'pnorm')
 wilcox.test(PHt~vivmor,data=DoAPrt,exact=FALSE)
 #comparison of the variance between Dead and Alive
 fligner.test(PHt~vivmor,data=DoAPrt)
+mean(DoAPrt[DoAPrt$vivmor=="0",]$PHt)
+sqrt(var(DoAPrt[DoAPrt$vivmor=="0",]$PHt))
 var(DoAPrt[DoAPrt$vivmor=="0",]$PHt)
+mean(DoAPrt[DoAPrt$vivmor=="1",]$PHt)
+sqrt(var(DoAPrt[DoAPrt$vivmor=="1",]$PHt))
 var(DoAPrt[DoAPrt$vivmor=="1",]$PHt)
 
 
