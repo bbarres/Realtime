@@ -412,6 +412,7 @@ HetVivMort$vivmor<-as.factor(HetVivMort$vivmor)
 VivMortGlob<-HetVivMort[HetVivMort$fam=="Global",]
 DoANat<-VivMortGlob[VivMortGlob$moda=="exp",]
 DoAPrt<-VivMortGlob[VivMortGlob$moda=="low",]
+
 #looking at the distribution
 plot(density(DoANat$PHt))
 qqnorm(DoANat$PHt)
@@ -423,6 +424,8 @@ ks.test(DoANat$PHt,'pnorm')
 wilcox.test(PHt~vivmor,data=DoANat,exact=FALSE)
 #comparison of the variance between Dead and Alive
 fligner.test(PHt~vivmor,data=DoANat)
+var(DoANat[DoANat$vivmor=="0",]$PHt)
+var(DoANat[DoANat$vivmor=="1",]$PHt)
 
 #looking at the distribution
 plot(density(DoAPrt$PHt))
@@ -434,7 +437,8 @@ ks.test(DoAPrt$PHt,'pnorm')
 wilcox.test(PHt~vivmor,data=DoAPrt,exact=FALSE)
 #comparison of the variance between Dead and Alive
 fligner.test(PHt~vivmor,data=DoAPrt)
-
+var(DoAPrt[DoAPrt$vivmor=="0",]$PHt)
+var(DoAPrt[DoAPrt$vivmor=="1",]$PHt)
 
 
 
