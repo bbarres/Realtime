@@ -161,7 +161,7 @@ legend(2009.5,10,legend=c("Natural treatment","Protected treatment"),
 #Figure combining the 3 plot of phenotypic traits evolution: portrait####
 ##############################################################################/
 
-
+pdf(file="output/Figure_phenevol_port.pdf",width=6,height=14)
 op<-par(mfrow=c(3,1),mar=c(4.1,5.1,2.1,1.1))
 #Figure A
 matplot(t(survEv),type="b",ylim=c(0,100),las=1,
@@ -177,8 +177,7 @@ axis(2,lwd=2,las=1,font=2,cex.axis=1.5)
 box(lwd=2)
 legend(1.5,45,legend=c("Natural treatment","Protected treatment"),
        col=colovec,lty=c(1,2),pch=c(22,19),pt.bg="white",
-       bty="n",cex=1.8,y.intersp=0.65,x.intersp=0.5,lwd=2)
-
+       bty="n",cex=1.8,y.intersp=1,x.intersp=0.5,lwd=2)
 
 #Figure B
 graf<-barplot(temp1$mean,density=c(-1,20),angle=c(0,60),border=NA,
@@ -204,7 +203,7 @@ barplot(temp1$mean,density=c(-1,20),angle=c(0,60),border=colovec,
         space=c(0,0.25,rep(c(1,0.25),times=8)),font.lab=2,add=TRUE)
 legend(-1,105,legend=c("Natural treatment","Protected treatment"),
        fill=colovec,density=c(-1,20),angle=c(0,60),bty="n",border=colovec,
-       cex=1.5,y.intersp=0.8,x.intersp=0.5)
+       cex=1.8,y.intersp=1,x.intersp=0.5)
 par(lwd=1)
 
 #Figure C
@@ -228,10 +227,11 @@ axis(1,lwd=2,cex.axis=1.5,at=c(2009:2017),
      lab=colnames(survEv),las=1,font=2)
 axis(2,lwd=2,las=1,font=2,cex.axis=1.5)
 box(lwd=2)
-legend(2009.8,18,legend=c("Natural treatment","Protected treatment"),
+legend(2009.8,15,legend=c("Natural treatment","Protected treatment"),
        col=colovec,lty=c(1,2),pch=c(22,19),pt.bg="white",
-       bty="n",cex=1.8,y.intersp=0.65,x.intersp=0.5,lwd=2)
+       bty="n",cex=1.8,y.intersp=1,x.intersp=0.5,lwd=2)
 par(op)
+dev.off()
 #export to .pdf 6 x 14 portrait
 
 
@@ -239,7 +239,7 @@ par(op)
 #Figure combining the 3 plot of phenotypic traits evolution: landscape####
 ##############################################################################/
 
-pdf(file="output/truc.pdf",width=18,height=6)
+pdf(file="output/Figure_phenevol_land.pdf",width=18,height=6)
 op<-par(mfrow=c(1,3),mar=c(4.1,5.1,2.1,1.1))
 #Figure A
 matplot(t(survEv),type="b",ylim=c(0,100),las=1,
