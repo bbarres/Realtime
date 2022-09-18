@@ -57,14 +57,14 @@ for (i in 1:dim(RezNatGAPIT)[1]) {
           col=brewer.pal(9,"Set1")[c(6,3,2)],
           xlab=RezNatGAPIT$SNP[i],
           ylab="Powdery mildew note",main="Powdery mildew")
-  graf<-barplot(as.data.frame(table(temp2$`Dead or Alive`,
+  graf<-barplot(as.data.frame(table(temp2$`Survival`,
                                     temp2[,2]))$Freq,
                 col=brewer.pal(12,"Set3")[6:7],las=1,
                 space=c(0.1,rep(c(0.1,0.9),2),0.1),
-                main="Dead or Alive",xlab=RezNatGAPIT$SNP[i])
+                main="Survival",xlab=RezNatGAPIT$SNP[i])
   #abline(h=c(50,100,200,300),col=grey(0.8,0.8),lwd=2,lty=1)
   axis(1,at=(graf[c(1,3,5)]+graf[c(2,4,6)])/2,
-       labels=colnames(table(temp2$`Dead or Alive`,
+       labels=colnames(table(temp2$`Survival`,
                              temp2[,2])))
   box(bty="o",lwd=1)
   par(op)
@@ -89,13 +89,13 @@ for (i in 1:dim(RezNatGAPIT)[1]) {
           col=brewer.pal(12,"Set3")[7],sep=":",las=1,side="right",
           frame.plot=FALSE,add=TRUE)
   box(bty="o",lwd=1)
-  graf<-barplot(proportions(table(temp2$`Dead or Alive`,
+  graf<-barplot(proportions(table(temp2$`Survival`,
                                   temp2[,2]),margin=2)[1,]*100,
                 col=brewer.pal(12,"Set3")[6],las=1,space=1,
                 ylim=c(0,100),names.arg="",
                 main="Exposed death rate")
   axis(1,at=graf,
-       labels=paste(colnames(table(temp2$`Dead or Alive`,temp2[,2])),
+       labels=paste(colnames(table(temp2$`Survival`,temp2[,2])),
                     " (n=",table(temp2[,2]),")",
                     sep=""))
   box(bty="o",lwd=1)
@@ -113,13 +113,13 @@ for (i in 1:dim(RezNatGAPIT)[1]) {
           col=brewer.pal(12,"Set3")[7],sep=":",las=1,side="right",
           frame.plot=FALSE,add=TRUE)
   box(bty="o",lwd=1)
-  grafb<-barplot(proportions(table(temp3$`Dead or Alive`,
+  grafb<-barplot(proportions(table(temp3$`Survival`,
                                    temp3[,2]),margin=2)[1,]*100,
                  col=brewer.pal(12,"Set3")[6],las=1,space=1,
                  ylim=c(0,100),names.arg="",
                  main="Protected death rate")
   axis(1,at=grafb,
-       labels=paste(colnames(table(temp3$`Dead or Alive`,temp3[,2])),
+       labels=paste(colnames(table(temp3$`Survival`,temp3[,2])),
                     " (n=",table(temp3[,2]),")",
                     sep=""))
   box(bty="o",lwd=1)
@@ -159,14 +159,14 @@ for (i in 1:dim(RezLimGAPIT)[1]) {
           col=brewer.pal(9,"Set1")[c(6,3,2)],
           xlab=RezLimGAPIT$SNP[i],
           ylab="Powdery mildew note",main="Powdery mildew")
-  graf<-barplot(as.data.frame(table(temp3$`Dead or Alive`,
+  graf<-barplot(as.data.frame(table(temp3$`Survival`,
                                     temp3[,2]))$Freq,
                 col=brewer.pal(12,"Set3")[6:7],las=1,
                 space=c(0.1,rep(c(0.1,0.9),2),0.1),
-                main="Dead or Alive",xlab=RezLimGAPIT$SNP[i])
+                main="Survival",xlab=RezLimGAPIT$SNP[i])
   #abline(h=c(50,100,200,300),col=grey(0.8,0.8),lwd=2,lty=1)
   axis(1,at=(graf[c(1,3,5)]+graf[c(2,4,6)])/2,
-       labels=colnames(table(temp3$`Dead or Alive`,
+       labels=colnames(table(temp3$`Survival`,
                              temp3[,2])))
   box(bty="o",lwd=1)
   par(op)
@@ -191,13 +191,13 @@ for (i in 1:dim(RezLimGAPIT)[1]) {
           col=brewer.pal(12,"Set3")[7],sep=":",las=1,side="right",
           frame.plot=FALSE,add=TRUE)
   box(bty="o",lwd=1)
-  graf<-barplot(proportions(table(temp2$`Dead or Alive`,
+  graf<-barplot(proportions(table(temp2$`Survival`,
                                   temp2[,2]),margin=2)[1,]*100,
                 col=brewer.pal(12,"Set3")[6],las=1,space=1,
                 ylim=c(0,100),names.arg="",
                 main="Exposed death rate")
   axis(1,at=graf,
-       labels=paste(colnames(table(temp2$`Dead or Alive`,temp2[,2])),
+       labels=paste(colnames(table(temp2$`Survival`,temp2[,2])),
                     " (n=",table(temp2[,2]),")",
                     sep=""))
   box(bty="o",lwd=1)
@@ -215,13 +215,13 @@ for (i in 1:dim(RezLimGAPIT)[1]) {
           col=brewer.pal(12,"Set3")[7],sep=":",las=1,side="right",
           frame.plot=FALSE,add=TRUE)
   box(bty="o",lwd=1)
-  grafb<-barplot(proportions(table(temp3$`Dead or Alive`,
+  grafb<-barplot(proportions(table(temp3$`Survival`,
                                    temp3[,2]),margin=2)[1,]*100,
                  col=brewer.pal(12,"Set3")[6],las=1,space=1,
                  ylim=c(0,100),names.arg="",
                  main="Protected death rate")
   axis(1,at=grafb,
-       labels=paste(colnames(table(temp3$`Dead or Alive`,temp3[,2])),
+       labels=paste(colnames(table(temp3$`Survival`,temp3[,2])),
                     " (n=",table(temp3[,2]),")",
                     sep=""))
   box(bty="o",lwd=1)
@@ -232,7 +232,7 @@ for (i in 1:dim(RezLimGAPIT)[1]) {
 
 
 ##############################################################################/
-#plot for the SNP significant for Dead or Alive trait####
+#plot for the SNP significant for Survival trait####
 ##############################################################################/
 
 #code for plotting all the significant SNP
@@ -269,34 +269,34 @@ vioplot(temp2$`Powdery mildew`~temp2[,2],boxwex=0.3,las=1,
         col=brewer.pal(9,"Set1")[c(6,3,2)],
         xlab=RezNatGAPIT$SNP[14],
         ylab="Powdery mildew note",main="Powdery mildew")
-graf<-barplot(as.data.frame(table(temp2$`Dead or Alive`,
+graf<-barplot(as.data.frame(table(temp2$`Survival`,
                                   temp2[,2]))$Freq,
               col=brewer.pal(12,"Set3")[6:7],las=1,
               space=c(0.1,rep(c(0.1,0.9),2),0.1),
-              main="Dead or Alive",xlab=RezNatGAPIT$SNP[14])
+              main="Survival",xlab=RezNatGAPIT$SNP[14])
 #abline(h=c(50,100,200,300),col=grey(0.8,0.8),lwd=2,lty=1)
 axis(1,at=(graf[c(1,3,5)]+graf[c(2,4,6)])/2,
-     labels=colnames(table(temp2$`Dead or Alive`,
+     labels=colnames(table(temp2$`Survival`,
                            temp2[,2])))
 box(bty="o",lwd=1)
 
-graf<-barplot(proportions(table(temp2$`Dead or Alive`,
+graf<-barplot(proportions(table(temp2$`Survival`,
                                 temp2[,2]),margin=2)[1,]*100,
               col=brewer.pal(12,"Set3")[6],las=1,space=1,
               ylim=c(0,100),names.arg="",
               main="Exposed death rate")
 axis(1,at=graf,
-     labels=paste(colnames(table(temp2$`Dead or Alive`,temp2[,2])),
+     labels=paste(colnames(table(temp2$`Survival`,temp2[,2])),
                   " (n=",table(temp2[,2]),")",
                   sep=""))
 box(bty="o",lwd=1)
-grafb<-barplot(proportions(table(temp3$`Dead or Alive`,
+grafb<-barplot(proportions(table(temp3$`Survival`,
                                  temp3[,2]),margin=2)[1,]*100,
                col=brewer.pal(12,"Set3")[6],las=1,space=1,
                ylim=c(0,100),names.arg="",
                main="Protected death rate")
 axis(1,at=grafb,
-     labels=paste(colnames(table(temp3$`Dead or Alive`,temp3[,2])),
+     labels=paste(colnames(table(temp3$`Survival`,temp3[,2])),
                   " (n=",table(temp3[,2]),")",
                   sep=""))
 box(bty="o",lwd=1)
@@ -337,14 +337,14 @@ vioplot(temp3$`Powdery mildew`~temp3[,2],boxwex=0.3,las=1,
         col=brewer.pal(9,"Set1")[c(6,3,2)],
         xlab=RezLimGAPIT$SNP[6],
         ylab="Powdery mildew note",main="Powdery mildew")
-graf<-barplot(as.data.frame(table(temp3$`Dead or Alive`,
+graf<-barplot(as.data.frame(table(temp3$`Survival`,
                                   temp3[,2]))$Freq,
               col=brewer.pal(12,"Set3")[6:7],las=1,
               space=c(0.1,rep(c(0.1,0.9),2),0.1),
-              main="Dead or Alive",xlab=RezLimGAPIT$SNP[6])
+              main="Survival",xlab=RezLimGAPIT$SNP[6])
 #abline(h=c(50,100,200,300),col=grey(0.8,0.8),lwd=2,lty=1)
 axis(1,at=(graf[c(1,3,5)]+graf[c(2,4,6)])/2,
-     labels=colnames(table(temp3$`Dead or Alive`,
+     labels=colnames(table(temp3$`Survival`,
                            temp3[,2])))
 box(bty="o",lwd=1)
 par(op)
@@ -366,13 +366,13 @@ vioplot(temp2[temp2[,11]==1,traiinterest]~temp2[temp2[,11]==1,2],
         col=brewer.pal(12,"Set3")[7],sep=":",las=1,side="right",
         frame.plot=FALSE,add=TRUE)
 box(bty="o",lwd=1)
-graf<-barplot(proportions(table(temp2$`Dead or Alive`,
+graf<-barplot(proportions(table(temp2$`Survival`,
                                 temp2[,2]),margin=2)[1,]*100,
               col=brewer.pal(12,"Set3")[6],las=1,space=1,
               ylim=c(0,100),names.arg="",
               main="Exposed death rate")
 axis(1,at=graf,
-     labels=paste(colnames(table(temp2$`Dead or Alive`,temp2[,2])),
+     labels=paste(colnames(table(temp2$`Survival`,temp2[,2])),
                   " (n=",table(temp2[,2]),")",
                   sep=""))
 box(bty="o",lwd=1)
@@ -390,13 +390,13 @@ vioplot(temp3[temp3[,11]==1,traiinterest]~temp3[temp3[,11]==1,2],
         col=brewer.pal(12,"Set3")[7],sep=":",las=1,side="right",
         frame.plot=FALSE,add=TRUE)
 box(bty="o",lwd=1)
-grafb<-barplot(proportions(table(temp3$`Dead or Alive`,
+grafb<-barplot(proportions(table(temp3$`Survival`,
                                  temp3[,2]),margin=2)[1,]*100,
                col=brewer.pal(12,"Set3")[6],las=1,space=1,
                ylim=c(0,100),names.arg="",
                main="Protected death rate")
 axis(1,at=grafb,
-     labels=paste(colnames(table(temp3$`Dead or Alive`,temp3[,2])),
+     labels=paste(colnames(table(temp3$`Survival`,temp3[,2])),
                   " (n=",table(temp3[,2]),")",
                   sep=""))
 box(bty="o",lwd=1)
