@@ -232,7 +232,7 @@ for (i in 1:dim(RezLimGAPIT)[1]) {
 
 
 ##############################################################################/
-#plot for the SNP significant for Survival trait####
+#plot for the SNP significant for Survival and Powdery mildew trait####
 ##############################################################################/
 
 #code for plotting all the significant SNP
@@ -243,13 +243,13 @@ tempb<-tempb[,c(1,48:866)]
 
 #for the Exposed treatment
 temp2<-temp[,colnames(temp)=="Sample_ID" | 
-              colnames(temp)==RezNatGAPIT$SNP[14]]
+              colnames(temp)==RezNatGAPIT$SNP[12]]
 temp2<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
 #temp2[,2]<-as.factor(temp2[,2])
-traiinterest<-substring(RezNatGAPIT[14,6],7)
+traiinterest<-substring(RezNatGAPIT[12,6],7)
 #data of the protected treatment
 temp3<-tempb[,colnames(tempb)=="Sample_ID" | 
-               colnames(tempb)==RezNatGAPIT$SNP[14]]
+               colnames(tempb)==RezNatGAPIT$SNP[12]]
 temp3<-merge(temp3,LimTrait,by.x="Sample_ID",by.y="Taxa")
 #temp3[,2]<-as.factor(temp3[,2])
 
