@@ -41,6 +41,8 @@ RezNatGAPIT<-read.table("GAPIT.Filter_GWAS_results.txt",header=TRUE,
 RezNatGAPIT$SNP<-str_replace_all(RezNatGAPIT$SNP,"~","_")
 RezNatGAPIT$SNP<-str_replace_all(RezNatGAPIT$SNP,"-","_")
 RezNatGAPIT$SNP<-str_replace_all(RezNatGAPIT$SNP,fixed("+"),"_")
+#one SNP is not significant considering Pcor<0.01 criteria, so we remove it
+RezNatGAPIT<-RezNatGAPIT[-3,]
 setwd(nomTemp)
 write.table(RezNatGAPIT,file="data/RezNatGAPIT.txt",sep="\t",
             quote=FALSE,row.names=FALSE)
@@ -87,6 +89,8 @@ RezLimGAPIT<-read.table("GAPIT.Filter_GWAS_results.txt",header=TRUE,
 RezLimGAPIT$SNP<-str_replace_all(RezLimGAPIT$SNP,"~","_")
 RezLimGAPIT$SNP<-str_replace_all(RezLimGAPIT$SNP,"-","_")
 RezLimGAPIT$SNP<-str_replace_all(RezLimGAPIT$SNP,fixed("+"),"_")
+#one SNP is not significant considering Pcor<0.01 criteria, so we remove it
+RezLimGAPIT<-RezLimGAPIT[-5,]
 setwd(nomTemp)
 write.table(RezLimGAPIT,file="data/RezLimGAPIT.txt",sep="\t",
             quote=FALSE,row.names=FALSE)
