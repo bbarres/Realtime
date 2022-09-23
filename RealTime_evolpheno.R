@@ -314,5 +314,34 @@ dev.off()
 
 
 ##############################################################################/
+#Figure of the distribution of height at the end of the experiment####
+##############################################################################/
+
+distriHeight<-dispo[dispo$family_simp!="CC" & dispo$family_simp!="hd" & 
+                      !is.na(dispo$an_mort) & dispo$an_mort!="g" & 
+                      dispo$family_simp!="26",
+                    c("Sample_ID","bloc","PU","treat","family_simp","H09v",
+                      "H10v","H11v","H12v","H14v","H15v","H16v","H17v")]
+distriHeight$family_simp<-drop.levels(distriHeight$family_simp)
+levels(distriHeight$family_simp)[1:2]<-c("01","09")
+#spliting the data set by treatment
+disHeigNat<-distriHeight[distriHeight$treat=="exp",]
+disHeigPro<-distriHeight[distriHeight$treat=="low",]
+
+#defining a color vector
+colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4])
+
+op<-par(mfrow=c(1,2),mar=c(4,4,3,0.1))
+boxplot(disHeigNat$H17v~disHeigNat$family_simp,col=colovec[4],boxwex=0.6,
+        las=1,main="Natural treatment",xlab="Families",ylab="Height (cm)")
+abline(h=mean(disHeigNat$H17v,na.rm=TRUE),col=colovec[3],lwd=3,lty=2)
+boxplot(disHeigPro$H17v~disHeigPro$family_simp,col=colovec[2],boxwex=0.6,
+        las=1,main="Protected treatment",xlab="Families",ylab="")
+abline(h=mean(disHeigPro$H17v,na.rm=TRUE),col=colovec[1],lwd=3,lty=2)
+par(op)
+#export to .pdf 14 x 6 inches
+
+
+##############################################################################/
 #END
 ##############################################################################/
