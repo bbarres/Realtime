@@ -329,16 +329,27 @@ disHeigNat<-distriHeight[distriHeight$treat=="exp",]
 disHeigPro<-distriHeight[distriHeight$treat=="low",]
 
 #defining a color vector
-colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4])
+colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4],
+           brewer.pal(11,"RdYlGn")[1])
 
+pdf(file="output/Figure_compHeight.pdf",width=14,height=7)
 op<-par(mfrow=c(1,2),mar=c(4,4,3,0.1))
 boxplot(disHeigNat$H17v~disHeigNat$family_simp,col=colovec[4],boxwex=0.6,
-        las=1,main="Natural treatment",xlab="Families",ylab="Height (cm)")
-abline(h=mean(disHeigNat$H17v,na.rm=TRUE),col=colovec[3],lwd=3,lty=2)
+        las=1,main="Natural treatment",xlab="Families",ylab="Height (cm)",
+        ylim=c(0,165),cex.main=2)
+points(tapply(disHeigNat$H17v,disHeigNat$family_simp,
+              FUN=mean,na.rm=TRUE),
+       pch=18,cex=2,col=colovec[3])
+abline(h=mean(disHeigNat$H17v,na.rm=TRUE),col=colovec[5],lwd=3,lty=2)
 boxplot(disHeigPro$H17v~disHeigPro$family_simp,col=colovec[2],boxwex=0.6,
-        las=1,main="Protected treatment",xlab="Families",ylab="")
-abline(h=mean(disHeigPro$H17v,na.rm=TRUE),col=colovec[1],lwd=3,lty=2)
+        las=1,main="Protected treatment",xlab="Families",ylab="",
+        ylim=c(0,165),cex.main=2)
+points(tapply(disHeigPro$H17v,disHeigPro$family_simp,
+              FUN=mean,na.rm=TRUE),
+       pch=18,cex=2,col=colovec[1])
+abline(h=mean(disHeigPro$H17v,na.rm=TRUE),col=colovec[5],lwd=3,lty=2)
 par(op)
+dev.off()
 #export to .pdf 14 x 6 inches
 
 
