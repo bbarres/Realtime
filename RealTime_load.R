@@ -21,6 +21,7 @@ library(poppr)
 library(RColorBrewer)
 library(stringr)
 library(tidyr)
+library(vegan)
 library(vioplot)
 library(viridis)
 
