@@ -55,7 +55,8 @@ row.names(Shanplot)<-c("Emerging","2009","2010","2011",
                        "2012","2013","2014","2015","2016",
                        "2017")
 
-op<-par(mar=c(5.1,4.1,1.1,1.1))
+pdf(file="output/Figure_ShannonEvol.pdf",width=7,height=6)
+op<-par(mar=c(5.1,4.3,1.1,1.1))
 matplot(Shanplot,type="b",ylim=c(3.25,3.85),las=1,
         col=colovec[c(1,2,1,1,1,2,2,1,1)],lwd=2,
         lty=c(1,2,1,1,1,2,2,1,1),
@@ -63,8 +64,8 @@ matplot(Shanplot,type="b",ylim=c(3.25,3.85),las=1,
         xaxt="n",yaxt="n",bty="n",
         ylab="Shannon index",xlab="Year",
         font.lab=2,cex.lab=1.5)
-axis(1,lwd=2,cex.axis=1,at=c(1:10),
-     lab=c("Emerging","2009","2010","2011",
+axis(1,lwd=2,cex.axis=0.9,at=c(1:10),
+     lab=c("Emerg.","2009","2010","2011",
            "2012","2013","2014","2015","2016",
            "2017"),las=1,font=2)
 axis(2,lwd=2,las=1,font=2)
@@ -76,8 +77,8 @@ legend(1,3.35,legend="Protected treatment",
        col=colovec[2],lty=2,pch=19,pt.bg="white",
        bty="n",cex=1.3,title.cex=1,y.intersp=1.5,x.intersp=0.5,lwd=2)
 par(op)
-#export to .pdf 6 x 6 inches
-
+#export to .pdf 7 x 6 inches
+dev.off()
 
 ##############################################################################/
 #END
