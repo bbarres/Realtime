@@ -350,7 +350,7 @@ points(tapply(disHeigPro$H17v,disHeigPro$family_simp,
 abline(h=mean(disHeigPro$H17v,na.rm=TRUE),col=colovec[5],lwd=3,lty=2)
 par(op)
 dev.off()
-#export to .pdf 14 x 6 inches
+#export to .pdf 14 x 7 inches
 
 
 ##############################################################################/
