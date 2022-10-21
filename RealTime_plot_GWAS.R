@@ -157,6 +157,12 @@ par(op)
 dev.off()
 
 
+
+
+#from here needs to add the same code as above but for all the SNP of
+#interest
+
+
 ##############################################################################/
 #plotting significant SNP genotype effect on ALL the traits (old version)####
 ##############################################################################/
