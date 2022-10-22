@@ -45,6 +45,20 @@ readManDa<-function(pathtoGWASrez) {
 
 
 ##############################################################################/
+#Loading the data using the defined function####
+##############################################################################/
+
+AcNat<-readManDa("output/natGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
+AcLim<-readManDa("output/limGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
+HeNat<-readManDa("output/natGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
+HeLim<-readManDa("output/limGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
+PMNat<-readManDa("output/natGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
+PMLim<-readManDa("output/limGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
+SuNat<-readManDa("output/natGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
+SuLim<-readManDa("output/limGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
+
+
+##############################################################################/
 #function to plot a Manhattan plot####
 ##############################################################################/
 
@@ -81,22 +95,12 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
          lab=NA)
   }
   box(lwd=2)
-
 }
 
 
 ##############################################################################/
-#running the functions to obtain a beautiful Manhattan plot####
+#Ploting using the function####
 ##############################################################################/
-
-AcNat<-readManDa("output/natGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
-AcLim<-readManDa("output/limGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
-HeNat<-readManDa("output/natGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
-HeLim<-readManDa("output/limGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
-PMNat<-readManDa("output/natGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
-PMLim<-readManDa("output/limGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
-SuNat<-readManDa("output/natGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
-SuLim<-readManDa("output/limGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
 
 #Figure for one trait
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4])
@@ -120,29 +124,26 @@ ManhaPlot(AcLim,colovec[3:4],colosign,
 par(op)
 #export to .pdf 15 x 7 inches
 
-
-
-#Figure combined for the 4 traits
+#Figure for the article, combining the 4 traits GWAS results
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4])
 colosign<-brewer.pal(9,"YlOrRd")[c(4,6,8)]
+pdf(file="output/Figure_Manhat.pdf",width=10,height=13)
 op<-par(mfrow=c(8,1),mar=c(1,5,2.5,0.5))
-
 #survival
 ManhaPlot(SuNat,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,11))
 title(main="Survival",font=2,cex.main=3)
-legend(-50000000,14.5,legend=c("Natural","Protected"),xpd=TRUE,
+legend(-35000000,11.5,legend=c("Natural","Protected"),xpd=TRUE,
        pch=22,pt.cex=4,pt.lwd=4,cex=1.4,
        pt.bg=colovec[c(3,1)],col=colovec[c(4,2)],bty="n",
-       x.intersp=0.9,y.intersp=0.5)
-legend(150000000,14.5,legend=c("Pcor<0.01","Pcor<0.001","Pcor<0.0001"),
+       x.intersp=1.1,y.intersp=1.4)
+legend(150000000,11.5,legend=c("Pcor<0.01","Pcor<0.001","Pcor<0.0001"),
        xpd=TRUE,pch=21,pt.cex=2,pt.lwd=1,cex=1.4,
        pt.bg=colosign,col="black",bty="n",
-       x.intersp=0.6,y.intersp=0.3)
+       x.intersp=0.8,y.intersp=0.9)
 par(mar=c(2,5,1.5,0.5))
 ManhaPlot(SuLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(11,0))
-
 #Powdery mildew
 par(mar=c(1,5,2.5,0.5))
 ManhaPlot(PMNat,colovec[3:4],colosign,
@@ -151,7 +152,6 @@ title(main="Powdery mildew",font=2,cex.main=3)
 par(mar=c(2,5,1.5,0.5))
 ManhaPlot(PMLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(8,0))
-
 #Height
 par(mar=c(1,5,2.5,0.5))
 ManhaPlot(HeNat,colovec[3:4],colosign,
@@ -160,7 +160,6 @@ title(main="Height",font=2,cex.main=3)
 par(mar=c(2,5,1.5,0.5))
 ManhaPlot(HeLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(8,0))
-
 #Acorn weight
 par(mar=c(1,5,2.5,0.5))
 ManhaPlot(AcNat,colovec[3:4],colosign,
@@ -169,9 +168,9 @@ title(main="Acorn weight",font=2,cex.main=3)
 par(mar=c(2,5,1.5,0.5))
 ManhaPlot(AcLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(9,0))
-
 par(op)
 #export 10 x 13 inches in .pdf
+dev.off()
 
 
 ##############################################################################/
