@@ -65,12 +65,12 @@ microGen<-df2genind(temp2,ploidy=2,sep="/",
                     pop=micro.dat$family_simp)
 #adding information in the 'other' slot
 microGen@other$fam<-micro.dat$family_simp
-microGen@other$treat<-micro.dat$exp
+microGen@other$treat<-micro.dat$treat
 microGen@other$PU<-paste(micro.dat$trait,micro.dat$bloc,sep="")
 microGen@other$height<-micro.dat$Hdeb17
 microGen@other$DoA<-micro.dat$live_bin
 #combine experimental and dead or alive information
-microGen@other$newPop<-paste(micro.dat$exp,micro.dat$live_bin,sep="")
+microGen@other$newPop<-paste(micro.dat$treat,micro.dat$live_bin,sep="")
 
 #this includes individual that are not directly related to the experiment, 
 #such as parents and the controlled crosses and 2 individuals that were 
@@ -176,11 +176,11 @@ snpGen<-df2genind(snp.dat[,temp],ploidy=2,sep="/",
                   pop=snp.dat$family_simp)
 #adding information in the 'other' slot
 snpGen@other$fam<-snp.dat$family_simp
-snpGen@other$treat<-snp.dat$exp
+snpGen@other$treat<-snp.dat$treat
 snpGen@other$height<-snp.dat$Hdeb17
 snpGen@other$DoA<-snp.dat$live_bin
 #combine experimental and dead or alive information
-snpGen@other$newPop<-paste(snp.dat$exp,snp.dat$live_bin,sep="")
+snpGen@other$newPop<-paste(snp.dat$treat,snp.dat$live_bin,sep="")
 locNames(snpGen)<-paste("snp",1:819,sep="")
 
 #this includes individual that are not directly related to the experiment, 
