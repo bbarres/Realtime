@@ -1,13 +1,10 @@
 ##############################################################################/
 ##############################################################################/
-#GWAS analyses using GAPIT3
+#Individual genetic diversity analyses
 ##############################################################################/
 ##############################################################################/
 
-# #at the time of writing this code, GAPIT3 was still under development on 
-# #Github, so you have to run this to install the updated package
-# devtools::install_github("jiabowang/GAPIT3",force=TRUE)
-
+#loading the necessary packages and data sets
 source("RealTime_load.R")
 
 
@@ -17,7 +14,6 @@ source("RealTime_load.R")
 
 #this code is available here: 
 #http://aureliecoulon.net/0bf520f8_e6b3_4e12_8fc9_4867ce9ebad2.html
-
 "GENHET"<-
   function(dat,estimfreq,locname,alfuser){
     
@@ -237,7 +233,7 @@ for (i in 1:length(nomFam)) {
 }
 
 #export of the final result file
-write.table(HetVivMort,file="data/HetVivMort.txt",sep="\t",
+write.table(HetVivMort,file="data/Hetind_DoA.txt",sep="\t",
             quote=FALSE,row.names=FALSE)
 
 
@@ -245,9 +241,9 @@ write.table(HetVivMort,file="data/HetVivMort.txt",sep="\t",
 #Plot for comparing Dead or Alive heterozygosities indices by family####
 ##############################################################################/
 
-#if you don't want to run the above code, you can directly import the 
-#result file
-HetVivMort<-read.table(file="data/HetVivMort.txt",sep="\t",
+#if you don't want to run the code above which can take some time, 
+#you can directly import the result file
+HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
                        header=TRUE,colClasses="character")
 
 HetVivMortExp<-HetVivMort[HetVivMort$moda=="exp",]
@@ -262,66 +258,8 @@ HetVivMortLim<-HetVivMortLim[HetVivMortLim$fam!="Global",]
 HetVivMortLim$fam[HetVivMortLim$fam=="1"]<-"01"
 HetVivMortLim$fam[HetVivMortLim$fam=="9"]<-"09"
 
-
-
-#plot of the different indices for Natural treatment by family
-op<-par(mfrow=c(5,1))
-vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Natural / PHt")
-vioplot(as.numeric(HetVivMortExp$Hs_obs)~
-          HetVivMortExp$vivmor:HetVivMortExp$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Natural / Hs_obs")
-vioplot(as.numeric(HetVivMortExp$Hs_exp)~
-          HetVivMortExp$vivmor:HetVivMortExp$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Natural / Hs_exp")
-vioplot(as.numeric(HetVivMortExp$IR)~HetVivMortExp$vivmor:HetVivMortExp$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Natural / IR")
-vioplot(as.numeric(HetVivMortExp$HL)~HetVivMortExp$vivmor:HetVivMortExp$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Natural / HL")
-par(op)
-#export to .pdf 20 x 20 inches
-
-#plot of the different indices for Protected treatment by family
-op<-par(mfrow=c(5,1))
-vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$vivmor:HetVivMortLim$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Protected / PHt")
-vioplot(as.numeric(HetVivMortLim$Hs_obs)~
-          HetVivMortLim$vivmor:HetVivMortLim$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Protected / Hs_obs")
-vioplot(as.numeric(HetVivMortLim$Hs_exp)~
-          HetVivMortLim$vivmor:HetVivMortLim$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Protected / Hs_exp")
-vioplot(as.numeric(HetVivMortLim$IR)~HetVivMortLim$vivmor:HetVivMortLim$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Protected / IR")
-vioplot(as.numeric(HetVivMortLim$HL)~HetVivMortLim$vivmor:HetVivMortLim$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Protected / HL")
-par(op)
-#export to .pdf 20 x 20 inches
-
-
-
-
 #plot of the PHt index for both natural and protected treatment by family
+pdf(file="output/Figure_PHt.pdf",width=10,height=10)
 op<-par(mfrow=c(2,1),mar=c(2,4,4,1))
 #semi violin plot for the natural treatment
 HetAli<-HetVivMortExp[HetVivMortExp$vivmor==1,]
@@ -358,9 +296,8 @@ points(x=c(1:15)+0.2,y=aggregate(as.numeric(HetAli$PHt),
                                   list(HetAli$fam),FUN=mean)[,2],
        pch=21,bg=colovec[4],cex=1.2)
 box(bty="l",lwd=2)
-legend(-0.2,0.43,c("dead","alive"),fill=colovec[1:2],cex=1.3,
-       bty="n",x.intersp=0.2,y.intersp=0.7,xpd=TRUE)
-
+legend(0.1,0.15,c("dead","alive"),fill=colovec[1:2],cex=1.5,
+       bty="n",x.intersp=0.7,y.intersp=0.9,xpd=TRUE)
 #semi violin plot for the protected treatment
 HetAli<-HetVivMortLim[HetVivMortLim$vivmor==1,]
 HetDea<-HetVivMortLim[HetVivMortLim$vivmor==0,]
@@ -399,13 +336,14 @@ points(x=c(1:15)+0.2,y=aggregate(as.numeric(HetAli$PHt),
 box(bty="l",lwd=2)
 par(op)
 #export to .pdf 10 x 10 inches
+dev.off()
 
 
 ##############################################################################/
 #Comparison of mean and variance of PHt####
 ##############################################################################/
 
-HetVivMort<-read.table(file="data/HetVivMort.txt",sep="\t",
+HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
                        header=TRUE)
 HetVivMort$vivmor<-as.factor(HetVivMort$vivmor)
 
@@ -451,8 +389,6 @@ var(DoAPrt[DoAPrt$vivmor=="0",]$PHt)
 mean(DoAPrt[DoAPrt$vivmor=="1",]$PHt)
 sqrt(var(DoAPrt[DoAPrt$vivmor=="1",]$PHt))
 var(DoAPrt[DoAPrt$vivmor=="1",]$PHt)
-
-
 
 
 
@@ -503,7 +439,7 @@ legend(0.2,0.4,c("dead","alive"),fill=colovec[1:2],cex=1.3,
 
 colovec<-c(brewer.pal(12,"Set3")[6:7],
            brewer.pal(9,"Set1")[1:2])
-HetVivMort<-read.table(file="data/HetVivMort.txt",sep="\t",
+HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
                        header=TRUE)
 HetVivMortFam<-HetVivMort[HetVivMort$fam!="Global",]
 HetVivMortFam$catHet<-cut(HetVivMortFam$PHt,
@@ -523,7 +459,7 @@ text(temp,102,paste("n=",effectif,sep=""),font=3,cex=0.9,xpd=TRUE)
 
 
 ##############################################################################/
-#Heterozygosity total vs surviving####
+#Heterozygosity computation: total vs surviving####
 ##############################################################################/
 
 #reshaping the data set for computation
@@ -652,3 +588,66 @@ par(op)
 ##############################################################################/
 #END
 ##############################################################################/
+
+
+
+
+#additionnal plot
+
+#plot of the different indices for Natural treatment by family
+op<-par(mfrow=c(5,1))
+vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Natural / PHt")
+vioplot(as.numeric(HetVivMortExp$Hs_obs)~
+          HetVivMortExp$vivmor:HetVivMortExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Natural / Hs_obs")
+vioplot(as.numeric(HetVivMortExp$Hs_exp)~
+          HetVivMortExp$vivmor:HetVivMortExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Natural / Hs_exp")
+vioplot(as.numeric(HetVivMortExp$IR)~HetVivMortExp$vivmor:HetVivMortExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Natural / IR")
+vioplot(as.numeric(HetVivMortExp$HL)~HetVivMortExp$vivmor:HetVivMortExp$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Natural / HL")
+par(op)
+#export to .pdf 20 x 20 inches
+
+#plot of the different indices for Protected treatment by family
+op<-par(mfrow=c(5,1))
+vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$vivmor:HetVivMortLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Protected / PHt")
+vioplot(as.numeric(HetVivMortLim$Hs_obs)~
+          HetVivMortLim$vivmor:HetVivMortLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Protected / Hs_obs")
+vioplot(as.numeric(HetVivMortLim$Hs_exp)~
+          HetVivMortLim$vivmor:HetVivMortLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Protected / Hs_exp")
+vioplot(as.numeric(HetVivMortLim$IR)~HetVivMortLim$vivmor:HetVivMortLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Protected / IR")
+vioplot(as.numeric(HetVivMortLim$HL)~HetVivMortLim$vivmor:HetVivMortLim$fam,
+        col = c("orange","yellow"),sep=":",las=1,
+        ylab="Value",xlab="Pheno:Family",
+        main="Dead or Alive: Protected / HL")
+par(op)
+#export to .pdf 20 x 20 inches
+
+
+
+

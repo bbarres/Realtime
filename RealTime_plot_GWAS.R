@@ -33,9 +33,7 @@ temp<-temp[,c(1,48:866)]
 tempb<-snp.dat[snp.dat$Sample_ID %in% LimTrait$Taxa,]
 tempb<-tempb[,c(1,48:866)]
 
-pdf(file=paste("output/SNP_interest",".pdf",sep=""),
-    width=15,height=10)
-
+pdf("output/Figure_SNPinterest.pdf",width=15,height=10)
 nf<-layout(matrix(c(1,2,2,2,3,3,3,4,4,4,5,5,5,
                     6,9,9,9,10,10,10,11,11,11,12,12,12,
                     6,9,9,9,10,10,10,11,11,11,12,12,12,
@@ -67,7 +65,6 @@ plot.new()
 text(0.5,0.5,Rezcomb[11,1],srt=90,font=2,cex=1.5)
 plot.new()
 text(0.5,0.5,Rezcomb[16,1],srt=90,font=2,cex=1.5)
-
 par(mar=c(3,3,1,1))
 for (i in c(1,11,16)) {
   #data of the exposed treatment
@@ -103,7 +100,6 @@ for (i in c(1,11,16)) {
                          names_to="treat",values_to="Mortality Rate")
   totaleff<-pivot_longer(interme[,c(3:4)],cols=1:2,
                          names_to="treat",values_to="Total number")
-  
   vioplot(tempo$`Acorn weight`~tempo[,2],boxwex=0.3,las=1,
           border=colo[2:4],lineCol=colo[2:4],rectCol=colo[2:4],
           col=colo[1],ann=FALSE,ylim=c(0,13.5),
@@ -149,9 +145,7 @@ for (i in c(1,11,16)) {
        colnames(table(tempo$`Survival`,tempo[,2])))
   axis(2,at=seq(from=0,to=100,by=20),las=1,cex.axis=1.3,lwd=2)
   box(bty="o")
-
 }
-
 par(op)
 #export to .pdf 15 x 10 inches  
 dev.off()

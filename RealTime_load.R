@@ -73,7 +73,6 @@ colnames(AllTrait)<-c("treat","Taxa","oid4_09","oid5_10","oid5_11",
 NatTrait<-AllTrait[AllTrait$treat=="exp",2:11]
 LimTrait<-AllTrait[AllTrait$treat=="low",2:11]
 
-
 # #to remove
 # AllTrait<-read.table("data/pheno_final.txt",header=TRUE)
 # colnames(AllTrait)[11:14]<-c("Powdery mildew","Height",
@@ -84,7 +83,6 @@ LimTrait<-AllTrait[AllTrait$treat=="low",2:11]
 # NatTrait<-AllTrait[AllTrait$treat=="exp",5:14]
 # LimTrait<-AllTrait[AllTrait$treat=="low",5:14]
 # #end remove
-
 
 #loading the natural treatment genotype data
 NatG<-read.delim("data/nat.hmp.txt",header=FALSE)
