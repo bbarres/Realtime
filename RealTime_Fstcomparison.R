@@ -5,40 +5,13 @@
 ##############################################################################/
 
 source("RealTime_load.R")
-
-
-##############################################################################/
-#using the dosage format for the snp data
-##############################################################################/
-
-compSNP<-read.snp("data/data.snp")
-metaIND<-read.table("data/metadatIND.snp",sep="\t",header=T,
-                    stringsAsFactors=TRUE,na.strings="..")
-metaMARK<-read.table("data/metadatMARK.snp",sep="\t",header=T,
-                     stringsAsFactors=TRUE,na.strings="..")
-compSNP@loc.names<-as.character(metaMARK$loc.names)
-#adding other information to the @other slot for individuals
-indNames(compSNP)<-metaIND$nom_Ind
-compSNP@other$famille<-metaIND$famille
-compSNP@other$mother<-metaIND$mother
-compSNP@other$father<-metaIND$father
-compSNP@other$traitement<-metaIND$traitement
-compSNP@other$traitsimp<-metaIND$trait_simp
-compSNP@other$live_bin<-metaIND$live_bin
-
-#limiting the data set to individuals of the experimental setting 
-experSNP<-compSNP[compSNP$pop!="PAR" & compSNP$pop!="CC" 
-                  & compSNP$pop!="A4" & compSNP$pop!="3P"]
-
-#some individuals don't have the information of their death
-experSNP@ind.names[experSNP@other$live_bin=="NA"]
-
-#we remove these individuals until clarification
-temp<-experSNP[experSNP@other$live_bin!="NA"]
-
+#creating a folder to store Genepop results output files
+nomTemp<-getwd()
+dir.create(paste(nomTemp,"/output/Genepop",sep=""))
+setwd(nomTemp)
 
 ##############################################################################/
-#F statistics based on the microsatellite data
+#F statistics based on the microsatellite data####
 ##############################################################################/
 
 #the number of individuals with quality checked microsatellite data
@@ -84,45 +57,25 @@ microGen<-microGen[!is.na(microGen@other$DoA)]
 #checking the minor allele frequencies of the markers
 minorAllele(microGen)
 
-#set newPop as population
+#dead vs surviving
 pop(microGen)<-microGen@other$newPop
 table(pop(microGen))
 pairwise.WCfst(genind2hierfstat(microGen))
-genind_to_genepop(microGen,output="data/microGenAD.txt")
-microGendat<-"data/microGenAD.txt"
-genedivFis(microGendat,sizes=FALSE,"output/microGenAD.txt.Fis")
-test_HW(microGendat,which="Proba",outputFile="output/microGenAD.txt.HW")
-Fst(microGendat,sizes=FALSE,pairs=TRUE,"output/microGenAD.txt.Fst")
+genind_to_genepop(microGen,output="data/microGenDoA.txt")
+microGendat<-"data/microGenDoA.txt"
+genedivFis(microGendat,sizes=FALSE,"output/Genepop/microGenDoA.Fis")
+test_HW(microGendat,which="Proba",outputFile="output/Genepop/microGenDoA.HW")
+Fst(microGendat,sizes=FALSE,pairs=TRUE,"output/Genepop/microGenDoA.Fst")
 test_diff(microGendat,genic=FALSE,pairs=TRUE,
-          outputFile="output/microGenAD.txt.DD",batches=500,iterations=10000)
+          outputFile="output/Genepop/microGenDoA.DD",
+          batches=500,iterations=10000)
 clean_workdir()
 n.temp<-seppop(microGen)
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(microGen)
 Arich<-colMeans(allelic.richness(microGen,min.n=100)$Ar)
 Ali.vs.Dea<-rbind(Hobs,Hexp,Arich)
-
-#taking the 90% quantile as the future surviving individuals
-tempgen<-microGen[microGen@other$PU=="lim1"]
-tempgen@other$height>quantile(as.numeric(tempgen@other$height),0.9)
-microGen@other$newPop2<-
-pop(microGen)<-microGen@other$newPop
-table(pop(microGen))
-pairwise.WCfst(genind2hierfstat(microGen))
-genind_to_genepop(microGen,output="data/microGenAD.txt")
-microGendat<-"data/microGenAD.txt"
-genedivFis(microGendat,sizes=FALSE,"output/microGenAD.txt.Fis")
-test_HW(microGendat,which="Proba",outputFile="output/microGenAD.txt.HW")
-Fst(microGendat,sizes=FALSE,pairs=TRUE,"output/microGenAD.txt.Fst")
-test_diff(microGendat,genic=FALSE,pairs=TRUE,
-          outputFile="output/microGenAD.txt.DD")
-clean_workdir()
-n.temp<-seppop(microGen)
-Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
-Hexp<-Hs(microGen)
-Arich<-colMeans(allelic.richness(microGen,min.n=100)$Ar)
-Ali.vs.Dea<-rbind(Hobs,Hexp,Arich)
-
+write.table(Ali.vs.Dea,file="output/Genepop/microDoA.div",quote=FALSE)
 
 #total vs surviving
 temp<-repool(n.temp$exp1,n.temp$exp0)
@@ -136,19 +89,19 @@ table(pop(temp))
 pairwise.WCfst(genind2hierfstat(temp))
 genind_to_genepop(temp,output="data/microGenDF.txt")
 microGendat<-"data/microGenDF.txt"
-genedivFis(microGendat,sizes=FALSE,"output/microGenDF.txt.Fis")
-test_HW(microGendat,which="Proba",outputFile="output/microGenDF.txt.HW")
-Fst(microGendat,sizes=FALSE,pairs=TRUE,"output/microGenDF.txt.Fst")
+genedivFis(microGendat,sizes=FALSE,"output/Genepop/microGenDF.Fis")
+test_HW(microGendat,which="Proba",outputFile="output/Genepop/microGenDF.HW")
+Fst(microGendat,sizes=FALSE,pairs=TRUE,"output/Genepop/microGenDF.Fst")
 test_diff(microGendat,genic=FALSE,pairs=TRUE,
-          outputFile="output/microGenDF.txt.DD",batches=500,iterations=10000)
+          outputFile="output/Genepop/microGenDF.DD",
+          batches=500,iterations=10000)
 clean_workdir()
 n.temp<-seppop(temp) 
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(temp)
 Arich<-colMeans(allelic.richness(temp,min.n=100)$Ar)
 Deb.vs.Fin<-rbind(Hobs,Hexp,Arich)
-
-
+write.table(Deb.vs.Fin,file="output/Genepop/microDF.div",quote=FALSE)
 
 #compute genetic distance between individuals
 distMicro<-diss.dist(microGen,mat=FALSE)
@@ -200,25 +153,26 @@ table(minorAllele(snpGen)<0.05)
 #we limit the data to markers with a minor allele frequency > 0.05
 snpGen2<-snpGen[,loc=minorAllele(snpGen)<0.95 & minorAllele(snpGen)>0.05]
 
-#set newPop as population
+#dead vs surviving
 pop(snpGen2)<-snpGen2@other$newPop
 table(pop(snpGen2))
 pairwise.WCfst(genind2hierfstat(snpGen2))
-genind_to_genepop(snpGen2,output="data/snpGen2AD.txt")
+genind_to_genepop(snpGen2,output="data/snpGen2DoA.txt")
 #small tips: the conversion is putting six digit for missing data "000000",
 #therefore you have to replace this string of 6 zeros by a string of 4 zeros
-snpGen2dat<-"data/snpGen2AD.txt"
-genedivFis(snpGen2dat,sizes=FALSE,"output/snpGen2AD.txt.Fis")
-test_HW(snpGen2dat,which="Proba",outputFile="output/snpGen2AD.txt.HW")
-Fst(snpGen2dat,sizes=FALSE,pairs=TRUE,"output/snpGen2AD.txt.Fst")
+snpGen2dat<-"data/snpGen2DoA.txt"
+genedivFis(snpGen2dat,sizes=FALSE,"output/Genepop/snpGen2DoA.Fis")
+test_HW(snpGen2dat,which="Proba",outputFile="output/Genepop/snpGen2DoA.HW")
+Fst(snpGen2dat,sizes=FALSE,pairs=TRUE,"output/Genepop/snpGen2DoA.Fst")
 test_diff(snpGen2dat,genic=FALSE,pairs=TRUE,
-          outputFile="output/snpGen2AD.txt.DD")
+          outputFile="output/Genepop/snpGen2DoA.DD")
 clean_workdir()
 n.temp<-seppop(snpGen2)
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(snpGen2)
 Arich<-colMeans(allelic.richness(snpGen2,min.n=100)$Ar)
 Ali.vs.Dea.snp<-rbind(Hobs,Hexp,Arich)
+write.table(Ali.vs.Dea.snp,file="output/Genepop/snpDoA.div",quote=FALSE)
 
 #total vs surviving
 temp<-repool(n.temp$exp1,n.temp$exp0)
@@ -234,17 +188,18 @@ genind_to_genepop(temp,output="data/snpGen2DF.txt")
 #small tips: the conversion is putting six digit for missing data "000000",
 #therefore you have to replace this string of 6 zeros by a string of 4 zeros
 snpGen2dat<-"data/snpGen2DF.txt"
-genedivFis(snpGen2dat,sizes=FALSE,"output/snpGen2DF.txt.Fis")
-test_HW(snpGen2dat,which="Proba",outputFile="output/snpGen2DF.txt.HW")
-Fst(snpGen2dat,sizes=FALSE,pairs=TRUE,"output/snpGen2DF.txt.Fst")
+genedivFis(snpGen2dat,sizes=FALSE,"output/Genepop/snpGen2DF.Fis")
+test_HW(snpGen2dat,which="Proba",outputFile="output/Genepop/snpGen2DF.HW")
+Fst(snpGen2dat,sizes=FALSE,pairs=TRUE,"output/Genepop/snpGen2DF.Fst")
 test_diff(snpGen2dat,genic=FALSE,pairs=TRUE,
-          outputFile="output/snpGen2DF.txt.DD")
+          outputFile="output/Genepop/snpGen2DF.DD")
 clean_workdir()
 n.temp<-seppop(temp) 
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
 Hexp<-Hs(temp)
 Arich<-colMeans(allelic.richness(temp,min.n=100)$Ar)
 Deb.vs.Fin.snp<-rbind(Hobs,Hexp,Arich)
+write.table(Deb.vs.Fin.snp,file="output/Genepop/snpDF.div",quote=FALSE)
 
 #compute genetic distance between individuals
 distSnp2<-diss.dist(snpGen2,mat=FALSE)
@@ -257,3 +212,69 @@ tiplabels(pch=20,col=colovec[as.numeric(snpGen2@other$fam)],cex=2)
 ##############################################################################/
 #END
 ##############################################################################/
+
+
+
+
+
+
+
+
+#to be erased
+
+##############################################################################/
+#using the dosage format for the snp data
+##############################################################################/
+
+compSNP<-read.snp("data/data.snp")
+metaIND<-read.table("data/metadatIND.snp",sep="\t",header=T,
+                    stringsAsFactors=TRUE,na.strings="..")
+metaMARK<-read.table("data/metadatMARK.snp",sep="\t",header=T,
+                     stringsAsFactors=TRUE,na.strings="..")
+compSNP@loc.names<-as.character(metaMARK$loc.names)
+#adding other information to the @other slot for individuals
+indNames(compSNP)<-metaIND$nom_Ind
+compSNP@other$famille<-metaIND$famille
+compSNP@other$mother<-metaIND$mother
+compSNP@other$father<-metaIND$father
+compSNP@other$traitement<-metaIND$traitement
+compSNP@other$traitsimp<-metaIND$trait_simp
+compSNP@other$live_bin<-metaIND$live_bin
+
+#limiting the data set to individuals of the experimental setting 
+experSNP<-compSNP[compSNP$pop!="PAR" & compSNP$pop!="CC" 
+                  & compSNP$pop!="A4" & compSNP$pop!="3P"]
+
+#some individuals don't have the information of their death
+experSNP@ind.names[experSNP@other$live_bin=="NA"]
+
+#we remove these individuals until clarification
+temp<-experSNP[experSNP@other$live_bin!="NA"]
+
+
+##############################################################################/
+#diversity alive vs dead but with "future" dead
+##############################################################################/
+
+#taking the 90% quantile as the future surviving individuals
+tempgen<-microGen[microGen@other$PU=="lim1"]
+tempgen@other$height>quantile(as.numeric(tempgen@other$height),0.9)
+microGen@other$newPop2<-
+  pop(microGen)<-microGen@other$newPop
+table(pop(microGen))
+pairwise.WCfst(genind2hierfstat(microGen))
+genind_to_genepop(microGen,output="data/microGenAD.txt")
+microGendat<-"data/microGenAD.txt"
+genedivFis(microGendat,sizes=FALSE,"output/microGenAD.txt.Fis")
+test_HW(microGendat,which="Proba",outputFile="output/microGenAD.txt.HW")
+Fst(microGendat,sizes=FALSE,pairs=TRUE,"output/microGenAD.txt.Fst")
+test_diff(microGendat,genic=FALSE,pairs=TRUE,
+          outputFile="output/microGenAD.txt.DD")
+clean_workdir()
+n.temp<-seppop(microGen)
+Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
+Hexp<-Hs(microGen)
+Arich<-colMeans(allelic.richness(microGen,min.n=100)$Ar)
+Ali.vs.Dea<-rbind(Hobs,Hexp,Arich)
+
+

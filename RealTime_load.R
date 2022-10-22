@@ -28,9 +28,6 @@ library(viridis)
 
 #loading the different data sets
 
-#information of the snp markers
-#mrkrInf<-read.table()
-
 #data by individuals, including all individuals (hd, families, parents and CC
 RTdata<-read.table("data/datatot.txt",sep="\t",stringsAsFactors=FALSE,
                    header=TRUE)
@@ -67,12 +64,12 @@ snp.dat<-drop.levels(snp.dat)
 
 AllTrait<-snp.dat[snp.dat$family_simp!="PAR" & snp.dat$family_simp!="CC",]
 AllTrait<-AllTrait[,c("treat","Sample_ID","oid4_09","oid5_10",
-                        "oid5_11","oid4_12","oid2_13","oid_moy",
-                        "H12v","pgland","statut10")]
+                      "oid5_11","oid4_12","oid2_13","oid_moy",
+                      "H12v","pgland","statut10")]
 #rename the columns with more accurate names
 colnames(AllTrait)<-c("treat","Taxa","oid4_09","oid5_10","oid5_11",
-                       "oid4_12","oid2_13","Powdery mildew","Height",
-                       "Acorn weight","Survival")
+                      "oid4_12","oid2_13","Powdery mildew","Height",
+                      "Acorn weight","Survival")
 NatTrait<-AllTrait[AllTrait$treat=="exp",2:11]
 LimTrait<-AllTrait[AllTrait$treat=="low",2:11]
 
