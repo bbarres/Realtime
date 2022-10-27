@@ -107,7 +107,12 @@ SurvProp<-as.data.frame(prop.table(table(progSurv$treat,
 SurvProp<-SurvProp[SurvProp$Var2=="alive",]
 SurvProp<-pivot_wider(SurvProp[,-c(2)],names_from=Var1,values_from=Freq)
 colnames(SurvProp)<-c("Progeny","Natural","Protected")
+SurvProp$PMinf<-tapply(progSurv$oid_moy,INDEX=progSurv$family_simp,
+                       FUN=mean,na.rm=TRUE)
 
+#ploting the results
+plot(SurvProp[,c(3,2)])
+abline(0,1)
 
 ##############################################################################/
 #END
