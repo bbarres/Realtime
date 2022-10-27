@@ -111,8 +111,14 @@ SurvProp$PMinf<-tapply(progSurv$oid_moy,INDEX=progSurv$family_simp,
                        FUN=mean,na.rm=TRUE)
 
 #ploting the results
-plot(SurvProp[,c(3,2)])
-abline(0,1)
+coloor<-brewer.pal(11,"RdYlGn")[11:1]
+as.numeric(cut(SurvProp$PMinf,breaks=11))
+plot(SurvProp[,c(3,2)],xlim=c(0,1),ylim=c(0,1),
+     las=1,pch=19,cex=3,
+     col=coloor[as.numeric(cut(SurvProp$PMinf,breaks=11))])
+text(SurvProp[,c(3,2)],labels=SurvProp$Progeny)
+abline(0,1,lty=5,col=grey(0.6,1),lwd=3)
+
 
 ##############################################################################/
 #END
