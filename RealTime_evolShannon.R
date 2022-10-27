@@ -1,6 +1,6 @@
 ##############################################################################/
 ##############################################################################/
-#Plot the map of the RealTime experiment
+#Evolution of diversity and mortality rate by families
 ##############################################################################/
 ##############################################################################/
 
@@ -79,6 +79,35 @@ legend(1,3.35,legend="Protected treatment",
 par(op)
 #export to .pdf 7 x 6 inches
 dev.off()
+
+
+##############################################################################/
+#progeny survival by treatment and powdery mildew infection####
+##############################################################################/
+
+#preparing the data set
+progSurv<-dispo[dispo$family_simp!="CC" & dispo$family_simp!="hd" & 
+                  !is.na(dispo$an_mort) & dispo$an_mort!="g" & 
+                  dispo$family_simp!="26",
+                c("Sample_ID","bloc","PU","family_simp",
+                  "treat","an_mort","oid_moy")]
+levels(progSurv$family_simp)[1:2]<-c("01","09")
+progSurv<-drop.levels(progSurv)
+progSurv$DoA<-progSurv$an_mort
+progSurv[progSurv$DoA!="vivant",]$DoA<-"dead"
+progSurv[progSurv$DoA=="vivant",]$DoA<-"alive"
+progSurv$DoA<-as.factor(progSurv$DoA)
+progSurv$treat<-as.factor(progSurv$treat)
+
+#computing the survival rate by family by treatment
+SurvProp<-as.data.frame(prop.table(table(progSurv$treat,
+                                         progSurv$DoA,
+                                         progSurv$family_simp),
+                     margin=c(1,3)))
+SurvProp<-SurvProp[SurvProp$Var2=="alive",]
+SurvProp<-pivot_wider(SurvProp[,-c(2)],names_from=Var1,values_from=Freq)
+colnames(SurvProp)<-c("Progeny","Natural","Protected")
+
 
 ##############################################################################/
 #END
