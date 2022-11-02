@@ -178,6 +178,7 @@ box(lwd=2)
 legend(1.5,30,legend=c("Natural treatment","Protected treatment"),
        col=colovec,lty=c(1,2),pch=c(22,19),pt.bg="white",
        bty="n",cex=2,y.intersp=1.3,x.intersp=0.8,lwd=2,seg.len=2)
+mtext(text="A",side=3,cex=2,at=0.1,font=2,las=0,adj=1,line=-0.1)
 
 #Figure B
 graf<-barplot(temp1$mean,density=c(-1,20),angle=c(0,60),border=NA,
@@ -205,6 +206,7 @@ legend(0,98,legend=c("Natural treatment","Protected treatment"),
        fill=colovec,density=c(-1,20),angle=c(0,60),bty="n",border=colovec,
        cex=2,y.intersp=1.3,x.intersp=0.8)
 par(lwd=1)
+mtext(text="B",side=3,cex=2,at=-3,font=2,las=0,adj=1,line=-0.1)
 
 #Figure C
 plot(HeighTr$expmean~HeighTr$year,ylim=c(0,70),type="b",las=1,
@@ -230,6 +232,7 @@ box(lwd=2)
 legend(2009.5,11,legend=c("Natural treatment","Protected treatment"),
        col=colovec,lty=c(1,2),pch=c(22,19),pt.bg="white",
        bty="n",cex=2,y.intersp=1.3,x.intersp=0.8,lwd=2,seg.len=2)
+mtext(text="C",side=3,cex=2,at=2008.1,font=2,las=0,adj=1,line=-0.1)
 par(op)
 #export to .pdf 6 x 18 landscape
 dev.off()
