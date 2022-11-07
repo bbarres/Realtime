@@ -110,10 +110,11 @@ colnames(SurvProp)<-c("Progeny","Natural","Protected")
 SurvProp$PMinf<-tapply(progSurv$oid_moy,INDEX=progSurv$family_simp,
                        FUN=mean,na.rm=TRUE)
 
-#ploting the results (version 1)
+#ploting the results
 pdf(file="output/Figure5_SurvByProg.pdf",width=7,height=7)
 op<-par(mar=c(5.1,4.3,1,1))
-coloor<-brewer.pal(9,"YlOrRd") #with yellow to red gradient
+coloor<-brewer.pal(11,"RdYlGn")[c(11:9,7,5,3:1)] #with green to red gradient
+#another color gradient brewer.pal(9,"YlOrRd") #with yellow to red gradient
 nbbrak<-c(20,21,22,23,24,25,26,27,28)
 plot(SurvProp[,c(3,2)],xlim=c(0,100),ylim=c(0,100),bty="n",
      las=1,pch=21,cex=3,col="black",xaxt="n",yaxt="n",
@@ -131,6 +132,12 @@ axis(2,lwd=2,las=1,font=2)
 box(lwd=2)
 par(op)
 dev.off()
+
+
+##############################################################################/
+#END
+##############################################################################/
+
 
 #ploting the results (version 2)
 pdf(file="output/Figure5_SurvByProg2.pdf",width=7,height=7)
@@ -153,8 +160,3 @@ axis(2,lwd=2,las=1,font=2)
 box(lwd=2)
 par(op)
 dev.off()
-
-
-##############################################################################/
-#END
-##############################################################################/
