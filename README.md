@@ -12,9 +12,12 @@
 ## Datasets
 In this section, you will find the list of the data sets used in this study. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are 5 data sets used in this study.  
 
-+ **AgrAph5.dat:** the first data set contains the data for all the indivudals analyzed. Each line correspond to one individuals and the following information for each individuals can be found in this table: 
++ **datatot.txt:** the main data set which contains all the . Each line correspond to one individuals and the following information for each individuals can be found in this table: 
   + *indiv_ID*: individual's ID, this is a unique string of character
   + *data_batch*: the global dataset can be divided in several sub-projects (AgrAphid, RAtransect, Rpp and Zepeda)
+
++ **lim.hmp.txt.txt and nat.hmp.txt:** two data sets formatted for the GWAS analyses, for the protected and natural treatment respectively
+
 
 
 
