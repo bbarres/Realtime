@@ -8,7 +8,6 @@
 ## Context
  
 
-
 ## Datasets
 In this section, you will find the list of the data sets used in this study. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are 5 data sets used in this study.  
 
@@ -17,16 +16,20 @@ In this section, you will find the list of the data sets used in this study. The
   + *data_batch*: the global dataset can be divided in several sub-projects (AgrAphid, RAtransect, Rpp and Zepeda)
 
 + **lim.hmp.txt.txt and nat.hmp.txt:** two data sets formatted for the GWAS analyses, for the protected and natural treatment respectively
-
-
+  + *indiv_ID*:
 
 
 ## R scripts
 In this section, you will find the list of the different scripts used in the article with a brief description of their purpose.
 
 + **RealTime_load.R:** the script to load the different data sets, functions and packages that are necessary for the data analyses and representation in the R environment. 
-+ **RealTime_fun.R:** functions to perform the delta-K analysis. 
-+ **RealTime_strplot_fun.R:** a function to plot beautiful STRUCTURE-like plot with several parameters to control the output. 
++ **RealTime_evolpheno.R:** script to analyze and plot the evolutionary patterns of the main phenotypic traits over the years.
++ **RealTime_plot_SurvShannon.R:** script to compute the Shannon index evolution and to plot the Figure of the survival and Shannon index evolution. 
++ **RealTime_Fstcomparison.R:** script to compute F-statistics and compare them across the different treatment and time. The output files are stored in a Genepop folder created within the output folder. 
++ **RealTime_GENHET.R:** script to compute intra-individual heterozygosity indices. The code to produce the related Figure is also included. 
++ **RealTime_GWAS.R:** script to perform the Genome-Wide Association analyses for both treatment. This script will produce two folders each containing results from the GWAS analyses. These output files are necessary for plotting the manhattan and GWAS plot. 
++ **RealTime_plot_manhattan.R:** script to plot the manhattan plot Figure. 
++ **RealTime_plot_GWAS.R:** script to  plot the GWAS results for the SNP of interest. 
 
 
 ## R session info
