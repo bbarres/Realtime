@@ -36,7 +36,7 @@ In this section, you will find the list of the data sets used in this study. The
     -   *live_year*:
     -   *na.snp*:
     -   *REF\~CL371CT472_02-163* to *REF\~CL9715CT16278_02-801* (819 columns):
-    -   *trait*:
+    -   *trait_init*:
     - *phenP2_09*:
     - *nbp09*:
     - *oid1_09*:
