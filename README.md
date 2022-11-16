@@ -1,5 +1,6 @@
 [![DOI](https://zenodo.org/badge/41293576.svg)](https://zenodo.org/badge/latestdoi/41293576) 
-# Significant demographic and genetic impacts of powdery mildew in a young oak cohort *This repository contains the R code and SAS scripts used for the data analyses and production of the figures of the related article*
+# Significant demographic and genetic impacts of powdery mildew in a young oak cohort 
+*This repository contains the R code and SAS scripts used for the data analyses and production of the figures of the related article*
 
 ![alt text](https://am3pap005files.storage.live.com/y4mXUw4rIo7I6I-UHrfoPc32YcaZYoOIM_R2-WK8ZLDnMrfurYfJ5FV2WjlTIh_idbaCJMyDFBGPAnA3lwmFOaY_6M5ra2vfzfOiobz1ENwdeA1QbGCTFYXnkZznKUDZXRVNRsXyB7KCZzHJLIFI1B8rqivCd0_12NtVbUs-X7a5FWMEHdFaMUfnwWvsiDjm8JU?width=1584&height=588&cropmode=none)
 
