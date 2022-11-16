@@ -161,6 +161,8 @@ For reproducibility purpose, you will find all the information about the version
 
 ## Citation
 
-You will be soon (hopefully) able to cite the related study as follow: + Barrès B., Saint-Jean G., Lepoittevin C., Burban C., Garnier-Géré P., Dutech C. and Desprez-Loustau M.-L. [Significant demographic and genetic impacts of powdery mildew in a young oak cohort. *journal name*.](https://)
+You will be soon (hopefully) able to cite the related study as follow: 
++ Barrès B., Saint-Jean G., Lepoittevin C., Burban C., Garnier-Géré P., Dutech C. and Desprez-Loustau M.-L. [Significant demographic and genetic impacts of powdery mildew in a young oak cohort. *journal name*.](https://)
 
-If you want to use (some of) the code found on this page or if you want to cite this repository: + Benoit Barrès and Marie-Laure Desprez-Loustau. [Supporting data and code for: Significant demographic and genetic impacts of powdery mildew in a young oak cohort. Zenodo.](https://zenodo.org/badge/latestdoi/sss)
+If you want to use (some of) the code found on this page or if you want to cite this repository: 
++ Benoit Barrès and Marie-Laure Desprez-Loustau. [Supporting data and code for: Significant demographic and genetic impacts of powdery mildew in a young oak cohort. Zenodo.](https://zenodo.org/badge/latestdoi/sss)
