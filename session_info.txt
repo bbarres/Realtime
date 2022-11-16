@@ -8,8 +8,8 @@
  collate  French_France.utf8
  ctype    French_France.utf8
  tz       Europe/Paris
- date     2022-11-08
- rstudio  2022.07.1+554 Spotted Wakerobin (desktop)
+ date     2022-11-16
+ rstudio  2022.07.2+576 Spotted Wakerobin (desktop)
  pandoc   NA
 
 ─ Packages ───────────────────────────────────────────────────────────────────────
