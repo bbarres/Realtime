@@ -34,9 +34,111 @@ In this section, you will find the list of the data sets used in this study. The
     -   *live_year*:
     -   *na.snp*:
     -   *REF\~CL371CT472_02-163* to *REF\~CL9715CT16278_02-801* (819 columns):
-    -   
--   **lim.hmp.txt.txt and nat.hmp.txt:** two data sets formatted for the GWAS analyses, for the protected and natural treatment respectively
+    -   *trait*:
+    - *phenP2_09*:
+    - *nbp09*:
+    - *oid1_09*:
+    - *oid2_09*:
+    - *oid3_09*:
+    - *oid4_09*:
+    - *nec1_09*:
+    - *nec2_09*:
+    - *herbi1_09*:
+    - *herbi2_09*:
+    - *herbi3_09*:
+    - *herbi4_09*:
+    - *phen1_10*:
+    - *phen2_10*:
+    - *phen3_10*:
+    - *phen4_10*:
+    - *phen5_10*:
+    - *phenP2_10*:
+    - *nbp10*:
+    - *mortapex10*:
+    - *oid1_10*:
+    - *oid2_10*:
+    - *oid3_10*:
+    - *oid3P1_10*:
+    - *oid3P2_10*:
+    - *oid4_10*:
+    - *oid5_10*:
+    - *herbi1_10*:
+    - *herbi2_10*:
+    - *nbp11*:
+    - *phen1_11*:
+    - *phen2_11*:
+    - *phen3_11*:
+    - *phen4_11*:
+    - *phenP2_11*:
+    - *phenP3_11*:
+    - *oid1_11*:
+    - *oid2_11*:
+    - *oid3_11*:
+    - *oid4_11*:
+    - *oid4P2_11*:
+    - *oid5_11*:
+    - *herbi_11*:
+    - *phen1_12*:
+    - *phen2_12*:
+    - *phen3_12*:
+    - *phen4_12*:
+    - *phen5_12*:
+    - *oid1_12*:
+    - *oid2_12*:
+    - *oid3_12*:
+    - *oid4_12*:
+    - *nbp_12*:
+    - *phen1_13*:
+    - *gel_13*:
+    - *oid1_13*:
+    - *oid2_13*:
+    - *oid3_13*:
+    - *oid1_14*:
+    - *oid2_14*:
+    - *oid_16*:
+    - *oid_17*:
+    - *drap10*:
+    - *drap11*:
+    - *drap12*:
+    - *drap13*:
+    - *drap15*:
+    - *freq_drap*:
+    - *pgland*:
+    - *date_em*:
+    - *Hfin09*:
+    - *Hfin10*:
+    - *Hfin11*:
+    - *Hfin12*:
+    - *Hdeb14*:
+    - *Hdeb15*:
+    - *Hdeb16*:
+    - *Hdeb17*:
+    - *diam16*:
+    - *an_mort*:
+    - *H09v*:
+    - *H10v*:
+    - *H11v*:
+    - *H12v*:
+    - *H14v*:
+    - *H15v*:
+    - *H16v*:
+    - *H17v*:
+    - *cr10*:
+    - *cr11*:
+    - *cr12*:
+    - *cr13*:
+    - *cr14*:
+    - *cr15*:
+    - *cr16*:
+    - *esp*:
+    - *statut*:
+    - *treat*:
+    - *oid_moy*:
+    - *statut10*:
+    
+-   **lim.hmp.txt.txt** and **nat.hmp.txt:** two data sets formatted for the GWAS analyses, for the protected and natural treatment respectively
     -   *indiv_ID*:
+
 
 ## R scripts
 
