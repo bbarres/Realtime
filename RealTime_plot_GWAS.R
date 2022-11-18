@@ -54,7 +54,7 @@ text(0.5,0.5,"Height (cm)",font=2,cex=2.5)
 plot.new()
 text(0.5,0.5,"Powdery mildew\ninfection",font=2,cex=2.5)
 plot.new()
-text(0.5,0.7,"Mortality rate (%)",font=2,cex=2.5)
+text(0.5,0.7,"Mortality (%)",font=2,cex=2.5)
 legend(0.25,0.55,legend=c("Natural treatment","Protected treatment"),
        fill=c(colnat[3],colprt[3]),border=c(colnat[3],colprt[3]),
        density=c(-1,20),angle=c(0,60),bty="n",
