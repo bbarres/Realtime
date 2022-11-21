@@ -148,7 +148,7 @@ ManhaPlot(SuLim,colovec[1:2],colosign,
 par(mar=c(1,5,2.5,0.5))
 ManhaPlot(PMNat,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,8))
-title(main="Powdery mildew",font=2,cex.main=3,line=0.7)
+title(main="Mean Powdery mildew infection",font=2,cex.main=3,line=0.7)
 par(mar=c(2,5,1.5,0.5))
 ManhaPlot(PMLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(8,0))
