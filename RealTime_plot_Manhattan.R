@@ -109,7 +109,7 @@ op<-par(mfrow=c(2,1),mar=c(1,5,3,0.5))
 #Acorn weight
 ManhaPlot(AcNat,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,8))
-title(main="Acorn weight",font=2,cex.main=3)
+title(main="Acorn weight",font=2,cex.main=3,line=1)
 legend(-50000000,8.7,legend=c("Exposed","Protected"),xpd=TRUE,
        pch=22,pt.cex=4,pt.lwd=4,cex=1.3,
        pt.bg=colovec[c(1,3)],col=colovec[c(2,4)],bty="n",
@@ -128,11 +128,11 @@ par(op)
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4])
 colosign<-brewer.pal(9,"YlOrRd")[c(4,6,8)]
 pdf(file="output/Figure_Manhat.pdf",width=10,height=13)
-op<-par(mfrow=c(8,1),mar=c(1,5,2.5,0.5))
+op<-par(mfrow=c(8,1),mar=c(1,5,2.7,0.5))
 #survival
 ManhaPlot(SuNat,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,11))
-title(main="Survival",font=2,cex.main=3)
+title(main="Survival",font=2,cex.main=3,line=0.7)
 legend(-35000000,11.5,legend=c("Natural","Protected"),xpd=TRUE,
        pch=22,pt.cex=4,pt.lwd=4,cex=1.4,
        pt.bg=colovec[c(3,1)],col=colovec[c(4,2)],bty="n",
@@ -148,7 +148,7 @@ ManhaPlot(SuLim,colovec[1:2],colosign,
 par(mar=c(1,5,2.5,0.5))
 ManhaPlot(PMNat,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,8))
-title(main="Powdery mildew",font=2,cex.main=3)
+title(main="Powdery mildew",font=2,cex.main=3,line=0.7)
 par(mar=c(2,5,1.5,0.5))
 ManhaPlot(PMLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(8,0))
@@ -156,7 +156,7 @@ ManhaPlot(PMLim,colovec[1:2],colosign,
 par(mar=c(1,5,2.5,0.5))
 ManhaPlot(HeNat,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,8))
-title(main="Height",font=2,cex.main=3)
+title(main="Height",font=2,cex.main=3,line=0.7)
 par(mar=c(2,5,1.5,0.5))
 ManhaPlot(HeLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(8,0))
@@ -164,7 +164,7 @@ ManhaPlot(HeLim,colovec[1:2],colosign,
 par(mar=c(1,5,2.5,0.5))
 ManhaPlot(AcNat,colovec[3:4],colosign,
           decalCHR=40000000,desiXax=1,ylimi=c(0,9))
-title(main="Acorn weight",font=2,cex.main=3)
+title(main="Acorn weight",font=2,cex.main=3,line=0.7)
 par(mar=c(2,5,1.5,0.5))
 ManhaPlot(AcLim,colovec[1:2],colosign,
           decalCHR=40000000,desiXax=0,ylimi=c(9,0))
