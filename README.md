@@ -14,10 +14,10 @@
 In this section, you will find the list of the data sets used in this study. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are 5 data sets used in this study.
 
 - **datatot.txt:** the main data set which contains all the . Each line correspond to one individuals and the following information for each individuals can be found in this table:
-    - *Sample_ID*:
-    - *family*:
-    - *family_simp*:
-    - *parent_id*:
+    - *Sample_ID*: unique identification number for each sample
+    - *family*: to which family the sample belongs to. Only the family with a number as a family ID are of interest for this study
+    - *family_simp*: same information as the "family" variable, but with simplified coding
+    - *parent_id*: 
     - *bloc*:
     - *PU*:
     - *rg*:
