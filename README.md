@@ -17,13 +17,13 @@ In this section, you will find the list of the data sets used in this study. The
     - *Sample_ID*: unique identification number for each sample
     - *family*: to which family the sample belongs to. Only the family with a number as a family ID are of interest for this study
     - *family_simp*: same information as the "family" variable, but with simplified coding
-    - *parent_id*: 
-    - *bloc*:
-    - *PU*:
-    - *rg*:
-    - *n*:
-    - *coord_X*:
-    - *coord_Y*:
+    - *parent_id*: ID of the identified mother for the individual
+    - *bloc*: experimental design block ID
+    - *PU*: unitary plot ID
+    - *rg*: rank number within the unitary plot
+    - *n*: 
+    - *coord_X*: X coordinates in the general experimental setting, used for producing the map of the experimental setting in the supplementary material
+    - *coord_Y*: Y coordinates in the general experimental setting, used for producing the map of the experimental setting in the supplementary material
     - *na.9micro*:
     - *na.12micro*:
     - *barcode*:
@@ -37,7 +37,7 @@ In this section, you will find the list of the data sets used in this study. The
     - *father.snp*:
     - *live_bin*:
     - *live_year*:
-    - *na.snp*:
+    - *na.snp*: total number of missing information for all 819 selected SNP
     - *REF\~CL371CT472_02-163* to *REF\~CL9715CT16278_02-801* (819 columns):
     - *trait_init*:
     - *phenP2_09*:
