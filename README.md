@@ -28,11 +28,11 @@ In this section, you will find the list of the data sets used in this study. The
     - *na.12micro*: number of missing data for an individual for the 12 microsatellites
     - *barcode*: barcode ID for the GoldenGate Assay
     - *A11_all1* to *S19_all2* (24 columns): each pairs of column give the genotype for a microsatellite marker. The number represent the allele size in base pair
-    - *nb_conta_12*:
-    - *nb_conta_09*:
-    - *SNPage*:
-    - *Quality_SNPage*:
-    - *pb_robot_SNPage*:
+    - *nb_conta_12*: number of contaminations for the 12 microsatellite markers. A contamination is counted when 3 or more alleles have been detected for a locus
+    - *nb_conta_09*: number of contaminations for the 9 best microsatellite markers. A contamination is counted when 3 or more alleles have been detected for a locus
+    - *SNPage*: is the individual have been included in the GoldenGate Assay (1=included; 0=not included)
+    - *Quality_SNPage*: for the GoldenGate genotyped individuals, was the quality of genotyping good or not (1=good quality; 0=poor quality)
+    - *pb_robot_SNPage*: for some individuals, the volume of DNA added to the PCR reaction was reduced due to a problem with the pipetting robot (1=pipetting problem; 0=no pipetting problem)
     - *mother.snp*:
     - *father.snp*:
     - *live_bin*:
