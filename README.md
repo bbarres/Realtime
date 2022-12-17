@@ -24,10 +24,10 @@ In this section, you will find the list of the data sets used in this study. The
     - *n*: 
     - *coord_X*: X coordinates in the general experimental setting, used for producing the map of the experimental setting in the supplementary material
     - *coord_Y*: Y coordinates in the general experimental setting, used for producing the map of the experimental setting in the supplementary material
-    - *na.9micro*:
-    - *na.12micro*:
-    - *barcode*:
-    - *A11_all1* to *S19_all2* (24 columns):
+    - *na.9micro*: number of missing data for an individual for the 9 best microsatellites
+    - *na.12micro*: number of missing data for an individual for the 12 microsatellites
+    - *barcode*: barcode ID for the GoldenGate Assay
+    - *A11_all1* to *S19_all2* (24 columns): each pairs of column give the genotype for a microsatellite marker. The number represent the allele size in base pair
     - *nb_conta_12*:
     - *nb_conta_09*:
     - *SNPage*:
