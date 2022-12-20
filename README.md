@@ -15,7 +15,7 @@ In this section, you will find the list of the data sets used in this study for 
 
 - **datatot.txt:** the main data set which contains all the . Each line correspond to one individuals and the following information for each individuals can be found in this table:
     - *Sample_ID*: unique identification number for each sample
-    - *family*: to which family the sample belongs to. Only the family with a number as a family ID are of interest for this study
+    - *family*: to which family the individual belongs to. Only the family with a number as a family ID are of interest for this study. The family has been checked using a parentage analysis to confirm the mother tree when genetic data were available. If no genetic data were available, this is simply the original family ID of the acorn
     - *family_simp*: same information as the "family" variable, but with simplified coding
     - *parent_id*: ID of the identified mother for the individual
     - *bloc*: experimental design block ID
@@ -33,10 +33,10 @@ In this section, you will find the list of the data sets used in this study for 
     - *SNPage*: is the individual have been included in the GoldenGate Assay (1=included; 0=not included)
     - *Quality_SNPage*: for the GoldenGate genotyped individuals, was the quality of genotyping good or not (1=good quality; 0=poor quality)
     - *pb_robot_SNPage*: for some individuals, the volume of DNA added to the PCR reaction was reduced due to a problem with the pipetting robot (1=pipetting problem; 0=no pipetting problem)
-    - *mother.snp*:
-    - *father.snp*:
-    - *live_bin*:
-    - *live_year*:
+    - *mother.snp*: the mother ID based on a parentage analysis on the 819 SNP information. If one the parental ID match the original ID of the acorn, the mother ID is kept. If the parentage analysis identify another mother tree, the ID is changed to the genetic match. If the parentage analysis doesn't identify one of the original mother tree, the ID is set to missing (="NA")
+    - *father.snp*: the father ID based on a parentage analysis on the 819 SNP information. It can only be one of the mother tree or one of the adult tree from the vicinity of the mother trees that were sampled while collecting the acorn
+    - *live_bin*: is the juvenile still alive in 2017 ? ("1"=yes; "0"=no)
+    - *live_year*: year of the death of the juvenile (from "2009"" to "2017"; "vivant" if the juvenile was still alive in 2017)
     - *na.snp*: total number of missing information for all 819 selected SNP
     - *REF\~CL371CT472_02-163* to *REF\~CL9715CT16278_02-801* (819 columns):
     - *trait_init*:
@@ -167,6 +167,11 @@ For reproducibility purpose, you will find all the information about the version
 ## SAS Datasets
 
 In this section, you will find the list of the data sets used in this study for SAS analyses and Figures production. The data files can be found in the "dataSAS" folder. For the data tables, the name of the different variables are listed and explained as well. There are 5 data sets used in this study.
+
+
+## SAS scripts
+
+In this section, you will find the list of the different scripts used in the article with a brief description of their purpose.
 
 
 ## Citation
