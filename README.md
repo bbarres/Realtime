@@ -15,13 +15,13 @@ In this section, you will find the list of the data sets used in this study for 
 
 - **datatot.txt:** the main data set which contains all the . Each line correspond to one individuals and the following information for each individuals can be found in this table:
     - *Sample_ID*: unique identification number for each sample
-    - *family*: to which family the individual belongs to. Only the family with a number as a family ID are of interest for this study. The family has been checked using a parentage analysis to confirm the mother tree when genetic data were available. If no genetic data were available, this is simply the original family ID of the acorn
-    - *family_simp*: same information as the "family" variable, but with simplified coding
+    - *family*: which family the individual belongs to. Only the 15 principal families with a number as a family ID ("1", "9", "11", "27", "45", "48", "51", "70", "71", "72", "73", "74", "75", "76", "77") are of interest for this study. The family has been checked using a parentage analysis to confirm the mother tree when genetic data were available. If no genetic data were available, this is simply the original family ID of the acorn. Using genotyping tools, a few individuals were identified as not belonging to one of the 15 original families ("26" and "99"). Individuals used to surround the individuals included in the experimental design to limit boundary effects are labeled "hd". Individuals labelled "3P", "3P tv", "A4", "cc" and "cc-cast" belong to a controlled crossing not investigated in this study. Individuals labeled "asc" are potential father trees. 
+    - *family_simp*: same information as the "family" variable, but with simplified coding (all the controlled crossing individuals are labeled "CC" and the "asc" individuals are labeled "PAR")
     - *parent_id*: ID of the identified mother for the individual
-    - *bloc*: experimental design block ID
+    - *bloc*: block ID in the experimental design
     - *PU*: unitary plot ID
-    - *rg*: rank number within the unitary plot
-    - *n*: 
+    - *rg*: rank number within the unitary plot. There are 12 rank per block
+    - *n*: individual number on the rank. There are a maximum of 48 position on a rank
     - *coord_X*: X coordinates in the general experimental setting, used for producing the map of the experimental setting in the supplementary material
     - *coord_Y*: Y coordinates in the general experimental setting, used for producing the map of the experimental setting in the supplementary material
     - *na.9micro*: number of missing data for an individual for the 9 best microsatellites
@@ -38,7 +38,7 @@ In this section, you will find the list of the data sets used in this study for 
     - *live_bin*: is the juvenile still alive in 2017 ? ("1"=yes; "0"=no)
     - *live_year*: year of the death of the juvenile (from "2009"" to "2017"; "vivant" if the juvenile was still alive in 2017)
     - *na.snp*: total number of missing information for all 819 selected SNP
-    - *REF\~CL371CT472_02-163* to *REF\~CL9715CT16278_02-801* (819 columns):
+    - *REF\~CL371CT472_02-163* to *REF\~CL9715CT16278_02-801* (819 columns): the genotype for each of the 819 SNPs selected for the analysis. Oak being diploids, the genotype is indicated by 2 letters coding for the nucleotide (one for each copy of the genome) separated by a slash
     - *trait_init*:
     - *phenP2_09*:
     - *nbp09*:
