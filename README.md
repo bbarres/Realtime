@@ -38,7 +38,7 @@ In this section, you will find the list of the data sets used in this study for 
     - *live_bin*: is the juvenile still alive in 2017 ? ("1"=yes; "0"=no)
     - *live_year*: year of the death of the juvenile (from "2009"" to "2017"; "vivant" if the juvenile was still alive in 2017)
     - *na.snp*: total number of missing information for all 819 selected SNP
-    - *REF\~CL371CT472_02-163* to *REF\~CL9715CT16278_02-801* (819 columns): the genotype for each of the 819 SNPs selected for the analysis. Oak being diploids, the genotype is indicated by 2 letters coding for the nucleotide (one for each copy of the genome) separated by a slash
+    - *REF\~CL371CT472_02-163* to *REF\~CL9715CT16278_02-801* (819 columns): the allele combination for each of the 819 SNPs successfully genotyped. Oak being diploids, the genotype is indicated by 2 letters coding for the nucleotide (one for each copy of the genome) separated by a slash
     - *trait_init*:
     - *phenP2_09*:
     - *nbp09*:
@@ -108,8 +108,8 @@ In this section, you will find the list of the data sets used in this study for 
     - *drap13*:
     - *drap15*:
     - *freq_drap*:
-    - *pgland*:
-    - *date_em*:
+    - *pgland*: mass of the acorn (grams)
+    - *date_em*: date of acorn raising
     - *Hfin09*:
     - *Hfin10*:
     - *Hfin11*:
