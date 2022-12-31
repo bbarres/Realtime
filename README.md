@@ -108,7 +108,7 @@ In this section, you will find the list of the data sets used in this study for 
     - *drap13*:
     - *drap15*:
     - *freq_drap*:
-    - *pgland*: mass of the acorn (grams)
+    - *pgland*: weight of the acorn (grams)
     - *date_em*: date of acorn raising
     - *Hfin09*:
     - *Hfin10*:
@@ -119,7 +119,7 @@ In this section, you will find the list of the data sets used in this study for 
     - *Hdeb16*:
     - *Hdeb17*:
     - *diam16*:
-    - *an_mort*:
+    - *an_mort*: year of death of the juvenile oak
     - *H09v*:
     - *H10v*:
     - *H11v*:
@@ -139,7 +139,7 @@ In this section, you will find the list of the data sets used in this study for 
     - *statut*:
     - *treat*:
     - *oid_moy*:
-    - *statut10*:
+    - *statut10*: dead or alive status of the plant in 2017 coded as a binary variable (0=dead; 1=alive)
     
 - **lim.hmp.txt.txt** and **nat.hmp.txt:** two data sets formatted for the GWAS analyses, for the protected and natural treatment respectively
     - *indiv_ID*:
