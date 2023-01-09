@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/41293576.svg)](https://zenodo.org/badge/latestdoi/41293576) 
+[![DOI](https://zenodo.org/badge/33980368.svg)](https://zenodo.org/badge/latestdoi/33980368) 
 # Significant demographic and genetic impacts of powdery mildew in a young oak cohort 
 *This repository contains the R code and SAS scripts used for the data analyses and production of the figures of the related article*
 
@@ -180,4 +180,4 @@ You will be soon (hopefully) able to cite the related study as follow:
 + Barrès B., Saint-Jean G., Lepoittevin C., Burban C., Garnier-Géré P., Dutech C. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. *journal name*.](https://)
 
 If you want to use (some of) the code found on this page or if you want to cite this repository: 
-+ Benoit Barrès and Marie-Laure Desprez-Loustau. [Supporting data and code for: Demographic and genetic impacts of powdery mildew in a young oak cohort. Zenodo.](https://zenodo.org/badge/latestdoi/sss)
++ Benoit Barrès and Marie-Laure Desprez-Loustau. [Supporting data and code for: Demographic and genetic impacts of powdery mildew in a young oak cohort. Zenodo.](https://zenodo.org/badge/latestdoi/33980368)
