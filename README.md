@@ -120,25 +120,25 @@ In this section, you will find the list of the data sets used in this study for 
     - *Hdeb17*:
     - *diam16*:
     - *an_mort*: year of death of the juvenile oak
-    - *H09v*:
-    - *H10v*:
-    - *H11v*:
-    - *H12v*:
-    - *H14v*:
-    - *H15v*:
-    - *H16v*:
-    - *H17v*:
-    - *cr10*:
-    - *cr11*:
-    - *cr12*:
-    - *cr13*:
-    - *cr14*:
-    - *cr15*:
-    - *cr16*:
+    - *H09v*: size at the end of the year 2009 in cm (measured from the highest living shoot of the individual)
+    - *H10v*: size at the end of the year 2010 in cm (measured from the highest living shoot of the individual)
+    - *H11v*: size at the end of the year 2011 in cm (measured from the highest living shoot of the individual)
+    - *H12v*: size at the end of the year 2012 in cm (measured from the highest living shoot of the individual)
+    - *H14v*: size at the end of the year 2014 in cm (measured from the highest living shoot of the individual)
+    - *H15v*: size at the end of the year 2015 in cm (measured from the highest living shoot of the individual)
+    - *H16v*: size at the end of the year 2016 in cm (measured from the highest living shoot of the individual)
+    - *H17v*: size at the end of the year 2017 in cm (measured from the highest living shoot of the individual)
+    - *cr10*: growth in cm for the year 2010 (can be negative)
+    - *cr11*: growth in cm for the year 2011 (can be negative)
+    - *cr12*: growth in cm for the year 2012 (can be negative)
+    - *cr13*: growth in cm for the year 2013 (can be negative)
+    - *cr14*: growth in cm for the year 2014 (can be negative)
+    - *cr15*: growth in cm for the year 2015 (can be negative)
+    - *cr16*: growth in cm for the year 2016 (can be negative)
     - *esp*:
-    - *statut*:
-    - *treat*:
-    - *oid_moy*:
+    - *statut*: dead or alive status of the plant in 2017 coded as "viva" for plant still alive and "mort" for dead plants (NA for missing data)
+    - *treat*: final treatment category "exp" for exposed to powdery mildew and "low" for plot with powdery mildew infection limited by the use of fungicide
+    - *oid_moy*: mean powdery mildew infection score between 2009 and 2013
     - *statut10*: dead or alive status of the plant in 2017 coded as a binary variable (0=dead; 1=alive)
     
 - **lim.hmp.txt.txt** and **nat.hmp.txt:** two data sets formatted for the GWAS analyses, for the protected and natural treatment respectively
