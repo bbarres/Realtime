@@ -39,8 +39,8 @@ In this section, you will find the list of the data sets used in this study for 
     - *live_year*: year of the death of the juvenile (from "2009"" to "2017"; "vivant" if the juvenile was still alive in 2017)
     - *na.snp*: total number of missing information for all 819 selected SNP
     - *REF\~CL371CT472_02-163* to *REF\~CL9715CT16278_02-801* (819 columns): the allele combination for each of the 819 SNPs successfully genotyped. Oak being diploids, the genotype is indicated by 2 letters coding for the nucleotide (one for each copy of the genome) separated by a slash
-    - *trait_init*:
-    - *phenP2_09*:
+    - *trait_init*: initial coding of the treatment of the plot ("nat" for natural treatment, "renf" for treatment with additional inoculum and "lim" for plot treated with a fungicide)
+    - *phenP2_09*: scoring of the phenology of the second shoot of the individual on a scale from 0 to 4 for 2009 (NA for missing information)
     - *nbp09*:
     - *oid1_09*:
     - *oid2_09*:
@@ -52,12 +52,12 @@ In this section, you will find the list of the data sets used in this study for 
     - *herbi2_09*:
     - *herbi3_09*:
     - *herbi4_09*:
-    - *phen1_10*:
-    - *phen2_10*:
-    - *phen3_10*:
-    - *phen4_10*:
-    - *phen5_10*:
-    - *phenP2_10*:
+    - *phen1_10*: first scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
+    - *phen2_10*: second scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
+    - *phen3_10*: third scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
+    - *phen4_10*: fourth scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
+    - *phen5_10*: fifth scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
+    - *phenP2_10*: scoring of the phenology of the second shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
     - *nbp10*:
     - *mortapex10*:
     - *oid1_10*:
@@ -70,12 +70,12 @@ In this section, you will find the list of the data sets used in this study for 
     - *herbi1_10*:
     - *herbi2_10*:
     - *nbp11*:
-    - *phen1_11*:
-    - *phen2_11*:
-    - *phen3_11*:
-    - *phen4_11*:
-    - *phenP2_11*:
-    - *phenP3_11*:
+    - *phen1_11*: first scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
+    - *phen2_11*: second scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
+    - *phen3_11*: third scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
+    - *phen4_11*: fourth scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
+    - *phenP2_11*: scoring of the phenology of the second shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
+    - *phenP3_11*: scoring of the phenology of the third shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
     - *oid1_11*:
     - *oid2_11*:
     - *oid3_11*:
@@ -83,17 +83,17 @@ In this section, you will find the list of the data sets used in this study for 
     - *oid4P2_11*:
     - *oid5_11*:
     - *herbi_11*:
-    - *phen1_12*:
-    - *phen2_12*:
-    - *phen3_12*:
-    - *phen4_12*:
-    - *phen5_12*:
+    - *phen1_12*: first scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2012 (NA for missing information)
+    - *phen2_12*: second scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2012 (NA for missing information)
+    - *phen3_12*: third scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2012 (NA for missing information)
+    - *phen4_12*: fourth scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2012 (NA for missing information)
+    - *phen5_12*: fifth scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2012 (NA for missing information)
     - *oid1_12*:
     - *oid2_12*:
     - *oid3_12*:
     - *oid4_12*:
     - *nbp_12*:
-    - *phen1_13*:
+    - *phen1_13*: first scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2013 (NA for missing information)
     - *gel_13*:
     - *oid1_13*:
     - *oid2_13*:
