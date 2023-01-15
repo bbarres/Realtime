@@ -41,84 +41,84 @@ In this section, you will find the list of the data sets used in this study for 
     - *REF\~CL371CT472_02-163* to *REF\~CL9715CT16278_02-801* (819 columns): the allele combination for each of the 819 SNPs successfully genotyped. Oak being diploids, the genotype is indicated by 2 letters coding for the nucleotide (one for each copy of the genome) separated by a slash
     - *trait_init*: initial coding of the treatment of the plot ("nat" for natural treatment, "renf" for treatment with additional inoculum and "lim" for plot treated with a fungicide)
     - *phenP2_09*: scoring of the phenology of the second shoot of the individual on a scale from 0 to 4 for 2009 (NA for missing information)
-    - *nbp09*:
-    - *oid1_09*:
-    - *oid2_09*:
-    - *oid3_09*:
-    - *oid4_09*:
-    - *nec1_09*:
-    - *nec2_09*:
-    - *herbi1_09*:
-    - *herbi2_09*:
-    - *herbi3_09*:
-    - *herbi4_09*:
+    - *nbp09*: number of shoots in 2009, ranging from 1 to 4 (NA for missing information)
+    - *oid1_09*: first powdery mildew infection note for 2009 (NA for missing information)
+    - *oid2_09*: second powdery mildew infection note for 2009 (NA for missing information)
+    - *oid3_09*: third powdery mildew infection note for 2009 (NA for missing information)
+    - *oid4_09*: fourth powdery mildew infection note for 2009 (NA for missing information)
+    - *nec1_09*: first note of leaf necrosis for the year 2009 (NA for missing information)
+    - *nec2_09*: second note of leaf necrosis for the year 2009 (NA for missing information)
+    - *herbi1_09*: first herbivore damage note for 2009 (NA for missing information)
+    - *herbi2_09*: second herbivore damage note for 2009 (NA for missing information)
+    - *herbi3_09*: third herbivore damage note for 2009 (NA for missing information)
+    - *herbi4_09*: fourth herbivore damage note for 2009 (NA for missing information)
     - *phen1_10*: first scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
     - *phen2_10*: second scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
     - *phen3_10*: third scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
     - *phen4_10*: fourth scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
     - *phen5_10*: fifth scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
     - *phenP2_10*: scoring of the phenology of the second shoot of the individual on a scale from 0 to 4 for 2010 (NA for missing information)
-    - *nbp10*:
-    - *mortapex10*:
-    - *oid1_10*:
-    - *oid2_10*:
-    - *oid3_10*:
-    - *oid3P1_10*:
-    - *oid3P2_10*:
-    - *oid4_10*:
-    - *oid5_10*:
-    - *herbi1_10*:
-    - *herbi2_10*:
-    - *nbp11*:
+    - *nbp10*: number of shoots in 2010, ranging from 1 to 5 (NA for missing information)
+    - *mortapex10*: observed apical mortality in 2010 (NA for missing information)
+    - *oid1_10*: first powdery mildew infection note for 2010 (NA for missing information)
+    - *oid2_10*: second powdery mildew infection note for 2010 (NA for missing information)
+    - *oid3_10*: third powdery mildew infection note for 2010 (NA for missing information)
+    - *oid3P1_10*: third powdery mildew infection note for 2010 on the first shoot only (NA for missing information)
+    - *oid3P2_10*: third powdery mildew infection note for 2010 on the second shoot only (NA for missing information)
+    - *oid4_10*: fourth powdery mildew infection note for 2010 (NA for missing information)
+    - *oid5_10*: fifth powdery mildew infection note for 2010 (NA for missing information)
+    - *herbi1_10*: first herbivore damage note for 2010 (NA for missing information)
+    - *herbi2_10*: second herbivore damage note for 2010 (NA for missing information)
+    - *nbp11*: number of shoots in 2011, ranging from 1 to 4 (NA for missing information)
     - *phen1_11*: first scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
     - *phen2_11*: second scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
     - *phen3_11*: third scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
     - *phen4_11*: fourth scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
     - *phenP2_11*: scoring of the phenology of the second shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
     - *phenP3_11*: scoring of the phenology of the third shoot of the individual on a scale from 0 to 4 for 2011 (NA for missing information)
-    - *oid1_11*:
-    - *oid2_11*:
-    - *oid3_11*:
-    - *oid4_11*:
-    - *oid4P2_11*:
-    - *oid5_11*:
-    - *herbi_11*:
+    - *oid1_11*: first powdery mildew infection note for 2011 (NA for missing information)
+    - *oid2_11*: second powdery mildew infection note for 2011 (NA for missing information)
+    - *oid3_11*: third powdery mildew infection note for 2011 (NA for missing information)
+    - *oid4_11*: fourth powdery mildew infection note for 2011 (NA for missing information)
+    - *oid4P2_11*: fourth powdery mildew infection note for 2011 on the second shoot only (NA for missing information)
+    - *oid5_11*: fifth powdery mildew infection note for 2011 (NA for missing information)
+    - *herbi_11*: herbivore damage note for 2011 (NA for missing information)
     - *phen1_12*: first scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2012 (NA for missing information)
     - *phen2_12*: second scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2012 (NA for missing information)
     - *phen3_12*: third scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2012 (NA for missing information)
     - *phen4_12*: fourth scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2012 (NA for missing information)
     - *phen5_12*: fifth scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2012 (NA for missing information)
-    - *oid1_12*:
-    - *oid2_12*:
-    - *oid3_12*:
-    - *oid4_12*:
-    - *nbp_12*:
+    - *oid1_12*: first powdery mildew infection note for 2012 (NA for missing information)
+    - *oid2_12*: second powdery mildew infection note for 2012 (NA for missing information)
+    - *oid3_12*: third powdery mildew infection note for 2012 (NA for missing information)
+    - *oid4_12*: fourth powdery mildew infection note for 2012 (NA for missing information)
+    - *nbp_12*: number of shoots in 2012, ranging from 1 to 5 (NA for missing information)
     - *phen1_13*: first scoring of the phenology of the first shoot of the individual on a scale from 0 to 4 for 2013 (NA for missing information)
-    - *gel_13*:
-    - *oid1_13*:
-    - *oid2_13*:
-    - *oid3_13*:
-    - *oid1_14*:
-    - *oid2_14*:
-    - *oid_16*:
-    - *oid_17*:
-    - *drap10*:
-    - *drap11*:
-    - *drap12*:
-    - *drap13*:
-    - *drap15*:
-    - *freq_drap*:
+    - *gel_13*: individual affected by frost in 2013 ("0" = no, "1"= yes, "NA" = missing information)
+    - *oid1_13*: first powdery mildew infection note for 2013 (NA for missing information)
+    - *oid2_13*: second powdery mildew infection note for 2013 (NA for missing information)
+    - *oid3_13*: third powdery mildew infection note for 2013 (NA for missing information)
+    - *oid1_14*: first powdery mildew infection note for 2014 (NA for missing information)
+    - *oid2_14*: second powdery mildew infection note for 2014 (NA for missing information)
+    - *oid_16*: powdery mildew infection note for 2016 (NA for missing information)
+    - *oid_17*: powdery mildew infection note for 2017 (NA for missing information)
+    - *drap10*: flagshoot symptoms detected in 2010 ("0" = no, "1"= yes, "NA" = missing information)
+    - *drap11*: flagshoot symptoms detected in 2011 ("0" = no, "1"= yes, "NA" = missing information)
+    - *drap12*: flagshoot symptoms detected in 2012 ("0" = no, "1"= yes, "NA" = missing information)
+    - *drap13*: flagshoot symptoms detected in 2013 ("0" = no, "1"= yes, "NA" = missing information)
+    - *drap15*: flagshoot symptoms detected in 2015 ("0" = no, "1"= yes, "NA" = missing information)
+    - *freq_drap*: frequency of flagshoot symptoms detection between 2010 and 2015 (from 0 to 3, "NA" = missing information)
     - *pgland*: weight of the acorn (grams)
     - *date_em*: date of acorn raising
-    - *Hfin09*:
-    - *Hfin10*:
-    - *Hfin11*:
-    - *Hfin12*:
-    - *Hdeb14*:
-    - *Hdeb15*:
-    - *Hdeb16*:
-    - *Hdeb17*:
-    - *diam16*:
+    - *Hfin09*: height measured at the end of 2009 (cm)
+    - *Hfin10*: height measured at the end of 2010 (cm)
+    - *Hfin11*: height measured at the end of 2011 (cm)
+    - *Hfin12*: height measured at the end of 2012 (cm)
+    - *Hdeb14*: height measured at the beginning of 2014 (cm)
+    - *Hdeb15*: height measured at the beginning of 2015 (cm)
+    - *Hdeb16*: height measured at the beginning of 2016 (cm)
+    - *Hdeb17*: height measured at the beginning of 2017 (cm)
+    - *diam16*: diameter measured in 2016 (cm)
     - *an_mort*: year of death of the juvenile oak
     - *H09v*: size at the end of the year 2009 in cm (measured from the highest living shoot of the individual)
     - *H10v*: size at the end of the year 2010 in cm (measured from the highest living shoot of the individual)
