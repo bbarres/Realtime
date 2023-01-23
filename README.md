@@ -9,7 +9,7 @@
 
 
 
-## R Datasets
+## R Data sets
 
 In this section, you will find the list of the data sets used in this study for R analyses and Figures production. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are 5 data sets used in this study.
 
@@ -164,7 +164,7 @@ In this section, you will find the list of the different scripts used in the art
 For reproducibility purpose, you will find all the information about the versions of R, Rstudio, OS etc., as well as the list and version number of the packages used at the time of publishing this script in the **session_info.txt** file.
 
 
-## SAS Datasets
+## SAS Data sets
 
 In this section, you will find the list of the data sets used in this study for SAS analyses and Figures production. The data files can be found in the "dataSAS" folder. For the data tables, the name of the different variables are listed and explained as well. There are 5 data sets used in this study.
 
