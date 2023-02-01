@@ -142,7 +142,11 @@ In this section, you will find the list of the data sets used in this study for 
     - *statut10*: dead or alive status of the plant in 2017 coded as a binary variable (0=dead; 1=alive)
     
 - **lim.hmp.txt.txt** and **nat.hmp.txt:** two data sets formatted for the GWAS analyses, for the protected and natural treatment respectively
-    - *indiv_ID*:
+    - *rs#*: SNP ID
+    - *alleles*: 
+    - *chrom*: ID number of the chromosome the SNP is located on. Range from 1 to 12 for the 12 chromosome of *Quercus robur*. The 13 code is used for unmapped SNP. *MT* is for SNP located on mitochondrial DNA and *Plst* for SNP located on plastide
+    -pos	strand	assembly#	center	protLSID	assayLSID	panelLSID	QCcode	A2B18
+*:
 
 
 ## R scripts
