@@ -153,7 +153,7 @@ In this section, you will find the list of the data sets used in this study for 
     - *assayLSID*: not relevant for this analysis (filled with "NA")
     - *panelLSID*: ID of the panel from which the SNP has been selected from. For these dataset, all the SNP were designed for this experiment
     - *QCcode*: not relevant for this analysis (filled with "NA")
-    - *A2B18* to *C1K14*: each of this column names stands for a genotyped individual
+    - *A2B18* to *C1K14*: each of this column names stands for a genotyped individual. In each column, you will find the genotypes for the successfully genotyped SNP. The value is either the biallelic code for the genotype or "NA" when the genotyping failed
 
 
 ## R scripts
