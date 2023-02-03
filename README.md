@@ -10,7 +10,6 @@
 
 
 ## R Data sets
-
 In this section, you will find the list of the data sets used in this study for R analyses and Figures production. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are 5 data sets used in this study.
 
 - **datatot.txt:** the main data set which contains all the . Each line correspond to one individuals and the following information for each individuals can be found in this table:
@@ -157,7 +156,6 @@ In this section, you will find the list of the data sets used in this study for 
 
 
 ## R scripts
-
 In this section, you will find the list of the different scripts used in the article with a brief description of their purpose.
 
 - **RealTime_load.R:** the script to load the different data sets, functions and packages that are necessary for the data analyses and representation in the R environment.
@@ -171,23 +169,20 @@ In this section, you will find the list of the different scripts used in the art
 
 
 ## R session info
-
 For reproducibility purpose, you will find all the information about the versions of R, Rstudio, OS etc., as well as the list and version number of the packages used at the time of publishing this script in the **session_info.txt** file.
 
 
 ## SAS Data sets
-
 In this section, you will find the list of the data sets used in this study for SAS analyses and Figures production. The data files can be found in the "dataSAS" folder. For the data tables, the name of the different variables are listed and explained as well. There are 5 data sets used in this study.
 
 
 ## SAS scripts
-
 In this section, you will find the list of the different scripts used in the article with a brief description of their purpose.
 
 - **RealTime_load.R:** the script to load the different data sets, functions and packages that are necessary for the data analyses and representation in the R environment.
 
-## Citation
 
+## Citation
 You will be soon (hopefully) able to cite the related study as follow: 
 + Barrès B., Saint-Jean G., Lepoittevin C., Burban C., Garnier-Géré P., Dutech C. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. *journal name*.](https://)
 
