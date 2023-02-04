@@ -4,7 +4,10 @@
 ##############################################################################/
 ##############################################################################/
 
-#loading the libraries
+##############################################################################/
+#Loading the libraries####
+##############################################################################/
+
 library(adegenet)
 library(ape)
 library(FinePop2)
@@ -26,7 +29,9 @@ library(vioplot)
 library(viridis)
 
 
-#loading the different data sets
+##############################################################################/
+#Loading and preparing the main data set####
+##############################################################################/
 
 #data by individuals, including all individuals (hd, families, parents and CC
 RTdata<-read.table("data/datatot.txt",sep="\t",stringsAsFactors=FALSE,
@@ -92,7 +97,7 @@ LimG<-read.delim("data/lim.hmp.txt",header=FALSE)
 
 
 ##############################################################################/
-#Writing info session for reproducibility####
+#Writing session information for reproducibility####
 ##############################################################################/
 
 sink("session_info.txt")
