@@ -173,13 +173,18 @@ For reproducibility purpose, you will find all the information about the version
 
 
 ## SAS Data sets
-In this section, you will find the list of the data sets used in this study for SAS analyses and Figures production. The data files can be found in the "dataSAS" folder. For the data tables, the name of the different variables are listed and explained as well. There are 5 data sets used in this study.
+In this section, you will find the list of the data sets used in this study for SAS analyses. The data files can be found in the "dataSAS" folder. For the data tables, the name of the different variables are listed and explained as well. There are 2 data sets used in this study for analyses in SAS.
+- **RT_pop.csv:** the main data set which includes the information for all individuals:
+    - *Sample_ID*: unique identification number for each sample
+    
+- **RT_pop_tot.csv:** the data set which includes only individuals with genotypic information. In addition to the variables already described for the *RT_pop.csv* data set, there are four variables that estimate the level of heterozygosity/homozygosity in each individual:
+    - *Sample_ID*: unique identification number for each sample
 
 
 ## SAS scripts
-In this section, you will find the list of the different scripts used in the article with a brief description of their purpose.
+In this section, you will find a brief description of the script used for analyses with the SAS software.
 
-- **RealTime_load.R:** the script to load the different data sets, functions and packages that are necessary for the data analyses and representation in the R environment.
+- **RealTime_load.R:** this file lists all the scripts that have been used to perform statistical analyses and model fitting in the SAS framework. Each script begins with a line describing the general purpose of the analysis. All scripts have to be run on the *RT_pop.csv* data set, except for the two in the "with heterozygosity" section which should be run on the *RT_pop_tot.csv* data set. 
 
 
 ## Citation
