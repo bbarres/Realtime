@@ -10,9 +10,9 @@
 
 
 ## R Data sets
-In this section, you will find the list of the data sets used in this study for R analyses and Figures production. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are 5 data sets used in this study.
+In this section, you will find the list of the data sets used in this study for R analyses and Figures production. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are X R data sets used in this study.
 
-- **datatot.txt:** the main data set which contains all the . Each line correspond to one individuals and the following information for each individuals can be found in this table:
+- **datatot.txt:** the main data set which contains all the phenotypic and genotypic information for all the individuals of the experimental setup. Each line correspond to one individuals and the following information for each individuals can be found in this table:
     - *Sample_ID*: unique identification number for each sample
     - *family*: which family the individual belongs to. Only the 15 principal families with a number as a family ID ("1", "9", "11", "27", "45", "48", "51", "70", "71", "72", "73", "74", "75", "76", "77") are of interest for this study. The family has been checked using a parentage analysis to confirm the mother tree when genetic data were available. If no genetic data were available, this is simply the original family ID of the acorn. Using genotyping tools, a few individuals were identified as not belonging to one of the 15 original families ("26" and "99"). Individuals used to surround the individuals included in the experimental design to limit boundary effects are labeled "hd". Individuals labelled "3P", "3P tv", "A4", "cc" and "cc-cast" belong to a controlled crossing not investigated in this study. Individuals labeled "asc" are potential father trees. 
     - *family_simp*: same information as the "family" variable, but with simplified coding (all the controlled crossing individuals are labeled "CC" and the "asc" individuals are labeled "PAR")
