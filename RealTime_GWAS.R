@@ -11,7 +11,7 @@ source("RealTime_load.R")
 
 
 ##############################################################################/
-#Model Blink/kinship for exposed condition####
+#Model Blink/kinship for exposed treatment####
 ##############################################################################/
 
 # #Blink method on powdery mildew phenotype
@@ -59,7 +59,7 @@ write.table(RezNatGAPIT,file="data/RezNatGAPIT.txt",sep="\t",
 
 
 ##############################################################################/
-#Model Blink/kinship for limited inoculum condition####
+#Model Blink/kinship for limited inoculum treatment####
 ##############################################################################/
 
 # #Blink method on powdery mildew phenotype
