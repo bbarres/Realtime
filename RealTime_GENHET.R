@@ -391,8 +391,66 @@ sqrt(var(DoAPrt[DoAPrt$vivmor=="1",]$PHt))
 var(DoAPrt[DoAPrt$vivmor=="1",]$PHt)
 
 
+##############################################################################/
+#Figure S4: Correlation between individual heterozygosity indices####
+##############################################################################/
 
-#Plot for global data comparing Exposed and Limited treatments
+#a function to compute the absolute correlation between pairs of variables
+panel.cor <- function(x, y, digits=2, prefix="", cex.cor, ...)
+{
+  usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(0, 1, 0, 1))
+  r <- abs(cor(x, y))
+  txt <- format(c(r, 0.123456789), digits=digits)[1]
+  txt <- paste(prefix, txt, sep="")
+  if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+  text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+
+HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
+                       header=TRUE)
+#preparing the data set
+HetVivMortGlob<-HetVivMort[HetVivMort$fam=="Global",]
+
+#plot the graph
+pairs(HetVivMortGlob[,c(2:6)],las=1,cex.main=2,
+      main="Correlation between heterozygosity indices",
+      lower.panel=panel.smooth, upper.panel=panel.cor)
+#export to pdf 10 x 7 inches
+
+
+##############################################################################/
+#Figure SX: Plot of the distribution of mortality by PHt classes####
+##############################################################################/
+
+colovec<-c(brewer.pal(12,"Set3")[6:7],
+           brewer.pal(9,"Set1")[1:2])
+HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
+                       header=TRUE)
+HetVivMortFam<-HetVivMort[HetVivMort$fam!="Global",]
+HetVivMortFam$catHet<-cut(HetVivMortFam$PHt,
+                          breaks=c(0.07,0.22,0.24,0.26,0.28,0.30,0.32,0.36))
+effectif<-colSums(table(HetVivMortFam$vivmor,HetVivMortFam$catHet))
+freqMor<-proportions(table(HetVivMortFam$vivmor,HetVivMortFam$catHet),
+                     margin=2)*100
+temp<-barplot(freqMor,las=1,main="Mortality rate by PHt classes",
+              col=colovec[1:2],axes=FALSE,axisnames=FALSE,space=0.5)
+axis(1,at=temp,labels=FALSE,lwd=3,font=2)
+text(temp+0.3,par("usr")[1]-10,labels=names(effectif),srt=-60,
+     xpd=TRUE,cex=1,font=2)
+axis(2,lwd=3,font=2,cex.axis=1.2,las=1)
+box(bty="l",lwd=3)
+text(temp,102,paste("n=",effectif,sep=""),font=3,cex=0.9,xpd=TRUE)
+#export to .pdf 5 x 8 inches
+
+
+##############################################################################/
+#Figure SX: plot for global data comparing Exposed and Limited treatments####
+##############################################################################/
+
+HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
+                       header=TRUE)
+#preparing the data set
 HetVivMortGlob<-HetVivMort[HetVivMort$fam=="Global",]
 #semi violin plot for the exposed treatment
 HetAli<-HetVivMortGlob[HetVivMortGlob$vivmor==1,]
@@ -417,15 +475,15 @@ stripchart(as.numeric(HetAli$PHt)~HetAli$moda,vertical=TRUE,
            method="jitter",pch=21,add=TRUE,col=colovec[4],
            at=c(1:2)+0.2)
 segments(c(1:2)-0.2,aggregate(as.numeric(HetDea$PHt),
-                               list(HetDea$moda),FUN=mean)[,2],
+                              list(HetDea$moda),FUN=mean)[,2],
          c(1:2)+0.2,aggregate(as.numeric(HetAli$PHt),
-                               list(HetAli$moda),FUN=mean)[,2],
+                              list(HetAli$moda),FUN=mean)[,2],
          col=grey(0.95,0.9),lwd=6)
 points(x=c(1:2)-0.2,y=aggregate(as.numeric(HetDea$PHt),
-                                 list(HetDea$moda),FUN=mean)[,2],
+                                list(HetDea$moda),FUN=mean)[,2],
        pch=21,bg=colovec[3],col="black")
 points(x=c(1:2)+0.2,y=aggregate(as.numeric(HetAli$PHt),
-                                 list(HetAli$moda),FUN=mean)[,2],
+                                list(HetAli$moda),FUN=mean)[,2],
        pch=21,bg=colovec[4],col="black")
 box(bty="l")
 legend(0.2,0.4,c("dead","alive"),fill=colovec[1:2],cex=1.3,
@@ -433,29 +491,19 @@ legend(0.2,0.4,c("dead","alive"),fill=colovec[1:2],cex=1.3,
 #export to .pdf 6 x 8 inches
 
 
-##############################################################################/
-#Plot of the distribution of mortality by PHt classes####
-##############################################################################/
 
-colovec<-c(brewer.pal(12,"Set3")[6:7],
-           brewer.pal(9,"Set1")[1:2])
-HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
-                       header=TRUE)
-HetVivMortFam<-HetVivMort[HetVivMort$fam!="Global",]
-HetVivMortFam$catHet<-cut(HetVivMortFam$PHt,
-                          breaks=c(0.07,0.22,0.24,0.26,0.28,0.30,0.32,0.36))
-effectif<-colSums(table(HetVivMortFam$vivmor,HetVivMortFam$catHet))
-freqMor<-proportions(table(HetVivMortFam$vivmor,HetVivMortFam$catHet),
-                     margin=2)*100
-temp<-barplot(freqMor,las=1,main="Mortality rate by PHt classes",
-              col=colovec[1:2],axes=FALSE,axisnames=FALSE,space=0.5)
-axis(1,at=temp,labels=FALSE,lwd=3,font=2)
-text(temp+0.3,par("usr")[1]-10,labels=names(effectif),srt=-60,
-     xpd=TRUE,cex=1,font=2)
-axis(2,lwd=3,font=2,cex.axis=1.2,las=1)
-box(bty="l",lwd=3)
-text(temp,102,paste("n=",effectif,sep=""),font=3,cex=0.9,xpd=TRUE)
-#export to .pdf 5 x 8 inches
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ##############################################################################/
