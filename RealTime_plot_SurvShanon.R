@@ -82,7 +82,7 @@ dev.off()
 
 
 ##############################################################################/
-#progeny survival by treatment and powdery mildew infection####
+#Figure 5: progeny survival by treatment and powdery mildew infection####
 ##############################################################################/
 
 #preparing the data set
