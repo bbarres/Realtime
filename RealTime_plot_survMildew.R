@@ -22,10 +22,17 @@ survOid<-glm(Survival~Acorn_weight+Powdery_mildew,data=temp,family=binomial)
 #plot using visreg package####
 ##############################################################################/
 
+colovec<-c(brewer.pal(12,"Set3")[6:7],
+           brewer.pal(9,"Set1")[1:2])
 op<-par(mar=c(5.1,4.1,1.1,1.1))
 visreg(survOid,"Powdery_mildew",scale="response",rug=2,ylim=c(0,1),
        xlab="Mean infection (2009-2013) (%)",
        ylab="Survival (2017)")
+rug(temp[temp$Survival==0,]$Powdery_mildew,side=1,col=colovec[1])
+rug(temp[temp$Survival==1,]$Powdery_mildew,side=3,col=colovec[2])
+box()
+par(op)
+#export to pdf 7 x 5 inches
 
 
 ##############################################################################/
