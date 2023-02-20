@@ -392,7 +392,7 @@ var(DoAPrt[DoAPrt$vivmor=="1",]$PHt)
 
 
 ##############################################################################/
-#Figure S4: Correlation between individual heterozygosity indices####
+#Figure S6: Correlation between individual heterozygosity indices####
 ##############################################################################/
 
 #a function to compute the absolute correlation between pairs of variables
@@ -423,6 +423,7 @@ pairs(HetVivMortGlob[,c(2:6)],las=1,cex.main=2,
 #Figure SX: Plot of the distribution of mortality by PHt classes####
 ##############################################################################/
 
+pdf(file="output/Figure_SX_mortaRate.pdf",width=5,height=8)
 colovec<-c(brewer.pal(12,"Set3")[6:7],
            brewer.pal(9,"Set1")[1:2])
 HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
@@ -441,7 +442,10 @@ text(temp+0.3,par("usr")[1]-10,labels=names(effectif),srt=-60,
 axis(2,lwd=3,font=2,cex.axis=1.2,las=1)
 box(bty="l",lwd=3)
 text(temp,102,paste("n=",effectif,sep=""),font=3,cex=0.9,xpd=TRUE)
+legend(-2,115,c("dead","alive"),fill=colovec[1:2],cex=1.3,
+       bty="n",x.intersp=0.5,y.intersp=0.7,xpd=TRUE)
 #export to .pdf 5 x 8 inches
+dev.off()
 
 
 ##############################################################################/
