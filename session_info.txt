@@ -8,7 +8,7 @@
  collate  French_France.utf8
  ctype    French_France.utf8
  tz       Europe/Paris
- date     2023-02-19
+ date     2023-02-20
  rstudio  2022.12.0+353 Elsbeth Geranium (desktop)
  pandoc   NA
 
@@ -28,6 +28,7 @@
  dismo          1.3-9     2022-09-19 [1] CRAN (R 4.2.1)
  dplyr          1.1.0     2023-01-29 [1] CRAN (R 4.2.2)
  ellipsis       0.3.2     2021-04-29 [1] CRAN (R 4.2.0)
+ evaluate       0.20      2023-01-17 [1] CRAN (R 4.2.2)
  fansi          1.0.4     2023-01-22 [1] CRAN (R 4.2.2)
  fastmap        1.1.0     2021-01-25 [1] CRAN (R 4.2.0)
  FinePop2     * 0.4       2020-02-28 [1] CRAN (R 4.2.0)
@@ -47,6 +48,7 @@
  gtable         0.3.1     2022-09-01 [1] CRAN (R 4.2.1)
  gtools       * 3.9.4     2022-11-27 [1] CRAN (R 4.2.2)
  hierfstat    * 0.5-11    2022-05-05 [1] CRAN (R 4.2.0)
+ highr          0.10      2022-12-22 [1] CRAN (R 4.2.2)
  htmltools      0.5.4     2022-12-07 [1] CRAN (R 4.2.2)
  httpuv         1.6.9     2023-02-14 [1] CRAN (R 4.2.2)
  igraph         1.4.0     2023-02-10 [1] CRAN (R 4.2.2)
@@ -81,7 +83,7 @@
  R.oo           1.25.0    2022-06-12 [1] CRAN (R 4.2.0)
  R.utils        2.12.2    2022-11-11 [1] CRAN (R 4.2.2)
  R6             2.5.1     2021-08-19 [1] CRAN (R 4.2.0)
- raster         3.6-14    2023-01-16 [1] CRAN (R 4.2.2)
+ raster       * 3.6-14    2023-01-16 [1] CRAN (R 4.2.2)
  RColorBrewer * 1.1-3     2022-04-03 [1] CRAN (R 4.2.0)
  Rcpp           1.0.10    2023-01-22 [1] CRAN (R 4.2.2)
  reshape        0.8.9     2022-04-12 [1] CRAN (R 4.2.0)
@@ -95,7 +97,7 @@
  sessioninfo    1.2.2     2021-12-06 [1] CRAN (R 4.2.0)
  shiny          1.7.4     2022-12-15 [1] CRAN (R 4.2.2)
  sm           * 2.2-5.7.1 2022-07-04 [1] CRAN (R 4.2.1)
- sp             1.6-0     2023-01-19 [1] CRAN (R 4.2.2)
+ sp           * 1.6-0     2023-01-19 [1] CRAN (R 4.2.2)
  stringi        1.7.12    2023-01-11 [1] CRAN (R 4.2.2)
  stringr      * 1.5.0     2022-12-02 [1] CRAN (R 4.2.2)
  terra          1.7-3     2023-01-24 [1] CRAN (R 4.2.2)
