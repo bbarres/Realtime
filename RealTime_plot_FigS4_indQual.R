@@ -6,6 +6,31 @@
 
 
 
+
+rs_ST<-read.table("data/dataSup/RT_comp_pre_SNP_T.txt",
+                  sep="\t",header=T,dec=".")
+
+colnames(rs_ST)<-c("Index","Name","Chr","Position","ChiTest100",
+                   "Het_Excess","AA_Freq","AB_Freq","BB_Freq","Call_Freq",
+                   "Minor_Freq","Aux","P-C_Errors","P-P-C_Errors",
+                   "Rep_Errors","p10_GC","p50_GC","SNP","Calls",
+                   "no_calls","Plus/Minus_Strand","Custom_Cluster","Address",
+                   "GenTrain_Score","Orig_Score","Edited","Cluster_Sep",
+                   "AA_T_Mean","AA_T_Dev","AB_T_Mean","AB_T_Dev",
+                   "BB_T_Mean","BB_T_Dev","AA_R_Mean","AA_R_Dev",
+                   "AB_R_Mean","AB_R_Dev","BB_R_Mean","BB_R_Dev",
+                   "Address2","Norm_ID")
+
+
+##############################################################################/
+#END
+##############################################################################/
+
+
+
+
+
+
 #Avant de commencer quelques analyses que se soient, il faut partir ? la 
 #chasse aux "di?se" qui pourissent toutes les analyses car R les interpr?te 
 #comme des commentaires.
