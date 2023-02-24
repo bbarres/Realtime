@@ -6,20 +6,83 @@
 
 
 
-
-rs_ST<-read.table("data/dataSup/RT_comp_pre_SNP_T.txt",
+#loading and preparing the data set
+rs_ST<-read.table("data/dataSup/tri_SNP.txt",
                   sep="\t",header=T,dec=".")
 
 colnames(rs_ST)<-c("Index","Name","Chr","Position","ChiTest100",
-                   "Het_Excess","AA_Freq","AB_Freq","BB_Freq","Call_Freq",
+                   "Het_Excess","AA_Freq","AB_Freq","BB_Freq","Call.Freq",
                    "Minor_Freq","Aux","P-C_Errors","P-P-C_Errors",
-                   "Rep_Errors","p10_GC","p50_GC","SNP","Calls",
+                   "Rep_Errors","p10.GC","p50.GC","SNP","Calls",
                    "no_calls","Plus/Minus_Strand","Custom_Cluster","Address",
                    "GenTrain_Score","Orig_Score","Edited","Cluster_Sep",
                    "AA_T_Mean","AA_T_Dev","AB_T_Mean","AB_T_Dev",
                    "BB_T_Mean","BB_T_Dev","AA_R_Mean","AA_R_Dev",
                    "AB_R_Mean","AB_R_Dev","BB_R_Mean","BB_R_Dev",
                    "Address2","Norm_ID")
+
+
+##############################################################################/
+#END
+##############################################################################/
+
+rs_ST<-rs_ST[,-c(20,21,22)]
+rs_ST[1:15,]
+summary(rs_ST)
+colnames(rs_ST)
+
+attach(rs_ST)
+seuilp50min<-(mean(p50.GC,na.rm=T)-0.01)
+seuilp10min<-(mean(p10.GC,na.rm=T)-0.015)
+seuilCRatemin<-(mean(Call.Freq,na.rm=T)-0.01)
+xrange<-c(min(Call.Freq[Call.Freq!=0],na.rm=T)-0.01,
+          max(Call.Freq[Call.Freq!=0],na.rm=T)+0.01)
+yrange<-c(min(p10.GC,na.rm=T)-0.01,
+          max(p10.GC,na.rm=T)+0.01)
+
+op<-par(mfrow=c(1,3))
+
+ordp50<-p50.GC[order(p50.GC)]
+plot(ordp50,col=as.factor(ordp50<seuilp50min))
+abline(h=c(seuilp50min),lty=2,col="red")
+
+ordp10<-p10.GC[order(p10.GC)]
+plot(ordp10,col=as.factor(ordp10<seuilp10min))
+abline(h=c(seuilp10min),lty=2,col="red")
+
+ordCRate<-Call.Freq[order(Call.Freq)]
+plot(ordCRate[ordCRate!=0],col=as.factor(ordCRate<seuilCRatemin))
+abline(h=c(seuilCRatemin),lty=2,col="red")
+
+par(mfrow=c(1,2))
+
+plot(p10.GC~Call.Freq,xlim=xrange,ylim=yrange)
+abline(h=c(seuilp10min),lty=2,col="green4")
+abline(v=c(seuilCRatemin),lty=2,col="blue")
+points((p10.GC[p50.GC<seuilp50min])~(Call.Freq[p50.GC<seuilp50min]),
+       col="red",pch=1,cex=0.9)
+points((p10.GC[p10.GC<seuilp10min])~(Call.Freq[p10.GC<seuilp10min]),
+       col="green4",pch=1,cex=0.7)
+points((p10.GC[Call.Freq<seuilCRatemin])~(Call.Freq[Call.Freq<
+                                                      seuilCRatemin]),col="blue",pch=1,cex=0.5)
+
+plot(p50.GC~Call.Freq,xlim=xrange)
+abline(h=c(seuilp50min),lty=2,col="red")
+abline(v=c(seuilCRatemin),lty=2,col="blue")
+points((p50.GC[p50.GC<seuilp50min])~(Call.Freq[p50.GC<seuilp50min]),
+       col="red",pch=1,cex=0.9)
+points((p50.GC[p10.GC<seuilp10min])~(Call.Freq[p10.GC<seuilp10min]),
+       col="green4",pch=1,cex=0.7)
+points((p50.GC[Call.Freq<seuilCRatemin])~(Call.Freq[Call.Freq<
+                                                      seuilCRatemin]),col="blue",pch=1,cex=0.5)             
+
+par(op)
+
+excl<-(rs_ST[p50.GC<seuilp50min|p10.GC<seuilp10min|Call.Freq<seuilCRatemin,
+             c("Sample.ID","Array.Info.Sentrix.ID",
+               "Array.Info.Sentrix.Position")])
+
+detach(rs_ST)
 
 
 ##############################################################################/
