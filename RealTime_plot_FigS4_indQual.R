@@ -7,7 +7,7 @@
 
 
 #loading and preparing the data set
-rs_ST<-read.table("data/dataSup/tri_SNP.txt",
+rs_ST<-read.table("data/dataSup/Ind_geno_qual.txt",
                   sep="\t",header=T,dec=".")
 
 colnames(rs_ST)<-c("Index","Name","Chr","Position","ChiTest100",
