@@ -34,9 +34,9 @@ colnames(rs_ST)
 attach(rs_ST)
 seuilp50min<-(mean(p50.GC,na.rm=T)-0.01)
 seuilp10min<-(mean(p10.GC,na.rm=T)-0.015)
-seuilCRatemin<-(mean(Call.Freq,na.rm=T)-0.01)
-xrange<-c(min(Call.Freq[Call.Freq!=0],na.rm=T)-0.01,
-          max(Call.Freq[Call.Freq!=0],na.rm=T)+0.01)
+seuilCRatemin<-(mean(Call.Rate,na.rm=T)-0.01)
+xrange<-c(min(Call.Rate[Call.Rate!=0],na.rm=T)-0.01,
+          max(Call.Rate[Call.Rate!=0],na.rm=T)+0.01)
 yrange<-c(min(p10.GC,na.rm=T)-0.01,
           max(p10.GC,na.rm=T)+0.01)
 
@@ -50,35 +50,35 @@ ordp10<-p10.GC[order(p10.GC)]
 plot(ordp10,col=as.factor(ordp10<seuilp10min))
 abline(h=c(seuilp10min),lty=2,col="red")
 
-ordCRate<-Call.Freq[order(Call.Freq)]
+ordCRate<-Call.Rate[order(Call.Rate)]
 plot(ordCRate[ordCRate!=0],col=as.factor(ordCRate<seuilCRatemin))
 abline(h=c(seuilCRatemin),lty=2,col="red")
 
 par(mfrow=c(1,2))
 
-plot(p10.GC~Call.Freq,xlim=xrange,ylim=yrange)
+plot(p10.GC~Call.Rate,xlim=xrange,ylim=yrange)
 abline(h=c(seuilp10min),lty=2,col="green4")
 abline(v=c(seuilCRatemin),lty=2,col="blue")
-points((p10.GC[p50.GC<seuilp50min])~(Call.Freq[p50.GC<seuilp50min]),
+points((p10.GC[p50.GC<seuilp50min])~(Call.Rate[p50.GC<seuilp50min]),
        col="red",pch=1,cex=0.9)
-points((p10.GC[p10.GC<seuilp10min])~(Call.Freq[p10.GC<seuilp10min]),
+points((p10.GC[p10.GC<seuilp10min])~(Call.Rate[p10.GC<seuilp10min]),
        col="green4",pch=1,cex=0.7)
-points((p10.GC[Call.Freq<seuilCRatemin])~(Call.Freq[Call.Freq<
+points((p10.GC[Call.Rate<seuilCRatemin])~(Call.Rate[Call.Rate<
                                                       seuilCRatemin]),col="blue",pch=1,cex=0.5)
 
-plot(p50.GC~Call.Freq,xlim=xrange)
+plot(p50.GC~Call.Rate,xlim=xrange)
 abline(h=c(seuilp50min),lty=2,col="red")
 abline(v=c(seuilCRatemin),lty=2,col="blue")
-points((p50.GC[p50.GC<seuilp50min])~(Call.Freq[p50.GC<seuilp50min]),
+points((p50.GC[p50.GC<seuilp50min])~(Call.Rate[p50.GC<seuilp50min]),
        col="red",pch=1,cex=0.9)
-points((p50.GC[p10.GC<seuilp10min])~(Call.Freq[p10.GC<seuilp10min]),
+points((p50.GC[p10.GC<seuilp10min])~(Call.Rate[p10.GC<seuilp10min]),
        col="green4",pch=1,cex=0.7)
-points((p50.GC[Call.Freq<seuilCRatemin])~(Call.Freq[Call.Freq<
+points((p50.GC[Call.Rate<seuilCRatemin])~(Call.Rate[Call.Rate<
                                                       seuilCRatemin]),col="blue",pch=1,cex=0.5)             
 
 par(op)
 
-excl<-(rs_ST[p50.GC<seuilp50min|p10.GC<seuilp10min|Call.Freq<seuilCRatemin,
+excl<-(rs_ST[p50.GC<seuilp50min|p10.GC<seuilp10min|Call.Rate<seuilCRatemin,
              c("Sample.ID","Array.Info.Sentrix.ID",
                "Array.Info.Sentrix.Position")])
 
