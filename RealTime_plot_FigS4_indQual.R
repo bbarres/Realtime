@@ -5,28 +5,39 @@
 ##############################################################################/
 
 
-
 #loading and preparing the data set
-rs_ST<-read.table("data/dataSup/RT_s_pre_ST.txt",
+genoQual<-read.table("data/dataSup/RT_s_pre_ST.txt",
                   sep="\t",header=T,dec=".")
 
-rs_ST<-rs_ST[,-c(20,21,22)]
-rs_ST[1:15,]
-summary(rs_ST)
-colnames(rs_ST)
+genoQual<-genoQual[,-c(20,21,22)]
+genoQual[1:15,]
+summary(genoQual)
+colnames(genoQual)
+
+seuilp50min<-(mean(genoQual$p50.GC,na.rm=T)-0.01)
+seuilp10min<-(mean(genoQual$p10.GC,na.rm=T)-0.015)
+seuilCRatemin<-(mean(genoQual$Call.Rate,na.rm=T)-0.01)
+xrange<-c(min(genoQual$Call.Rate[genoQual$Call.Rate!=0],
+              na.rm=T)-0.01,
+          max(genoQual$Call.Rate[genoQual$Call.Rate!=0],
+              na.rm=T)+0.01)
+yrange<-c(min(genoQual$p10.GC,na.rm=T)-0.01,
+          max(genoQual$p10.GC,na.rm=T)+0.01)
 
 
+#plotting Figure S4
 par(mfrow=c(1,2))
 
-plot(p10.GC~Call.Rate,xlim=xrange,ylim=yrange)
+plot(p10.GC~Call.Rate,xlim=xrange,ylim=yrange,data=genoQual)
 abline(h=c(seuilp10min),lty=2,col="green4")
 abline(v=c(seuilCRatemin),lty=2,col="blue")
 points((p10.GC[p50.GC<seuilp50min])~(Call.Rate[p50.GC<seuilp50min]),
-       col="red",pch=1,cex=0.9)
+       col="red",pch=1,cex=0.9,data=genoQual)
 points((p10.GC[p10.GC<seuilp10min])~(Call.Rate[p10.GC<seuilp10min]),
-       col="green4",pch=1,cex=0.7)
-points((p10.GC[Call.Rate<seuilCRatemin])~(Call.Rate[Call.Rate<
-                                                      seuilCRatemin]),col="blue",pch=1,cex=0.5)
+       col="green4",pch=1,cex=0.7,data=genoQual)
+points((p10.GC[Call.Rate<seuilCRatemin])~
+         (Call.Rate[Call.Rate<seuilCRatemin]),
+       col="blue",pch=1,cex=0.5,data=genoQual)
 
 plot(p50.GC~Call.Rate,xlim=xrange)
 abline(h=c(seuilp50min),lty=2,col="red")
