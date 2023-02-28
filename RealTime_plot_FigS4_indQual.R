@@ -7,19 +7,42 @@
 
 
 #loading and preparing the data set
-rs_ST<-read.table("data/dataSup/Ind_geno_qual.txt",
+rs_ST<-read.table("data/dataSup/RT_s_pre_ST.txt",
                   sep="\t",header=T,dec=".")
 
-colnames(rs_ST)<-c("Index","Name","Chr","Position","ChiTest100",
-                   "Het_Excess","AA_Freq","AB_Freq","BB_Freq","Call.Freq",
-                   "Minor_Freq","Aux","P-C_Errors","P-P-C_Errors",
-                   "Rep_Errors","p10.GC","p50.GC","SNP","Calls",
-                   "no_calls","Plus/Minus_Strand","Custom_Cluster","Address",
-                   "GenTrain_Score","Orig_Score","Edited","Cluster_Sep",
-                   "AA_T_Mean","AA_T_Dev","AB_T_Mean","AB_T_Dev",
-                   "BB_T_Mean","BB_T_Dev","AA_R_Mean","AA_R_Dev",
-                   "AB_R_Mean","AB_R_Dev","BB_R_Mean","BB_R_Dev",
-                   "Address2","Norm_ID")
+rs_ST<-rs_ST[,-c(20,21,22)]
+rs_ST[1:15,]
+summary(rs_ST)
+colnames(rs_ST)
+
+
+par(mfrow=c(1,2))
+
+plot(p10.GC~Call.Rate,xlim=xrange,ylim=yrange)
+abline(h=c(seuilp10min),lty=2,col="green4")
+abline(v=c(seuilCRatemin),lty=2,col="blue")
+points((p10.GC[p50.GC<seuilp50min])~(Call.Rate[p50.GC<seuilp50min]),
+       col="red",pch=1,cex=0.9)
+points((p10.GC[p10.GC<seuilp10min])~(Call.Rate[p10.GC<seuilp10min]),
+       col="green4",pch=1,cex=0.7)
+points((p10.GC[Call.Rate<seuilCRatemin])~(Call.Rate[Call.Rate<
+                                                      seuilCRatemin]),col="blue",pch=1,cex=0.5)
+
+plot(p50.GC~Call.Rate,xlim=xrange)
+abline(h=c(seuilp50min),lty=2,col="red")
+abline(v=c(seuilCRatemin),lty=2,col="blue")
+points((p50.GC[p50.GC<seuilp50min])~(Call.Rate[p50.GC<seuilp50min]),
+       col="red",pch=1,cex=0.9)
+points((p50.GC[p10.GC<seuilp10min])~(Call.Rate[p10.GC<seuilp10min]),
+       col="green4",pch=1,cex=0.7)
+points((p50.GC[Call.Rate<seuilCRatemin])~(Call.Rate[Call.Rate<
+                                                      seuilCRatemin]),col="blue",pch=1,cex=0.5)             
+
+par(op)
+
+excl<-(rs_ST[p50.GC<seuilp50min|p10.GC<seuilp10min|Call.Rate<seuilCRatemin,
+             c("Sample.ID","Array.Info.Sentrix.ID",
+               "Array.Info.Sentrix.Position")])
 
 
 ##############################################################################/
