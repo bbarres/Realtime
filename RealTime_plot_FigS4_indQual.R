@@ -9,86 +9,13 @@
 genoQual<-read.table("data/dataSup/RT_s_pre_ST.txt",
                   sep="\t",header=T,dec=".")
 
-genoQual<-genoQual[,-c(20,21,22)]
-genoQual[1:15,]
 summary(genoQual)
 colnames(genoQual)
 
 
-
 ##############################################################################/
-#Creating a function to plot the genotypic quality####
+#plotting Figure S4####
 ##############################################################################/
-
-QualDNAgra<-function(SampleTable,p50,p10,CRate)
-{
-  attach(SampleTable)
-  seuilp50min<-(mean(p50.GC,na.rm=T)-p50)
-  seuilp10min<-(mean(p10.GC,na.rm=T)-p10)
-  seuilCRatemin<-(mean(Call.Rate,na.rm=T)-CRate)
-  xrange<-c(min(Call.Rate[Call.Rate!=0],na.rm=T)-0.01,
-            max(Call.Rate[Call.Rate!=0],na.rm=T)+0.01)
-  yrange<-c(min(p10.GC,na.rm=T)-0.01,
-            max(p10.GC,na.rm=T)+0.01)
-  
-  op<-par(mfrow=c(1,3))
-  
-  ordp50<-p50.GC[order(p50.GC)]
-  plot(ordp50,col=as.factor(ordp50<seuilp50min))
-  abline(h=c(seuilp50min),lty=2,col="red")
-  
-  ordp10<-p10.GC[order(p10.GC)]
-  plot(ordp10,col=as.factor(ordp10<seuilp10min))
-  abline(h=c(seuilp10min),lty=2,col="red")
-  
-  ordCRate<-Call.Rate[order(Call.Rate)]
-  plot(ordCRate[ordCRate!=0],col=as.factor(ordCRate<seuilCRatemin))
-  abline(h=c(seuilCRatemin),lty=2,col="red")
-  
-  par(mfrow=c(1,2))
-  
-  plot(p10.GC~Call.Rate,xlim=xrange,ylim=yrange)
-  abline(h=c(seuilp10min),lty=2,col="green4")
-  abline(v=c(seuilCRatemin),lty=2,col="blue")
-  points((p10.GC[p50.GC<seuilp50min])~(Call.Rate[p50.GC<seuilp50min]),
-         col="red",pch=1,cex=0.9)
-  points((p10.GC[p10.GC<seuilp10min])~(Call.Rate[p10.GC<seuilp10min]),
-         col="green4",pch=1,cex=0.7)
-  points((p10.GC[Call.Rate<seuilCRatemin])~(Call.Rate[Call.Rate<
-                                                        seuilCRatemin]),col="blue",pch=1,cex=0.5)
-  
-  plot(p50.GC~Call.Rate,xlim=xrange)
-  abline(h=c(seuilp50min),lty=2,col="red")
-  abline(v=c(seuilCRatemin),lty=2,col="blue")
-  points((p50.GC[p50.GC<seuilp50min])~(Call.Rate[p50.GC<seuilp50min]),
-         col="red",pch=1,cex=0.9)
-  points((p50.GC[p10.GC<seuilp10min])~(Call.Rate[p10.GC<seuilp10min]),
-         col="green4",pch=1,cex=0.7)
-  points((p50.GC[Call.Rate<seuilCRatemin])~(Call.Rate[Call.Rate<
-                                                        seuilCRatemin]),col="blue",pch=1,cex=0.5)             
-  
-  par(op)
-  excl<-(SampleTable[p50.GC<seuilp50min|p10.GC<seuilp10min|
-                       Call.Rate<seuilCRatemin,c("Sample.ID",
-                                                 "Array.Info.Sentrix.ID","Array.Info.Sentrix.Position")])
-  
-  detach(SampleTable)
-  return(excl)
-  
-}
-
-#allez on fait des essaies sur la fonction que l'on vient de cr?er
-rs_brute_ST<-read.table("rs_brute_ST.txt",sep="\t",header=T,dec=".")
-QualDNAgra(rs_brute_ST,0.01,0.015,0.015)
-rw_ST<-read.table("rw_ST.txt",sep="\t",header=T,dec=".")
-QualDNAgra(rw_ST,0.01,0.015,0.015)
-
-
-
-
-
-
-
 
 seuilp50min<-(mean(genoQual$p50.GC,na.rm=T)-0.01)
 seuilp10min<-(mean(genoQual$p10.GC,na.rm=T)-0.015)
@@ -101,14 +28,13 @@ yrange<-c(min(genoQual$p10.GC,na.rm=T)-0.01,
           max(genoQual$p10.GC,na.rm=T)+0.01)
 
 
-##############################################################################/
-#plotting Figure S4####
-##############################################################################/
-
 #plotting Figure S4
-par(mfrow=c(1,2))
 
-plot(p10.GC~Call.Rate,xlim=xrange,ylim=yrange,data=genoQual)
+op<-par(mfrow=c(1,2))
+
+plot(p10.GC~Call.Rate,xlim=xrange,ylim=yrange,
+     data=genoQual[genoQual$p50.GC>=seuilp50min & 
+                     genoQual$p10.GC>=seuilp10min,])
 abline(h=c(seuilp10min),lty=2,col="green4")
 abline(v=c(seuilCRatemin),lty=2,col="blue")
 points((p10.GC[p50.GC<seuilp50min])~(Call.Rate[p50.GC<seuilp50min]),
@@ -127,7 +53,8 @@ points((p50.GC[p50.GC<seuilp50min])~(Call.Rate[p50.GC<seuilp50min]),
 points((p50.GC[p10.GC<seuilp10min])~(Call.Rate[p10.GC<seuilp10min]),
        col="green4",pch=1,cex=0.7)
 points((p50.GC[Call.Rate<seuilCRatemin])~(Call.Rate[Call.Rate<
-                                                      seuilCRatemin]),col="blue",pch=1,cex=0.5)             
+                                                      seuilCRatemin]),
+       col="blue",pch=1,cex=0.5)             
 
 par(op)
 
