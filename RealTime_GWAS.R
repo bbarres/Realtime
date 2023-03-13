@@ -14,17 +14,7 @@ source("RealTime_load.R")
 #Model Blink/kinship for exposed treatment####
 ##############################################################################/
 
-# #Blink method on powdery mildew phenotype
-# natGAPIT<-GAPIT(
-#   Y=NatTrait[,1:7],
-#   G=NatG,
-#   kinship.algorithm="Loiselle",
-#   #KI=NatLois,
-#   PCA.total=0,
-#   model="Blink"
-#   #,Random.model=TRUE
-# )
-
+#preparing the output folder tree structure
 nomTemp<-getwd()
 dir.create(paste(nomTemp,"/output/natGWAS",sep=""))
 setwd(paste(nomTemp,"/output/natGWAS",sep=""))
@@ -47,32 +37,12 @@ setwd(nomTemp)
 write.table(RezNatGAPIT,file="data/RezNatGAPIT.txt",sep="\t",
             quote=FALSE,row.names=FALSE)
 
-# #MLM method on powdery mildew trait
-# natGAPIT<-GAPIT(
-#   Y=NatTrait[,c(1,7:10],
-#   G=NatG,
-#   kinship.algorithm="Loiselle",
-#   #KI=NatLois,
-#   PCA.total=0,
-#   model="MLM"
-# )
-
 
 ##############################################################################/
 #Model Blink/kinship for limited inoculum treatment####
 ##############################################################################/
 
-# #Blink method on powdery mildew phenotype
-# limGAPIT<-GAPIT(
-#   Y=LimTrait[,1:7],
-#   G=LimG,
-#   kinship.algorithm="Loiselle",
-#   #KI=LimLois,
-#   PCA.total=0,
-#   model="Blink"
-#   #,Random.model=TRUE
-# )
-
+#preparing the output folder tree structure
 nomTemp<-getwd()
 dir.create(paste(nomTemp,"/output/limGWAS",sep=""))
 setwd(paste(nomTemp,"/output/limGWAS",sep=""))
