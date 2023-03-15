@@ -9,20 +9,11 @@ source("RealTime_load.R")
 
 
 ##############################################################################/
-#function GENHET (Aurélie Coulon)####
+#peripheral functions####
 ##############################################################################/
 
-
-
-#le but c'est de redessiner les graphes de GenomeStudio mais dans R, histoire
-#d'avoir quelquechose de propre
-
-#premier point cr?er des fonctions pour dessiner des ellipses. L?, j'ai simplement 
-#r?cup?r? des fonctions sur le web 
-#(http://www.math.mcmaster.ca/peter/s4c03/s4c03_0505/classnotes/DrawingEllipsesinR.pdf)
-#apparemment c'est fait par Peter D. M. Macdonald de McMaster University
-#cela permet de dessiner des ellipses avec les coordonn?es du centre et la hauteur des 
-#axes, ? noter que l'on peut aussi pr?ciser le format de l'ellipse dans les param?tres
+#Functions to draw an ellipse. The following code has been retrieved from a 
+#function written by Peter D. M. Macdonald of McMaster University
 ellipse<-function (hlaxa = 1, hlaxb = 1, theta = 0, xc = 0, yc = 0, newplot = F,
 npoints = 100, ...)
 {
@@ -68,8 +59,13 @@ angle<-function (x, y)
 	}
 	apply(cbind(x, y), 1, angle2)
 
-
 }
+
+
+##############################################################################/
+#Data formating function####
+##############################################################################/
+
 
 #importation des donn?es de coordonn?es des individus par SNP ? partir du fichier de sortie 
 #de GenomeStudio
