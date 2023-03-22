@@ -79,12 +79,16 @@ coordIndSNP[1:10,1:14]
 statTable<-read.table("RT_comp_11P_SNP_T.txt", header=T, sep=" ", dec=".")
 names(statTable)
 statTable<-statTable[,-c(13,23)]
-colnames(statTable)<-c("Index","Name","Chr","Position","ChiTest100","Het_Excess","AA_Freq",
-"AB_Freq","BB_Freq","Call_Freq","Minor_Freq","Aux","P-C_Errors","P-P-C_Errors","Rep_Errors",
-"10_GC","50_GC","SNP","Calls","no_calls","Plus_Minus_Strand","Address","GenTrain_Score",
-"Orig_Score","Edited","Cluster_Sep","AA_T_Mean","AA_T_Dev","AB_T_Mean","AB_T_Dev","BB_T_Mean",
-"BB_T_Dev","AA_R_Mean","AA_R_Dev","AB_R_Mean","AB_R_Dev","BB_R_Mean","BB_R_Dev","Address2",
-"Norm_ID")
+colnames(statTable)<-c("Index","Name","Chr","Position","ChiTest100",
+                       "Het_Excess","AA_Freq","AB_Freq","BB_Freq",
+                       "Call_Freq","Minor_Freq","Aux","P-C_Errors",
+                       "P-P-C_Errors","Rep_Errors","10_GC","50_GC",
+                       "SNP","Calls","no_calls","Plus_Minus_Strand",
+                       "Address","GenTrain_Score","Orig_Score",
+                       "Edited","Cluster_Sep","AA_T_Mean","AA_T_Dev",
+                       "AB_T_Mean","AB_T_Dev","BB_T_Mean","BB_T_Dev",
+                       "AA_R_Mean","AA_R_Dev","AB_R_Mean","AB_R_Dev",
+                       "BB_R_Mean","BB_R_Dev","Address2","Norm_ID")
 
 
 #on cr?? une fonction pour construire une table par snp pour pouvoir ensuite  faire
@@ -140,16 +144,19 @@ SNPlot<-function(singleSNP,SNPstat) #avec 1 figure par page
 	nbpag<-(length(singleSNP))
 	pdf(file=paste("figSNP",".pdf"))
 	for (i in 1:nbpag) {
-		levels(singleSNP[[i]][, 2])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
+		levels(singleSNP[[i]][,2])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
 		attach(singleSNP[[i]])
-		plot(Theta,R, col = c("red", "purple", "blue", "black")[as.numeric(GType)],
+		plot(Theta,R,col=c("red", "purple", "blue", "black")[as.numeric(GType)],
 		cex=0.8,xlim=c(0,1),ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
 		main=paste(SNPstat$Name[i]," // note ",SNPstat$Aux[i]))
 		detach(singleSNP[[i]])
 		attach(SNPstat)
-		ellipse(AA_T_Dev[i],AA_R_Dev[i],0,AA_T_Mean[i],AA_R_Mean[i],col="red",lwd=3)
-		ellipse(AB_T_Dev[i],AB_R_Dev[i],0,AB_T_Mean[i],AB_R_Mean[i],col="purple",lwd=3)
-		ellipse(BB_T_Dev[i],BB_R_Dev[i],0,BB_T_Mean[i],BB_R_Mean[i],col="blue",lwd=3)
+		ellipse(AA_T_Dev[i],AA_R_Dev[i],0,AA_T_Mean[i],AA_R_Mean[i],
+		        col="red",lwd=3)
+		ellipse(AB_T_Dev[i],AB_R_Dev[i],0,AB_T_Mean[i],AB_R_Mean[i],
+		        col="purple",lwd=3)
+		ellipse(BB_T_Dev[i],BB_R_Dev[i],0,BB_T_Mean[i],BB_R_Mean[i],
+		        col="blue",lwd=3)
 		detach(SNPstat)
 	}
 	dev.off()
@@ -179,9 +186,12 @@ SNPlot6<-function(singleSNP,SNPstat)
 			main=paste(SNPstat$Name[i]," // note ",SNPstat$Aux[i]))
 			detach(singleSNP[[j]])
 			attach(SNPstat)
-			ellipse(AA_T_Dev[j],AA_R_Dev[j],0,AA_T_Mean[j],AA_R_Mean[j],col="red",lwd=3)
-			ellipse(AB_T_Dev[j],AB_R_Dev[j],0,AB_T_Mean[j],AB_R_Mean[j],col="purple",lwd=3)
-			ellipse(BB_T_Dev[j],BB_R_Dev[j],0,BB_T_Mean[j],BB_R_Mean[j],col="blue",lwd=3)
+			ellipse(AA_T_Dev[j],AA_R_Dev[j],0,AA_T_Mean[j],AA_R_Mean[j],
+			        col="red",lwd=3)
+			ellipse(AB_T_Dev[j],AB_R_Dev[j],0,AB_T_Mean[j],AB_R_Mean[j],
+			        col="purple",lwd=3)
+			ellipse(BB_T_Dev[j],BB_R_Dev[j],0,BB_T_Mean[j],BB_R_Mean[j],
+			        col="blue",lwd=3)
 			detach(SNPstat)
 		}
 		par(op)
