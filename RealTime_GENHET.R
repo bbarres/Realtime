@@ -495,21 +495,6 @@ legend(0.2,0.4,c("dead","alive"),fill=colovec[1:2],cex=1.3,
 #export to .pdf 6 x 8 inches
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ##############################################################################/
 #Heterozygosity computation: total vs surviving####
 ##############################################################################/
@@ -640,66 +625,3 @@ par(op)
 ##############################################################################/
 #END
 ##############################################################################/
-
-
-
-
-#additionnal plot
-
-#plot of the different indices for Natural treatment by family
-op<-par(mfrow=c(5,1))
-vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$vivmor:HetVivMortExp$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Natural / PHt")
-vioplot(as.numeric(HetVivMortExp$Hs_obs)~
-          HetVivMortExp$vivmor:HetVivMortExp$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Natural / Hs_obs")
-vioplot(as.numeric(HetVivMortExp$Hs_exp)~
-          HetVivMortExp$vivmor:HetVivMortExp$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Natural / Hs_exp")
-vioplot(as.numeric(HetVivMortExp$IR)~HetVivMortExp$vivmor:HetVivMortExp$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Natural / IR")
-vioplot(as.numeric(HetVivMortExp$HL)~HetVivMortExp$vivmor:HetVivMortExp$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Natural / HL")
-par(op)
-#export to .pdf 20 x 20 inches
-
-#plot of the different indices for Protected treatment by family
-op<-par(mfrow=c(5,1))
-vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$vivmor:HetVivMortLim$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Protected / PHt")
-vioplot(as.numeric(HetVivMortLim$Hs_obs)~
-          HetVivMortLim$vivmor:HetVivMortLim$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Protected / Hs_obs")
-vioplot(as.numeric(HetVivMortLim$Hs_exp)~
-          HetVivMortLim$vivmor:HetVivMortLim$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Protected / Hs_exp")
-vioplot(as.numeric(HetVivMortLim$IR)~HetVivMortLim$vivmor:HetVivMortLim$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Protected / IR")
-vioplot(as.numeric(HetVivMortLim$HL)~HetVivMortLim$vivmor:HetVivMortLim$fam,
-        col = c("orange","yellow"),sep=":",las=1,
-        ylab="Value",xlab="Pheno:Family",
-        main="Dead or Alive: Protected / HL")
-par(op)
-#export to .pdf 20 x 20 inches
-
-
-
-
