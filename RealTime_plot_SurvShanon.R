@@ -137,26 +137,3 @@ dev.off()
 ##############################################################################/
 #END
 ##############################################################################/
-
-
-#ploting the results (version 2)
-pdf(file="output/Figure5_SurvByProg2.pdf",width=7,height=7)
-op<-par(mar=c(5.1,4.3,1,1))
-coloor<-brewer.pal(11,"RdYlGn")[11:1] #with green to red gradient
-nbbrak<-11 #depend on the coloor chosen
-as.numeric(cut(SurvProp$PMinf,breaks=nbbrak))
-plot(SurvProp[,c(3,2)],xlim=c(0,100),ylim=c(0,100),bty="n",
-     las=1,pch=21,cex=3,col="black",xaxt="n",yaxt="n",
-     bg=coloor[as.numeric(cut(SurvProp$PMinf,breaks=nbbrak))],
-     ylab="Natural treatment survival rate (%)",
-     xlab="Protected treatment survival rate (%)",
-     font.lab=2,cex.lab=1.5)
-text(SurvProp[,c(3,2)],labels=SurvProp$Progeny)
-abline(0,1,lty=5,col=grey(0.6,1),lwd=3)
-legend(8,98,legend=levels(cut(SurvProp$PMinf,breaks=nbbrak)),
-       bty="n",fill=coloor,title="Mean\nPM infection")
-axis(1,lwd=2,cex.axis=1,las=1,font=2)
-axis(2,lwd=2,las=1,font=2)
-box(lwd=2)
-par(op)
-dev.off()
