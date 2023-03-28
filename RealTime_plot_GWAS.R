@@ -103,7 +103,7 @@ for (i in c(1,11,16)) {
   vioplot(tempo$`Acorn weight`~tempo[,2],boxwex=0.3,las=1,
           border=colo[2:4],lineCol=colo[2:4],rectCol=colo[2:4],
           col=colo[1],ann=FALSE,ylim=c(0,13.5),
-          xlab=Rezcomb$SNP[i],lty=1,lwd=3,axes=0,yaxt="n",
+          xaxt="n",lty=1,lwd=3,axes=0,yaxt="n",
           ylab="Acorn weight (g)",main="Acorn weight")
   axis(1,labels=paste(colnames(table(tempo$`Acorn weight`,tempo[,2])),
                       " (n=",table(tempo[,2]),")",
@@ -113,7 +113,7 @@ for (i in c(1,11,16)) {
   vioplot(tempo$`Height`~tempo[,2],boxwex=0.3,las=1,
           border=colo[2:4],lineCol=colo[2:4],rectCol=colo[2:4],
           col=colo[1],ann=FALSE,ylim=c(0,110),
-          xlab=Rezcomb$SNP[i],lty=1,lwd=3,axes=0,yaxt="n",
+          xaxt="n",lty=1,lwd=3,axes=0,yaxt="n",
           ylab="Height (cm)",main="Height")
   axis(1,labels=paste(colnames(table(tempo$`Height`,tempo[,2])),
                       " (n=",table(tempo[,2]),")",
@@ -123,7 +123,7 @@ for (i in c(1,11,16)) {
   vioplot(tempo$`Powdery mildew`~tempo[,2],boxwex=0.3,las=1,
           border=colo[2:4],lineCol=colo[2:4],rectCol=colo[2:4],
           col=colo[1],ann=FALSE,ylim=c(0,70),
-          xlab=Rezcomb$SNP[i],lty=1,lwd=3,axes=0,yaxt="n",
+          xaxt="n",lty=1,lwd=3,axes=0,yaxt="n",
           ylab="Powdery mildew note",main="Powdery mildew")
   axis(1,labels=paste(colnames(table(tempo$`Powdery mildew`,tempo[,2])),
                       " (n=",table(tempo[,2]),")",
@@ -270,7 +270,7 @@ for (i in 1:dim(Rezcomb)[1]) {
   vioplot(tempo$`Acorn weight`~tempo[,2],boxwex=0.3,las=1,
           border=colo[2:4],lineCol=colo[2:4],rectCol=colo[2:4],
           col=colo[1],ann=FALSE,ylim=c(0,13.5),
-          xlab=Rezcomb$SNP[i],lty=1,lwd=3,axes=0,yaxt="n",
+          xaxt="n",lty=1,lwd=3,axes=0,yaxt="n",
           ylab="Acorn weight (g)",main="Acorn weight")
   axis(1,labels=paste(colnames(table(tempo$`Acorn weight`,tempo[,2])),
                       " (n=",table(tempo[,2]),")",
@@ -280,7 +280,7 @@ for (i in 1:dim(Rezcomb)[1]) {
   vioplot(tempo$`Height`~tempo[,2],boxwex=0.3,las=1,
           border=colo[2:4],lineCol=colo[2:4],rectCol=colo[2:4],
           col=colo[1],ann=FALSE,ylim=c(0,110),
-          xlab=Rezcomb$SNP[i],lty=1,lwd=3,axes=0,yaxt="n",
+          xaxt="n",lty=1,lwd=3,axes=0,yaxt="n",
           ylab="Height (cm)",main="Height")
   axis(1,labels=paste(colnames(table(tempo$`Height`,tempo[,2])),
                       " (n=",table(tempo[,2]),")",
@@ -290,7 +290,7 @@ for (i in 1:dim(Rezcomb)[1]) {
   vioplot(tempo$`Powdery mildew`~tempo[,2],boxwex=0.3,las=1,
           border=colo[2:4],lineCol=colo[2:4],rectCol=colo[2:4],
           col=colo[1],ann=FALSE,ylim=c(0,70),
-          xlab=Rezcomb$SNP[i],lty=1,lwd=3,axes=0,yaxt="n",
+          xaxt="n",lty=1,lwd=3,axes=0,yaxt="n",
           ylab="Powdery mildew note",main="Powdery mildew")
   axis(1,labels=paste(colnames(table(tempo$`Powdery mildew`,tempo[,2])),
                       " (n=",table(tempo[,2]),")",
