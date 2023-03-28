@@ -155,7 +155,7 @@ dev.off()
 #plotting significant SNP genotype effect on ALL the traits####
 ##############################################################################/
 
-#code for plotting all the significant SNP
+#code for plotting all the significant SNP from the GWAS analysis
 temp<-snp.dat[snp.dat$Sample_ID %in% NatTrait$Taxa,]
 temp<-temp[,c(1,48:866)]
 tempb<-snp.dat[snp.dat$Sample_ID %in% LimTrait$Taxa,]
