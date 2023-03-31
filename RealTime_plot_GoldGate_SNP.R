@@ -66,9 +66,8 @@ angle<-function(x,y)
 ##############################################################################/
 
 
-#importation des donn?es de coordonn?es des individus par SNP ? partir du fichier de sortie 
-#de GenomeStudio
-coordIndSNP<-read.table("RT_comp_11P_FDT.txt", header=T, sep="\t", dec=".")
+#data importation for analysis
+coordIndSNP<-read.table("RT_comp_11P_FDT.txt",header=T,sep="\t",dec=".")
 #juste un aper?u pour voir la structure du fichier
 coordIndSNP[1:10,1:14]
 #importation des donn?es par SNP avec notamment les coordonn?es des ellipses, mais ?a servira 
