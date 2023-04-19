@@ -75,7 +75,7 @@ listIndBarCode<-RTdata[RTdata$Quality_SNPage==1 &
                          !is.na(RTdata$Quality_SNPage) &
                          RTdata$pb_robot_SNPage==0 & 
                          RTdata$family_simp!="CC" &
-                         RTdata$family_simp!="PAR",]
+                         RTdata$family_simp!="PAR","barcode"]
 
 #addition to make to the name of individuals
 B00D64M.GType	B00D64M.Score	B00D64M.Theta	B00D64M.R
