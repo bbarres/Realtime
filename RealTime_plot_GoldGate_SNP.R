@@ -70,6 +70,12 @@ coordIndSNP<-read.table("RT_comp_11P_FDT.txt",header=T,sep="\t",dec=".")
 #juste un aper?u pour voir la structure du fichier
 coordIndSNP[1:10,1:14]
 
+#list of individuals to plot
+listIndBarCode<-RTdata[RTdata$Quality_SNPage==1 & 
+                         !is.na(RTdata$Quality_SNPage) &
+                         RTdata$pb_robot_SNPage==0 & 
+                         RTdata$family_simp!="CC" &
+                         RTdata$family_simp!="PAR",]
 
 #addition to make to the name of individuals
 B00D64M.GType	B00D64M.Score	B00D64M.Theta	B00D64M.R
