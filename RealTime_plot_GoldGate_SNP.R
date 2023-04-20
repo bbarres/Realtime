@@ -68,24 +68,10 @@ angle<-function(x,y)
 #supplementary data importation for SNP results plotting
 coordIndSNP<-read.table("data/dataSup/RT_comp_11P_FDT.txt",
                         header=T,sep="\t",dec=".")
-#juste un aper?u pour voir la structure du fichier
+#a glimpse to the data structure
 coordIndSNP[1:10,1:14]
 
-#list of individuals to plot
-listIndBarCode<-RTdata[RTdata$Quality_SNPage==1 & 
-                         !is.na(RTdata$Quality_SNPage) &
-                         RTdata$pb_robot_SNPage==0 & 
-                         RTdata$family_simp!="CC" &
-                         RTdata$family_simp!="PAR","barcode"]
-
-#addition to make to the name of individuals
-B00D64M.GType	B00D64M.Score	B00D64M.Theta	B00D64M.R
-
-#importation des donn?es par SNP avec notamment les coordonn?es des ellipses, mais ?a servira 
-#aussi pour l'analyse multivari?e, pour ?viter d'avoir diff?rents probl?mes avec les noms de 
-#variables, ne pas oublier de retirer les quelques di?ses dans les titres sinon ?a fait foirer 
-#l'importation. De plus on r?alise cette petite transformation des noms de variables pour 
-#?tre compl?tement tranquille
+#supplementary data importation of the cluster statistic for each SNP
 statTable<-read.table("data/dataSup/RT_comp_11P_SNP_T.txt",
                       header=T,sep="\t",dec=".")
 names(statTable)
@@ -101,6 +87,22 @@ colnames(statTable)<-c("Index","Name","Chr","Position","ChiTest100",
                        "AA_R_Mean","AA_R_Dev","AB_R_Mean","AB_R_Dev",
                        "BB_R_Mean","BB_R_Dev","Address2","Norm_ID")
 
+#list of individuals to plot (excluding bad quality individual, individuals 
+#that belong to CC and PAR categories and individuals that have not been
+#genotyped with the SNP chip)
+listIndBarCode<-RTdata[RTdata$Quality_SNPage==1 & 
+                         !is.na(RTdata$Quality_SNPage) &
+                         RTdata$pb_robot_SNPage==0 & 
+                         RTdata$family_simp!="CC" &
+                         RTdata$family_simp!="PAR","barcode"]
+
+#addition to make to the name of individuals
+subcolname<-c(".GType",".Score",".Theta",".R")
+
+#list of columns names to keep
+listcolretain<-paste(rep(listIndBarCode,each=length(subcolname)),
+                     rep(subcolname,length(listIndBarCode)),
+                     sep="")
 
 #on cr?? une fonction pour construire une table par snp pour pouvoir ensuite  faire
 #facilement les plot, en entr?e de cette fonction il faut un dataframe cr?? ? partir de 
