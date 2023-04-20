@@ -34,7 +34,7 @@ library(viridis)
 #Loading and preparing the main data set####
 ##############################################################################/
 
-#data by individuals, including all individuals (hd, families, parents and CC
+#data by individuals, including all individuals (hd, families, parents and CC)
 RTdata<-read.table("data/datatot.txt",sep="\t",stringsAsFactors=FALSE,
                    header=TRUE)
 #because some functions do not like "." within colnames, we replace them

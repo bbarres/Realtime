@@ -65,8 +65,9 @@ angle<-function(x,y)
 #Data formatting function####
 ##############################################################################/
 
-#data importation for analysis
-coordIndSNP<-read.table("RT_comp_11P_FDT.txt",header=T,sep="\t",dec=".")
+#supplementary data importation for SNP results plotting
+coordIndSNP<-read.table("data/dataSup/RT_comp_11P_FDT.txt",
+                        header=T,sep="\t",dec=".")
 #juste un aper?u pour voir la structure du fichier
 coordIndSNP[1:10,1:14]
 
@@ -85,7 +86,8 @@ B00D64M.GType	B00D64M.Score	B00D64M.Theta	B00D64M.R
 #variables, ne pas oublier de retirer les quelques di?ses dans les titres sinon ?a fait foirer 
 #l'importation. De plus on r?alise cette petite transformation des noms de variables pour 
 #?tre compl?tement tranquille
-statTable<-read.table("RT_comp_11P_SNP_T.txt", header=T, sep=" ", dec=".")
+statTable<-read.table("data/dataSup/RT_comp_11P_SNP_T.txt",
+                      header=T,sep="\t",dec=".")
 names(statTable)
 statTable<-statTable[,-c(13,23)]
 colnames(statTable)<-c("Index","Name","Chr","Position","ChiTest100",
