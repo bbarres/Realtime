@@ -28,11 +28,23 @@ yrange10<-c(min(genoQual$p10.GC,na.rm=T)-0.01,
           max(genoQual$p10.GC,na.rm=T)+0.01)
 yrange50<-c(min(genoQual$p50.GC,na.rm=T)-0.01,
           max(genoQual$p50.GC,na.rm=T)+0.01)
+#adding a column with different notes for different quality of genotyping
+genoQual$qnote<-0
+genoQual$qnote<-ifelse(genoQual$Call.Rate<seuilCRatemin,
+                       genoQual$qnote+1,
+                       genoQual$qnote+0)
+genoQual$qnote<-ifelse(genoQual$p10.GC<seuilp10min,
+                       genoQual$qnote+1,
+                       genoQual$qnote+0)
+genoQual$qnote<-ifelse(genoQual$p50.GC<seuilp50min,
+                       genoQual$qnote+1,
+                       genoQual$qnote+0)
+
 #defining a color vector
-coVec<-c(rgb(0,0,0,max=255,alpha=30),
-         rgb(228,26,26,max=255,alpha=150),
-         rgb(55,126,184,max=255,alpha=150),
-         rgb(77,175,74,max=255,alpha=150))
+coVec<-c(rgb(0,0,0,max=255,alpha=40),
+         rgb(255,255,51,max=255,alpha=200),
+         rgb(255,127,0,max=255,alpha=200),
+         rgb(228,26,28,max=255,alpha=200))
 
 
 ##############################################################################/
@@ -46,27 +58,22 @@ plot(p10.GC~Call.Rate,xlim=xrange,ylim=yrange10,
      data=genoQual[genoQual$p50.GC>=seuilp50min & 
                      genoQual$p10.GC>=seuilp10min &
                      genoQual$Call.Rate>=seuilCRatemin,],
-     col=coVec[1],pch=1,cex=0.6)
+     col=coVec[1],pch=1,cex=0.6,las=1)
 abline(h=c(seuilp10min),lty=2,col=brewer.pal(9,"Set1")[2],lwd=3)
 abline(v=c(seuilCRatemin),lty=2,col=brewer.pal(9,"Set1")[3],lwd=3)
-points((p10.GC[p10.GC<seuilp10min])~(Call.Rate[p10.GC<seuilp10min]),
-       col=coVec[3],pch=1,cex=0.8,data=genoQual)
-points((p10.GC[Call.Rate<seuilCRatemin & p10.GC>seuilp10min])~
-         (Call.Rate[Call.Rate<seuilCRatemin & p10.GC>seuilp10min]),
-       col=coVec[4],pch=1,cex=0.8,data=genoQual)
-
+points(p10.GC~Call.Rate,pch=21,cex=0.7,
+       bg=coVec[qnote+1],col=rgb(0,0,0,max=255,alpha=200),
+       data=genoQual[genoQual$qnote!=0,])
 plot(p50.GC~Call.Rate,xlim=xrange,ylim=yrange50,
      data=genoQual[genoQual$p50.GC>=seuilp50min & 
                      genoQual$p10.GC>=seuilp10min &
                      genoQual$Call.Rate>=seuilCRatemin,],
-     col=coVec[1],pch=1,cex=0.6)
-abline(h=c(seuilp50min),lty=2,col=brewer.pal(9,"Set1")[1],lwd=3)
+     col=coVec[1],pch=1,cex=0.6,las=1)
+abline(h=c(seuilp50min),lty=2,col=brewer.pal(9,"Set1")[4],lwd=3)
 abline(v=c(seuilCRatemin),lty=2,col=brewer.pal(9,"Set1")[3],lwd=3)
-points((p50.GC[p50.GC<seuilp50min])~(Call.Rate[p50.GC<seuilp50min]),
-       col=coVec[2],pch=1,cex=0.8,data=genoQual)
-points((p50.GC[Call.Rate<seuilCRatemin & p50.GC>seuilp50min])~
-         (Call.Rate[Call.Rate<seuilCRatemin & p50.GC>seuilp50min]),
-       col=coVec[4],pch=1,cex=0.8,data=genoQual)
+points(p50.GC~Call.Rate,pch=21,cex=0.7,
+       bg=coVec[qnote+1],col=rgb(0,0,0,max=255,alpha=200),
+       data=genoQual[genoQual$qnote!=0,])
 par(op)
 dev.off()
 
