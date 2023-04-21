@@ -25,7 +25,7 @@ ellipse<-function(hlaxa=1,hlaxb=1,theta=0,xc=0,yc=0,newplot=F,npoints=100,...)
   yp<-rad*sin(alpha+theta)+yc
   if (newplot)
     plot(xp,yp,type="l",...)
-  elselines(xp,yp,...)
+  else lines(xp,yp,...)
   invisible()
 }
 
@@ -100,18 +100,16 @@ listIndBarCode<-RTdata[RTdata$Quality_SNPage==1 &
 subcolname<-c(".GType",".Score",".Theta",".R")
 
 #list of columns names to keep
-listcolretain<-paste(rep(listIndBarCode,each=length(subcolname)),
-                     rep(subcolname,length(listIndBarCode)),
-                     sep="")
+listcolretain<-c(colnames(coordIndSNP)[1:10],
+                         paste(rep(listIndBarCode,each=length(subcolname)),
+                               rep(subcolname,length(listIndBarCode)),
+                               sep=""))
 
-#on cr?? une fonction pour construire une table par snp pour pouvoir ensuite  faire
-#facilement les plot, en entr?e de cette fonction il faut un dataframe cr?? ? partir de 
-#l'importation d'un fichier de sortie compl?te de GenomeStudio 'matnom', le nombre de 
-#SNP que l'on veut traiter 'nbSNP' (on n'est pas oblig? de faire tous les SNP du fichier)
-#et enfin le nombre d'individus qui nous int?resse 'nbIND'. Bon c'est assez long  ? faire 
-#tourner, notamment je pense ? cause des boucles (qui sont d?conseill? dans R). Il faut 
-#environ 10 min pour 100 SNP avec 1425 ind
+#limiting the dataset to the individuals included in the study
+coordIndSNP<-coordIndSNP[,listcolretain]
 
+
+#a function to create a table for each SNP
 preplotSNP<-function(matnom,nbSNP)
 {
 	matnom<-matnom[order(matnom$Index),]
@@ -135,7 +133,7 @@ preplotSNP<-function(matnom,nbSNP)
 }
 
 
-mylist<-preplotSNP(coordIndSNP,5)
+mylist<-preplotSNP(coordIndSNP,1061)
 #un petit aper?u d'un des fichiers contenus dans la list
 mylist[[5]][1:20,1:5]
 
