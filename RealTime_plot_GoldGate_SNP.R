@@ -9,11 +9,11 @@ source("RealTime_load.R")
 
 
 ##############################################################################/
-#peripheral functions####
+#function for plotting ellipse####
 ##############################################################################/
 
-#Functions to draw an ellipse. The following code has been retrieved from a 
-#function written by Peter D. M. Macdonald of McMaster University
+#The following code has been retrieved from a function written by 
+#Peter D. M. Macdonald of McMaster University
 ellipse<-function(hlaxa=1,hlaxb=1,theta=0,xc=0,yc=0,newplot=F,npoints=100,...)
 {
   a<-seq(0,2*pi,length=npoints+1)
@@ -62,7 +62,72 @@ angle<-function(x,y)
 
 
 ##############################################################################/
-#Data formatting function####
+#function for creating table list for each SNP####
+##############################################################################/
+
+#this function take a FDT output file from the GenomeStudio software. The 
+#second variable 'nbSNP' is the number of SNP markers to process. It returns 
+#a list of tables, one for each SNP processed
+preplotSNP<-function(matnom,nbSNP)
+{
+  matnom<-matnom[order(matnom$Index),]
+  nbIND<-(dim(matnom)[2]-10)/4
+  matnom1<-matnom
+  nomcol<-c("GType","Score","Theta","R")
+  nomcolmat<-c(colnames(matnom[1:10]),rep(nomcol,nbIND))
+  names(matnom)<-nomcolmat
+  listeSNP<-vector(mode="list", length=nbSNP)
+  for (i in 1:nbSNP) {
+    SNP<-data.frame(check.names=F)
+    NomInd<-c()
+    for (j in 1:nbIND) {
+      SNP<-rbind(SNP,matnom[i,(4*(j-1)+11):(4*(j-1)+14)])
+      NomInd<-c(NomInd,substr(colnames(matnom1[(4*(j-1)+14)]),1,7)) 
+    }
+    SNP<-cbind(SNP,NomInd)[,c(5,1,2,3,4)]
+    listeSNP[[i]]<-SNP	
+  }
+  return(listeSNP)
+}
+
+
+##############################################################################/
+#function for plotting each SNP####
+##############################################################################/
+
+#this function take as variable 'singleSNP', a list produce by 
+#the 'preplot' function (see above) and 'SNPstat' a file with the 
+#characteristics of the clusters for each SNP imported from a SNP_T output 
+#file of the GenomeStudio software with minor modifications to the column 
+#names (see an example in the script below)
+SNPlot<-function(singleSNP,SNPstat) #one plot per page
+{
+  SNPstat<-SNPstat[order(SNPstat$Index),] 
+  nbpag<-(length(singleSNP))
+  pdf(file=paste("output/Figure_RawSNP",".pdf"))
+  for (i in 1:nbpag) {
+    levels(singleSNP[[i]][,2])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
+    attach(singleSNP[[i]])
+    plot(Theta,R,col=c("red", "purple", "blue", "black")[as.numeric(GType)],
+         cex=0.8,xlim=c(0,1),las=1,
+         ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
+         main=paste(SNPstat$Name[i]," // note ",SNPstat$Aux[i]))
+    detach(singleSNP[[i]])
+    attach(SNPstat)
+    ellipse(AA_T_Dev[i],AA_R_Dev[i],0,AA_T_Mean[i],AA_R_Mean[i],
+            col="red",lwd=3)
+    ellipse(AB_T_Dev[i],AB_R_Dev[i],0,AB_T_Mean[i],AB_R_Mean[i],
+            col="purple",lwd=3)
+    ellipse(BB_T_Dev[i],BB_R_Dev[i],0,BB_T_Mean[i],BB_R_Mean[i],
+            col="blue",lwd=3)
+    detach(SNPstat)
+  }
+  dev.off()
+}
+
+
+##############################################################################/
+#importing the supplementary datasets####
 ##############################################################################/
 
 #supplementary data importation for SNP results plotting
@@ -109,75 +174,28 @@ listcolretain<-c(colnames(coordIndSNP)[1:10],
 coordIndSNP<-coordIndSNP[,listcolretain]
 
 
-#a function to create a table for each SNP
-preplotSNP<-function(matnom,nbSNP)
-{
-	matnom<-matnom[order(matnom$Index),]
-	nbIND<-(dim(matnom)[2]-10)/4
-	matnom1<-matnom
-	nomcol<-c("GType","Score","Theta","R")
-	nomcolmat<-c(colnames(matnom[1:10]),rep(nomcol,nbIND))
-	names(matnom)<-nomcolmat
-	listeSNP<-vector(mode="list", length=nbSNP)
-	for (i in 1:nbSNP) {
-		SNP<-data.frame(check.names=F)
-		NomInd<-c()
-		for (j in 1:nbIND) {
-			SNP<-rbind(SNP,matnom[i,(4*(j-1)+11):(4*(j-1)+14)])
-			NomInd<-c(NomInd,substr(colnames(matnom1[(4*(j-1)+14)]),1,7)) 
-		}
-		SNP<-cbind(SNP,NomInd)[,c(5,1,2,3,4)]
-		listeSNP[[i]]<-SNP	
-	}
-	return(listeSNP)
-}
+##############################################################################/
+#plotting all SNP markers (take some time to run####
+##############################################################################/
 
-
-mylist<-preplotSNP(coordIndSNP,1061)
-#un petit aper?u d'un des fichiers contenus dans la list
+#first we prepare the list for the 1536 SNP on the chip
+mylist<-preplotSNP(coordIndSNP,1536)
+#here is a glimpse to the structure of the dataset
 mylist[[5]][1:20,1:5]
-
-
-#une fois qu'on a cr?? la liste des SNP comme on la voulait, on fait une fonction de 
-#plotage des SNPs
-
-#cette fonction demande en entr?e un fichier de type 'singleSNP'produit par la fonction 
-#'preplotSNP'et un fichier de type 'SNPstat' qui correspond ? l'importation du fichier 
-#des caract?ristiques des SNP (fichier produit par GenomeStudio) dans lequel on a 
-#notamment les coordonn?es des ellipses. Il faut aussi noter qu'il est important de 
-#charger les fonction 'ellipse' et 'angle' en d?but de ce fichier pour pouvoir faire 
-#tourner les fonctions ? l'int?rieur de cette fonction
-
-
-SNPlot<-function(singleSNP,SNPstat) #avec 1 figure par page
-{
-	SNPstat<-SNPstat[order(SNPstat$Index),] 
-	nbpag<-(length(singleSNP))
-	pdf(file=paste("figSNP",".pdf"))
-	for (i in 1:nbpag) {
-		levels(singleSNP[[i]][,2])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
-		attach(singleSNP[[i]])
-		plot(Theta,R,col=c("red", "purple", "blue", "black")[as.numeric(GType)],
-		cex=0.8,xlim=c(0,1),ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
-		main=paste(SNPstat$Name[i]," // note ",SNPstat$Aux[i]),las=1)
-		detach(singleSNP[[i]])
-		attach(SNPstat)
-		ellipse(AA_T_Dev[i],AA_R_Dev[i],0,AA_T_Mean[i],AA_R_Mean[i],
-		        col="red",lwd=3)
-		ellipse(AB_T_Dev[i],AB_R_Dev[i],0,AB_T_Mean[i],AB_R_Mean[i],
-		        col="purple",lwd=3)
-		ellipse(BB_T_Dev[i],BB_R_Dev[i],0,BB_T_Mean[i],BB_R_Mean[i],
-		        col="blue",lwd=3)
-		detach(SNPstat)
-	}
-	dev.off()
-}
-
+#now we plot the SNP and produce the Figure file
 SNPlot(mylist,statTable)
 
-#faisons le pour tous les SNP
-mylist<-preplotSNP(coordIndSNP,1536) #attention c'est tr?s long !
-SNPlot(mylist,statTable)
+
+
+
+
+
+
+
+
+
+
+
 
 
 #avec "n" figures par page, ici "n=6", les figures viennent d'un m?me fichier
