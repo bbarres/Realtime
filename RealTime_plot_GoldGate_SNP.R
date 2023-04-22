@@ -67,13 +67,13 @@ angle<-function(x,y)
 
 #supplementary data importation for SNP results plotting
 coordIndSNP<-read.table("data/dataSup/RT_comp_11P_FDT.txt",
-                        header=T,sep="\t",dec=".")
+                        header=T,sep="\t",dec=".",stringsAsFactors=TRUE)
 #a glimpse to the data structure
 coordIndSNP[1:10,1:14]
 
 #supplementary data importation of the cluster statistic for each SNP
 statTable<-read.table("data/dataSup/RT_comp_11P_SNP_T.txt",
-                      header=T,sep="\t",dec=".")
+                      header=T,sep="\t",dec=".",stringsAsFactors=TRUE)
 names(statTable)
 statTable<-statTable[,-c(13,23)]
 colnames(statTable)<-c("Index","Name","Chr","Position","ChiTest100",
@@ -159,7 +159,7 @@ SNPlot<-function(singleSNP,SNPstat) #avec 1 figure par page
 		attach(singleSNP[[i]])
 		plot(Theta,R,col=c("red", "purple", "blue", "black")[as.numeric(GType)],
 		cex=0.8,xlim=c(0,1),ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
-		main=paste(SNPstat$Name[i]," // note ",SNPstat$Aux[i]))
+		main=paste(SNPstat$Name[i]," // note ",SNPstat$Aux[i]),las=1)
 		detach(singleSNP[[i]])
 		attach(SNPstat)
 		ellipse(AA_T_Dev[i],AA_R_Dev[i],0,AA_T_Mean[i],AA_R_Mean[i],
