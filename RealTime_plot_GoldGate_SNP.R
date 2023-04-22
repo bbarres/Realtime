@@ -175,7 +175,7 @@ coordIndSNP<-coordIndSNP[,listcolretain]
 
 
 ##############################################################################/
-#plotting all SNP markers (take some time to run####
+#plotting all SNP markers (take some time to run)####
 ##############################################################################/
 
 #first we prepare the list for the 1536 SNP on the chip
