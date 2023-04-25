@@ -96,15 +96,16 @@ preplotSNP<-function(matnom,nbSNP)
 ##############################################################################/
 
 #this function take as variable 'singleSNP', a list produce by 
-#the 'preplot' function (see above) and 'SNPstat' a file with the 
+#the 'preplot' function (see above), 'SNPstat' a file with the 
 #characteristics of the clusters for each SNP imported from a SNP_T output 
 #file of the GenomeStudio software with minor modifications to the column 
-#names (see an example in the script below)
-SNPlot<-function(singleSNP,SNPstat) #one plot per page
+#names (see an example in the script below) and 'FileName' a chain of 
+#character for the file name
+SNPlot<-function(singleSNP,SNPstat,FileName) #one plot per page
 {
   SNPstat<-SNPstat[order(SNPstat$Index),] 
   nbpag<-(length(singleSNP))
-  pdf(file=paste("output/Figure_RawSNP",".pdf"))
+  pdf(file=paste("output\\",FileName,".pdf",sep=""))
   for (i in 1:nbpag) {
     levels(singleSNP[[i]][,2])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
     attach(singleSNP[[i]])
@@ -152,7 +153,7 @@ colnames(statTable)<-c("Index","Name","Chr","Position","ChiTest100",
                        "AA_R_Mean","AA_R_Dev","AB_R_Mean","AB_R_Dev",
                        "BB_R_Mean","BB_R_Dev","Address2","Norm_ID")
 
-#list of individuals to plot (excluding bad quality individual, individuals 
+#list of individuals to plot (excluding bad quality individuals, individuals 
 #that belong to CC and PAR categories and individuals that have not been
 #genotyped with the SNP chip)
 listIndBarCode<-RTdata[RTdata$Quality_SNPage==1 & 
@@ -175,7 +176,7 @@ coordIndSNP<-coordIndSNP[,listcolretain]
 
 
 ##############################################################################/
-#plotting all SNP markers (take some time to run)####
+#plotting all the 1536 SNP markers (take some time to run)####
 ##############################################################################/
 
 #first we prepare the list for the 1536 SNP on the chip
@@ -183,13 +184,14 @@ mylist<-preplotSNP(coordIndSNP,1536)
 #here is a glimpse to the structure of the dataset
 mylist[[5]][1:20,1:5]
 #now we plot the SNP and produce the Figure file
-SNPlot(mylist,statTable)
+SNPlot(mylist,statTable,"Raw_1536SNP")
 
 
+##############################################################################/
+#plotting all the SNP markers excluded after visual inspection####
+##############################################################################/
 
-
-
-
+statTableExcl<-statTable[statTable$Aux=="31",]
 
 
 
