@@ -167,9 +167,9 @@ subcolname<-c(".GType",".Score",".Theta",".R")
 
 #list of columns names to keep
 listcolretain<-c(colnames(coordIndSNP)[1:10],
-                         paste(rep(listIndBarCode,each=length(subcolname)),
-                               rep(subcolname,length(listIndBarCode)),
-                               sep=""))
+                 paste(rep(listIndBarCode,each=length(subcolname)),
+                       rep(subcolname,length(listIndBarCode)),
+                       sep=""))
 
 #limiting the dataset to the individuals included in the study
 coordIndSNP<-coordIndSNP[,listcolretain]
@@ -191,9 +191,24 @@ SNPlot(mylist,statTable,"Raw_1536SNP")
 #plotting all the SNP markers excluded after visual inspection####
 ##############################################################################/
 
+#limiting the dataset to excluded SNP after visual inspection
 statTableExcl<-statTable[statTable$Aux=="31",]
+coordIndSNPExcl<-coordIndSNP[statTableExcl$Index,]
+#ploting the excluded SNP
+mylist<-preplotSNP(coordIndSNPExcl,dim(statTableExcl)[1])
+SNPlot(mylist,statTableExcl,"Raw_ExcludedSNP")
 
 
+##############################################################################/
+#plotting all the SNP markers saved after visual inspection####
+##############################################################################/
+
+#limiting the dataset to saved SNP after visual inspection
+statTableSave<-statTable[statTable$Aux=="13",]
+coordIndSNPSave<-coordIndSNP[statTableSave$Index,]
+#ploting the saved SNP
+mylist<-preplotSNP(coordIndSNPSave,dim(statTableSave)[1])
+SNPlot(mylist,statTableSave,"Raw_SavedSNP")
 
 
 
