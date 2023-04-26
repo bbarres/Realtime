@@ -70,7 +70,6 @@ angle<-function(x,y)
 #a list of tables, one for each SNP processed
 preplotSNP<-function(matnom,nbSNP)
 {
-  matnom<-matnom[order(matnom$Index),]
   nbIND<-(dim(matnom)[2]-10)/4
   matnom1<-matnom
   nomcol<-c("GType","Score","Theta","R")
@@ -103,7 +102,6 @@ preplotSNP<-function(matnom,nbSNP)
 #character for the file name
 SNPlot<-function(singleSNP,SNPstat,FileName) #one plot per page
 {
-  SNPstat<-SNPstat[order(SNPstat$Index),] 
   nbpag<-(length(singleSNP))
   pdf(file=paste("output\\",FileName,".pdf",sep=""))
   for (i in 1:nbpag) {
@@ -112,7 +110,7 @@ SNPlot<-function(singleSNP,SNPstat,FileName) #one plot per page
     plot(Theta,R,col=c("red", "purple", "blue", "black")[as.numeric(GType)],
          cex=0.8,xlim=c(0,1),las=1,
          ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
-         main=paste(SNPstat$Name[i]," // note ",SNPstat$Aux[i]))
+         main=paste(SNPstat$Name[i]," // score ",SNPstat$Aux[i]))
     detach(singleSNP[[i]])
     attach(SNPstat)
     ellipse(AA_T_Dev[i],AA_R_Dev[i],0,AA_T_Mean[i],AA_R_Mean[i],
@@ -211,169 +209,76 @@ mylist<-preplotSNP(coordIndSNPSave,dim(statTableSave)[1])
 SNPlot(mylist,statTableSave,"Raw_SavedSNP")
 
 
+##############################################################################/
+#Figure S5: plotting SNP markers example for score 1 (good) and 3 (bad)####
+##############################################################################/
 
+statTableGooBad<-statTable[c(77,81,103,11,2,13,15,45,93),]
+coordIndSNPGooBad<-coordIndSNP[c(77,81,103,11,2,13,15,45,93),]
+mylist<-preplotSNP(coordIndSNPGooBad,dim(statTableGooBad)[1])
 
-
-
-#avec "n" figures par page, ici "n=6", les figures viennent d'un m?me fichier
-
-SNPlot6<-function(singleSNP,SNPstat) 
-{
-	SNPstat<-SNPstat[order(SNPstat$Index),] 
-	nbpag<-ceiling((length(singleSNP))/6)
-	for (i in 1:nbpag) {
-		pdf(file=paste((6*(i-1)+1),"_a_",6*i,".pdf"))
-		op<-par(mfrow=c(2,3),pty="s")
-		for (j in ((6*(i-1))+1):(i*6)) {
-			levels(singleSNP[[j]][, 2])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
-			attach(singleSNP[[j]])
-			plot(Theta,R, col = c("red", "purple", "blue", "black")[as.numeric(GType)],
-			cex=0.5,xlim=c(0,1),ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
-			main=paste(SNPstat$Name[i]," // note ",SNPstat$Aux[i]))
-			detach(singleSNP[[j]])
-			attach(SNPstat)
-			ellipse(AA_T_Dev[j],AA_R_Dev[j],0,AA_T_Mean[j],AA_R_Mean[j],
-			        col="red",lwd=3)
-			ellipse(AB_T_Dev[j],AB_R_Dev[j],0,AB_T_Mean[j],AB_R_Mean[j],
-			        col="purple",lwd=3)
-			ellipse(BB_T_Dev[j],BB_R_Dev[j],0,BB_T_Mean[j],BB_R_Mean[j],
-			        col="blue",lwd=3)
-			detach(SNPstat)
-		}
-		par(op)
-		dev.off()
-	}
+#ploting the Figure S5
+pdf(file="output/Figure_S5_GoodBadSNP.pdf",width=10,height=10)
+colovec<-brewer.pal(9,"Set1")[c(3,1)]
+op<-par(mfrow=c(3,3),pty="s")
+for (j in (1:9)) {
+  levels(mylist[[j]][, 2])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
+  attach(mylist[[j]])
+  plot(Theta,R,col=c("red", "purple", "blue", "black")[as.numeric(GType)],
+       cex=0.8,xlim=c(0,1),las=1,
+       ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
+       main=paste(statTableGooBad$Name[j]," // score ",
+                  statTableGooBad$Aux[j]))
+  box(col=colovec[as.numeric(as.factor(statTableGooBad$Aux))[j]],lwd=2)
+  detach(mylist[[j]])
+  attach(statTableGooBad)
+  ellipse(AA_T_Dev[j],AA_R_Dev[j],0,AA_T_Mean[j],AA_R_Mean[j],
+          col="red",lwd=3)
+  ellipse(AB_T_Dev[j],AB_R_Dev[j],0,AB_T_Mean[j],AB_R_Mean[j],
+          col="purple",lwd=3)
+  ellipse(BB_T_Dev[j],BB_R_Dev[j],0,BB_T_Mean[j],BB_R_Mean[j],
+          col="blue",lwd=3)
+  detach(statTableGooBad)
 }
-
-SNPlot6(mylist,statTable)
-
-
-#figure c?t? ? c?te pour pouvoir comparer deux annotations diff?rentes par exemples, il faut 
-#que les fichiers de donn?es contiennent exactement les m?me SNP et les m?mes individus, sinon 
-#?a donne n'importe quoi
-
-biSNPlot<-function(singleSNP1,SNPstat1,singleSNP2,SNPstat2) #avec 1 figure par page
-{
-	SNPstat1<-SNPstat1[order(SNPstat1$Index),]
-	SNPstat2<-SNPstat2[order(SNPstat2$Index),]
-	nbpag<-(length(singleSNP1))
-	pdf(file=paste("figSNPbi2",".pdf"),width=14)
-	op<-par(mfrow=c(1,2),pty="s")
-	for (i in 1:nbpag) {
-		levels(singleSNP1[[i]][, 2])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
-		attach(singleSNP1[[i]])
-		plot(Theta,R, col = c("red", "purple", "blue", "black")[as.numeric(GType)],
-		cex=0.8,xlim=c(0,1),ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
-		main=paste("jeux A ",SNPstat1$Name[i]," // note ",SNPstat1$Aux[i]))
-		detach(singleSNP1[[i]])
-		attach(SNPstat1)
-		ellipse(AA_T_Dev[i],AA_R_Dev[i],0,AA_T_Mean[i],AA_R_Mean[i],col="red",lwd=3)
-		ellipse(AB_T_Dev[i],AB_R_Dev[i],0,AB_T_Mean[i],AB_R_Mean[i],col="purple",lwd=3)
-		ellipse(BB_T_Dev[i],BB_R_Dev[i],0,BB_T_Mean[i],BB_R_Mean[i],col="blue",lwd=3)
-		detach(SNPstat1)
-		levels(singleSNP2[[i]][, 2])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
-		attach(singleSNP2[[i]])
-		plot(Theta,R, col = c("red", "purple", "blue", "black")[as.numeric(GType)],
-		cex=0.8,xlim=c(0,1),ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
-		main=paste("jeux B ",SNPstat2$Name[i]," // note ",SNPstat2$Aux[i]))
-		detach(singleSNP2[[i]])
-		attach(SNPstat2)
-		ellipse(AA_T_Dev[i],AA_R_Dev[i],0,AA_T_Mean[i],AA_R_Mean[i],col="red",lwd=3)
-		ellipse(AB_T_Dev[i],AB_R_Dev[i],0,AB_T_Mean[i],AB_R_Mean[i],col="purple",lwd=3)
-		ellipse(BB_T_Dev[i],BB_R_Dev[i],0,BB_T_Mean[i],BB_R_Mean[i],col="blue",lwd=3)
-		detach(SNPstat2)
-	}
-	par(op)
-	dev.off()
-}
-
-#run d'exemple de biplot, ne pas oublier d'enlever les di?ses dans les fichier de type 
-#'SNP_Table'
-coordIndSNP1<-read.table("rs_brute_FDT.txt", header=T, sep="\t", dec=".")
-statTable1<-read.table("rs_brute_SNP_T.txt", header=T, sep="\t", dec=".")
-colnames(statTable1)<-c("Index","Name","Chr","Position","ChiTest100","Het_Excess","AA_Freq",
-"AB_Freq","BB_Freq","Call_Freq","Minor_Freq","Aux","P-C_Errors","P-P-C_Errors","Rep_Errors",
-"p10_GC","p50_GC","SNP","Calls","no_calls","Plus/Minus_Strand","Address","GenTrain_Score",
-"Orig_Score","Edited","Cluster_Sep","AA_T_Mean","AA_T_Dev","AB_T_Mean","AB_T_Dev","BB_T_Mean",
-"BB_T_Dev","AA_R_Mean","AA_R_Dev","AB_R_Mean","AB_R_Dev","BB_R_Mean","BB_R_Dev","Address2",
-"Norm_ID")
-coordIndSNP2<-read.table("rs_FDT.txt", header=T, sep="\t", dec=".")
-statTable2<-read.table("rs_SNP_T.txt", header=T, sep="\t", dec=".")
-colnames(statTable2)<-c("Index","Name","Chr","Position","ChiTest100","Het_Excess","AA_Freq",
-"AB_Freq","BB_Freq","Call_Freq","Minor_Freq","Aux","P-C_Errors","P-P-C_Errors","Rep_Errors",
-"10_GC","50_GC","SNP","Calls","no_calls","Plus/Minus_Strand","Address","GenTrain_Score",
-"Orig_Score","Edited","Cluster_Sep","AA_T_Mean","AA_T_Dev","AB_T_Mean","AB_T_Dev","BB_T_Mean",
-"BB_T_Dev","AA_R_Mean","AA_R_Dev","AB_R_Mean","AB_R_Dev","BB_R_Mean","BB_R_Dev","Address2",
-"Norm_ID")
-mylist1<-preplotSNP(coordIndSNP1,1536)
-mylist2<-preplotSNP(coordIndSNP2,1536)
-biSNPlot(mylist1,statTable1,mylist2,statTable2)
-
-
-
-statSNP<-statSNP[order(statSNP$Index),] 
-attach(statSNP)
-ellipse(AA_T_Dev[6],AA_R_Dev[6],0,AA_T_Mean[6],AA_R_Mean[6],col="red",lwd=3)
-ellipse(AB_T_Dev[6],AB_R_Dev[6],0,AB_T_Mean[6],AB_R_Mean[6],col="purple",lwd=3)
-ellipse(BB_T_Dev[6],BB_R_Dev[6],0,BB_T_Mean[6],BB_R_Mean[6],col="blue",lwd=3)
-detach(statSNP)
 par(op)
-
-******************************************************************************************
-#il faut utiliser les g?notypes pour les couleurs, on utilise cette astuce pour que 
-#tous les SNP aient les 4 types de levels, pour ?viter d'avoir des probl?mes de couleur 
-#par la suite
-levels(mylist[[6]][, 1])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
-levels(mylist[[6]][, 1])
-#?a marche pour changer les noms aussi
-##levels(mylist[[6]][, 1])<-list("red"="AA","purple"="AB","blue"="BB","black"="NC")
-
-attach(mylist[[6]])
-plot(Theta,R, col = c("red", "purple", "blue", "black")[as.numeric(GType)],cex=0.5,
-xlim=c(0,1),ylim=c(0,1.2),main=statSNP$Name[6])
-detach(mylist[[6]])
-statSNP<-statSNP[order(statSNP$Index),] 
-attach(statSNP)
-ellipse(AA_T_Dev[6],AA_R_Dev[6],0,AA_T_Mean[6],AA_R_Mean[6],col="red",lwd=3)
-ellipse(AB_T_Dev[6],AB_R_Dev[6],0,AB_T_Mean[6],AB_R_Mean[6],col="purple",lwd=3)
-ellipse(BB_T_Dev[6],BB_R_Dev[6],0,BB_T_Mean[6],BB_R_Mean[6],col="blue",lwd=3)
-detach(statSNP)
-
-*****************************************************************************************
+dev.off()
 
 
-#ensuite pour faire tourner une fonction sur la liste des SNP
-lapply()
+##############################################################################/
+#Figure S6: plotting SNP markers example for saved and excluded SNP####
+##############################################################################/
 
+statTableSavExcl<-rbind(statTableSave[c(21,26,2),],
+                        statTableExcl[c(1,5,20),])
+coordIndSNPSavExcl<-rbind(coordIndSNPSave[c(21,26,2),],
+                          coordIndSNPExcl[c(1,5,20),])
+mylist<-preplotSNP(coordIndSNPSavExcl,dim(statTableSavExcl)[1])
 
-ls()
-
-rm(list=ls())
-
-j<-1
-matnom<-coordIndSNP
-colnames(matnom[(4*(j-1)+14)])
-
-
-m <- cbind(1, 1:7) # the '1' (= shorter vector) is recycled
-m
-m <- cbind(m, 8:14)[, c(1, 3, 2)] # insert a column
-m
-cbind(1:7, diag(3))# vector is subset -> warning
-
-cbind(0, rbind(1, 1:3))
-cbind(I=0, X=rbind(a=1, b=1:3))  # use some names
-xx <- data.frame(I=rep(0,2))
-cbind(xx, X=rbind(a=1, b=1:3))   # named differently
-
-cbind(0, matrix(1, nrow=0, ncol=4))#> Warning (making sense)
-dim(cbind(0, matrix(1, nrow=2, ncol=0)))#-> 2 x 1
-
-## deparse.level
-dd <- 10
-rbind(1:4, c=2, "a++" = 10, dd, deparse.level=0)# middle 2 rownames
-rbind(1:4, c=2, "a++" = 10, dd, deparse.level=1)# 3 rownames (default)
-rbind(1:4, c=2, "a++" = 10, dd, deparse.level=2)# 4 rownames
+#ploting the Figure S6
+pdf(file="output/Figure_S6_SavExclSNP.pdf",width=10,height=7)
+colovec<-brewer.pal(9,"Set1")[c(3,1)]
+op<-par(mfrow=c(2,3),pty="s")
+for (j in (1:6)) {
+  levels(mylist[[j]][, 2])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
+  attach(mylist[[j]])
+  plot(Theta,R,col=c("red", "purple", "blue", "black")[as.numeric(GType)],
+       cex=0.8,xlim=c(0,1),las=1,
+       ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
+       main=paste(statTableSavExcl$Name[j]," // score ",
+                  statTableSavExcl$Aux[j]))
+  box(col=colovec[as.numeric(as.factor(statTableSavExcl$Aux))[j]],lwd=2)
+  detach(mylist[[j]])
+  attach(statTableSavExcl)
+  ellipse(AA_T_Dev[j],AA_R_Dev[j],0,AA_T_Mean[j],AA_R_Mean[j],
+          col="red",lwd=3)
+  ellipse(AB_T_Dev[j],AB_R_Dev[j],0,AB_T_Mean[j],AB_R_Mean[j],
+          col="purple",lwd=3)
+  ellipse(BB_T_Dev[j],BB_R_Dev[j],0,BB_T_Mean[j],BB_R_Mean[j],
+          col="blue",lwd=3)
+  detach(statTableSavExcl)
+}
+par(op)
+dev.off()
 
 
 ##############################################################################/

@@ -52,7 +52,7 @@ coVec<-c(rgb(0,0,0,max=255,alpha=40),
 ##############################################################################/
 
 #this code will produce a pdf file in the output folder
-pdf(file="output/Figure_S4.pdf",width=11,height=6)
+pdf(file="output/Figure_S4_QualInd.pdf",width=11,height=6)
 op<-par(mfrow=c(1,2))
 plot(p10.GC~Call.Rate,xlim=xrange,ylim=yrange10,
      data=genoQual[genoQual$p50.GC>=seuilp50min & 
