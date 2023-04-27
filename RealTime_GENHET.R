@@ -259,7 +259,7 @@ HetVivMortLim$fam[HetVivMortLim$fam=="1"]<-"01"
 HetVivMortLim$fam[HetVivMortLim$fam=="9"]<-"09"
 
 #plot of the PHt index for both natural and protected treatment by family
-pdf(file="output/Figure_PHt.pdf",width=10,height=10)
+pdf(file="output/Figure_8_PHt.pdf",width=10,height=10)
 op<-par(mfrow=c(2,1),mar=c(2,4,4,1))
 #semi violin plot for the natural treatment
 HetAli<-HetVivMortExp[HetVivMortExp$vivmor==1,]
@@ -392,7 +392,7 @@ var(DoAPrt[DoAPrt$vivmor=="1",]$PHt)
 
 
 ##############################################################################/
-#Figure S6: Correlation between individual heterozygosity indices####
+#Figure S7: Correlation between individual heterozygosity indices####
 ##############################################################################/
 
 #a function to compute the absolute correlation between pairs of variables
@@ -413,6 +413,7 @@ HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
 HetVivMortGlob<-HetVivMort[HetVivMort$fam=="Global",]
 
 #plot the graph
+pdf(file="output/Figure_S7__corHeteroz.pdf",width=10,height=10)
 pairs(HetVivMortGlob[,c(2:6)],las=1,cex.main=2,
       main="Correlation between heterozygosity indices",
       lower.panel=panel.smooth, upper.panel=panel.cor)
