@@ -413,7 +413,7 @@ HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
 HetVivMortGlob<-HetVivMort[HetVivMort$fam=="Global",]
 
 #plot the graph
-pdf(file="output/Figure_S7__corHeteroz.pdf",width=10,height=10)
+pdf(file="output/Figure_S7_corHeteroz.pdf",width=10,height=10)
 pairs(HetVivMortGlob[,c(2:6)],las=1,cex.main=2,
       main="Correlation between heterozygosity indices",
       lower.panel=panel.smooth, upper.panel=panel.cor)
