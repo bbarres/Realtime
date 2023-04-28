@@ -33,7 +33,7 @@ temp<-temp[,c(1,48:866)]
 tempb<-snp.dat[snp.dat$Sample_ID %in% LimTrait$Taxa,]
 tempb<-tempb[,c(1,48:866)]
 
-pdf("output/Figure_SNPinterest.pdf",width=15,height=10)
+pdf("output/Figure_10_SNPinterest.pdf",width=15,height=10)
 nf<-layout(matrix(c(1,2,2,2,3,3,3,4,4,4,5,5,5,
                     6,9,9,9,10,10,10,11,11,11,12,12,12,
                     6,9,9,9,10,10,10,11,11,11,12,12,12,

@@ -158,10 +158,10 @@ legend(2009.5,10,legend=c("Natural treatment","Protected treatment"),
 
 
 ##############################################################################/
-#Figure combining the 3 plot of phenotypic traits evolution: landscape####
+#Figure 2: combining the 3 plot of phenotypic traits evolution####
 ##############################################################################/
 
-pdf(file="output/Figure_phenevol_land.pdf",width=18,height=6)
+pdf(file="output/Figure_2_phenevol.pdf",width=18,height=6)
 op<-par(mfrow=c(1,3),mar=c(4.1,5.1,2.1,1.1))
 #Figure A
 matplot(t(survEv),type="b",ylim=c(0,100),las=1,
@@ -239,7 +239,7 @@ dev.off()
 
 
 ##############################################################################/
-#Figure of the distribution of height at the end of the experiment####
+#Figure 6: distribution of height at the end of the experiment####
 ##############################################################################/
 
 distriHeight<-dispo[dispo$family_simp!="CC" & dispo$family_simp!="hd" & 
@@ -257,7 +257,7 @@ disHeigPro<-distriHeight[distriHeight$treat=="low",]
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4],
            brewer.pal(11,"RdYlGn")[1])
 
-pdf(file="output/Figure_compHeight.pdf",width=14,height=7)
+pdf(file="output/Figure_6_compHeight.pdf",width=14,height=7)
 op<-par(mfrow=c(1,2),mar=c(4,4,3,0.1))
 boxplot(disHeigNat$H17v~disHeigNat$family_simp,col=colovec[4],boxwex=0.6,
         las=1,main="Natural treatment",xlab="Families",ylab="Height (cm)",
@@ -281,83 +281,3 @@ dev.off()
 ##############################################################################/
 #END
 ##############################################################################/
-
-
-##############################################################################/
-#Figure combining the 3 plot of phenotypic traits evolution: portrait####
-##############################################################################/
-
-pdf(file="output/Figure_phenevol_port.pdf",width=6,height=14)
-op<-par(mfrow=c(3,1),mar=c(4.1,5.1,2.1,1.1))
-#Figure A
-matplot(t(survEv),type="b",ylim=c(0,100),las=1,
-        col=colovec[as.numeric(survEv.treat)],lwd=2,
-        lty=as.numeric(survEv.treat),bg="white",
-        pch=c(22,19,22,22,22,19,19,22,22),
-        xaxt="n",yaxt="n",bty="n",
-        ylab="Percentage of survival",xlab="Year",
-        font.lab=2,cex.lab=2,cex=1.8)
-axis(1,lwd=2,cex.axis=1.5,at=c(1:dim(survEv)[2]),
-     lab=colnames(survEv),las=1,font=2)
-axis(2,lwd=2,las=1,font=2,cex.axis=1.5)
-box(lwd=2)
-legend(1.5,45,legend=c("Natural treatment","Protected treatment"),
-       col=colovec,lty=c(1,2),pch=c(22,19),pt.bg="white",
-       bty="n",cex=1.8,y.intersp=1,x.intersp=0.5,lwd=2)
-
-#Figure B
-graf<-barplot(temp1$mean,density=c(-1,20),angle=c(0,60),border=NA,
-              col=colovec,ylim=c(-1,105),ylab="Percentage of infection",
-              xlab="Year",cex.axis=1,cex.lab=2,las=1,yaxt="n",bty="n",
-              space=c(0,0.25,rep(c(1,0.25),times=8)),font.lab=2)
-axis(1,at=graf[seq(1,17,2)]+0.625,labels=rownames(infectM),
-     lwd=2,font=2,cex.axis=1.5)
-axis(2,at=seq(0,100,20),labels=seq(0,100,20),lwd=2,las=1,
-     font=2,cex.axis=1.5)
-box(bty="o",lwd=2)
-#adding standard deviation
-temp2<-pivot_longer(infectM,cols=3:4,names_to="treat",values_to="sd")
-plotCI(x=graf,y=temp1$mean,
-       ui=temp1$mean+temp2$sd,
-       li=temp1$mean,
-       pch=NA,lwd=1.5,add=TRUE)
-#for cosmetic reason, we superimpose again the barplot
-par(lwd=2)
-barplot(temp1$mean,density=c(-1,20),angle=c(0,60),border=colovec,
-        col=colovec,ylim=c(-1,105),ylab="Percentage of infection",
-        cex.axis=1,cex.lab=1.5,las=1,yaxt="n",bty="n",
-        space=c(0,0.25,rep(c(1,0.25),times=8)),font.lab=2,add=TRUE)
-legend(-1,105,legend=c("Natural treatment","Protected treatment"),
-       fill=colovec,density=c(-1,20),angle=c(0,60),bty="n",border=colovec,
-       cex=1.8,y.intersp=1,x.intersp=0.5)
-par(lwd=1)
-
-#Figure C
-plot(HeighTr$expmean~HeighTr$year,ylim=c(0,70),type="b",las=1,
-     xaxt="n",yaxt="n",bty="n",col=colovec[1],
-     ylab="Seedling height (cm)",xlab="Year",
-     font.lab=2,cex.lab=2,lwd=2,pch=22,bg="white")
-plotCI(x=HeighTr$year,y=HeighTr$expmean,
-       ui=HeighTr$expmean,
-       li=HeighTr$expmean-HeighTr$expsd,
-       pch=NA,lwd=1.5,add=TRUE)
-plotCI(x=HeighTr$year,y=HeighTr$lowmean,
-       ui=HeighTr$lowmean+HeighTr$lowsd,
-       li=HeighTr$lowmean,
-       pch=NA,lwd=1.5,add=TRUE)
-points(HeighTr$expmean~HeighTr$year,type="b",
-       col=colovec[1],lwd=2.5,pch=22,bg="white",cex=2)
-points(HeighTr$lowmean~HeighTr$year,type="b",lty=2,
-       col=colovec[2],lwd=2.5,pch=19,cex=2)
-axis(1,lwd=2,cex.axis=1.5,at=c(2009:2017),
-     lab=colnames(survEv),las=1,font=2)
-axis(2,lwd=2,las=1,font=2,cex.axis=1.5)
-box(lwd=2)
-legend(2009.8,15,legend=c("Natural treatment","Protected treatment"),
-       col=colovec,lty=c(1,2),pch=c(22,19),pt.bg="white",
-       bty="n",cex=1.8,y.intersp=1,x.intersp=0.5,lwd=2)
-par(op)
-dev.off()
-#export to .pdf 6 x 14 portrait
-
-
