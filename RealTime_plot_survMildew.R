@@ -19,7 +19,7 @@ survOid<-glm(Survival~Acorn_weight+Powdery_mildew,data=temp,family=binomial)
 
 
 ##############################################################################/
-#plot using visreg package####
+#Figure 3: plot using visreg package####
 ##############################################################################/
 
 colovec<-c(brewer.pal(12,"Set3")[6:7],
