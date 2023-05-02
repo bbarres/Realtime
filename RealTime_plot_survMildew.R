@@ -31,7 +31,7 @@ summary(survTreatAndAcorn)
 
 
 ##############################################################################/
-#Figure SXX: plot using visreg package####
+#Figure SXX: plot using visreg for acorn weight effect visualization####
 ##############################################################################/
 
 pdf(file="output/Figure_SXX_GLMacorn.pdf",width=7,height=5)
@@ -67,7 +67,7 @@ summary(survOid)
 
 
 ##############################################################################/
-#Figure 3: plot using visreg package####
+#Figure 3: plot using visreg for mildew infection effect visualization####
 ##############################################################################/
 
 pdf(file="output/Figure_3_GLMmildew.pdf",width=7,height=5)
@@ -96,7 +96,7 @@ summary(survH09)
 
 
 ##############################################################################/
-#Figure SXX: plot using visreg Height in 2009 effect visualisation ####
+#Figure SXX: plot using visreg Height in 2009 effect visualization ####
 ##############################################################################/
 
 pdf(file="output/Figure_SXX_GLMH09.pdf",width=7,height=5)
@@ -130,7 +130,7 @@ summary(survFrost)
 
 
 ##############################################################################/
-#Figure SXX: plot using visreg package for Frost damage visualisation####
+#Figure SXX: plot using visreg package for Frost damage visualization####
 ##############################################################################/
 
 pdf(file="output/Figure_SXX_GLMFrost.pdf",width=7,height=5)
