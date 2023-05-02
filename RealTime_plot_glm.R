@@ -106,7 +106,7 @@ colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4],
            brewer.pal(11,"RdYlGn")[1])
 visreg(survH09,"H09v",scale="response",xlim=c(0,110),
        rug=2,ylim=c(0,1),by="Treatment",overlay=TRUE,
-       xlab="Height in 2009",
+       xlab="Height in 2009 (cm)",
        ylab="Survival (2017)",
        line=list(col=colovec[c(4,2)]),
        fill=list(col=colovec[c(3,1)]))
