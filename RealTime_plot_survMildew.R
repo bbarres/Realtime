@@ -27,6 +27,7 @@ levels(temp$Treatment)<-c("Natural","Protected")
 
 survTreatAndAcorn<-glm(Survival~Treatment+Acorn_weight,
                        data=temp,family=binomial)
+summary(survTreatAndAcorn)
 
 
 ##############################################################################/
@@ -34,7 +35,7 @@ survTreatAndAcorn<-glm(Survival~Treatment+Acorn_weight,
 ##############################################################################/
 
 pdf(file="output/Figure_SXX_GLMacorn.pdf",width=7,height=5)
-op<-par(mar=c(5.1,4.1,1.1,1.1))
+op<-par(mar=c(4.3,4.1,1.9,1.1))
 #defining a color vector
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4],
            brewer.pal(11,"RdYlGn")[1])
@@ -62,6 +63,7 @@ dev.off()
 
 survOid<-glm(Survival~Acorn_weight+Powdery_mildew,
              data=temp,family=binomial)
+summary(survOid)
 
 
 ##############################################################################/
@@ -90,6 +92,7 @@ dev.off()
 
 survH09<-glm(Survival~H09v*Treatment,
              data=temp,family=binomial)
+summary(survH09)
 
 
 ##############################################################################/
@@ -97,7 +100,7 @@ survH09<-glm(Survival~H09v*Treatment,
 ##############################################################################/
 
 pdf(file="output/Figure_SXX_GLMH09.pdf",width=7,height=5)
-op<-par(mar=c(5.1,4.1,1.1,1.1))
+op<-par(mar=c(4.3,4.1,1.9,1.1))
 #defining a color vector
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4],
            brewer.pal(11,"RdYlGn")[1])
@@ -123,6 +126,7 @@ dev.off()
 
 survFrost<-glm(Survival~Acorn_weight+Powdery_mildew+Frost_damage,
                data=temp,family=binomial)
+summary(survFrost)
 
 
 ##############################################################################/
@@ -130,7 +134,7 @@ survFrost<-glm(Survival~Acorn_weight+Powdery_mildew+Frost_damage,
 ##############################################################################/
 
 pdf(file="output/Figure_SXX_GLMFrost.pdf",width=7,height=5)
-op<-par(mar=c(5.1,4.1,1.1,1.1))
+op<-par(mar=c(4.3,4.1,1.9,1.1))
 #defining a color vector
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4],
            brewer.pal(11,"RdYlGn")[1])
@@ -154,6 +158,8 @@ dev.off()
 
 survFull<-glm(Survival~Acorn_weight+Powdery_mildew*family_simp+Frost_damage,
               data=temp,family=binomial)
+summary(survFull)
+anova(survFull,test="Chisq")
 
 
 ##############################################################################/
