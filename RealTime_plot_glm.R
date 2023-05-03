@@ -22,7 +22,7 @@ levels(temp$Treatment)<-c("Natural","Protected")
 
 
 ##############################################################################/
-#Model 1: effect of acorn weight and treatment####
+#Model 1: effect of acorn weight and exposure####
 ##############################################################################/
 
 survTreatAndAcorn<-glm(Survival~Treatment+Acorn_weight,
@@ -31,10 +31,10 @@ summary(survTreatAndAcorn)
 
 
 ##############################################################################/
-#Figure SXX: plot using visreg for acorn weight effect visualization####
+#Figure S10: plot using visreg for acorn weight effect visualization####
 ##############################################################################/
 
-pdf(file="output/Figure_SXX_GLMacorn.pdf",width=7,height=5)
+pdf(file="output/Figure_S10_GLMacorn.pdf",width=7,height=5)
 op<-par(mar=c(4.3,4.1,1.9,1.1))
 #defining a color vector
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4],
@@ -87,7 +87,7 @@ dev.off()
 
 
 ##############################################################################/
-#Model 3 for plot: effect of Height in 2009 and treatment####
+#Model 3 for plot: effect of Height in 2009 and exposure####
 ##############################################################################/
 
 survH09<-glm(Survival~H09v*Treatment,
@@ -96,10 +96,10 @@ summary(survH09)
 
 
 ##############################################################################/
-#Figure SXX: plot using visreg Height in 2009 effect visualization ####
+#Figure S11: plot using visreg Height in 2009 effect visualization ####
 ##############################################################################/
 
-pdf(file="output/Figure_SXX_GLMH09.pdf",width=7,height=5)
+pdf(file="output/Figure_S11_GLMH09.pdf",width=7,height=5)
 op<-par(mar=c(4.3,4.1,1.9,1.1))
 #defining a color vector
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4],
@@ -130,10 +130,10 @@ summary(survFrost)
 
 
 ##############################################################################/
-#Figure SXX: plot using visreg package for Frost damage visualization####
+#Figure S12: plot using visreg package for Frost damage visualization####
 ##############################################################################/
 
-pdf(file="output/Figure_SXX_GLMFrost.pdf",width=7,height=5)
+pdf(file="output/Figure_S12_GLMFrost.pdf",width=7,height=5)
 op<-par(mar=c(4.3,4.1,1.9,1.1))
 #defining a color vector
 colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4],
@@ -160,29 +160,6 @@ survFull<-glm(Survival~Acorn_weight+Powdery_mildew*family_simp+Frost_damage,
               data=temp,family=binomial)
 summary(survFull)
 anova(survFull,test="Chisq")
-
-
-##############################################################################/
-#Figure SXX: plot using visreg package####
-##############################################################################/
-
-pdf(file="output/Figure_SXX_GLMFrost.pdf",width=7,height=5)
-op<-par(mar=c(5.1,4.1,1.1,1.1))
-#defining a color vector
-colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4],
-           brewer.pal(11,"RdYlGn")[1])
-visreg(survFull,"Powdery_mildew",scale="response",
-       rug=2,ylim=c(0,1),by="Frost_damage",overlay=TRUE,
-       xlab="Mean infection (2009-2013) (%)",
-       ylab="Survival (2017)")
-colovec<-c(brewer.pal(12,"Set3")[6:7],
-           brewer.pal(9,"Set1")[1:2])
-rug(temp[temp$Survival==0,]$Powdery_mildew,side=1,col=colovec[1])
-rug(temp[temp$Survival==1,]$Powdery_mildew,side=3,col=colovec[2])
-box()
-par(op)
-#export to pdf 7 x 5 inches
-dev.off()
 
 
 ##############################################################################/
