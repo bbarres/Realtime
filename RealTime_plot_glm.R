@@ -156,7 +156,7 @@ dev.off()
 #Model 5: full model####
 ##############################################################################/
 
-survFull<-glm(Survival~Acorn_weight+Powdery_mildew*family_simp+Frost_damage,
+survFull<-glm(Survival~Acorn_weight+Treatment*family_simp+Frost_damage,
               data=temp,family=binomial)
 summary(survFull)
 anova(survFull,test="Chisq")
