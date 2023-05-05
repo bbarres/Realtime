@@ -108,7 +108,7 @@ SNPlot<-function(singleSNP,SNPstat,FileName) #one plot per page
     levels(singleSNP[[i]][,2])<-list("AA"="AA","AB"="AB","BB"="BB","NC"="NC")
     attach(singleSNP[[i]])
     plot(Theta,R,col=c("red", "purple", "blue", "black")[as.numeric(GType)],
-         cex=0.8,xlim=c(0,1),las=1,
+         cex=0.8,xlim=c(0,1),las=1,xlab="Normalized Theta",ylab="Normalized R",
          ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
          main=paste(SNPstat$Name[i]," // score ",SNPstat$Aux[i]))
     detach(singleSNP[[i]])
@@ -227,6 +227,7 @@ for (j in (1:9)) {
   plot(Theta,R,col=c("red", "purple", "blue", "black")[as.numeric(GType)],
        cex=0.8,xlim=c(0,1),las=1,
        ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
+       xlab="Normalized Theta",ylab="Normalized R",
        main=paste(statTableGooBad$Name[j]," // score ",
                   statTableGooBad$Aux[j]))
   box(col=colovec[as.numeric(as.factor(statTableGooBad$Aux))[j]],lwd=2)
@@ -263,6 +264,7 @@ for (j in (1:6)) {
   attach(mylist[[j]])
   plot(Theta,R,col=c("red", "purple", "blue", "black")[as.numeric(GType)],
        cex=0.8,xlim=c(0,1),las=1,
+       xlab="Normalized Theta",ylab="Normalized R",
        ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
        main=paste(statTableSavExcl$Name[j]," // score ",
                   statTableSavExcl$Aux[j]))
