@@ -8,7 +8,7 @@ source("RealTime_load.R")
 
 
 ##############################################################################/
-#Figure 5: progeny survival by treatment and powdery mildew infection####
+#Figure 5: progeny survival by exposure and powdery mildew infection####
 ##############################################################################/
 
 #preparing the data set
@@ -25,7 +25,7 @@ progSurv[progSurv$DoA=="vivant",]$DoA<-"alive"
 progSurv$DoA<-as.factor(progSurv$DoA)
 progSurv$treat<-as.factor(progSurv$treat)
 
-#computing the survival rate by family by treatment
+#computing the survival rate by family by exposure
 SurvProp<-as.data.frame(prop.table(table(progSurv$treat,
                                          progSurv$DoA,
                                          progSurv$family_simp),
@@ -45,14 +45,14 @@ nbbrak<-c(20,21,22,23,24,25,26,27,28)
 plot(SurvProp[,c(3,2)],xlim=c(0,100),ylim=c(0,100),bty="n",
      las=1,pch=21,cex=3,col="black",xaxt="n",yaxt="n",
      bg=coloor[as.numeric(cut(SurvProp$PMinf,breaks=nbbrak))],
-     ylab="Natural treatment survival rate (%)",
-     xlab="Protected treatment survival rate (%)",
+     ylab="Natural exposure survival rate (%)",
+     xlab="Protected exposure survival rate (%)",
      font.lab=2,cex.lab=1.5)
 text(SurvProp[,c(3,2)],labels=SurvProp$Progeny)
 abline(0,1,lty=5,col=grey(0.6,1),lwd=3)
 legend(8,98,legend=c("]20-21]","]21-22]","]22-23]","]23-24]",
                      "]24-25]","]25-26]","]26-27]","]27-28]"),
-       bty="n",fill=coloor,title="Mean\nPM infection")
+       bty="n",fill=coloor,title="Mean infection\n(2009-2013)")
 axis(1,lwd=2,cex.axis=1,las=1,font=2)
 axis(2,lwd=2,las=1,font=2)
 box(lwd=2)

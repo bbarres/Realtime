@@ -24,7 +24,7 @@ colprt<-brewer.pal(11,"RdBu")[7:10]
 
 
 ##############################################################################/
-#plotting the 3 significant SNP genotype effect on ALL the traits####
+#Figure 10: plotting the 3 significant SNP effect on ALL the traits####
 ##############################################################################/
 
 #code for plotting all the significant SNP
@@ -50,12 +50,12 @@ plot.new()
 plot.new()
 text(0.5,0.5,"Acorn weight (g)",font=2,cex=2.5)
 plot.new()
-text(0.5,0.5,"Height (cm)",font=2,cex=2.5)
+text(0.5,0.5,"Height\nin 2012 (cm)",font=2,cex=2.5)
 plot.new()
-text(0.5,0.5,"Powdery mildew\ninfection",font=2,cex=2.5)
+text(0.5,0.5,"Mean infection\n(2009-2013)",font=2,cex=2.5)
 plot.new()
 text(0.5,0.7,"Mortality (%)",font=2,cex=2.5)
-legend(0.25,0.55,legend=c("Natural treatment","Protected treatment"),
+legend(0.25,0.55,legend=c("Natural exposure","Protected exposure"),
        fill=c(colnat[3],colprt[3]),border=c(colnat[3],colprt[3]),
        density=c(-1,20),angle=c(0,60),bty="n",
        cex=1.5,y.intersp=1.3,x.intersp=0.5,ncol=1,xpd=TRUE)
@@ -67,14 +67,14 @@ plot.new()
 text(0.5,0.5,Rezcomb[16,1],srt=90,font=2,cex=1.5)
 par(mar=c(3,3,1,1))
 for (i in c(1,11,16)) {
-  #data of the exposed treatment
+  #data of the exposed exposure
   temp2<-temp[,colnames(temp)=="Sample_ID" | 
                 colnames(temp)==Rezcomb$SNP[i]]
   temp2<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
   #temp2[,2]<-as.factor(temp2[,2])
   traiinterest<-substring(Rezcomb[i,6],7)
   treatme<-Rezcomb[i,7]
-  #data of the protected treatment
+  #data of the protected exposure
   temp3<-tempb[,colnames(tempb)=="Sample_ID" | 
                  colnames(tempb)==Rezcomb$SNP[i]]
   temp3<-merge(temp3,LimTrait,by.x="Sample_ID",by.y="Taxa")
@@ -152,7 +152,7 @@ dev.off()
 
 
 ##############################################################################/
-#plotting significant SNP genotype effect on ALL the traits####
+#Figure SXX: plotting significant SNP genotype effect on ALL the traits####
 ##############################################################################/
 
 #code for plotting all the significant SNP from the GWAS analysis on 
@@ -184,12 +184,12 @@ for (j in 1:(dim(Rezcomb)[1]/4)) {
   plot.new()
   text(0.5,0.5,"Acorn weight (g)",font=2,cex=2.5)
   plot.new()
-  text(0.5,0.5,"Height (cm)",font=2,cex=2.5)
+  text(0.5,0.5,"Height\nin 2012 (cm)",font=2,cex=2.5)
   plot.new()
-  text(0.5,0.5,"Powdery mildew\ninfection",font=2,cex=2.5)
+  text(0.5,0.5,"Mean infection\n(2009-2013)",font=2,cex=2.5)
   plot.new()
   text(0.5,0.7,"Mortality (%)",font=2,cex=2.5)
-  legend(0.25,0.55,legend=c("Natural treatment","Protected treatment"),
+  legend(0.25,0.55,legend=c("Natural exposure","Protected exposure"),
          fill=c(colnat[3],colprt[3]),border=c(colnat[3],colprt[3]),
          density=c(-1,20),angle=c(0,60),bty="n",
          cex=1.5,y.intersp=1.3,x.intersp=0.5,ncol=1,xpd=TRUE)
@@ -201,14 +201,14 @@ for (j in 1:(dim(Rezcomb)[1]/4)) {
   
   par(mar=c(3,3,1,1))
   for (i in (1+4*(j-1)):(4*j)) {
-    #data of the exposed treatment
+    #data of the exposed exposure
     temp2<-temp[,colnames(temp)=="Sample_ID" | 
                   colnames(temp)==Rezcomb$SNP[i]]
     temp2<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
     #temp2[,2]<-as.factor(temp2[,2])
     traiinterest<-substring(Rezcomb[i,6],7)
     treatme<-Rezcomb[i,7]
-    #data of the protected treatment
+    #data of the protected exposure
     temp3<-tempb[,colnames(tempb)=="Sample_ID" | 
                    colnames(tempb)==Rezcomb$SNP[i]]
     temp3<-merge(temp3,LimTrait,by.x="Sample_ID",by.y="Taxa")
@@ -352,12 +352,12 @@ plot.new()
 plot.new()
 text(0.5,0.5,"Acorn weight (g)",font=2,cex=2.5)
 plot.new()
-text(0.5,0.5,"Height (cm)",font=2,cex=2.5)
+text(0.5,0.5,"Height\nin 2012 (cm)",font=2,cex=2.5)
 plot.new()
-text(0.5,0.5,"Powdery mildew\ninfection",font=2,cex=2.5)
+text(0.5,0.5,"Mean infection\n(2009-2013)",font=2,cex=2.5)
 plot.new()
 text(0.5,0.7,"Mortality (%)",font=2,cex=2.5)
-legend(0.25,0.55,legend=c("Natural treatment","Protected treatment"),
+legend(0.25,0.55,legend=c("Natural exposure","Protected exposure"),
        fill=c(colnat[3],colprt[3]),border=c(colnat[3],colprt[3]),
        density=c(-1,20),angle=c(0,60),bty="n",
        cex=1.5,y.intersp=1.3,x.intersp=0.5,ncol=1,xpd=TRUE)
@@ -369,14 +369,14 @@ for (i in 1:dim(Rezcomb)[1]) {
 
 par(mar=c(3,3,1,1))
 for (i in 1:dim(Rezcomb)[1]) {
-  #data of the exposed treatment
+  #data of the exposed exposure
   temp2<-temp[,colnames(temp)=="Sample_ID" | 
                 colnames(temp)==Rezcomb$SNP[i]]
   temp2<-merge(temp2,NatTrait,by.x="Sample_ID",by.y="Taxa")
   #temp2[,2]<-as.factor(temp2[,2])
   traiinterest<-substring(Rezcomb[i,6],7)
   treatme<-Rezcomb[i,7]
-  #data of the protected treatment
+  #data of the protected exposure
   temp3<-tempb[,colnames(tempb)=="Sample_ID" | 
                  colnames(tempb)==Rezcomb$SNP[i]]
   temp3<-merge(temp3,LimTrait,by.x="Sample_ID",by.y="Taxa")

@@ -26,7 +26,7 @@ HetVivMortLim$fam[HetVivMortLim$fam=="9"]<-"09"
 
 
 ##############################################################################/
-#Figure 8: omparing Dead or Alive heterozygosities indices by family####
+#Figure 8: comparing Dead or Alive heterozygosities indices by family####
 ##############################################################################/
 
 #plot of the PHt index for both natural and protected treatment by family
@@ -40,7 +40,7 @@ colovec<-c(brewer.pal(12,"Set3")[6:7],
 vioplot(as.numeric(HetVivMortExp$PHt)~HetVivMortExp$fam,xaxt="n",yaxt="n",
         col = c("transparent"),sep=":",las=1,border="transparent",
         ylab="PHt",xlab="",ylim=c(0.07,0.35),frame.plot=FALSE,cex.main=2,
-        lineCol="transparent",rectCol="transparent",main="Natural treatment")
+        lineCol="transparent",rectCol="transparent",main="Natural exposure")
 axis(1,lwd=2,at=c(1:15),labels=levels(as.factor(HetVivMortExp$fam)),font=2)
 axis(2,lwd=2,las=1,font=2)
 vioplot(as.numeric(HetDea$PHt)~HetDea$fam,plotCentre="line",
@@ -69,7 +69,7 @@ points(x=c(1:15)+0.2,y=aggregate(as.numeric(HetAli$PHt),
 box(bty="l",lwd=2)
 legend(0.1,0.15,c("dead","alive"),fill=colovec[1:2],cex=1.5,
        bty="n",x.intersp=0.7,y.intersp=0.9,xpd=TRUE)
-#semi violin plot for the protected treatment
+#semi violin plot for the protected exposure
 HetAli<-HetVivMortLim[HetVivMortLim$vivmor==1,]
 HetDea<-HetVivMortLim[HetVivMortLim$vivmor==0,]
 colovec<-c(brewer.pal(12,"Set3")[6:7],
@@ -78,7 +78,7 @@ vioplot(as.numeric(HetVivMortLim$PHt)~HetVivMortLim$fam,xaxt="n",yaxt="n",
         col = c("transparent"),sep=":",las=1,border="transparent",
         ylab="PHt",xlab="",ylim=c(0.07,0.35),frame.plot=FALSE,
         lineCol="transparent",rectCol="transparent",cex.main=2,
-        main="Protected treatment")
+        main="Protected exposure")
 axis(1,lwd=2,at=c(1:15),labels=levels(as.factor(HetVivMortExp$fam)),font=2)
 axis(2,lwd=2,las=1,font=2)
 vioplot(as.numeric(HetDea$PHt)~HetDea$fam,plotCentre="line",

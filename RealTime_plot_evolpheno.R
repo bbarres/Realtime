@@ -35,10 +35,10 @@ axis(1,lwd=2,cex.axis=1,at=c(1:dim(survEv)[2]),
      lab=colnames(survEv),las=1,font=2)
 axis(2,lwd=2,las=1,font=2)
 box(lwd=2)
-legend(1,55,legend=rep(NA,6),title="Natural\ntreatment",title.adj=0,
+legend(1,55,legend=rep(NA,6),title="Natural\nexposure",title.adj=0,
        col=colovec[1],lty=1,pch=c(22,21,24,3,23,25),pt.bg="white",
        bty="n",cex=1.3,title.cex=1,y.intersp=1.5,x.intersp=0.5,lwd=2)
-legend(3,55,legend=rep(NA,3),title="Protected\ntreatment",title.adj=0,
+legend(3,55,legend=rep(NA,3),title="Protected\nexposure",title.adj=0,
        col=colovec[2],lty=2,pch=c(15,16,17),pt.bg="white",
        bty="n",cex=1.3,title.cex=1,y.intersp=1.5,x.intersp=0.5,lwd=2)
 #export to .pdf 6 x 6 inches
@@ -98,7 +98,7 @@ barplot(temp1$mean,density=c(-1,20),angle=c(0,60),border=colovec,
         col=colovec,ylim=c(-1,105),ylab="Percentage of infection",
         cex.axis=1,cex.lab=1.5,las=1,yaxt="n",bty="n",
         space=c(0,0.25,rep(c(1,0.25),times=8)),font.lab=2,add=TRUE)
-legend(-1,103,legend=c("Natural treatment","Protected treatment"),
+legend(-1,103,legend=c("Natural exposure","Protected exposure"),
        fill=colovec,density=c(-1,20),angle=c(0,60),bty="n",border=colovec,
        cex=1.3,y.intersp=1.5,x.intersp=0.5)
 par(lwd=1)
@@ -151,7 +151,7 @@ axis(1,lwd=2,cex.axis=1,at=c(2009:2017),
      lab=colnames(survEv),las=1,font=2)
 axis(2,lwd=2,las=1,font=2)
 box(lwd=2)
-legend(2009.5,10,legend=c("Natural treatment","Protected treatment"),
+legend(2009.5,10,legend=c("Natural exposure","Protected exposure"),
        col=colovec,lty=c(1,2),pch=c(22,19),pt.bg="white",
        bty="n",cex=1.1,title.cex=1.5,y.intersp=1.8,x.intersp=0.5,lwd=2)
 #export to .pdf 6 x 6 inches
@@ -175,7 +175,7 @@ axis(1,lwd=2,cex.axis=1.5,at=c(1:dim(survEv)[2]),
      lab=colnames(survEv),las=1,font=2)
 axis(2,lwd=2,las=1,font=2,cex.axis=1.5)
 box(lwd=2)
-legend(1.5,30,legend=c("Natural treatment","Protected treatment"),
+legend(1.5,30,legend=c("Natural exposure","Protected exposure"),
        col=colovec,lty=c(1,2),pch=c(22,19),pt.bg="white",
        bty="n",cex=2,y.intersp=1.3,x.intersp=0.8,lwd=2,seg.len=2)
 mtext(text="A",side=3,cex=2,at=0.1,font=2,las=0,adj=1,line=-0.1)
@@ -202,7 +202,7 @@ barplot(temp1$mean,density=c(-1,20),angle=c(0,60),border=colovec,
         col=colovec,ylim=c(-1,105),ylab="Percentage of infection",
         cex.axis=1,cex.lab=1.5,las=1,yaxt="n",bty="n",
         space=c(0,0.25,rep(c(1,0.25),times=8)),font.lab=2,add=TRUE)
-legend(0,98,legend=c("Natural treatment","Protected treatment"),
+legend(0,98,legend=c("Natural exposure","Protected exposure"),
        fill=colovec,density=c(-1,20),angle=c(0,60),bty="n",border=colovec,
        cex=2,y.intersp=1.3,x.intersp=0.8)
 par(lwd=1)
@@ -229,7 +229,7 @@ axis(1,lwd=2,cex.axis=1.5,at=c(2009:2017),
      lab=colnames(survEv),las=1,font=2)
 axis(2,lwd=2,las=1,font=2,cex.axis=1.5)
 box(lwd=2)
-legend(2009.5,11,legend=c("Natural treatment","Protected treatment"),
+legend(2009.5,11,legend=c("Natural exposure","Protected exposure"),
        col=colovec,lty=c(1,2),pch=c(22,19),pt.bg="white",
        bty="n",cex=2,y.intersp=1.3,x.intersp=0.8,lwd=2,seg.len=2)
 mtext(text="C",side=3,cex=2,at=2008.1,font=2,las=0,adj=1,line=-0.1)
@@ -249,7 +249,7 @@ distriHeight<-dispo[dispo$family_simp!="CC" & dispo$family_simp!="hd" &
                       "H10v","H11v","H12v","H14v","H15v","H16v","H17v")]
 distriHeight$family_simp<-drop.levels(distriHeight$family_simp)
 levels(distriHeight$family_simp)[1:2]<-c("01","09")
-#spliting the data set by treatment
+#spliting the data set by exposure
 disHeigNat<-distriHeight[distriHeight$treat=="exp",]
 disHeigPro<-distriHeight[distriHeight$treat=="low",]
 
@@ -260,14 +260,14 @@ colovec<-c(brewer.pal(12,"Paired")[1:2],brewer.pal(12,"Paired")[3:4],
 pdf(file="output/Figure_6_compHeight.pdf",width=14,height=7)
 op<-par(mfrow=c(1,2),mar=c(4,4,3,0.1))
 boxplot(disHeigNat$H17v~disHeigNat$family_simp,col=colovec[4],boxwex=0.6,
-        las=1,main="Natural treatment",xlab="Families",ylab="Height (cm)",
+        las=1,main="Natural exposure",xlab="Families",ylab="Height (cm)",
         ylim=c(0,165),cex.main=2)
 points(tapply(disHeigNat$H17v,disHeigNat$family_simp,
               FUN=mean,na.rm=TRUE),
        pch=18,cex=2,col=colovec[3])
 abline(h=mean(disHeigNat$H17v,na.rm=TRUE),col=colovec[5],lwd=3,lty=2)
 boxplot(disHeigPro$H17v~disHeigPro$family_simp,col=colovec[2],boxwex=0.6,
-        las=1,main="Protected treatment",xlab="Families",ylab="",
+        las=1,main="Protected exposure",xlab="Families",ylab="",
         ylim=c(0,165),cex.main=2)
 points(tapply(disHeigPro$H17v,disHeigPro$family_simp,
               FUN=mean,na.rm=TRUE),

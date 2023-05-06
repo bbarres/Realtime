@@ -70,10 +70,10 @@ axis(1,lwd=2,cex.axis=0.9,at=c(1:10),
            "2017"),las=1,font=2)
 axis(2,lwd=2,las=1,font=2)
 box(lwd=2)
-legend(1,3.4,legend="Natural treatment",
+legend(1,3.4,legend="Natural exposure",
        col=colovec[1],lty=1,pch=22,pt.bg="white",
        bty="n",cex=1.3,title.cex=1,y.intersp=1.5,x.intersp=0.5,lwd=2)
-legend(1,3.35,legend="Protected treatment",
+legend(1,3.35,legend="Protected exposure",
        col=colovec[2],lty=2,pch=19,pt.bg="white",
        bty="n",cex=1.3,title.cex=1,y.intersp=1.5,x.intersp=0.5,lwd=2)
 par(op)
