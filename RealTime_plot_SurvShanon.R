@@ -1,6 +1,6 @@
 ##############################################################################/
 ##############################################################################/
-#Evolution of diversity and mortality rate by families
+#Evolution of Shannon index by families in each plot
 ##############################################################################/
 ##############################################################################/
 
@@ -8,20 +8,19 @@ source("RealTime_load.R")
 
 
 ##############################################################################/
-#Figure 7: yearly evolution of the shannon diversity index by bloc####
+#Computation of the Shannon index####
 ##############################################################################/
 
 #limiting the data set to useful data
 evolShan<-dispo[dispo$family_simp!="CC" & dispo$family_simp!="hd" & 
                   !is.na(dispo$an_mort) & dispo$an_mort!="g" & 
-                dispo$family_simp!="26",
+                  dispo$family_simp!="26",
                 c("Sample_ID","bloc","PU","treat","an_mort","family_simp")]
 evolShan$grpbloc<-paste(evolShan$bloc,evolShan$PU,evolShan$treat,sep="")
 levels(evolShan$family_simp)[1:2]<-c("01","09")
 evolShan<-drop.levels(evolShan)
-#defining a color vector
-colovec<-c(brewer.pal(12,"Paired")[4],brewer.pal(12,"Paired")[2])
 
+#computing the Shannon index
 temp<-table(evolShan$family_simp,evolShan$grpbloc)
 Shanplot<-apply(temp,2,diversity,base=2)
 temp<-table(evolShan[evolShan$an_mort>2009,]$family_simp,
@@ -55,6 +54,15 @@ row.names(Shanplot)<-c("Emerging","2009","2010","2011",
                        "2012","2013","2014","2015","2016",
                        "2017")
 
+
+##############################################################################/
+#Figure 7: yearly evolution of the shannon diversity index by bloc####
+##############################################################################/
+
+#defining a color vector
+colovec<-c(brewer.pal(12,"Paired")[4],brewer.pal(12,"Paired")[2])
+
+#code to generate the figure
 pdf(file="output/Figure_7_ShannonEvol.pdf",width=7,height=6)
 op<-par(mar=c(5.1,4.3,1.1,1.1))
 matplot(Shanplot,type="b",ylim=c(3.25,3.85),las=1,
