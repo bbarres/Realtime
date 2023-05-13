@@ -142,7 +142,7 @@ dev.off()
 
 
 ##############################################################################/
-#Figure SX: Plot of the distribution of mortality by PHt classes####
+#Figure S16: Plot of the distribution of mortality by PHt classes####
 ##############################################################################/
 
 #you first need to run the 'RealTime_GENHET.R' script

@@ -152,7 +152,7 @@ dev.off()
 
 
 ##############################################################################/
-#Figure SXX: plotting significant SNP genotype effect on ALL the traits####
+#Additional Figures: significant SNP genotype effect on ALL the traits####
 ##############################################################################/
 
 #code for plotting all the significant SNP from the GWAS analysis on 

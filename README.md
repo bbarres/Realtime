@@ -158,12 +158,17 @@ In this section, you will find the list of the data sets used in this study for 
 ## R scripts
 In this section, you will find the list of the different scripts used in the article with a brief description of their purpose.
 
-- **RealTime_load.R:** the script to load the different data sets, functions and packages that are necessary for the data analyses and representation in the R environment.
-- **RealTime_evolpheno.R:** script to analyze and plot the evolutionary patterns of the main phenotypic traits over the years.
-- **RealTime_plot_SurvShannon.R:** script to compute the Shannon index evolution and to plot the Figure of the survival and Shannon index evolution.
 - **RealTime_Fstcomparison.R:** script to compute F-statistics and compare them across the different treatment and time. The output files are stored in a Genepop folder created within the output folder.
-- **RealTime_GENHET.R:** script to compute intra-individual heterozygosity indices. The code to produce the related Figure is also included.
-- **RealTime_GWAS.R:** script to perform the Genome-Wide Association analyses for both treatment. This script will produce two folders each containing results from the GWAS analyses. These output files are necessary for plotting the manhattan and GWAS plot.
+- **RealTime_GENHET.R:** script to compute intra-individual heterozygosity indices. 
+- **RealTime_GWAS.R:** script to perform the Genome-Wide Association analyses for both treatment. This script will produce two folders each containing results from the GWAS analyses. These output files are necessary for plotting the manhattan and GWAS plot (see scripts below).
+- **RealTime_load.R:** the script to load the different data sets, functions and packages that are necessary for the data analyses and representation in the R environment.
+- **RealTime_plot_evolpheno.R:** script to analyze and plot the evolutionary patterns of the main phenotypic traits over the years.
+- **RealTime_plot_FigS2_map.R:** script to plot the map (Figure S2) of the experimental setup.
+- **RealTime_plot_FigS4_indQual.R:** script to plot the scatterplot used to determined the individuals genotyped with the SNP markers with sufficient quality.
+- **RealTime_plot_FigsIndHeter.R:** script to produce the Figures related to intra-individual heterozygosity (Figure 8, Figure S7 and Figure S16). The *RealTime_GENHET.R* must be run prior to this script in order to produce the necessary entry files. 
+- **RealTime_plot_glm.R:** script to plot the Figures (Figure 3, Figure S10, Figure S11 and Figure S12) related to the GLM analyses performed in SAS.
+- **RealTime_plot_GoldGate_SNP.R:** script to plot the scatterplot examples of variable quality SNP markers. Figure S5 and Figure S6 are produce using this script.
+- **RealTime_plot_SurvShannon.R:** script to compute the Shannon index evolution and to plot the Figure of the survival and Shannon index evolution.
 - **RealTime_plot_manhattan.R:** script to plot the manhattan plot Figure.
 - **RealTime_plot_GWAS.R:** script to plot the GWAS results for the SNP of interest.
 
@@ -184,7 +189,7 @@ In this section, you will find the list of the data sets used in this study for 
 ## SAS scripts
 In this section, you will find a brief description of the script used for analyses with the SAS software.
 
-- **RealTime_load.R:** this file lists all the scripts that have been used to perform statistical analyses and model fitting in the SAS framework. Each script begins with a line describing the general purpose of the analysis. All scripts have to be run on the *RT_pop.csv* data set, except for the two in the "with heterozygosity" section which should be run on the *RT_pop_tot.csv* data set. 
+- **RealTime_pgm_analyses_tot.sas:** this file lists all the scripts that have been used to perform statistical analyses and model fitting in the SAS framework. Each script begins with a line describing the general purpose of the analysis. All scripts have to be run on the *RT_pop.csv* data set, except for the two in the "with heterozygosity" section which should be run on the *RT_pop_tot.csv* data set. 
 
 
 ## Citation
