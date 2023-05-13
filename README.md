@@ -171,8 +171,7 @@ In this section, you will find the list of the different scripts used in the art
 - **RealTime_plot_GWAS.R:** script to plot the distribution of phenotype traits by genotypes for SNP of interest (Figure 10).
 - **RealTime_plot_manhattan.R:** script to plot the manhattan plot Figure 9 for the four phenotypic traits of interest and for the two exposures (Natural and Protected).
 - **RealTime_plot_SurvProtecVsNat.R:** script to plot the progeny survival percentages across families in Protected experimental plots versus Natural powdery mildew infected plots (Figure 5).
-  - **RealTime_plot_SurvShannon.R:** script to compute the Shannon index for each yera and to plot the Shannon index evolution over years (Figure 7).
-- **RealTime_plot_GWAS.R:** script to plot the GWAS results for the SNP of interest.
+- **RealTime_plot_SurvShannon.R:** script to compute the Shannon index for each yera and to plot the Shannon index evolution over years (Figure 7).
 
 
 ## R session info
