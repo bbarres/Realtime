@@ -162,14 +162,16 @@ In this section, you will find the list of the different scripts used in the art
 - **RealTime_GENHET.R:** script to compute intra-individual heterozygosity indices. 
 - **RealTime_GWAS.R:** script to perform the Genome-Wide Association analyses for both treatment. This script will produce two folders each containing results from the GWAS analyses. These output files are necessary for plotting the manhattan and GWAS plot (see scripts below).
 - **RealTime_load.R:** the script to load the different data sets, functions and packages that are necessary for the data analyses and representation in the R environment.
-- **RealTime_plot_evolpheno.R:** script to analyze and plot the evolutionary patterns of the main phenotypic traits over the years.
+- **RealTime_plot_evolpheno.R:** script to analyze and plot the evolutionary patterns of the main phenotypic traits over the years (Figure 2).
 - **RealTime_plot_FigS2_map.R:** script to plot the map (Figure S2) of the experimental setup.
 - **RealTime_plot_FigS4_indQual.R:** script to plot the scatterplot used to determined the individuals genotyped with the SNP markers with sufficient quality.
-- **RealTime_plot_FigsIndHeter.R:** script to produce the Figures related to intra-individual heterozygosity (Figure 8, Figure S7 and Figure S16). The *RealTime_GENHET.R* must be run prior to this script in order to produce the necessary entry files. 
+- **RealTime_plot_FigsIndHeter.R:** script to produce the Figures related to intra-individual heterozygosity (Figure 8, Figure S7 and Figure S16). The ***RealTime_GENHET.R*** must be run prior to this script in order to produce the necessary entry files. 
 - **RealTime_plot_glm.R:** script to plot the Figures (Figure 3, Figure S10, Figure S11 and Figure S12) related to the GLM analyses performed in SAS.
-- **RealTime_plot_GoldGate_SNP.R:** script to plot the scatterplot examples of variable quality SNP markers. Figure S5 and Figure S6 are produce using this script.
+- **RealTime_plot_GoldGate_SNP.R:** script to plot the scatterplot of the genotypes examples of SNP markers of variable quality. Figure S5 and Figure S6 are produce using this script.
+- **RealTime_plot_GWAS.R:** script to plot the distribution of phenotype traits by genotypes for SNP of interest (Figure 10).
+- **RealTime_plot_manhattan.R:** script to plot the manhattan plot Figure 9 for the four phenotypic traits of interest and for the two exposures (Natural and Protected).
+- **RealTime_plot_SurvProtecVsNat.R:** script to plot the progeny survival percentages across families in Protected experimental plots versus Natural powdery mildew infected plots (Figure 5).
 - **RealTime_plot_SurvShannon.R:** script to compute the Shannon index evolution and to plot the Figure of the survival and Shannon index evolution.
-- **RealTime_plot_manhattan.R:** script to plot the manhattan plot Figure.
 - **RealTime_plot_GWAS.R:** script to plot the GWAS results for the SNP of interest.
 
 
