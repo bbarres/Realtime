@@ -34,8 +34,8 @@ In this section, you will find the list of the data sets used in this study for 
     - *pb_robot_SNPage*: for some individuals, the volume of DNA added to the PCR reaction was reduced due to a problem with the pipetting robot (1=pipetting problem; 0=no pipetting problem)
     - *mother.snp*: the mother ID based on a parentage analysis on the 819 SNP information. If one the parental ID match the original ID of the acorn, the mother ID is kept. If the parentage analysis identify another mother tree, the ID is changed to the genetic match. If the parentage analysis doesn't identify one of the original mother tree, the ID is set to missing (="NA")
     - *father.snp*: the father ID based on a parentage analysis on the 819 SNP information. It can only be one of the mother tree or one of the adult tree from the vicinity of the mother trees that were sampled while collecting the acorn
-    - *live_bin*: is the juvenile still alive in 2017 ? ("1"=yes; "0"=no)
-    - *live_year*: year of the death of the juvenile (from "2009"" to "2017"; "vivant" if the juvenile was still alive in 2017)
+    - *live_bin*: is the seedling still alive in 2017 ? ("1"=yes; "0"=no)
+    - *live_year*: year of the death of the seedlings (from "2009"" to "2017"; "vivant" if the seedling was still alive in 2017)
     - *na.snp*: total number of missing information for all 819 selected SNP
     - *REF\~CL371CT472_02-163* to *REF\~CL9715CT16278_02-801* (819 columns): the allele combination for each of the 819 SNPs successfully genotyped. Oak being diploids, the genotype is indicated by 2 letters coding for the nucleotide (one for each copy of the genome) separated by a slash
     - *trait_init*: initial coding of the treatment of the plot ("nat" for natural treatment, "renf" for treatment with additional inoculum and "lim" for plot treated with a fungicide)
@@ -118,7 +118,7 @@ In this section, you will find the list of the data sets used in this study for 
     - *Hdeb16*: height measured at the beginning of 2016 (cm)
     - *Hdeb17*: height measured at the beginning of 2017 (cm)
     - *diam16*: diameter measured in 2016 (cm)
-    - *an_mort*: year of death of the juvenile oak
+    - *an_mort*: year of death of the seedling oak
     - *H09v*: size at the end of the year 2009 in cm (measured from the highest living shoot of the individual)
     - *H10v*: size at the end of the year 2010 in cm (measured from the highest living shoot of the individual)
     - *H11v*: size at the end of the year 2011 in cm (measured from the highest living shoot of the individual)
@@ -136,7 +136,7 @@ In this section, you will find the list of the data sets used in this study for 
     - *cr16*: growth in cm for the year 2016 (can be negative)
     - *esp*:
     - *statut*: dead or alive status of the plant in 2017 coded as "viva" for plant still alive and "mort" for dead plants (NA for missing data)
-    - *treat*: final treatment category "exp" for exposed to powdery mildew and "low" for plot with powdery mildew infection limited by the use of fungicide
+    - *treat*: final exposure category "exp" for exposed to powdery mildew and "low" for plot with powdery mildew infection limited by the use of fungicide
     - *oid_moy*: mean powdery mildew infection score between 2009 and 2013
     - *statut10*: dead or alive status of the plant in 2017 coded as a binary variable (0=dead; 1=alive)
     
@@ -203,27 +203,32 @@ In this section, you will find the list of the data sets used in this study for 
     - *Hfin10:* height measured at the end of 2010 (cm)
     - *Hfin11:* height measured at the end of 2011 (cm)
     - *Hfin12:* height measured at the end of 2012 (cm)
-    - *Hdeb14:* height measured at the end of 2014 (cm)
-    - *Hdeb15:* height measured at the end of 2015 (cm)
-    - *Hdeb16:* height measured at the end of 2016 (cm)
-    - *Hdeb17:* height measured at the end of 2017 (cm)
-    - *diam16:* 
-    - *an_mort:*
-    - *H09v:*
-    - *H10v:*
-    - *H11v:*
-    - *H12v:*
-    - *H14v:*
-    - *H15v:*
-    - *H16v:*
-    - *H17v:*
-    - *exp:*
-    - *oid_moy:*
-    - *survie2017:* 
+    - *Hdeb14:* height measured at the beginning of 2014 (cm)
+    - *Hdeb15:* height measured at the beginning of 2015 (cm)
+    - *Hdeb16:* height measured at the beginning of 2016 (cm)
+    - *Hdeb17:* height measured at the beginning of 2017 (cm)
+    - *diam16:* diameter measured in 2016 (cm)
+    - *an_mort:* year of the death of the seedlings (from "2009"" to "2017"; "vivant" if the seedling was still alive in 2017)
+    - *H09v:* size at the end of the year 2009 in cm (measured from the highest living shoot of the individual)
+    - *H10v:* size at the end of the year 2010 in cm (measured from the highest living shoot of the individual)
+    - *H11v:* size at the end of the year 2011 in cm (measured from the highest living shoot of the individual)
+    - *H12v:* size at the end of the year 2012 in cm (measured from the highest living shoot of the individual)
+    - *H14v:* size at the end of the year 2014 in cm (measured from the highest living shoot of the individual)
+    - *H15v:* size at the end of the year 2015 in cm (measured from the highest living shoot of the individual)
+    - *H16v:* size at the end of the year 2016 in cm (measured from the highest living shoot of the individual)
+    - *H17v:* size at the end of the year 2017 in cm (measured from the highest living shoot of the individual)
+    - *exp:* final exposure category "exp" for natural powdery mildew exposure and "low" for plot with protected exposure by the use of fungicide
+    - *oid_moy:* ean powdery mildew infection score between 2009 and 2013
+    - *survie2017:* dead or alive status of the plant in 2017 coded as a binary variable (0=dead; 1=alive). Empty = missing information 
 
     
 - **RT_pop_tot.csv:** the data set which includes only individuals with genotypic information. In addition to the variables already described for the *RT_pop.csv* data set, there are four variables that estimate the level of heterozygosity/homozygosity in each individual:
-
+    - *PHt:* number of heterozygous loci / number of genotyped loci
+    - *Hs_obs:* standardized heterozygosity based on the mean observed heterozygosity
+    - *Hs_exp:* standardized heterozygosity based on the mean expected heterozygosity
+    - *IR:* Internal relatedness
+    - *HL:* Homozygosity by locus
+    
 
 ## SAS scripts
 In this section, you will find a brief description of the script used for analyses with the SAS software.
