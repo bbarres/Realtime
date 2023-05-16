@@ -181,10 +181,48 @@ For reproducibility purpose, you will find all the information about the version
 ## SAS Data sets
 In this section, you will find the list of the data sets used in this study for SAS analyses. The data files can be found in the "dataSAS" folder. For the data tables, the name of the different variables are listed and explained as well. There are 2 data sets used in this study for analyses in SAS.
 - **RT_pop.csv:** the main data set which includes the information for all individuals:
-    - *Sample_ID*: unique identification number for each sample
+    - *Ind:* unique identification number for each sample
+    - *fameff:* which family the individual belongs to ("1", "9", "11", "27", "45", "48", "51", "70", "71", "72", "73", "74", "75", "76", "77") 
+    - *bloc:*	block ID in the experimental design
+    - *PU:* unitary plot ID
+    - *rg*: rank number within the unitary plot. There are 12 rank per block
+    - *n*: individual number on the rank. There are a maximum of 48 position on a rank
+    - *fam:* original family ID before correction using the genotyping information
+    - *trait:* initial coding of the exposure of the plot ("nat" and "renf" for natural exposure, "lim" for protected exposure)
+    - *oid4_09:* fourth powdery mildew infection note for 2009 (empty for missing information)
+    - *oid5_10:* fifth powdery mildew infection note for 2010 (empty for missing information)
+    - *oid5_11:* fifth powdery mildew infection note for 2011 (empty for missing information)
+    - *oid4_12:* fourth powdery mildew infection note for 2012 (empty for missing information)
+    - *gel_13:* individual affected by frost in 2013 ("0" = no, "1"= yes, empty = missing information)
+    - *oid2_13:* second powdery mildew infection note for 2013 (empty for missing information)
+    - *oid_16:* powdery mildew infection note for 2016 (empty for missing information)
+    - *oid_17:* powdery mildew infection note for 2017 (empty for missing information)
+    - *pgland:* weight of the acorn (grams)
+    - *date_em:* date of acorn raising
+    - *Hfin09:* height measured at the end of 2009 (cm)
+    - *Hfin10:* height measured at the end of 2010 (cm)
+    - *Hfin11:* height measured at the end of 2011 (cm)
+    - *Hfin12:* height measured at the end of 2012 (cm)
+    - *Hdeb14:* height measured at the end of 2014 (cm)
+    - *Hdeb15:* height measured at the end of 2015 (cm)
+    - *Hdeb16:* height measured at the end of 2016 (cm)
+    - *Hdeb17:* height measured at the end of 2017 (cm)
+    - *diam16:* 
+    - *an_mort:*
+    - *H09v:*
+    - *H10v:*
+    - *H11v:*
+    - *H12v:*
+    - *H14v:*
+    - *H15v:*
+    - *H16v:*
+    - *H17v:*
+    - *exp:*
+    - *oid_moy:*
+    - *survie2017:* 
+
     
 - **RT_pop_tot.csv:** the data set which includes only individuals with genotypic information. In addition to the variables already described for the *RT_pop.csv* data set, there are four variables that estimate the level of heterozygosity/homozygosity in each individual:
-    - *Sample_ID*: unique identification number for each sample
 
 
 ## SAS scripts
@@ -195,7 +233,7 @@ In this section, you will find a brief description of the script used for analys
 
 ## Citation
 You will be soon (hopefully) able to cite the related study as follow: 
-+ Barrès B., Saint-Jean G., Lepoittevin C., Burban C., Garnier-Géré P., Dutech C. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. *journal name*.](https://)
++ Barrès B., Dutech C., Saint-Jean G., Bodénès C., Burban C., Fiévet V., Garnier-Géré P., Lepoittevin C. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. *journal name*.](https://)
 
 If you want to use (some of) the code found on this page or if you want to cite this repository: 
 + Benoit Barrès and Marie-Laure Desprez-Loustau. [Supporting data and code for: Demographic and genetic impacts of powdery mildew in a young oak cohort. Zenodo.](https://zenodo.org/badge/latestdoi/33980368)
