@@ -142,11 +142,41 @@ dev.off()
 
 
 ##############################################################################/
-#Figure S16: Plot of the distribution of mortality by PHt classes####
+#Figure S14: Plot of the distribution and probability curve of PHt####
 ##############################################################################/
 
 #you first need to run the 'RealTime_GENHET.R' script
 pdf(file="output/Figure_SX_mortaPHtclass.pdf",width=5,height=8)
+colovec<-c(brewer.pal(12,"Set3")[6:7],
+           brewer.pal(9,"Set1")[1:2])
+HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
+                       header=TRUE)
+HetVivMortFam<-HetVivMort[HetVivMort$fam!="Global",]
+HetVivMortFam$catHet<-cut(HetVivMortFam$PHt,
+                          breaks=c(0.07,0.22,0.24,0.26,0.28,0.30,0.32,0.36))
+effectif<-colSums(table(HetVivMortFam$vivmor,HetVivMortFam$catHet))
+freqMor<-proportions(table(HetVivMortFam$vivmor,HetVivMortFam$catHet),
+                     margin=2)*100
+temp<-barplot(freqMor,las=1,main="Mortality rate by PHt classes",
+              col=colovec[1:2],axes=FALSE,axisnames=FALSE,space=0.5)
+axis(1,at=temp,labels=FALSE,lwd=3,font=2)
+text(temp+0.3,par("usr")[1]-10,labels=names(effectif),srt=-60,
+     xpd=TRUE,cex=1,font=2)
+axis(2,lwd=3,font=2,cex.axis=1.2,las=1)
+box(bty="l",lwd=3)
+text(temp,102,paste("n=",effectif,sep=""),font=3,cex=0.9,xpd=TRUE)
+legend(-2,115,c("dead","alive"),fill=colovec[1:2],cex=1.3,
+       bty="n",x.intersp=0.5,y.intersp=0.7,xpd=TRUE)
+#export to .pdf 5 x 8 inches
+dev.off()
+
+
+##############################################################################/
+#Figure S16: Plot of the distribution of mortality by PHt classes####
+##############################################################################/
+
+#you first need to run the 'RealTime_GENHET.R' script
+pdf(file="output/Figure_S16_mortaPHtclass.pdf",width=5,height=8)
 colovec<-c(brewer.pal(12,"Set3")[6:7],
            brewer.pal(9,"Set1")[1:2])
 HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
