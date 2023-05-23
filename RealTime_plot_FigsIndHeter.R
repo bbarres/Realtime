@@ -151,27 +151,23 @@ HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
 HetVivMort$vivmor<-as.factor(HetVivMort$vivmor)
 VivMortGlob<-HetVivMort[HetVivMort$fam=="Global",]
 
-#looking at the distribution
-plot(density(VivMortGlob$PHt),main="Natural treatment")
-lines(density(VivMortGlob[DoANat$vivmor=="0",]$PHt),col="red")
-lines(density(DoANat[DoANat$vivmor=="1",]$PHt),col="blue")
-qqnorm(VivMortGlob$PHt,ylab="PHt")
-qqline(VivMortGlob$PHt,col="red",lwd=2)
-
 #plotting the Figure S14
-pdf(file="output/Figure_S14_dist_PHt.pdf",width=5,height=8)
-nf<-layout(matrix(c(1,1,2,3,3,
-                    1,1,2,3,3),
-                  2,5,byrow=TRUE))
-op<-par(mar=c(0,0,0,0),lwd=2)
-histPH<-hist(VivMortGlob$PHt,las=1,freq=TRUE,
-             main="",plot=FALSE,
-             ylab="Counts",xlab="PHt classes")
-barplot(histPH$counts,space=0,horiz=TRUE)
-boxplot(VivMortGlob$PHt,horizontal=FALSE,boxwex=0.4,
-        las=1,notch=TRUE)
-qqnorm(VivMortGlob$PHt,ylab="PHt",las=1)
+pdf(file="output/Figure_S14_dist_PHt.pdf",width=10,height=6)
+nf<-layout(matrix(c(1,2,2,2,2,2,3,3,
+                    1,2,2,2,2,2,3,3),
+                  2,8,byrow=TRUE))
+op<-par(mar=c(5.1,0,4.1,0),lwd=1.5)
+boxplot(VivMortGlob$PHt,horizontal=FALSE,boxwex=0.9,
+        las=1,notch=TRUE,frame=FALSE,axes=FALSE)
+par(mar=c(5.1,5.1,4.1,1.1))
+qqnorm(VivMortGlob$PHt,ylab="PHt",las=1,frame=TRUE,
+       cex.lab=2,cex.main=2.5)
 qqline(VivMortGlob$PHt,col="red",lwd=2)
+par(mar=c(5.1,0,4.1,1.1))
+histPH<-hist(VivMortGlob$PHt,plot=FALSE)
+barplot(histPH$counts,space=0,horiz=TRUE,
+        xlab="Counts",cex.lab=2)
+par(op)
 #export to .pdf 5 x 8 inches
 dev.off()
 
