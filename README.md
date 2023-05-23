@@ -165,7 +165,7 @@ In this section, you will find the list of the different scripts used in the art
 - **RealTime_plot_evolpheno.R:** script to analyze and plot the temporal evolution of the main phenotypic traits over the years (Figure 2). The code for the distribution of tree height by family and by powdery mildew exposures (Figure 6) is also included in this script. 
 - **RealTime_plot_FigS2_map.R:** script to plot the map (Figure S2) of the experimental setup.
 - **RealTime_plot_FigS4_indQual.R:** script to plot the scatterplot used to determined the individuals genotyped with the SNP markers with sufficient quality.
-- **RealTime_plot_FigsIndHeter.R:** script to produce the Figures related to intra-individual heterozygosity (Figure 8, Figure S7 and Figure S16). The ***RealTime_GENHET.R*** must be run prior to this script in order to produce the necessary entry files. 
+- **RealTime_plot_FigsIndHeter.R:** script to produce the Figures related to intra-individual heterozygosity (Figure 8, Figure S7, Figure S14 and Figure S16). The ***RealTime_GENHET.R*** must be run prior to this script in order to produce the necessary entry files. 
 - **RealTime_plot_glm.R:** script to plot the Figures (Figure 3, Figure S10, Figure S11 and Figure S12) related to the GLM analyses performed in SAS.
 - **RealTime_plot_GoldGate_SNP.R:** script to plot the scatterplot of the genotypes examples of SNP markers of variable quality. Figure S5 and Figure S6 are produce using this script.
 - **RealTime_plot_GWAS.R:** script to plot the distribution of phenotype traits by genotypes for SNP of interest (Figure 10).
