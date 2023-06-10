@@ -6,7 +6,7 @@
 
 
 ## Context
-The impact of pathogens on their hosts in the wild remains a relatively unexplored subject.
+The impact of pathogens on their host populations in the wild remains a relatively unexplored subject.
 
 
 ## R Data sets
