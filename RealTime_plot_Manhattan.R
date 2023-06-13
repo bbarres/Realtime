@@ -49,13 +49,13 @@ readManDa<-function(pathtoGWASrez) {
 ##############################################################################/
 
 AcNat<-readManDa("output/natGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
-AcLim<-readManDa("output/limGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
+AcLim<-readManDa("output/proGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
 HeNat<-readManDa("output/natGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
-HeLim<-readManDa("output/limGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
+HeLim<-readManDa("output/proGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
 PMNat<-readManDa("output/natGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
-PMLim<-readManDa("output/limGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
+PMLim<-readManDa("output/proGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
 SuNat<-readManDa("output/natGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
-SuLim<-readManDa("output/limGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
+SuLim<-readManDa("output/proGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
 
 
 ##############################################################################/
