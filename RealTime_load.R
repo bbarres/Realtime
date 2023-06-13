@@ -77,24 +77,13 @@ colnames(AllTrait)<-c("treat","Taxa","oid4_09","oid5_10","oid5_11",
                       "oid4_12","oid2_13","Powdery mildew","Height",
                       "Acorn weight","Survival")
 NatTrait<-AllTrait[AllTrait$treat=="exp",2:11]
-LimTrait<-AllTrait[AllTrait$treat=="low",2:11]
+ProTrait<-AllTrait[AllTrait$treat=="low",2:11]
 
-# #to remove
-# AllTrait<-read.table("data/pheno_final.txt",header=TRUE)
-# colnames(AllTrait)[11:14]<-c("Powdery mildew","Height",
-#                              "Acorn weight","Dead or Alive")
-# #we remove the individuals without SNP data
-# AllTrait<-AllTrait[AllTrait$SNPage==1 & !is.na(AllTrait$SNPage) &
-#                      AllTrait$Quality_SNPage==1,]
-# NatTrait<-AllTrait[AllTrait$treat=="exp",5:14]
-# LimTrait<-AllTrait[AllTrait$treat=="low",5:14]
-# #end remove
-
-#loading the natural treatment genotype data
+#loading the natural exposure genotype data
 NatG<-read.delim("data/nat.hmp.txt",header=FALSE)
 
-#loading the limited treatment genotype data
-LimG<-read.delim("data/lim.hmp.txt",header=FALSE)
+#loading the protected exposure genotype data
+ProG<-read.delim("data/pro.hmp.txt",header=FALSE)
 
 
 ##############################################################################/

@@ -15,9 +15,9 @@ source("RealTime_load.R")
 #RealTime_GWAS.R script before this script
 RezNatGAPIT<-read.table("data/RezNatGAPIT.txt",sep="\t",header=TRUE)
 RezNatGAPIT$treat<-"Natural"
-RezLimGAPIT<-read.table("data/RezLimGAPIT.txt",sep="\t",header=TRUE)
-RezLimGAPIT$treat<-"Protected"
-Rezcomb<-rbind(RezNatGAPIT,RezLimGAPIT)
+RezProGAPIT<-read.table("data/RezProGAPIT.txt",sep="\t",header=TRUE)
+RezProGAPIT$treat<-"Protected"
+Rezcomb<-rbind(RezNatGAPIT,RezProGAPIT)
 #defining colors vector
 colnat<-brewer.pal(11,"PRGn")[7:10]
 colprt<-brewer.pal(11,"RdBu")[7:10]
@@ -30,7 +30,7 @@ colprt<-brewer.pal(11,"RdBu")[7:10]
 #code for plotting all the significant SNP
 temp<-snp.dat[snp.dat$Sample_ID %in% NatTrait$Taxa,]
 temp<-temp[,c(1,48:866)]
-tempb<-snp.dat[snp.dat$Sample_ID %in% LimTrait$Taxa,]
+tempb<-snp.dat[snp.dat$Sample_ID %in% ProTrait$Taxa,]
 tempb<-tempb[,c(1,48:866)]
 
 pdf("output/Figure_10_SNPinterest.pdf",width=15,height=10)
@@ -77,7 +77,7 @@ for (i in c(1,11,16)) {
   #data of the protected exposure
   temp3<-tempb[,colnames(tempb)=="Sample_ID" | 
                  colnames(tempb)==Rezcomb$SNP[i]]
-  temp3<-merge(temp3,LimTrait,by.x="Sample_ID",by.y="Taxa")
+  temp3<-merge(temp3,ProTrait,by.x="Sample_ID",by.y="Taxa")
   #temp3[,2]<-as.factor(temp3[,2])
   if(treatme=="Natural") {
     tempo<-temp2
@@ -159,7 +159,7 @@ dev.off()
 #multiple files
 temp<-snp.dat[snp.dat$Sample_ID %in% NatTrait$Taxa,]
 temp<-temp[,c(1,48:866)]
-tempb<-snp.dat[snp.dat$Sample_ID %in% LimTrait$Taxa,]
+tempb<-snp.dat[snp.dat$Sample_ID %in% ProTrait$Taxa,]
 tempb<-tempb[,c(1,48:866)]
 
 for (j in 1:(dim(Rezcomb)[1]/4)) {
@@ -211,7 +211,7 @@ for (j in 1:(dim(Rezcomb)[1]/4)) {
     #data of the protected exposure
     temp3<-tempb[,colnames(tempb)=="Sample_ID" | 
                    colnames(tempb)==Rezcomb$SNP[i]]
-    temp3<-merge(temp3,LimTrait,by.x="Sample_ID",by.y="Taxa")
+    temp3<-merge(temp3,ProTrait,by.x="Sample_ID",by.y="Taxa")
     #temp3[,2]<-as.factor(temp3[,2])
     if(treatme=="Natural") {
       tempo<-temp2
@@ -288,12 +288,11 @@ for (j in 1:(dim(Rezcomb)[1]/4)) {
 }
 
 
-
 #code for plotting all the significant SNP from the GWAS analysis on 
 #a unique file
 temp<-snp.dat[snp.dat$Sample_ID %in% NatTrait$Taxa,]
 temp<-temp[,c(1,48:866)]
-tempb<-snp.dat[snp.dat$Sample_ID %in% LimTrait$Taxa,]
+tempb<-snp.dat[snp.dat$Sample_ID %in% ProTrait$Taxa,]
 tempb<-tempb[,c(1,48:866)]
 
 pdf("output/Figure_SNPinterest_ALL.pdf",width=15,height=49)
@@ -379,7 +378,7 @@ for (i in 1:dim(Rezcomb)[1]) {
   #data of the protected exposure
   temp3<-tempb[,colnames(tempb)=="Sample_ID" | 
                  colnames(tempb)==Rezcomb$SNP[i]]
-  temp3<-merge(temp3,LimTrait,by.x="Sample_ID",by.y="Taxa")
+  temp3<-merge(temp3,ProTrait,by.x="Sample_ID",by.y="Taxa")
   #temp3[,2]<-as.factor(temp3[,2])
   if(treatme=="Natural") {
     tempo<-temp2

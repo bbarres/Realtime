@@ -19,25 +19,25 @@ readManDa<-function(pathtoGWASrez) {
   datMan<-read.csv(file=pathtoGWASrez)
   #we change the chromosome information into a factor with convenient
   #levels order
-  datMan$Chromosome<-factor(datMan$Chromosome,
+  datMan$Chr<-factor(datMan$Chr,
                                levels=c("1","2","3","4","5","6","7",
                                         "8","9","10","11","12","13",
                                         "MT","Pltd"))
   #there is only 12 chromosome in Q. robur, the 13 stand for an 
   #unlocated SNP on the genome at the time of the analysis. The level
   #"13" is therefore turn into "NA"
-  levels(datMan$Chromosome)[13]<-"Na"
-  levels(datMan$Chromosome)[14]<-"Mt"
-  levels(datMan$Chromosome)[15]<-"Cp"
+  levels(datMan$Chr)[13]<-"Na"
+  levels(datMan$Chr)[14]<-"Mt"
+  levels(datMan$Chr)[15]<-"Cp"
   #we turn Position from integer to numeric
-  datMan$Position<-as.numeric(datMan$Position)
-  datMan<-datMan[order(datMan$Chromosome,datMan$Position),]
+  datMan$Pos<-as.numeric(datMan$Pos)
+  datMan<-datMan[order(datMan$Chr,datMan$Pos),]
   datMan$logp<- -log10(datMan$P.value)
-  datMan$grpNum<-as.numeric(datMan$Chromosome)
-  datMan$decal<-rep(c(0,cumsum(tapply(datMan$Position,
-                                      datMan$Chromosome,max))[1:14]),
-                    times=table(datMan$Chromosome))
-  datMan$signiCat<-cut(datMan$FDR_Adjusted_P.values,
+  datMan$grpNum<-as.numeric(datMan$Chr)
+  datMan$decal<-rep(c(0,cumsum(tapply(datMan$Pos,
+                                      datMan$Chr,max))[1:14]),
+                    times=table(datMan$Chr))
+  datMan$signiCat<-cut(datMan$H.B.P.Value,
                        breaks=c(0,0.0001,0.001,0.01,1),
                        labels=c("<0.0001","<0.001","<0.01","ns"))
   return(datMan)
@@ -48,14 +48,14 @@ readManDa<-function(pathtoGWASrez) {
 #Loading the data using the defined function####
 ##############################################################################/
 
-AcNat<-readManDa("output/natGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
-AcLim<-readManDa("output/proGWAS/GAPIT.Blink.Acorn weight.GWAS.Results.csv")
-HeNat<-readManDa("output/natGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
-HeLim<-readManDa("output/proGWAS/GAPIT.Blink.Height.GWAS.Results.csv")
-PMNat<-readManDa("output/natGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
-PMLim<-readManDa("output/proGWAS/GAPIT.Blink.Powdery mildew.GWAS.Results.csv")
-SuNat<-readManDa("output/natGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
-SuLim<-readManDa("output/proGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
+AcNat<-readManDa("output/natGWAS/GAPIT.Association.GWAS_Results.BLINK.Acorn weight.csv")
+AcLim<-readManDa("output/proGWAS/GAPIT.Association.GWAS_Results.BLINK.Acorn weight.csv")
+HeNat<-readManDa("output/natGWAS/GAPIT.Association.GWAS_Results.BLINK.Height.csv")
+HeLim<-readManDa("output/proGWAS/GAPIT.Association.GWAS_Results.BLINK.Height.csv")
+PMNat<-readManDa("output/natGWAS/GAPIT.Association.GWAS_Results.BLINK.Powdery mildew.csv")
+PMLim<-readManDa("output/proGWAS/GAPIT.Association.GWAS_Results.BLINK.Powdery mildew.csv")
+SuNat<-readManDa("output/natGWAS/GAPIT.Association.GWAS_Results.BLINK.Survival.csv")
+SuLim<-readManDa("output/proGWAS/GAPIT.Association.GWAS_Results.BLINK.Survival.csv")
 
 
 ##############################################################################/
@@ -65,12 +65,12 @@ SuLim<-readManDa("output/proGWAS/GAPIT.Blink.Survival.GWAS.Results.csv")
 ManhaPlot<-function(datMan,colovec,colosign="red",
                     decalCHR=0,desiXax=1,ylimi=c(0,10)) {
   datMan$posabsol<-datMan$decal+
-    datMan$Position+
+    datMan$Pos+
     (datMan$grpNum-1)*decalCHR
   plot(datMan$posabsol,datMan$logp,pch=19,las=1,font.axis=2,
        ylab=expression(-log[10](pval)),cex.lab=1.5,cex=1.0,
        xaxt="n",yaxt="n",bty="n",xlab="",ylim=ylimi,
-       col=colovec[as.numeric(even(as.numeric(datMan$Chromosome)))+1])
+       col=colovec[as.numeric(even(as.numeric(datMan$Chr)))+1])
   points(datMan[datMan$signiCat=="<0.01",]$posabsol,
          datMan[datMan$signiCat=="<0.01",]$logp,
          pch=21,bg=colosign[1],cex=1.5)
@@ -83,14 +83,14 @@ ManhaPlot<-function(datMan,colovec,colosign="red",
   axis(2,lwd=2,las=1)
   if(desiXax==1){
     axis(1,lwd=2,cex.axis=1,
-         at=c(c(0,cumsum(tapply(datMan$Position,datMan$Chromosome,max))[1:14])+
-                tapply(datMan$Position,datMan$Chromosome,max)/2+
+         at=c(c(0,cumsum(tapply(datMan$Pos,datMan$Chr,max))[1:14])+
+                tapply(datMan$Pos,datMan$Chr,max)/2+
                 (0:14)*decalCHR),
-         lab=levels(datMan$Chromosome),las=1,hadj=0.5,padj=-0.5,font=2)
+         lab=levels(datMan$Chr),las=1,hadj=0.5,padj=-0.5,font=2)
   } else {
     axis(3,lwd=2,
-         at=c(c(0,cumsum(tapply(datMan$Position,datMan$Chromosome,max))[1:14])+
-                tapply(datMan$Position,datMan$Chromosome,max)/2+
+         at=c(c(0,cumsum(tapply(datMan$Pos,datMan$Chr,max))[1:14])+
+                tapply(datMan$Pos,datMan$Chr,max)/2+
                 (0:14)*decalCHR),
          lab=NA)
   }

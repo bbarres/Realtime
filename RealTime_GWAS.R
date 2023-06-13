@@ -48,22 +48,22 @@ nomTemp<-getwd()
 dir.create(paste(nomTemp,"/output/proGWAS",sep=""))
 setwd(paste(nomTemp,"/output/proGWAS",sep=""))
 #Blink method on general phenotype
-limGAPIT<-GAPIT(
-  Y=LimTrait[,c(1,7:10)],
-  G=LimG,
+ProGAPIT<-GAPIT(
+  Y=ProTrait[,c(1,7:10)],
+  G=ProG,
   SNP.effect="Add",
   PCA.total=0,
   model="Blink"
 )
-RezLimGAPIT<-read.table("GAPIT.Association.Filter_GWAS_results.csv",
+RezProGAPIT<-read.table("GAPIT.Association.Filter_GWAS_results.csv",
                         header=TRUE,sep=",")
-RezLimGAPIT$SNP<-str_replace_all(RezLimGAPIT$SNP,"~","_")
-RezLimGAPIT$SNP<-str_replace_all(RezLimGAPIT$SNP,"-","_")
-RezLimGAPIT$SNP<-str_replace_all(RezLimGAPIT$SNP,fixed("+"),"_")
+RezProGAPIT$SNP<-str_replace_all(RezProGAPIT$SNP,"~","_")
+RezProGAPIT$SNP<-str_replace_all(RezProGAPIT$SNP,"-","_")
+RezProGAPIT$SNP<-str_replace_all(RezProGAPIT$SNP,fixed("+"),"_")
 #one SNP is not significant considering Pcor<0.01 criteria, so we remove it
-RezLimGAPIT<-RezLimGAPIT[-5,-1]
+RezProGAPIT<-RezProGAPIT[-5,-1]
 setwd(nomTemp)
-write.table(RezLimGAPIT,file="data/RezProGAPIT.txt",sep="\t",
+write.table(RezProGAPIT,file="data/RezProGAPIT.txt",sep="\t",
             quote=FALSE,row.names=FALSE)
 
 
