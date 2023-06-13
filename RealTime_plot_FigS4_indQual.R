@@ -6,7 +6,7 @@
 
 
 #loading and preparing the additionnal dataset
-genoQual<-read.table("data/dataSup/RT_s_pre_ST.txt",
+genoQual<-read.table("data/dataSup/Ind_Geno_Qual_ST.txt",
                      sep="\t",header=T,dec=".")
 summary(genoQual)
 colnames(genoQual)

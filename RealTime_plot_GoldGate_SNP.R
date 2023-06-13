@@ -130,13 +130,13 @@ SNPlot<-function(singleSNP,SNPstat,FileName) #one plot per page
 ##############################################################################/
 
 #supplementary data importation for SNP results plotting
-coordIndSNP<-read.table("data/dataSup/RT_comp_11P_FDT.txt",
+coordIndSNP<-read.table("data/dataSup/SNP_Ind_coord_FDT.txt",
                         header=T,sep="\t",dec=".",stringsAsFactors=TRUE)
 #a glimpse to the data structure
 coordIndSNP[1:10,1:14]
 
 #supplementary data importation of the cluster statistic for each SNP
-statTable<-read.table("data/dataSup/RT_comp_11P_SNP_T.txt",
+statTable<-read.table("data/dataSup/SNP_Stat_Tab_T.txt",
                       header=T,sep="\t",dec=".",stringsAsFactors=TRUE)
 names(statTable)
 statTable<-statTable[,-c(13,23)]
