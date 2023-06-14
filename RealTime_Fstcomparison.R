@@ -61,6 +61,8 @@ minorAllele(microGen)
 pop(microGen)<-microGen@other$newPop
 table(pop(microGen))
 pairwise.WCfst(genind2hierfstat(microGen))
+#produce and save the genepop format file for genepop analyses 
+#in the data folder
 genind_to_genepop(microGen,output="data/microGenDoA.txt")
 microGendat<-"data/microGenDoA.txt"
 genedivFis(microGendat,sizes=FALSE,"output/Genepop/microGenDoA.Fis")
@@ -69,6 +71,8 @@ Fst(microGendat,sizes=FALSE,pairs=TRUE,"output/Genepop/microGenDoA.Fst")
 test_diff(microGendat,genic=FALSE,pairs=TRUE,
           outputFile="output/Genepop/microGenDoA.DD",
           batches=500,iterations=10000)
+#removing the temporary files created in the current folder 
+#by the genepop package
 clean_workdir()
 n.temp<-seppop(microGen)
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
@@ -87,6 +91,8 @@ temp<-repool(temp,temp2,n.temp$low1)
 #number of individuals by populations
 table(pop(temp))
 pairwise.WCfst(genind2hierfstat(temp))
+#produce and save the genepop format file for genepop analyses 
+#in the data folder
 genind_to_genepop(temp,output="data/microGenDF.txt")
 microGendat<-"data/microGenDF.txt"
 genedivFis(microGendat,sizes=FALSE,"output/Genepop/microGenDF.Fis")
@@ -95,6 +101,8 @@ Fst(microGendat,sizes=FALSE,pairs=TRUE,"output/Genepop/microGenDF.Fst")
 test_diff(microGendat,genic=FALSE,pairs=TRUE,
           outputFile="output/Genepop/microGenDF.DD",
           batches=500,iterations=10000)
+#removing the temporary files created in the current folder 
+#by the genepop package
 clean_workdir()
 n.temp<-seppop(temp) 
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
@@ -157,15 +165,20 @@ snpGen2<-snpGen[,loc=minorAllele(snpGen)<0.95 & minorAllele(snpGen)>0.05]
 pop(snpGen2)<-snpGen2@other$newPop
 table(pop(snpGen2))
 pairwise.WCfst(genind2hierfstat(snpGen2))
+#produce and save the genepop format file for genepop analyses 
+#in the data folder
 genind_to_genepop(snpGen2,output="data/snpGen2DoA.txt")
-#small tips: the conversion is putting six digit for missing data "000000",
+#the conversion is putting six digit for missing data "000000",
 #therefore you have to replace this string of 6 zeros by a string of 4 zeros
+#in the original output file before proceeding to the next step
 snpGen2dat<-"data/snpGen2DoA.txt"
 genedivFis(snpGen2dat,sizes=FALSE,"output/Genepop/snpGen2DoA.Fis")
 test_HW(snpGen2dat,which="Proba",outputFile="output/Genepop/snpGen2DoA.HW")
 Fst(snpGen2dat,sizes=FALSE,pairs=TRUE,"output/Genepop/snpGen2DoA.Fst")
 test_diff(snpGen2dat,genic=FALSE,pairs=TRUE,
           outputFile="output/Genepop/snpGen2DoA.DD")
+#removing the temporary files created in the current folder 
+#by the genepop package
 clean_workdir()
 n.temp<-seppop(snpGen2)
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))
@@ -184,15 +197,20 @@ temp<-repool(temp,temp2,n.temp$low1)
 #number of individuals by populations
 table(pop(temp))
 pairwise.WCfst(genind2hierfstat(temp))
+#produce and save the genepop format file for genepop analyses 
+#in the data folder
 genind_to_genepop(temp,output="data/snpGen2DF.txt")
-#small tips: the conversion is putting six digit for missing data "000000",
+#the conversion is putting six digit for missing data "000000",
 #therefore you have to replace this string of 6 zeros by a string of 4 zeros
+#in the original output file before proceeding to the next step
 snpGen2dat<-"data/snpGen2DF.txt"
 genedivFis(snpGen2dat,sizes=FALSE,"output/Genepop/snpGen2DF.Fis")
 test_HW(snpGen2dat,which="Proba",outputFile="output/Genepop/snpGen2DF.HW")
 Fst(snpGen2dat,sizes=FALSE,pairs=TRUE,"output/Genepop/snpGen2DF.Fst")
 test_diff(snpGen2dat,genic=FALSE,pairs=TRUE,
           outputFile="output/Genepop/snpGen2DF.DD")
+#removing the temporary files created in the current folder 
+#by the genepop package
 clean_workdir()
 n.temp<-seppop(temp) 
 Hobs<-do.call("c",lapply(n.temp,function(x) mean(summary(x)$Hobs)))

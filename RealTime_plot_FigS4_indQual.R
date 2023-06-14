@@ -58,7 +58,7 @@ plot(p10.GC~Call.Rate,xlim=xrange,ylim=yrange10,
      data=genoQual[genoQual$p50.GC>=seuilp50min & 
                      genoQual$p10.GC>=seuilp10min &
                      genoQual$Call.Rate>=seuilCRatemin,],
-     xlab="Call Rate",ylab="10% GenCall",
+     xlab="Call Rate",ylab="10% GeneCall",
      col=coVec[1],pch=1,cex=0.6,las=1)
 abline(h=c(seuilp10min),lty=2,col=brewer.pal(9,"Set1")[2],lwd=3)
 abline(v=c(seuilCRatemin),lty=2,col=brewer.pal(9,"Set1")[3],lwd=3)
@@ -69,7 +69,7 @@ plot(p50.GC~Call.Rate,xlim=xrange,ylim=yrange50,
      data=genoQual[genoQual$p50.GC>=seuilp50min & 
                      genoQual$p10.GC>=seuilp10min &
                      genoQual$Call.Rate>=seuilCRatemin,],
-     xlab="Call Rate",ylab="50% GenCall",
+     xlab="Call Rate",ylab="50% GeneCall",
      col=coVec[1],pch=1,cex=0.6,las=1)
 abline(h=c(seuilp50min),lty=2,col=brewer.pal(9,"Set1")[4],lwd=3)
 abline(v=c(seuilCRatemin),lty=2,col=brewer.pal(9,"Set1")[3],lwd=3)
