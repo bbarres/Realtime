@@ -133,10 +133,10 @@ HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
 HetVivMortGlob<-HetVivMort[HetVivMort$fam=="Global",]
 
 #plot the graph
-pdf(file="output/Figure_S7_corHeteroz.pdf",width=10,height=10)
-pairs(HetVivMortGlob[,c(2:6)],las=1,cex.main=2,
+pdf(file="output/Figure_S7_corHeteroz.pdf",width=10,height=7)
+pairs(HetVivMortGlob[,c(2:6)],las=1,cex.main=2,cex.cor=2.2,
       main="Correlation between heterozygosity indices",
-      lower.panel=panel.smooth, upper.panel=panel.cor)
+      lower.panel=panel.smooth,upper.panel=panel.cor)
 #export to pdf 10 x 7 inches
 dev.off()
 
@@ -177,7 +177,7 @@ dev.off()
 ##############################################################################/
 
 #you first need to run the 'RealTime_GENHET.R' script
-pdf(file="output/Figure_S16_mortaPHtclass.pdf",width=5,height=8)
+pdf(file="output/Figure_S16_mortaPHtclass.pdf",width=7,height=8)
 colovec<-c(brewer.pal(12,"Set3")[6:7],
            brewer.pal(9,"Set1")[1:2])
 HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
@@ -189,14 +189,14 @@ effectif<-colSums(table(HetVivMortFam$vivmor,HetVivMortFam$catHet))
 freqMor<-proportions(table(HetVivMortFam$vivmor,HetVivMortFam$catHet),
                      margin=2)*100
 temp<-barplot(freqMor,las=1,main="Mortality rate by PHt classes",
-              col=colovec[1:2],axes=FALSE,axisnames=FALSE,space=0.5)
+              col=colovec[1:2],axes=FALSE,axisnames=FALSE,space=0.6)
 axis(1,at=temp,labels=FALSE,lwd=3,font=2)
 text(temp+0.3,par("usr")[1]-10,labels=names(effectif),srt=-60,
      xpd=TRUE,cex=1,font=2)
 axis(2,lwd=3,font=2,cex.axis=1.2,las=1)
 box(bty="l",lwd=3)
 text(temp,102,paste("n=",effectif,sep=""),font=3,cex=0.9,xpd=TRUE)
-legend(-2,115,c("dead","alive"),fill=colovec[1:2],cex=1.3,
+legend(-1,115,c("dead","alive"),fill=colovec[1:2],cex=1.3,
        bty="n",x.intersp=0.5,y.intersp=0.7,xpd=TRUE)
 #export to .pdf 5 x 8 inches
 dev.off()
