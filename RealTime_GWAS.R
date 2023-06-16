@@ -11,7 +11,7 @@ source("RealTime_load.R")
 
 
 ##############################################################################/
-#Model Blink/kinship for natural exposure####
+#Model Blink for natural exposure####
 ##############################################################################/
 
 #preparing the output folder tree structure
@@ -40,7 +40,7 @@ write.table(RezNatGAPIT,file="data/RezNatGAPIT.txt",sep="\t",
 
 
 ##############################################################################/
-#Model Blink/kinship for protected exposure####
+#Model Blink for protected exposure####
 ##############################################################################/
 
 #preparing the output folder tree structure

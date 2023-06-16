@@ -17,17 +17,16 @@ library(genepop)
 library(graph4lg)
 library(gtools)
 library(hierfstat)
-library(kinship2)
 library(plotrix)
 library(PopGenReport)
 library(poppr)
 library(RColorBrewer)
-library(visreg)
 library(stringr)
 library(tidyr)
 library(vegan)
 library(vioplot)
 library(viridis)
+library(visreg)
 
 
 ##############################################################################/
