@@ -46,7 +46,7 @@ dev.off()
 colovec<-c(brewer.pal(12,"Paired")[c(rep(6,9),9,4)])
 op<-par(mar=c(0,0,15,0))
 plot(dispo$coord_X,dispo$coord_Y,bty="n",ann=FALSE,axes=FALSE,
-     pch=c(rep(21,17),24,21,22)[as.numeric(dispo$family_simp)],
+     pch=c(rep(21,17),24,22)[as.numeric(dispo$family_simp)],
      bg=colovec[as.numeric(as.factor(dispo$an_mort))])
 text(x=c(20,620,1220,20,620,1220,20,620,1220),
      y=c(760,760,760,455,455,455,145,145,145),
@@ -68,12 +68,6 @@ par(op)
 #export to .pdf 20 x 12 inches
 
 
-#some individuals from the experimental setup are not included in the 
-#phenotypic data set
-dispo[dispo$family_simp!="CC" & dispo$family_simp!="hd" & 
-              is.na(dispo$an_mort),"Sample_ID"]
-
-
 ##############################################################################/
 #map of the tree height####
 ##############################################################################/
@@ -81,14 +75,15 @@ dispo[dispo$family_simp!="CC" & dispo$family_simp!="hd" &
 #defining a vector to chose the columns with tree height information
 temp<-c("Hfin09","Hfin10","Hfin11","Hfin12",
         "Hdeb14","Hdeb15","Hdeb16","Hdeb17")
-min(dispo[,temp])
+min(dispo[,temp],na.rm=TRUE)
 cut(as.numeric(as.matrix(dispo[,temp])),49,na.rm=TRUE,levels=FALSE)
+colovec<-viridis(50)
 
-colovec<-viridis(2)
 op<-par(mar=c(0,0,15,0))
 plot(dispo$coord_X,dispo$coord_Y,bty="n",ann=FALSE,axes=FALSE,
-     pch=c(rep(21,17),24,21,22)[as.numeric(dispo$family_simp)],
-     bg=colovec[as.numeric(dispo$an_mort)])
+     pch=c(rep(21,17),24,22)[as.numeric(dispo$family_simp)],
+     bg=colovec[as.numeric(cut(as.numeric(as.matrix(dispo[,temp[8]])),
+                               49,na.rm=TRUE,levels=FALSE))])
 text(x=c(20,620,1220,20,620,1220,20,620,1220),
      y=c(760,760,760,455,455,455,145,145,145),
      labels=c("A1 / natural","A2 / protected","A3 / natural",
@@ -104,7 +99,7 @@ legend(x=60,y=950,horiz=FALSE,x.intersp=1,y.intersp=0.5,
        xpd=TRUE,pt.cex=3,bty="n",text.font=2,
        legend=c("Experiment","CC","hd"),
        pch=c(21,24,22))
-title(main="Dead or alive map",cex.main=4,line=10)
+title(main=paste("Height in ",temp[8],sep=""),cex.main=4,line=10)
 par(op)
 #export to .pdf 20 x 12 inches
 
