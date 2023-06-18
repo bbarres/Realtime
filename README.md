@@ -140,7 +140,7 @@ In this section, you will find the list of the data sets used in this study for 
     - *oid_moy*: mean powdery mildew infection score between 2009 and 2013
     - *statut10*: dead or alive status of the plant in 2017 coded as a binary variable (0=dead; 1=alive)
     
-- **lim.hmp.txt.txt** and **nat.hmp.txt:** two data sets formatted for the GWAS analyses using the *hapmap* format, for the protected and natural treatment, respectively
+- **pro.hmp.txt** and **nat.hmp.txt:** two data sets formatted for the GWAS analyses using the *hapmap* format, for the protected and natural treatment, respectively
     - *rs#*: SNP ID
     - *alleles*: possible nucleotide allele for each SNP
     - *chrom*: ID number of the chromosome the SNP is located on. Range from 1 to 12 for the 12 chromosome of *Quercus robur*. The *13* code is used for unmapped SNP. *MT* is for SNP located on mitochondrial DNA and *Plst* for SNP located on plastide
