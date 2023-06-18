@@ -238,7 +238,7 @@ In this section, you will find a brief description of the script used for analys
 
 ## Citation
 You will be soon (hopefully) able to cite the related study as follow: 
-+ Barrès B., Dutech C., Saint-Jean G., Bodénès C., Burban C., Fiévet V., Lepoittevin C., Garnier-Géré P. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. *PCI Wood and Forest*.***submitted***](https://)
++ Barrès B., Dutech C., Saint-Jean G., Bodénès C., Burban C., Fiévet V., Lepoittevin C., Garnier-Géré P. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. *PCI Wood and Forest*.***submitted to PCI Forest and Wood Sciences***](https://)
 
 If you want to use (some of) the code found on this page or if you want to cite this repository: 
 + Benoit Barrès and Marie-Laure Desprez-Loustau. [Supporting data and code for: Demographic and genetic impacts of powdery mildew in a young oak cohort. Zenodo.](https://zenodo.org/badge/latestdoi/33980368)
