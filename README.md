@@ -9,10 +9,10 @@
 The impact of pathogens on their host populations in the wild can be manifold, but remains a relatively unexplored subject. Studying this type of impact in a wild system is complex, not least because of the number of factors (in addition to the pathogen studied) that can influence the demography of the host species: herbivory, competition with other species, other pathogens... In this study, we used a semi-controlled experimental set-up to mimic a regeneration cohort of young oaks (*Quercus robur*), in order to study the impact of oak powdery mildew (*Eysiphe alphitoides* and *E. quercicola*) on the evolution of the composition of this cohort. The system included two treatments: natural infection and infection controlled by a fungicide treatment. Acorns were planted and emerging oaks were monitored for 9 years. Numerous phenotypic traits were recorded annually, and a random sub-sample of planted individuals were genotyped for 819 SNPs identified on genes of interest. This enabled us to assess the impact of oak powdery mildew pressure on cohort demography and diversity over time. 
 
 
-## R Data sets (/data)
-In this section, you will find the list of the data sets used in this study for R analyses and Figures production. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are 3 R data sets used in this study.
+## R Datasets (/data)
+In this section, you will find the list of the datasets used in this study for R analyses and Figures production. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are 3 R datasets used in this study.
 
-- **datatot.txt:** the main data set which contains all the phenotypic and genotypic information for all the individuals of the experimental setup. Each line correspond to one individuals and the following information for each individuals can be found in this table:
+- **datatot.txt:** the main dataset which contains all the phenotypic and genotypic information for all the individuals of the experimental setup. Each line correspond to one individuals and the following information for each individuals can be found in this table:
     - *Sample_ID*: unique identification number for each sample
     - *family*: which family the individual belongs to. Only the 15 principal families with a number as a family ID ("1", "9", "11", "27", "45", "48", "51", "70", "71", "72", "73", "74", "75", "76", "77") are of interest for this study. The family has been checked using a parentage analysis to confirm the mother tree when genetic data were available. If no genetic data were available, this is simply the original family ID of the acorn. Using genotyping tools, a few individuals were identified as not belonging to one of the 15 original families ("26" and "99"). Individuals used to surround the individuals included in the experimental design to limit boundary effects are labeled "hd". Individuals labelled "3P", "3P tv", "A4", "cc" and "cc-cast" belong to a controlled crossing not investigated in this study. Individuals labeled "asc" are potential father trees. 
     - *family_simp*: same information as the "family" variable, but with simplified coding (all the controlled crossing individuals are labeled "CC" and the "asc" individuals are labeled "PAR")
@@ -140,7 +140,7 @@ In this section, you will find the list of the data sets used in this study for 
     - *oid_moy*: mean powdery mildew infection score between 2009 and 2013
     - *statut10*: dead or alive status of the plant in 2017 coded as a binary variable (0=dead; 1=alive)
     
-- **pro.hmp.txt** and **nat.hmp.txt:** two data sets formatted for the GWAS analyses using the *hapmap* format, for the protected and natural treatment, respectively
+- **pro.hmp.txt** and **nat.hmp.txt:** two datasets formatted for the GWAS analyses using the *hapmap* format, for the protected and natural treatment, respectively
     - *rs#*: SNP ID
     - *alleles*: possible nucleotide allele for each SNP
     - *chrom*: ID number of the chromosome the SNP is located on. Range from 1 to 12 for the 12 chromosome of *Quercus robur*. The *13* code is used for unmapped SNP. *MT* is for SNP located on mitochondrial DNA and *Plst* for SNP located on plastide
@@ -161,7 +161,7 @@ In this section, you will find the list of the different scripts used in the art
 - **RealTime_Fstcomparison.R:** script to compute F-statistics and compare them across the different treatment and time. The output files are stored in a Genepop folder created within the output folder.
 - **RealTime_GENHET.R:** script to compute intra-individual heterozygosity indices. 
 - **RealTime_GWAS.R:** script to perform the Genome-Wide Association analyses for both treatment. This script will produce two folders each containing results from the GWAS analyses. These output files are necessary for plotting the manhattan and GWAS plot (see scripts below).
-- **RealTime_load.R:** the script to load the different data sets, functions and packages that are necessary for the data analyses and representation in the R environment.
+- **RealTime_load.R:** the script to load the different datasets, functions and packages that are necessary for the data analyses and representation in the R environment.
 - **RealTime_plot_evolpheno.R:** script to analyze and plot the temporal evolution of the main phenotypic traits over the years (Figure 2). The code for the distribution of tree height by family and by powdery mildew exposures (Figure 6) is also included in this script. 
 - **RealTime_plot_FigS2_map.R:** script to plot the map (Figure S2) of the experimental setup.
 - **RealTime_plot_FigS4_indQual.R:** script to plot the scatterplot used to determined the individuals genotyped with the SNP markers with sufficient quality.
@@ -178,9 +178,9 @@ In this section, you will find the list of the different scripts used in the art
 For reproducibility purpose, you will find all the information about the versions of R, Rstudio, OS etc., as well as the list and version number of the packages used at the time of publishing this script in the **session_info.txt** file.
 
 
-## SAS Data sets (/dataSAS)
-In this section, you will find the list of the data sets used in this study for SAS analyses. The data files can be found in the "dataSAS" folder. For the data tables, the name of the different variables are listed and explained as well. There are 2 data sets used in this study for analyses in SAS.
-- **RT_pop.csv:** the main data set which includes the information for all individuals:
+## SAS Datasets (/dataSAS)
+In this section, you will find the list of the datasets used in this study for SAS analyses. The data files can be found in the "dataSAS" folder. For the data tables, the name of the different variables are listed and explained as well. There are 2 datasets used in this study for analyses in SAS.
+- **RT_pop.csv:** the main dataset which includes the information for all individuals:
     - *Ind:* unique identification number for each sample
     - *fameff:* which family the individual belongs to ("1", "9", "11", "27", "45", "48", "51", "70", "71", "72", "73", "74", "75", "76", "77") 
     - *bloc:*	block ID in the experimental design
@@ -222,7 +222,7 @@ In this section, you will find the list of the data sets used in this study for 
     - *survie2017:* dead or alive status of the plant in 2017 coded as a binary variable (0=dead; 1=alive). Empty = missing information 
 
     
-- **RT_pop_tot.csv:** the data set which includes only individuals with genotypic information. In addition to the variables already described for the *RT_pop.csv* data set, there are four variables that estimate the level of heterozygosity/homozygosity in each individual:
+- **RT_pop_tot.csv:** the dataset which includes only individuals with genotypic information. In addition to the variables already described for the *RT_pop.csv* dataset, there are four variables that estimate the level of heterozygosity/homozygosity in each individual:
     - *PHt:* number of heterozygous loci / number of genotyped loci
     - *Hs_obs:* standardized heterozygosity based on the mean observed heterozygosity
     - *Hs_exp:* standardized heterozygosity based on the mean expected heterozygosity
@@ -233,11 +233,11 @@ In this section, you will find the list of the data sets used in this study for 
 ## SAS scripts
 In this section, you will find a brief description of the script used for analyses with the SAS software.
 
-- **RealTime_pgm_analyses_tot.sas:** this file lists all the scripts that have been used to perform statistical analyses and model fitting in the SAS framework. Each script begins with a line describing the general purpose of the analysis. All scripts have to be run on the *RT_pop.csv* data set, except for the two in the "with heterozygosity" section which should be run on the *RT_pop_tot.csv* data set. 
+- **RealTime_pgm_analyses_tot.sas:** this file lists all the scripts that have been used to perform statistical analyses and model fitting in the SAS framework. Each script begins with a line describing the general purpose of the analysis. All scripts have to be run on the *RT_pop.csv* dataset, except for the two in the "with heterozygosity" section which should be run on the *RT_pop_tot.csv* dataset. 
 
 
-## Supplementary Data sets (/data/dataSup)
-In this section, you will find the list of the supplementary data sets used in this study. The data file can be found in the "dataSup" subfolder. There are 4 supplementary data sets linked to this study.
+## Supplementary Datasets (/data/dataSup)
+In this section, you will find the list of the supplementary datasets used in this study. The data file can be found in the "dataSup" subfolder. There are 4 supplementary datasets linked to this study.
 
 - **Data_S1.txt:** this file lists the flanking sequences of the 819 SNP used in the study. These sequences were used to map the SNP markers on the *Q. robur* genome. This is a fasta file format. 
 - **Ind_Geno_Qual.txt:** dataset providing quality statistics on genotyping results for genotyped individuals. These data are used to produce Figure S4
