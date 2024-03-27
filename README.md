@@ -237,10 +237,11 @@ In this section, you will find a brief description of the script used for analys
 
 
 ## Supplementary Data sets (/data/dataSup)
-In this section, you will find the list of the supplementary data sets used in this study. The data file can be found in the "dataSup" subfolder. There are 4 supplementary data set linked to this study.
+In this section, you will find the list of the supplementary data sets used in this study. The data file can be found in the "dataSup" subfolder. There are 4 supplementary data sets linked to this study.
 
 - **Data_S1.txt:** this file lists the flanking sequences of the 819 SNP used in the study. These sequences were used to map the SNP markers on the *Q. robur* genome. This is a fasta file format. 
-- **Data_S1.txt:**
+- **Ind_Geno_Qual.txt:** dataset providing quality statistics on genotyping results for genotyped individuals. These data are used to produce Figure S4
+- **SNP_Ind_coord_FDT.txt** and **SNP_Stat_Tab_T.txt:** two datasets that are the output of the clustering permformed using the genotyping module of the BeadStudio/GenomeStudio package (Illumina, San Diego, CA, USA). This datasets are used to produce Figures S5 and S6 and can be used to produce the polar plot for all SNPs markers. 
 
 
 ## Citation
