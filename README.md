@@ -10,7 +10,7 @@ The impact of pathogens on their host populations in the wild can be manifold, b
 
 
 ## R Data sets (/data)
-In this section, you will find the list of the data sets used in this study for R analyses and Figures production. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are X R data sets used in this study.
+In this section, you will find the list of the data sets used in this study for R analyses and Figures production. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are 3 R data sets used in this study.
 
 - **datatot.txt:** the main data set which contains all the phenotypic and genotypic information for all the individuals of the experimental setup. Each line correspond to one individuals and the following information for each individuals can be found in this table:
     - *Sample_ID*: unique identification number for each sample
@@ -236,10 +236,11 @@ In this section, you will find a brief description of the script used for analys
 - **RealTime_pgm_analyses_tot.sas:** this file lists all the scripts that have been used to perform statistical analyses and model fitting in the SAS framework. Each script begins with a line describing the general purpose of the analysis. All scripts have to be run on the *RT_pop.csv* data set, except for the two in the "with heterozygosity" section which should be run on the *RT_pop_tot.csv* data set. 
 
 
-## Supplementary Data set (/dataSup)
-In this section, you will find the list of the supplementary data sets used in this study. The data file can be found in the "dataSup" folder. There is 1 supplementary data set linked to this study.
+## Supplementary Data sets (/data/dataSup)
+In this section, you will find the list of the supplementary data sets used in this study. The data file can be found in the "dataSup" subfolder. There are 4 supplementary data set linked to this study.
 
 - **Data_S1.txt:** this file lists the flanking sequences of the 819 SNP used in the study. These sequences were used to map the SNP markers on the *Q. robur* genome. This is a fasta file format. 
+- **Data_S1.txt:**
 
 
 ## Citation
