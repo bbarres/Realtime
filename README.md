@@ -237,7 +237,7 @@ In this section, you will find a brief description of the script used for analys
 
 
 ## Supplementary Data set (/dataSup)
-In this section, you will find the list of the supplementary data sets used in this study. The data file can be found in the "dataSup" folder. There is 1 supplementary data set linked to this.
+In this section, you will find the list of the supplementary data sets used in this study. The data file can be found in the "dataSup" folder. There is 1 supplementary data set linked to this study.
 
 - **Data_S1.txt:** this file lists the flanking sequences of the 819 SNP used in the study. These sequences were used to map the SNP markers on the *Q. robur* genome. This is a fasta file format. 
 
