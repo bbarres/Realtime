@@ -9,7 +9,7 @@
 The impact of pathogens on their host populations in the wild can be manifold, but remains a relatively unexplored subject. Studying this type of impact in a wild system is complex, not least because of the number of factors (in addition to the pathogen studied) that can influence the demography of the host species: herbivory, competition with other species, other pathogens... In this study, we used a semi-controlled experimental set-up to mimic a regeneration cohort of young oaks (*Quercus robur*), in order to study the impact of oak powdery mildew (*Eysiphe alphitoides* and *E. quercicola*) on the evolution of the composition of this cohort. The system included two treatments: natural infection and infection controlled by a fungicide treatment. Acorns were planted and emerging oaks were monitored for 9 years. Numerous phenotypic traits were recorded annually, and a random sub-sample of planted individuals were genotyped for 819 SNPs identified on genes of interest. This enabled us to assess the impact of oak powdery mildew pressure on cohort demography and diversity over time. 
 
 
-## R Data sets
+## R Data sets (/data)
 In this section, you will find the list of the data sets used in this study for R analyses and Figures production. The data files can be found in the "data" folder. For the data tables, the name of the different variables are listed and explained as well. There are X R data sets used in this study.
 
 - **datatot.txt:** the main data set which contains all the phenotypic and genotypic information for all the individuals of the experimental setup. Each line correspond to one individuals and the following information for each individuals can be found in this table:
@@ -178,7 +178,7 @@ In this section, you will find the list of the different scripts used in the art
 For reproducibility purpose, you will find all the information about the versions of R, Rstudio, OS etc., as well as the list and version number of the packages used at the time of publishing this script in the **session_info.txt** file.
 
 
-## SAS Data sets
+## SAS Data sets (/dataSAS)
 In this section, you will find the list of the data sets used in this study for SAS analyses. The data files can be found in the "dataSAS" folder. For the data tables, the name of the different variables are listed and explained as well. There are 2 data sets used in this study for analyses in SAS.
 - **RT_pop.csv:** the main data set which includes the information for all individuals:
     - *Ind:* unique identification number for each sample
@@ -234,6 +234,12 @@ In this section, you will find the list of the data sets used in this study for 
 In this section, you will find a brief description of the script used for analyses with the SAS software.
 
 - **RealTime_pgm_analyses_tot.sas:** this file lists all the scripts that have been used to perform statistical analyses and model fitting in the SAS framework. Each script begins with a line describing the general purpose of the analysis. All scripts have to be run on the *RT_pop.csv* data set, except for the two in the "with heterozygosity" section which should be run on the *RT_pop_tot.csv* data set. 
+
+
+## Supplementary Data set (/dataSup)
+In this section, you will find the list of the supplementary data sets used in this study. The data file can be found in the "dataSup" folder. There is 1 supplementary data set linked to this.
+
+- **Data_S1.txt:** this file lists the flanking sequences of the 819 SNP used in the study. These sequences were used to map the SNP markers on the *Q. robur* genome. This is a fasta file format. 
 
 
 ## Citation
