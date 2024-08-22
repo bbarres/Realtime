@@ -245,8 +245,13 @@ In this section, you will find the list of the supplementary datasets used in th
 
 
 ## Citation
-You will be soon (hopefully) able to cite the related study as follow: 
-+ Barrès B., Dutech C., Saint-Jean G., Bodénès C., Burban C., Fievet V., Lepoittevin C., Garnier-Géré P. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. ***Submitted to PCI Forest and Wood Sciences***.](https://)
+You can cite the related study as follow: 
++ Barrès B., Dutech C., Saint-Jean G., Bodénès C., Burban C., Fievet V., Lepoittevin C., Garnier-Géré P. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. *Annals of Forest Science*.](https://)
+
+The preprint, which can be cited as follow, was initially recommended in *PCI Forest and Wood Sciences*:
++ Barrès B., Dutech C., Saint-Jean G., Bodénès C., Burban C., Fievet V., Lepoittevin C., Garnier-Géré P. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. *bioRxiv, 2023.06.22.546164, ver. 2 peer-reviewed and recommended by Peer Community in Forest and Wood Science*, 2024.](https://doi.org/10.1101/2023.06.22.546164)
+The link to the recommendation: 
++ Dreyer, E. [An interesting analysis of the interactions between English oaks (*Quercus robur* L.) and powdery mildew (*Erisyphe* sp.) at tree population level. *Peer Community in Forest and Wood Sciences*, 1, 100112.] (https://doi.org/10.24072/pci.forestwoodsci.100112)
 
 If you want to use (some of) the code found on this page or if you want to cite this repository: 
 + Benoit Barrès and Marie-Laure Desprez-Loustau. [Supporting data and code for: Demographic and genetic impacts of powdery mildew in a young oak cohort. Zenodo.](https://zenodo.org/badge/latestdoi/33980368)
