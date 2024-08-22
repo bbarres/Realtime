@@ -244,6 +244,10 @@ In this section, you will find the list of the supplementary datasets used in th
 - **SNP_Ind_coord_FDT.txt** and **SNP_Stat_Tab_T.txt:** two datasets that are the output of the clustering permformed using the genotyping module of the BeadStudio/GenomeStudio package (Illumina, San Diego, CA, USA). This datasets are used to produce Figures S5 and S6 and can be used to produce the polar plot for all SNPs markers. 
 
 
+## R session info
+For reproducibility purpose, you will find all the information about the versions of R, Rstudio, OS etc., as well as the list and version number of the packages used at the time of publishing this script in the **session_info.txt** file.
+
+
 ## Citation
 You can cite the related study as follow: 
 + Barrès B., Dutech C., Saint-Jean G., Bodénès C., Burban C., Fievet V., Lepoittevin C., Garnier-Géré P. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. *Annals of Forest Science*.](https://)
