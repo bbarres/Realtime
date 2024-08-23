@@ -210,14 +210,14 @@ SNPlot(mylist,statTableSave,"Raw_SavedSNP")
 
 
 ##############################################################################/
-#Figure S5: plotting SNP markers example for score 1 (good) and 3 (bad)####
+#Figure S5/A15: plotting SNP markers example for score 1 (good) and 3 (bad)####
 ##############################################################################/
 
 statTableGooBad<-statTable[c(77,81,103,11,2,13,15,45,93),]
 coordIndSNPGooBad<-coordIndSNP[c(77,81,103,11,2,13,15,45,93),]
 mylist<-preplotSNP(coordIndSNPGooBad,dim(statTableGooBad)[1])
 
-#ploting the Figure S5
+#ploting the Figure S5/A15
 pdf(file="output/Figure_S5_GoodBadSNP.pdf",width=10,height=10)
 colovec<-brewer.pal(9,"Set1")[c(3,1)]
 op<-par(mfrow=c(3,3),pty="s")
@@ -247,7 +247,7 @@ dev.off()
 
 
 ##############################################################################/
-#Figure S6: plotting SNP markers example for saved and excluded SNP####
+#Figure S6/A16: plotting SNP markers example for saved and excluded SNP####
 ##############################################################################/
 
 statTableSavExcl<-rbind(statTableSave[c(21,26,2),],

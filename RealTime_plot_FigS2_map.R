@@ -8,7 +8,7 @@ source("RealTime_load.R")
 
 
 ##############################################################################/
-#map of the experimental set up####
+#Figure S2/A12: map of the experimental set up####
 ##############################################################################/
 
 #how many individuals in each treatment for each family

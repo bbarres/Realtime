@@ -31,7 +31,7 @@ summary(survTreatAndAcorn)
 
 
 ##############################################################################/
-#Figure S10: plot using visreg for acorn weight effect visualization####
+#Figure S10/A20: plot using visreg for acorn weight effect visualization####
 ##############################################################################/
 
 pdf(file="output/Figure_S10_GLMacorn.pdf",width=7,height=5)
@@ -96,7 +96,7 @@ summary(survH09)
 
 
 ##############################################################################/
-#Figure S11: plot using visreg Height in 2009 effect visualization ####
+#Figure S11/A21: plot using visreg Height in 2009 effect visualization ####
 ##############################################################################/
 
 pdf(file="output/Figure_S11_GLMH09.pdf",width=7,height=5)
@@ -130,7 +130,7 @@ summary(survFrost)
 
 
 ##############################################################################/
-#Figure S12: plot using visreg package for Frost damage visualization####
+#Figure S12/A22: plot using visreg package for Frost damage visualization####
 ##############################################################################/
 
 pdf(file="output/Figure_S12_GLMFrost.pdf",width=7,height=5)

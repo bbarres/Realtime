@@ -1,6 +1,6 @@
 ##############################################################################/
 ##############################################################################/
-#Figure S4: Sorting individuals by general genotyping quality
+#Figure S4/A14: Sorting individuals by general genotyping quality
 ##############################################################################/
 ##############################################################################/
 
@@ -49,7 +49,7 @@ coVec<-c(rgb(0,0,0,max=255,alpha=40),
 
 
 ##############################################################################/
-#Figure S4: plotting the quality of individuals genotyped with SNP####
+#Figure S4/A14: plotting the quality of individuals genotyped with SNP####
 ##############################################################################/
 
 #this code will produce a pdf file in the output folder

@@ -111,7 +111,7 @@ dev.off()
 
 
 ##############################################################################/
-#Figure S7: Correlation between individual heterozygosity indices####
+#Figure S7/A17: Correlation between individual heterozygosity indices####
 ##############################################################################/
 
 #a function to compute the absolute correlation between pairs of variables
@@ -132,7 +132,7 @@ HetVivMort<-read.table(file="data/Hetind_DoA.txt",sep="\t",
                        header=TRUE)
 HetVivMortGlob<-HetVivMort[HetVivMort$fam=="Global",]
 
-#plot the graph
+#ploting the figure S7/A17
 pdf(file="output/Figure_S7_corHeteroz.pdf",width=10,height=7)
 pairs(HetVivMortGlob[,c(2:6)],las=1,cex.main=2,cex.cor=2.2,
       main="Correlation between heterozygosity indices",
@@ -142,7 +142,7 @@ dev.off()
 
 
 ##############################################################################/
-#Figure S14: Plot of the distribution and probability curve of PHt####
+#Figure S14/A24: Plot of the distribution and probability curve of PHt####
 ##############################################################################/
 
 #you first need to run the 'RealTime_GENHET.R' script
@@ -173,7 +173,7 @@ dev.off()
 
 
 ##############################################################################/
-#Figure S16: Plot of the distribution of mortality by PHt classes####
+#Figure S16/A26: Plot of the distribution of mortality by PHt classes####
 ##############################################################################/
 
 #you first need to run the 'RealTime_GENHET.R' script
