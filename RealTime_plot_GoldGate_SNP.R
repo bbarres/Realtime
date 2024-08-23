@@ -229,7 +229,8 @@ for (j in (1:9)) {
        ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
        xlab="Normalized Theta",ylab="Normalized R",
        main=paste(statTableGooBad$Name[j]," // score ",
-                  statTableGooBad$Aux[j]))
+                  statTableGooBad$Aux[j]),
+       cex.lab=2)
   box(col=colovec[as.numeric(as.factor(statTableGooBad$Aux))[j]],lwd=2)
   detach(mylist[[j]])
   attach(statTableGooBad)
@@ -267,7 +268,8 @@ for (j in (1:6)) {
        xlab="Normalized Theta",ylab="Normalized R",
        ylim=c(0,ifelse((summary(R)[6])>1,(summary(R)[6]),1)),
        main=paste(statTableSavExcl$Name[j]," // score ",
-                  statTableSavExcl$Aux[j]))
+                  statTableSavExcl$Aux[j]),
+       cex.lab=2)
   box(col=colovec[as.numeric(as.factor(statTableSavExcl$Aux))[j]],lwd=2)
   detach(mylist[[j]])
   attach(statTableSavExcl)

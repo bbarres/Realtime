@@ -6,6 +6,7 @@
 
 
 #loading and preparing the additionnal dataset
+source("RealTime_load.R")
 genoQual<-read.table("data/dataSup/Ind_Geno_Qual_ST.txt",
                      sep="\t",header=T,dec=".")
 summary(genoQual)
@@ -70,7 +71,7 @@ plot(p50.GC~Call.Rate,xlim=xrange,ylim=yrange50,
                      genoQual$p10.GC>=seuilp10min &
                      genoQual$Call.Rate>=seuilCRatemin,],
      xlab="Call Rate",ylab="50% GeneCall",
-     col=coVec[1],pch=1,cex=0.6,las=1)
+     col=coVec[1],pch=1,cex=0.6,las=1,cex.lab=1.5,cex.axis=1.2)
 abline(h=c(seuilp50min),lty=2,col=brewer.pal(9,"Set1")[4],lwd=3)
 abline(v=c(seuilCRatemin),lty=2,col=brewer.pal(9,"Set1")[3],lwd=3)
 points(p50.GC~Call.Rate,pch=21,cex=0.7,
