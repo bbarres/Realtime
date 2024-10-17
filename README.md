@@ -251,7 +251,7 @@ For reproducibility purpose, you will find all the information about the version
 
 ## Citation
 You can cite the related study as follow: 
-+ Barrès B., Dutech C., Saint-Jean G., Bodénès C., Burban C., Fievet V., Lepoittevin C., Garnier-Géré P. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. *Annals of Forest Science*.](https://)
++ Barrès B., Dutech C., Saint-Jean G., Bodénès C., Burban C., Fievet V., Lepoittevin C., Garnier-Géré P. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak (*Quercus robur* L.) cohort. *Annals of Forest Science*, 81:44, 2024. doi:10.1186/s13595-024-01259-2.](https://doi.org/10.1186/s13595-024-01259-2)
 
 The preprint, which can be cited as follow, was initially recommended in *PCI Forest and Wood Sciences*:
 + Barrès B., Dutech C., Saint-Jean G., Bodénès C., Burban C., Fievet V., Lepoittevin C., Garnier-Géré P. and Desprez-Loustau M.-L. [Demographic and genetic impacts of powdery mildew in a young oak cohort. *bioRxiv, 2023.06.22.546164, ver. 2 peer-reviewed and recommended by Peer Community in Forest and Wood Science*, 2024.](https://doi.org/10.1101/2023.06.22.546164)
